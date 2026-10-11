@@ -427,6 +427,14 @@ if(
 
     }
     
+assistProviders.forEach(player => {
+
+    let assistsInLastMatch =
+        countAssistsInMatch(
+            lastMatch,
+            player
+        );
+    
 let assistsInLastMatch = 0;
 
 for(let i=1;i<=12;i++){
