@@ -188,6 +188,8 @@ for(let i=1;i<=12;i++){
 
 }
 
+let previousClasicoGoals = 0;
+
     // First El Clásico goal
 
     if(
@@ -195,8 +197,6 @@ for(let i=1;i<=12;i++){
             .toLowerCase()
             .includes("real madrid")
     ){
-
-        let previousClasicoGoals = 0;
 
         allMatches.forEach(match => {
 
@@ -397,8 +397,6 @@ if(matchesWithoutGoal >= 10){
 }
     
 // Multi-goal milestone
-
-let goalsInLastMatch = 0;
 
 if(
     goalsInLastMatch >= 2 &&
@@ -725,7 +723,7 @@ starters.forEach(player => {
     ){
 
         const overtaken =
-            rankingAfter[afterPos + 1];
+            rankingBefore[beforePos - 1];
 
         if(overtaken){
 
@@ -744,7 +742,22 @@ starters.forEach(player => {
 
 });
 
-    return insights;
+const uniqueInsights = [];
+const seen = new Set();
+
+insights.forEach(item => {
+
+    if(seen.has(item.text)){
+        return;
+    }
+
+    seen.add(item.text);
+
+    uniqueInsights.push(item);
+
+});
+
+return uniqueInsights;
 
 }
 
