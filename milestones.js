@@ -1101,7 +1101,91 @@ function getLatestMilestones(){
 
 }
 
-function renderMilestones(){
+async function getInterestingStats(){
+
+    const response =
+        await fetch(
+            "interesting-stats.json"
+        );
+
+    const stats =
+        await response.json();
+
+    const lastMatch =
+        getLastPlayedMatch();
+
+    return stats
+
+        .filter(stat =>
+
+            stat.Active === "TRUE" &&
+
+            Number(stat["Match ID"]) ===
+            Number(lastMatch.ID)
+
+        )
+
+        .map(stat => ({
+
+            key:
+                `stat-${stat.ID}`,
+
+            priority:
+                Number(stat.Priority),
+
+            text:
+                `${stat.Number} - ${stat.Text} ${stat.Tagline}`
+
+        }));
+
+}
+
+async function getCombinedInsights(){
+
+    const autoInsights =
+        getLastMatchInsights();
+
+    const customInsights =
+        await getInterestingStats();
+
+    const merged = [
+
+        ...autoInsights,
+
+        ...customInsights
+
+    ];
+
+    const unique = [];
+    const seen = new Set();
+
+    merged
+
+        .sort(
+            (a,b) =>
+                b.priority - a.priority
+        )
+
+        .forEach(item => {
+
+            const key =
+                item.key || item.text;
+
+            if(seen.has(key)){
+                return;
+            }
+
+            seen.add(key);
+
+            unique.push(item);
+
+        });
+
+    return unique.slice(0,5);
+
+}
+
+async function renderMilestones(){
 
     const container =
         document.getElementById(
@@ -1113,7 +1197,7 @@ function renderMilestones(){
     }
 
     const milestones =
-        getLatestMilestones();
+    await getCombinedInsights();
 
     container.innerHTML =
 
