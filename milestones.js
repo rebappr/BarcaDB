@@ -315,28 +315,16 @@ function generateTopAppearanceRanking(
         Object.entries(players)
         .sort(
             (a,b) =>
-            b[1].appearances -
-            a[1].appearances
-        );
+                b[1].appearances -
+                a[1].appearances
+        )
+        .slice(0,5);
 
-    ranking.forEach(([name],index) => {
-
-        const rank =
-            index + 1;
-
-        if(
-            ![
-                5,
-                10,
-                25,
-                50
-            ].includes(rank)
-        ){
-            return;
-        }
+    ranking.forEach(
+        ([name,stats],index) => {
 
         const key =
-            `rank-${name}-${rank}`;
+            `top-apps-${name}`;
 
         if(seen.has(key)){
             return;
@@ -349,7 +337,7 @@ function generateTopAppearanceRanking(
             priority:90,
 
             text:
-                `📈 ${name} ranks ${rank}th on Barcelona's all-time appearances list.`
+                `📈 ${name} ranks #${index + 1} in Barcelona appearances with ${stats.appearances} matches.`
 
         });
 
