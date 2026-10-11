@@ -27,10 +27,29 @@ const MILESTONE_RULES = {
 
 };
 
+function isValidMatch(match){
+
+    return (
+        match &&
+        match.Result &&
+        match.Result !== "-:-"
+    );
+
+}
+
+function isValidPerson(name){
+
+    return (
+        typeof name === "string" &&
+        name.trim().length > 1 &&
+        name !== "-"
+    );
+
+}
+
 function generateMilestones(){
 
     const milestones = [];
-
     const seen = new Set();
 
     const players = {};
@@ -83,20 +102,7 @@ function generateMilestones(){
         seen
     );
 
-    return milestones
-        .sort(
-            (a,b) => b.priority - a.priority
-        );
-
-}
-
-function isValidMatch(match){
-
-    return (
-        match &&
-        match["Result"] &&
-        match["Result"] !== "-:-"
-    );
+    return milestones;
 
 }
 
@@ -105,12 +111,12 @@ function processPlayerAppearances(
     players
 ){
 
-    for(let i = 1; i <= 11; i++){
+    for(let i=1;i<=11;i++){
 
         const player =
             match[`Player name ${i}`];
 
-        if(!player){
+        if(!isValidPerson(player)){
             continue;
         }
 
@@ -136,13 +142,13 @@ function processPlayerGoals(
     players
 ){
 
-    for(let i = 1; i <= 12; i++){
+    for(let i=1;i<=12;i++){
 
         const scorer =
             match[`Goal Player ${i}`];
 
         if(
-            !scorer ||
+            !isValidPerson(scorer) ||
             scorer.includes("(OG)")
         ){
             continue;
@@ -170,9 +176,10 @@ function processManagers(
     managers
 ){
 
-    const manager = match.Manager;
+    const manager =
+        match.Manager;
 
-    if(!manager){
+    if(!isValidPerson(manager)){
         return;
     }
 
@@ -188,7 +195,7 @@ function generateAppearanceMilestones(
 ){
 
     Object.entries(players)
-    .forEach(([name, stats]) => {
+    .forEach(([name,stats]) => {
 
         if(
             !MILESTONE_RULES
@@ -211,8 +218,6 @@ function generateAppearanceMilestones(
 
             priority:80,
 
-            type:"appearance",
-
             text:
                 `🎉 ${name} reached ${stats.appearances} appearances for FC Barcelona.`
 
@@ -229,7 +234,7 @@ function generateGoalMilestones(
 ){
 
     Object.entries(players)
-    .forEach(([name, stats]) => {
+    .forEach(([name,stats]) => {
 
         if(
             !MILESTONE_RULES
@@ -252,8 +257,6 @@ function generateGoalMilestones(
 
             priority:80,
 
-            type:"goal",
-
             text:
                 `⚽ ${name} scored his ${stats.goals}th goal for FC Barcelona.`
 
@@ -270,7 +273,7 @@ function generateManagerMilestones(
 ){
 
     Object.entries(managers)
-    .forEach(([name, matches]) => {
+    .forEach(([name,matches]) => {
 
         if(
             !MILESTONE_RULES
@@ -292,8 +295,6 @@ function generateManagerMilestones(
         milestones.push({
 
             priority:70,
-
-            type:"manager",
 
             text:
                 `🧠 ${name} managed FC Barcelona in ${matches} official matches.`
@@ -318,54 +319,51 @@ function generateTopAppearanceRanking(
             a[1].appearances
         );
 
-    ranking.forEach(
+    ranking.forEach(([name],index) => {
 
-        ([name], index) => {
+        const rank =
+            index + 1;
 
-            const rank =
-                index + 1;
-
-            if(
-                ![
-                    10,
-                    20,
-                    50,
-                    100
-                ].includes(rank)
-            ){
-                return;
-            }
-
-            const key =
-                `rank-${name}-${rank}`;
-
-            if(seen.has(key)){
-                return;
-            }
-
-            seen.add(key);
-
-            milestones.push({
-
-                priority:90,
-
-                type:"ranking",
-
-                text:
-                    `📈 ${name} ranks ${rank}th on Barcelona's all-time appearances list.`
-
-            });
-
+        if(
+            ![
+                5,
+                10,
+                25,
+                50
+            ].includes(rank)
+        ){
+            return;
         }
 
-    );
+        const key =
+            `rank-${name}-${rank}`;
+
+        if(seen.has(key)){
+            return;
+        }
+
+        seen.add(key);
+
+        milestones.push({
+
+            priority:90,
+
+            text:
+                `📈 ${name} ranks ${rank}th on Barcelona's all-time appearances list.`
+
+        });
+
+    });
 
 }
 
 function generateClasicoMilestones(){
 
-    const milestones = [];
+    if(typeof getClasicos !== "function"){
+        return [];
+    }
 
+    const milestones = [];
     const seen = new Set();
 
     const appearances = {};
@@ -373,27 +371,37 @@ function generateClasicoMilestones(){
 
     getClasicos().forEach(match => {
 
-        for(let i = 1; i <= 11; i++){
+        for(let i=1;i<=11;i++){
 
             const player =
                 match[`Player name ${i}`];
 
-            if(player){
+            if(isValidPerson(player)){
 
                 appearances[player] =
                     (appearances[player] || 0) + 1;
 
             }
 
+            const oppPlayer =
+                match[`Opp. Player name ${i}`];
+
+            if(isValidPerson(oppPlayer)){
+
+                appearances[oppPlayer] =
+                    (appearances[oppPlayer] || 0) + 1;
+
+            }
+
         }
 
-        for(let i = 1; i <= 12; i++){
+        for(let i=1;i<=12;i++){
 
             const scorer =
                 match[`Goal Player ${i}`];
 
             if(
-                scorer &&
+                isValidPerson(scorer) &&
                 !scorer.includes("(OG)")
             ){
 
@@ -402,12 +410,25 @@ function generateClasicoMilestones(){
 
             }
 
+            const oppScorer =
+                match[`Opp. Goal Player ${i}`];
+
+            if(
+                isValidPerson(oppScorer) &&
+                !oppScorer.includes("(OG)")
+            ){
+
+                goals[oppScorer] =
+                    (goals[oppScorer] || 0) + 1;
+
+            }
+
         }
 
     });
 
     Object.entries(appearances)
-    .forEach(([name, apps]) => {
+    .forEach(([name,apps]) => {
 
         if(
             !MILESTONE_RULES
@@ -430,8 +451,6 @@ function generateClasicoMilestones(){
 
             priority:90,
 
-            type:"clasico",
-
             text:
                 `⚔️ ${name} made ${apps} El Clásico appearances.`
 
@@ -440,7 +459,7 @@ function generateClasicoMilestones(){
     });
 
     Object.entries(goals)
-    .forEach(([name, goalCount]) => {
+    .forEach(([name,goalCount]) => {
 
         if(
             !MILESTONE_RULES
@@ -463,8 +482,6 @@ function generateClasicoMilestones(){
 
             priority:95,
 
-            type:"clasico-goal",
-
             text:
                 `⚽ ${name} scored ${goalCount} goals in El Clásico.`
 
@@ -481,23 +498,17 @@ function getLatestMilestones(limit = 10){
     return [
 
         ...generateMilestones(),
-
         ...generateClasicoMilestones()
 
     ]
-
     .sort(
         (a,b) => b.priority - a.priority
     )
-
-    .slice(0, limit);
+    .slice(0,limit);
 
 }
 
 function renderMilestones(){
-
-    const milestones =
-        getLatestMilestones();
 
     const container =
         document.getElementById(
@@ -507,6 +518,9 @@ function renderMilestones(){
     if(!container){
         return;
     }
+
+    const milestones =
+        getLatestMilestones();
 
     container.innerHTML =
 
