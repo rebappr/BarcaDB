@@ -1118,7 +1118,9 @@ async function getInterestingStats(){
 
         .filter(stat =>
 
-            stat.Active === "TRUE" &&
+            String(stat.Active || "")
+                .trim()
+                .toLowerCase() === "true" &&
 
             Number(stat["Match ID"]) ===
             Number(lastMatch.ID)
@@ -1131,7 +1133,7 @@ async function getInterestingStats(){
                 `stat-${stat.ID}`,
 
             priority:
-                Number(stat.Priority),
+                Number(stat.Priority) || 0,
 
             text:
                 `${stat.Number} - ${stat.Text} ${stat.Tagline}`
