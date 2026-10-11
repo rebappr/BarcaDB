@@ -89,8 +89,6 @@ if(played){
     appearances++;
 }
 
-}
-
     });
 
     return appearances;
@@ -292,7 +290,8 @@ if(
 ){
 
     const clasicoGoals =
-    previousClasicoGoals + 1;
+    previousClasicoGoals +
+    goalsInLastMatch;
 
     if(
         [5,10,15,20,25]
