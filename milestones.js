@@ -773,7 +773,7 @@ starters.forEach(player => {
 
 if(
     overtaken &&
-    rankingAfter[afterPos].appearances >
+    rankingAfter[afterPos].appearances >=
     overtaken.appearances
 ){
 
@@ -819,12 +819,6 @@ return uniqueInsights;
 function getLatestMilestones(limit = 10){
 
     return getLastMatchInsights()
-
-        .sort(
-            (a,b) =>
-                b.priority - a.priority
-        )
-
         .slice(0,limit);
 
 }
