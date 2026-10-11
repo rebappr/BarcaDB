@@ -576,6 +576,93 @@ scorers.forEach(scorer => {
         });
 
     }
+    
+// Multi-goal match / Hat-trick
+
+let goalsInLastMatch = 0;
+
+for(let i=1;i<=12;i++){
+
+    if(
+        lastMatch[`Goal Player ${i}`] === scorer
+    ){
+        goalsInLastMatch++;
+    }
+
+}
+
+if(goalsInLastMatch >= 2){
+
+    let previousDate = null;
+
+    const previousMatches = allMatches
+
+        .filter(match =>
+            Number(match.ID) <
+            Number(lastMatch.ID)
+        )
+
+        .sort(
+            (a,b) =>
+            Number(b.ID) - Number(a.ID)
+        );
+
+    for(const match of previousMatches){
+
+        let goalsInMatch = 0;
+
+        for(let j=1;j<=12;j++){
+
+            if(
+                match[`Goal Player ${j}`] === scorer
+            ){
+                goalsInMatch++;
+            }
+
+        }
+
+        if(goalsInMatch >= goalsInLastMatch){
+
+            previousDate =
+                match.Date;
+
+            break;
+
+        }
+
+    }
+
+    if(goalsInLastMatch === 2){
+
+        insights.push({
+
+            priority:110,
+
+            text:
+                previousDate
+                ? `⚽ ${scorer} scored a brace for Barcelona. His previous brace came on ${previousDate}.`
+                : `⚽ ${scorer} scored his first brace for Barcelona.`
+
+        });
+
+    }
+
+    if(goalsInLastMatch >= 3){
+
+        insights.push({
+
+            priority:130,
+
+            text:
+                previousDate
+                ? `🎩 ${scorer} scored a hat-trick. His previous hat-trick came on ${previousDate}.`
+                : `🎩 ${scorer} scored the first hat-trick of his Barcelona career.`
+
+        });
+
+    }
+
+}
 
 });
 
