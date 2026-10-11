@@ -189,6 +189,18 @@ for(let i=1;i<=12;i++){
 }
 
 scorers.forEach(scorer => {
+    
+let goalsInLastMatch = 0;
+
+for(let i=1;i<=12;i++){
+
+    if(
+        lastMatch[`Goal Player ${i}`] === scorer
+    ){
+        goalsInLastMatch++;
+    }
+
+}
 
 let goalsInLastMatch = 0;
 
@@ -490,72 +502,70 @@ if(
 
 }
 
-let clasicosWithoutGoal = 0;
+if(
+    String(lastMatch["Opp. Team"])
+        .toLowerCase()
+        .includes("real madrid")
+){
 
-const clasicos = allMatches
+    let clasicosWithoutGoal = 0;
 
-    .filter(match =>
-        String(match["Opp. Team"])
-            .toLowerCase()
-            .includes("real madrid")
-    )
+    const clasicos = allMatches
 
-    .sort(
-        (a,b) =>
-        Number(b.ID) - Number(a.ID)
-    );
+        .filter(match =>
+            String(match["Opp. Team"])
+                .toLowerCase()
+                .includes("real madrid")
+        )
 
-for(const match of clasicos){
+        .sort(
+            (a,b) =>
+            Number(b.ID) - Number(a.ID)
+        );
 
-    if(
-        Number(match.ID) >=
-        Number(lastMatch.ID)
-    ){
-        continue;
-    }
-
-    let scored = false;
-
-    for(let j=1;j<=12;j++){
+    for(const match of clasicos){
 
         if(
-            match[`Goal Player ${j}`] === scorer
+            Number(match.ID) >=
+            Number(lastMatch.ID)
         ){
+            continue;
+        }
 
-            scored = true;
-            break;
+        let scored = false;
+
+        for(let j=1;j<=12;j++){
+
+            if(
+                match[`Goal Player ${j}`] === scorer
+            ){
+
+                scored = true;
+                break;
+
+            }
 
         }
 
+        if(scored){
+            break;
+        }
+
+        clasicosWithoutGoal++;
+
     }
 
-    if(scored){
-        break;
-    }
+    if(clasicosWithoutGoal >= 5){
 
-    clasicosWithoutGoal++;
+        insights.push({
 
-}
+            priority:175,
 
-if(clasicosWithoutGoal >= 5){
+            text:
+                `⚔️ ${scorer} ended a ${clasicosWithoutGoal}-match El Clásico scoring drought.`
 
-    insights.push({
+        });
 
-        priority:175,
-
-        text:
-            `⚔️ ${scorer} ended a ${clasicosWithoutGoal}-match El Clásico scoring drought.`
-
-    });
-
-}
-
-for(let i=1;i<=12;i++){
-
-    if(
-        lastMatch[`Goal Player ${i}`] === scorer
-    ){
-        goalsInLastMatch++;
     }
 
 }
