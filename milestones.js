@@ -518,65 +518,66 @@ function getLastMatchInsights(){
 
     // Goalscorers in latest match
 
-    for(let i=1;i<=12;i++){
+    const scorers = new Set();
 
-        const scorer =
-            lastMatch[`Goal Player ${i}`];
+for(let i=1;i<=12;i++){
+
+    const scorer =
+        lastMatch[`Goal Player ${i}`];
+
+    if(
+        !scorer ||
+        scorer.includes("(OG)")
+    ){
+        continue;
+    }
+
+    scorers.add(scorer);
+
+}
+
+scorers.forEach(scorer => {
+
+    let previousGoals = 0;
+
+    allMatches.forEach(match => {
 
         if(
-            !scorer ||
-            scorer.includes("(OG)")
+            Number(match.ID) >=
+            Number(lastMatch.ID)
         ){
-            continue;
+            return;
         }
+
+        for(let j=1;j<=12;j++){
+
+            if(
+                match[`Goal Player ${j}`] ===
+                scorer
+            ){
+                previousGoals++;
+            }
+
+        }
+
+    });
+
+    // First goal for Barcelona
+
+    if(previousGoals === 0){
 
         insights.push({
 
-            priority:90,
+            priority:120,
 
             text:
-                `⚽ ${scorer} scored in Barcelona's latest match.`
+                `🎉 ${scorer} scored his first goal for FC Barcelona.`
 
         });
-
-        let previousGoals = 0;
-
-        allMatches.forEach(match => {
-
-            if(
-                Number(match.ID) >=
-                Number(lastMatch.ID)
-            ){
-                return;
-            }
-
-            for(let j=1;j<=12;j++){
-
-                if(
-                    match[`Goal Player ${j}`] ===
-                    scorer
-                ){
-                    previousGoals++;
-                }
-
-            }
-
-        });
-
-        if(previousGoals === 0){
-
-            insights.push({
-
-                priority:120,
-
-                text:
-                    `🎉 ${scorer} scored his first goal for FC Barcelona.`
-
-            });
-
-        }
 
     }
+
+});
 
     return insights;
 
