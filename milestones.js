@@ -78,12 +78,10 @@ function getLastPlayedMatch(){
 
 }
 
-function countAppearancesUntilMatch(
-    player,
-    matchId
-){
+function buildAppearanceStats(matchId){
 
-    let appearances = 0;
+    const appearances =
+    appearanceStats[player] || 0;
 
     allMatches.forEach(match => {
 
@@ -93,37 +91,37 @@ function countAppearancesUntilMatch(
             return;
         }
 
-        let played = false;
+        const playersInMatch =
+            new Set();
 
-for(let i=1;i<=11;i++){
+        for(let i=1;i<=11;i++){
 
-    if(
-        match[`Player name ${i}`] === player
-    ){
-        played = true;
-        break;
-    }
+            const player =
+                match[`Player name ${i}`];
 
-}
+            if(isValidPerson(player)){
+                playersInMatch.add(player);
+            }
 
-if(!played){
-
-    for(let i=1;i<=12;i++){
-
-        if(
-            match[`Substitution IN Player ${i}`] === player
-        ){
-            played = true;
-            break;
         }
 
-    }
+        for(let i=1;i<=12;i++){
 
-}
+            const player =
+                match[`Substitution IN Player ${i}`];
 
-if(played){
-    appearances++;
-}
+            if(isValidPerson(player)){
+                playersInMatch.add(player);
+            }
+
+        }
+
+        playersInMatch.forEach(player => {
+
+            appearances[player] =
+                (appearances[player] || 0) + 1;
+
+        });
 
     });
 
@@ -190,6 +188,39 @@ playersInMatch.forEach(player => {
                 b.appearances -
                 a.appearances
         );
+
+}
+
+function playerPlayed(match, player){
+
+    const playerNorm =
+        normalizePlayer(player);
+
+    for(let i=1;i<=11;i++){
+
+        if(
+            normalizePlayer(
+                match[`Player name ${i}`]
+            ) === playerNorm
+        ){
+            return true;
+        }
+
+    }
+
+    for(let i=1;i<=12;i++){
+
+        if(
+            normalizePlayer(
+                match[`Substitution IN Player ${i}`]
+            ) === playerNorm
+        ){
+            return true;
+        }
+
+    }
+
+    return false;
 
 }
 
@@ -477,7 +508,9 @@ for(const match of previousMatches){
 
     }
 
-    matchesWithoutGoal++;
+    if(!playerPlayed(match, scorer)){
+    continue;
+}
 
 }
 
@@ -776,10 +809,7 @@ if(goalsInLastMatch >= 2){
 starters.forEach(player => {
 
     const appearances =
-        countAppearancesUntilMatch(
-            player,
-            Number(lastMatch.ID)
-        );
+    appearanceStats[player] || 0;
 
     if(
         [50,100,150,200,250,300]
