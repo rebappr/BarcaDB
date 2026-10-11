@@ -512,9 +512,11 @@ function getLastMatchInsights(){
         priority:100,
 
         text:
-            `📅 Latest result: FC Barcelona ${lastMatch.Result} ${lastMatch["Opp. Team"]} in ${lastMatch.Competition}.`
+            `📅 Latest result: FC Barcelona ${lastMatch.Result} against ${lastMatch["Opp. Team"]} in ${lastMatch.Competition}.`
 
     });
+
+    // Goalscorers in latest match
 
     for(let i=1;i<=12;i++){
 
@@ -536,6 +538,43 @@ function getLastMatchInsights(){
                 `⚽ ${scorer} scored in Barcelona's latest match.`
 
         });
+
+        let previousGoals = 0;
+
+        allMatches.forEach(match => {
+
+            if(
+                Number(match.ID) >=
+                Number(lastMatch.ID)
+            ){
+                return;
+            }
+
+            for(let j=1;j<=12;j++){
+
+                if(
+                    match[`Goal Player ${j}`] ===
+                    scorer
+                ){
+                    previousGoals++;
+                }
+
+            }
+
+        });
+
+        if(previousGoals === 0){
+
+            insights.push({
+
+                priority:120,
+
+                text:
+                    `🎉 ${scorer} scored his first goal for FC Barcelona.`
+
+            });
+
+        }
 
     }
 
