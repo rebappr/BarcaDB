@@ -26,34 +26,6 @@ function normalizePlayer(name){
 
 }
 
-function playerPlayed(match, player){
-
-    for(let i=1;i<=11;i++){
-
-        if(
-            normalizePlayer(match[`Player name ${i}`]) ===
-            normalizePlayer(player)
-        ){
-            return true;
-        }
-
-    }
-
-    for(let i=1;i<=12;i++){
-
-        if(
-            normalizePlayer(match[`Substitution IN Player ${i}`]) ===
-            normalizePlayer(player)
-        ){
-            return true;
-        }
-
-    }
-
-    return false;
-
-}
-
 function normalizeSeason(season){
 
     return String(season || "")
@@ -80,19 +52,15 @@ function getLastPlayedMatch(){
 
 function buildAppearanceStats(matchId){
 
-    const appearances =
-    appearanceStats[player] || 0;
+    const appearances = {};
 
     allMatches.forEach(match => {
 
-        if(
-            Number(match.ID) > matchId
-        ){
+        if(Number(match.ID) > matchId){
             return;
         }
 
-        const playersInMatch =
-            new Set();
+        const playersInMatch = new Set();
 
         for(let i=1;i<=11;i++){
 
@@ -234,6 +202,12 @@ function getLastMatchInsights(){
     if(!lastMatch){
         return [];
     }
+    
+const appearanceStats =
+    buildAppearanceStats(
+        Number(lastMatch.ID)
+    );
+
 
     insights.push({
 
@@ -501,16 +475,14 @@ for(const match of previousMatches){
 
     }
 
-    if(scored){
+if(scored){
 
-        hasScoredBefore = true;
-        break;
+    hasScoredBefore = true;
+    break;
 
-    }
-
-    if(!playerPlayed(match, scorer)){
-    continue;
 }
+
+matchesWithoutGoal++;
 
 }
 
