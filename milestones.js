@@ -885,7 +885,7 @@ assistProviders.forEach(player => {
     const assistsInLastMatch =
         countAssistsInMatch(
             lastMatch,
-            scorer
+            player
         );
 
     let previousAssists = 0;
