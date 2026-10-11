@@ -176,6 +176,18 @@ for(let i=1;i<=12;i++){
 
 scorers.forEach(scorer => {
 
+let goalsInLastMatch = 0;
+
+for(let i=1;i<=12;i++){
+
+    if(
+        lastMatch[`Goal Player ${i}`] === scorer
+    ){
+        goalsInLastMatch++;
+    }
+
+}
+
     // First El Clásico goal
 
     if(
@@ -733,38 +745,6 @@ starters.forEach(player => {
 });
 
     return insights;
-
-}
-
-function countAppearancesUntilMatch(
-    player,
-    matchId
-){
-
-    let appearances = 0;
-
-    allMatches.forEach(match => {
-
-        if(
-            Number(match.ID) > matchId
-        ){
-            return;
-        }
-
-        for(let i=1;i<=11;i++){
-
-            if(
-                match[`Player name ${i}`] === player
-            ){
-                appearances++;
-                break;
-            }
-
-        }
-
-    });
-
-    return appearances;
 
 }
 
