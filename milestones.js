@@ -421,7 +421,7 @@ if(
             priority:120,
 
             text:
-                `🎉⚽${scorer} scored his first goal for FC Barcelona.`
+                `🎉 ⚽ ${scorer} scored his first goal for FC Barcelona.`
 
         });
 
