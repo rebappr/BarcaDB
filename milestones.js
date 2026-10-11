@@ -300,6 +300,12 @@ scorers.forEach(scorer => {
     
 let goalsInLastMatch = 0;
 
+const assistsInLastMatch =
+    countAssistsInMatch(
+        lastMatch,
+        scorer
+    );
+
 for(let i=1;i<=12;i++){
 
     if(
@@ -441,166 +447,6 @@ if(
         });
 
     }
-    
-assistProviders.forEach(player => {
-
-    let assistsInLastMatch =
-        countAssistsInMatch(
-            lastMatch,
-            player
-        );
-    
-let assistsInLastMatch = 0;
-
-for(let i=1;i<=12;i++){
-
-    if(
-        normalizePlayer(
-            lastMatch[`Assist Player ${i}`]
-        ) === normalizePlayer(scorer)
-    ){
-        assistsInLastMatch++;
-    }
-
-}
-
-let previousAssists = 0;
-
-allMatches.forEach(match => {
-
-    if(
-        Number(match.ID) >=
-        Number(lastMatch.ID)
-    ){
-        return;
-    }
-
-    for(let j=1;j<=12;j++){
-
-        if(
-            normalizePlayer(
-                match[`Assist Player ${j}`]
-            ) === normalizePlayer(scorer)
-        ){
-            previousAssists++;
-        }
-
-    }
-
-});
-
-if(
-    previousAssists === 0 &&
-    assistsInLastMatch > 0
-){
-
-    insights.push({
-
-        priority:120,
-
-        text:
-            `🎯 ${scorer} recorded his first assist for FC Barcelona.`
-
-    });
-
-}
-
-let seasonAssists = 0;
-
-allMatches.forEach(match => {
-
-    if(
-        normalizeSeason(match.Season) !==
-        normalizeSeason(lastMatch.Season)
-    ){
-        return;
-    }
-
-    if(
-        Number(match.ID) >=
-        Number(lastMatch.ID)
-    ){
-        return;
-    }
-
-    for(let j=1;j<=12;j++){
-
-        if(
-            normalizePlayer(
-                match[`Assist Player ${j}`]
-            ) === normalizePlayer(scorer)
-        ){
-            seasonAssists++;
-        }
-
-    }
-
-});
-
-if(
-    seasonAssists === 0 &&
-    assistsInLastMatch > 0
-){
-
-    insights.push({
-
-        priority:115,
-
-        text:
-            `🎯 ${scorer} recorded his first assist of the ${lastMatch.Season} season.`
-
-    });
-
-}
-
-if(
-    assistsInLastMatch === 2
-){
-
-    insights.push({
-
-        priority:120,
-
-        text:
-            `🎯 ${player} provided two assists in the match.`
-
-    });
-
-}
-else if(
-    assistsInLastMatch >= 3
-){
-
-    insights.push({
-
-        priority:150,
-
-        text:
-            `🎯 ${player} provided ${assistsInLastMatch} assists in a single match.`
-
-    });
-
-}
-
-if(
-    goalsInLastMatch > 0 &&
-    assistsInLastMatch > 0
-){
-
-    insights.push({
-
-        priority:140,
-
-        text:
-            `⭐ ${scorer} recorded a goal and an assist in the same match.`
-
-    });
-
-}
-
-const totalAssists =
-    previousAssists +
-    assistsInLastMatch;
 
 if(
     [
@@ -1042,6 +888,154 @@ const rankingAfter =
     buildAppearanceRanking(
         Number(lastMatch.ID)
     );
+    
+assistProviders.forEach(player => {
+
+    const assistsInLastMatch =
+        countAssistsInMatch(
+            lastMatch,
+            player
+        );
+
+    let previousAssists = 0;
+
+    allMatches.forEach(match => {
+
+        if(
+            Number(match.ID) >=
+            Number(lastMatch.ID)
+        ){
+            return;
+        }
+
+        for(let j=1;j<=12;j++){
+
+            if(
+                normalizePlayer(
+                    match[`Assist Player ${j}`]
+                ) === normalizePlayer(player)
+            ){
+                previousAssists++;
+            }
+
+        }
+
+    });
+
+    if(
+        previousAssists === 0 &&
+        assistsInLastMatch > 0
+    ){
+
+        insights.push({
+
+            priority:120,
+
+            text:
+                `🎯 ${player} recorded his first assist for FC Barcelona.`
+
+        });
+
+    }
+
+    let seasonAssists = 0;
+
+    allMatches.forEach(match => {
+
+        if(
+            normalizeSeason(match.Season) !==
+            normalizeSeason(lastMatch.Season)
+        ){
+            return;
+        }
+
+        if(
+            Number(match.ID) >=
+            Number(lastMatch.ID)
+        ){
+            return;
+        }
+
+        for(let j=1;j<=12;j++){
+
+            if(
+                normalizePlayer(
+                    match[`Assist Player ${j}`]
+                ) === normalizePlayer(player)
+            ){
+                seasonAssists++;
+            }
+
+        }
+
+    });
+
+    if(
+        seasonAssists === 0 &&
+        assistsInLastMatch > 0
+    ){
+
+        insights.push({
+
+            priority:115,
+
+            text:
+                `🎯 ${player} recorded his first assist of the ${lastMatch.Season} season.`
+
+        });
+
+    }
+
+    if(
+        assistsInLastMatch === 2
+    ){
+
+        insights.push({
+
+            priority:120,
+
+            text:
+                `🎯 ${player} provided two assists in the match.`
+
+        });
+
+    }
+    else if(
+        assistsInLastMatch >= 3
+    ){
+
+        insights.push({
+
+            priority:150,
+
+            text:
+                `🎯 ${player} provided ${assistsInLastMatch} assists in a single match.`
+
+        });
+
+    }
+
+    const totalAssists =
+        previousAssists +
+        assistsInLastMatch;
+
+    if(
+        [10,25,50,75,100,150,200,250]
+        .includes(totalAssists)
+    ){
+
+        insights.push({
+
+            priority:130,
+
+            text:
+                `🎯 ${player} reached ${totalAssists} assists for FC Barcelona.`
+
+        });
+
+    }
+
+});
 
 starters.forEach(player => {
 
