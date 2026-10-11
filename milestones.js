@@ -481,6 +481,15 @@ function generateClasicoMilestones(){
 
 }
 
+function normalizeSeason(season){
+
+    return String(season || "")
+        .replace(/\s+/g,"")
+        .replace(/-/g,"/")
+        .trim();
+
+}
+
 function getLastPlayedMatch(){
 
     return allMatches
@@ -577,7 +586,7 @@ scorers.forEach(scorer => {
 
     }
     
-// Multi-goal match / Hat-trick
+// Multi-goal milestone
 
 let goalsInLastMatch = 0;
 
@@ -598,8 +607,13 @@ if(goalsInLastMatch >= 2){
     const previousMatches = allMatches
 
         .filter(match =>
+
             Number(match.ID) <
-            Number(lastMatch.ID)
+            Number(lastMatch.ID) &&
+
+            normalizeSeason(match.Season) ===
+            normalizeSeason(lastMatch.Season)
+
         )
 
         .sort(
@@ -621,7 +635,10 @@ if(goalsInLastMatch >= 2){
 
         }
 
-        if(goalsInMatch >= goalsInLastMatch){
+        if(
+            goalsInMatch >=
+            goalsInLastMatch
+        ){
 
             previousDate =
                 match.Date;
@@ -632,6 +649,8 @@ if(goalsInLastMatch >= 2){
 
     }
 
+    // Brace
+
     if(goalsInLastMatch === 2){
 
         insights.push({
@@ -640,14 +659,16 @@ if(goalsInLastMatch >= 2){
 
             text:
                 previousDate
-                ? `⚽ ${scorer} scored a brace for Barcelona. His previous brace came on ${previousDate}.`
-                : `⚽ ${scorer} scored his first brace for Barcelona.`
+                ? `⚽ ${scorer} scored a brace. His previous brace or better this season came on ${previousDate}.`
+                : `⚽ ${scorer} recorded his first brace of the season.`
 
         });
 
     }
 
-    if(goalsInLastMatch >= 3){
+    // Hat-trick
+
+    else if(goalsInLastMatch === 3){
 
         insights.push({
 
@@ -655,8 +676,42 @@ if(goalsInLastMatch >= 2){
 
             text:
                 previousDate
-                ? `🎩 ${scorer} scored a hat-trick. His previous hat-trick came on ${previousDate}.`
-                : `🎩 ${scorer} scored the first hat-trick of his Barcelona career.`
+                ? `🎩 ${scorer} scored a hat-trick. His previous hat-trick or better this season came on ${previousDate}.`
+                : `🎩 ${scorer} scored his first hat-trick of the season.`
+
+        });
+
+    }
+
+    // Poker
+
+    else if(goalsInLastMatch === 4){
+
+        insights.push({
+
+            priority:150,
+
+            text:
+                previousDate
+                ? `🔥 ${scorer} scored four goals. The last time he scored four or more goals this season was on ${previousDate}.`
+                : `🔥 ${scorer} scored four goals in a match for the first time this season.`
+
+        });
+
+    }
+
+    // 5+
+
+    else{
+
+        insights.push({
+
+            priority:200,
+
+            text:
+                previousDate
+                ? `🚀 ${scorer} scored ${goalsInLastMatch} goals in a single match. His previous game with at least ${goalsInLastMatch} goals this season was on ${previousDate}.`
+                : `🚀 ${scorer} scored ${goalsInLastMatch} goals in one match for the first time this season.`
 
         });
 
