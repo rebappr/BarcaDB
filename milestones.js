@@ -111,33 +111,36 @@ function buildAppearanceRanking(
             return;
         }
 
-        for(let i=1;i<=11;i++){
+        const playersInMatch = new Set();
 
-            const player =
-                match[`Player name ${i}`];
+for(let i=1;i<=11;i++){
 
-            if(!player){
-                continue;
-            }
+    const player =
+        match[`Player name ${i}`];
 
-            stats[player] =
-                (stats[player] || 0) + 1;
+    if(player){
+        playersInMatch.add(player);
+    }
 
-        }
-        
-        for(let i=1;i<=12;i++){
+}
+
+for(let i=1;i<=12;i++){
 
     const player =
         match[`Substitution IN Player ${i}`];
 
-    if(!player){
-        continue;
+    if(player){
+        playersInMatch.add(player);
     }
+
+}
+
+playersInMatch.forEach(player => {
 
     stats[player] =
         (stats[player] || 0) + 1;
 
-}
+});
 
     });
 
