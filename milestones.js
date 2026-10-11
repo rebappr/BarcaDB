@@ -1127,6 +1127,12 @@ async function getInterestingStats(){
 
         )
 
+        .sort(
+            (a,b) =>
+                Number(b.Priority || 0) -
+                Number(a.Priority || 0)
+        )
+
         .map(stat => ({
 
             key:
