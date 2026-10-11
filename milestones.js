@@ -318,6 +318,22 @@ for(let i=1;i<=12;i++){
 
 }
 
+if(
+    goalsInLastMatch > 0 &&
+    assistsInLastMatch > 0
+){
+
+    insights.push({
+
+        priority:140,
+
+        text:
+            `⭐ ${scorer} recorded a goal and an assist in the same match.`
+
+    });
+
+}
+
 let previousClasicoGoals = 0;
 
     // First El Clásico goal
@@ -407,7 +423,6 @@ if(
 
 }
 
-
     let previousGoals = 0;
 
     allMatches.forEach(match => {
@@ -447,30 +462,6 @@ if(
         });
 
     }
-
-if(
-    [
-        10,
-        25,
-        50,
-        75,
-        100,
-        150,
-        200,
-        250
-    ].includes(totalAssists)
-){
-
-    insights.push({
-
-        priority:130,
-
-        text:
-            `🎯 ${scorer} reached ${totalAssists} assists for FC Barcelona.`
-
-    });
-
-}
     
 let seasonGoals = 0;
 
@@ -894,7 +885,7 @@ assistProviders.forEach(player => {
     const assistsInLastMatch =
         countAssistsInMatch(
             lastMatch,
-            player
+            scorer
         );
 
     let previousAssists = 0;
