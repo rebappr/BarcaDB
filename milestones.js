@@ -37,16 +37,25 @@ function normalizeSeason(season){
 
 function getLastPlayedMatch(){
 
-    return allMatches
-        .filter(
-            match =>
-                match.Result &&
-                match.Result !== "-:-"
-        )
-        .sort(
-            (a,b) =>
-                Number(b.ID) - Number(a.ID)
-        )[0];
+    let lastMatch = null;
+
+    allMatches.forEach(match => {
+
+        if(!isValidMatch(match)){
+            return;
+        }
+
+        if(
+            !lastMatch ||
+            Number(match.ID) >
+            Number(lastMatch.ID)
+        ){
+            lastMatch = match;
+        }
+
+    });
+
+    return lastMatch;
 
 }
 
@@ -118,9 +127,10 @@ for(let i=1;i<=11;i++){
     const player =
         match[`Player name ${i}`];
 
-    if(player){
-        playersInMatch.add(player);
-    }
+    if(isValidPerson(player)){
+    playersInMatch.add(player);
+}
+
 
 }
 
@@ -129,9 +139,9 @@ for(let i=1;i<=12;i++){
     const player =
         match[`Substitution IN Player ${i}`];
 
-    if(player){
-        playersInMatch.add(player);
-    }
+    if(isValidPerson(player)){
+    playersInMatch.add(player);
+}
 
 }
 
@@ -258,10 +268,12 @@ let goalsInLastMatch = 0;
 for(let i=1;i<=12;i++){
 
     if(
-        lastMatch[`Goal Player ${i}`] === scorer
-    ){
-        goalsInLastMatch++;
-    }
+    normalizePlayer(
+        lastMatch[`Goal Player ${i}`]
+    ) === normalizePlayer(scorer)
+){
+    goalsInLastMatch++;
+}
 
 }
 
@@ -369,11 +381,12 @@ if(
         for(let j=1;j<=12;j++){
 
             if(
-                match[`Goal Player ${j}`] ===
-                scorer
-            ){
-                previousGoals++;
-            }
+    normalizePlayer(
+        match[`Goal Player ${j}`]
+    ) === normalizePlayer(scorer)
+){
+    previousGoals++;
+}
 
         }
 
