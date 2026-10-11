@@ -395,43 +395,6 @@ if(seasonGoals === 0){
 }
 
 let matchesWithoutGoal = 0;
-
-const previousMatches = allMatches
-
-    .filter(match =>
-        Number(match.ID) <
-        Number(lastMatch.ID)
-    )
-
-    .sort(
-        (a,b) =>
-        Number(b.ID) - Number(a.ID)
-    );
-
-for(const match of previousMatches){
-
-    let scored = false;
-
-    for(let j=1;j<=12;j++){
-
-        if(
-            match[`Goal Player ${j}`] === scorer
-        ){
-            scored = true;
-            break;
-        }
-
-    }
-
-    if(scored){
-        break;
-    }
-
-    matchesWithoutGoal++;
-
-}
-
-let matchesWithoutGoal = 0;
 let hasScoredBefore = false;
 
 const previousMatches = allMatches
