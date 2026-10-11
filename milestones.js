@@ -26,6 +26,34 @@ function normalizePlayer(name){
 
 }
 
+function playerPlayed(match, player){
+
+    for(let i=1;i<=11;i++){
+
+        if(
+            normalizePlayer(match[`Player name ${i}`]) ===
+            normalizePlayer(player)
+        ){
+            return true;
+        }
+
+    }
+
+    for(let i=1;i<=12;i++){
+
+        if(
+            normalizePlayer(match[`Substitution IN Player ${i}`]) ===
+            normalizePlayer(player)
+        ){
+            return true;
+        }
+
+    }
+
+    return false;
+
+}
+
 function normalizeSeason(season){
 
     return String(season || "")
@@ -423,14 +451,18 @@ const previousMatches = allMatches
 
 for(const match of previousMatches){
 
+    if(!playerPlayed(match, scorer)){
+        continue;
+    }
+
     let scored = false;
 
     for(let j=1;j<=12;j++){
 
         if(
             normalizePlayer(
-    match[`Goal Player ${j}`]
-) === normalizePlayer(scorer)
+                match[`Goal Player ${j}`]
+            ) === normalizePlayer(scorer)
         ){
             scored = true;
             break;
