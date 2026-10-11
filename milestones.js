@@ -69,6 +69,20 @@ function countAppearancesUntilMatch(
             }
 
         }
+        
+        for(let i=1;i<=12;i++){
+
+    if(
+        match[`Substitution IN Player ${i}`]
+        === player
+    ){
+
+        appearances++;
+        break;
+
+    }
+
+}
 
     });
 
