@@ -843,10 +843,10 @@ return uniqueInsights;
 
 }
 
-function getLatestMilestones(limit = 10){
+function getLatestMilestones(){
 
     return getLastMatchInsights()
-        .slice(0,limit);
+        .slice(0, 5);
 
 }
 
