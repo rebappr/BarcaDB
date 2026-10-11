@@ -481,18 +481,78 @@ function generateClasicoMilestones(){
 
 }
 
+function getLastPlayedMatch(){
+
+    return allMatches
+        .filter(
+            match =>
+                match.Result &&
+                match.Result !== "-:-"
+        )
+        .sort(
+            (a,b) =>
+                Number(b.ID) - Number(a.ID)
+        )[0];
+
+}
+
+function getLastMatchInsights(){
+
+    const insights = [];
+
+    const lastMatch =
+        getLastPlayedMatch();
+
+    if(!lastMatch){
+        return [];
+    }
+
+    insights.push({
+
+        priority:100,
+
+        text:
+            `📅 Latest result: FC Barcelona ${lastMatch.Result} ${lastMatch["Opp. Team"]} in ${lastMatch.Competition}.`
+
+    });
+
+    for(let i=1;i<=12;i++){
+
+        const scorer =
+            lastMatch[`Goal Player ${i}`];
+
+        if(
+            !scorer ||
+            scorer.includes("(OG)")
+        ){
+            continue;
+        }
+
+        insights.push({
+
+            priority:90,
+
+            text:
+                `⚽ ${scorer} scored in Barcelona's latest match.`
+
+        });
+
+    }
+
+    return insights;
+
+}
+
 function getLatestMilestones(limit = 10){
 
-    return [
+    return getLastMatchInsights()
 
-        ...generateMilestones(),
-        ...generateClasicoMilestones()
+        .sort(
+            (a,b) =>
+                b.priority - a.priority
+        )
 
-    ]
-    .sort(
-        (a,b) => b.priority - a.priority
-    )
-    .slice(0,limit);
+        .slice(0,limit);
 
 }
 
