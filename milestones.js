@@ -117,6 +117,20 @@ function buildAppearanceRanking(
                 (stats[player] || 0) + 1;
 
         }
+        
+        for(let i=1;i<=12;i++){
+
+    const player =
+        match[`Substitution IN Player ${i}`];
+
+    if(!player){
+        continue;
+    }
+
+    stats[player] =
+        (stats[player] || 0) + 1;
+
+}
 
     });
 
@@ -202,8 +216,6 @@ for(let i=1;i<=12;i++){
 
 }
 
-let goalsInLastMatch = 0;
-
 let previousClasicoGoals = 0;
 
     // First El Clásico goal
@@ -245,7 +257,10 @@ let previousClasicoGoals = 0;
 
         });
 
-        if(previousClasicoGoals === 0){
+        if(
+    previousClasicoGoals === 0 &&
+    goalsInLastMatch > 0
+){
 
             insights.push({
 
@@ -746,20 +761,24 @@ starters.forEach(player => {
     ){
 
         const overtaken =
-            rankingBefore[beforePos - 1];
+    rankingBefore[beforePos - 1];
 
-        if(overtaken){
+if(
+    overtaken &&
+    rankingAfter[afterPos].appearances >
+    overtaken.appearances
+){
 
-            insights.push({
+    insights.push({
 
-                priority:130,
+        priority:130,
 
-                text:
-                    `📈 ${player} overtook ${overtaken.name} in Barcelona appearances.`
+        text:
+            `📈 ${player} overtook ${overtaken.name} in Barcelona appearances.`
 
-            });
+    });
 
-        }
+}
 
     }
 
@@ -779,6 +798,11 @@ insights.forEach(item => {
     uniqueInsights.push(item);
 
 });
+
+uniqueInsights.sort(
+    (a,b) =>
+        b.priority - a.priority
+);
 
 return uniqueInsights;
 
