@@ -806,7 +806,7 @@ if(
 
     insights.push({
 
-        priority:130,
+        priority:10,
 
         text:
             `📈 ${player} overtook ${overtaken.name} in Barcelona appearances.`
