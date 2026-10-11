@@ -18,6 +18,14 @@ function isValidPerson(name){
 
 }
 
+function normalizePlayer(name){
+
+    return String(name || "")
+        .trim()
+        .toLowerCase();
+
+}
+
 function normalizeSeason(season){
 
     return String(season || "")
@@ -254,7 +262,9 @@ let previousClasicoGoals = 0;
             for(let j=1;j<=12;j++){
 
                 if(
-                    match[`Goal Player ${j}`] === scorer
+                    normalizePlayer(
+    match[`Goal Player ${j}`]
+) === normalizePlayer(scorer)
                 ){
 
                     previousClasicoGoals++;
@@ -372,7 +382,9 @@ allMatches.forEach(match => {
     for(let j=1;j<=12;j++){
 
         if(
-            match[`Goal Player ${j}`] === scorer
+            normalizePlayer(
+    match[`Goal Player ${j}`]
+) === normalizePlayer(scorer)
         ){
             seasonGoals++;
         }
@@ -416,7 +428,9 @@ for(const match of previousMatches){
     for(let j=1;j<=12;j++){
 
         if(
-            match[`Goal Player ${j}`] === scorer
+            normalizePlayer(
+    match[`Goal Player ${j}`]
+) === normalizePlayer(scorer)
         ){
             scored = true;
             break;
@@ -484,7 +498,9 @@ if(
         for(let j=1;j<=12;j++){
 
             if(
-                match[`Goal Player ${j}`] === scorer
+                normalizePlayer(
+    match[`Goal Player ${j}`]
+) === normalizePlayer(scorer)
             ){
                 goals++;
             }
@@ -567,7 +583,9 @@ if(
         for(let j=1;j<=12;j++){
 
             if(
-                match[`Goal Player ${j}`] === scorer
+                normalizePlayer(
+    match[`Goal Player ${j}`]
+) === normalizePlayer(scorer)
             ){
 
                 scored = true;
@@ -628,7 +646,9 @@ if(goalsInLastMatch >= 2){
         for(let j=1;j<=12;j++){
 
             if(
-                match[`Goal Player ${j}`] === scorer
+                normalizePlayer(
+    match[`Goal Player ${j}`]
+) === normalizePlayer(scorer)
             ){
                 goalsInMatch++;
             }
