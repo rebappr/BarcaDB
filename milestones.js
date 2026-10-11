@@ -57,30 +57,37 @@ function countAppearancesUntilMatch(
             return;
         }
 
-        for(let i=1;i<=11;i++){
+        let played = false;
 
-            if(
-                match[`Player name ${i}`] === player
-            ){
-
-                appearances++;
-                break;
-
-            }
-
-        }
-        
-        for(let i=1;i<=12;i++){
+for(let i=1;i<=11;i++){
 
     if(
-        match[`Substitution IN Player ${i}`]
-        === player
+        match[`Player name ${i}`] === player
     ){
-
-        appearances++;
+        played = true;
         break;
+    }
+
+}
+
+if(!played){
+
+    for(let i=1;i<=12;i++){
+
+        if(
+            match[`Substitution IN Player ${i}`] === player
+        ){
+            played = true;
+            break;
+        }
 
     }
+
+}
+
+if(played){
+    appearances++;
+}
 
 }
 
@@ -282,8 +289,7 @@ if(
 ){
 
     const clasicoGoals =
-        previousClasicoGoals +
-        goalsInLastMatch;
+    previousClasicoGoals + 1;
 
     if(
         [5,10,15,20,25]
