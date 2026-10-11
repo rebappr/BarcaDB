@@ -539,6 +539,35 @@ if(
 }
 
 if(
+    assistsInLastMatch === 2
+){
+
+    insights.push({
+
+        priority:120,
+
+        text:
+            `🎯 ${player} provided two assists in the match.`
+
+    });
+
+}
+else if(
+    assistsInLastMatch >= 3
+){
+
+    insights.push({
+
+        priority:150,
+
+        text:
+            `🎯 ${player} provided ${assistsInLastMatch} assists in a single match.`
+
+    });
+
+}
+
+if(
     goalsInLastMatch > 0 &&
     assistsInLastMatch > 0
 ){
