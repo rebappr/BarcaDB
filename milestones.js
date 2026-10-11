@@ -178,16 +178,6 @@ scorers.forEach(scorer => {
 
 let goalsInLastMatch = 0;
 
-for(let i=1;i<=12;i++){
-
-    if(
-        lastMatch[`Goal Player ${i}`] === scorer
-    ){
-        goalsInLastMatch++;
-    }
-
-}
-
 let previousClasicoGoals = 0;
 
     // First El Clásico goal
@@ -244,22 +234,31 @@ let previousClasicoGoals = 0;
 
     }
     
-const clasicoGoals =
-    previousClasicoGoals + goalsInLastMatch;
-
 if(
-    [5,10,15,20,25]
-    .includes(clasicoGoals)
+    String(lastMatch["Opp. Team"])
+        .toLowerCase()
+        .includes("real madrid")
 ){
 
-    insights.push({
+    const clasicoGoals =
+        previousClasicoGoals +
+        goalsInLastMatch;
 
-        priority:170,
+    if(
+        [5,10,15,20,25]
+        .includes(clasicoGoals)
+    ){
 
-        text:
-            `⚔️ ${scorer} reached ${clasicoGoals} El Clásico goals.`
+        insights.push({
 
-    });
+            priority:170,
+
+            text:
+                `⚔️ ${scorer} reached ${clasicoGoals} El Clásico goals.`
+
+        });
+
+    }
 
 }
 
