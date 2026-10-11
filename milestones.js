@@ -1094,57 +1094,61 @@ return uniqueInsights;
 
 }
 
-function getLatestMilestones(){
-
-    return getLastMatchInsights()
-        .slice(0, 5);
-
-}
-
 async function getInterestingStats(){
 
-    const response =
-        await fetch(
-            "interesting-stats.json"
-        );
+    try{
 
-    const stats =
-        await response.json();
+        const response =
+            await fetch(
+                "interesting-stats.json"
+            );
 
-    const lastMatch =
-        getLastPlayedMatch();
+        const stats =
+            await response.json();
 
-    return stats
+        const lastMatch =
+            getLastPlayedMatch();
 
-        .filter(stat =>
+        return stats
 
-            String(stat.Active || "")
-                .trim()
-                .toLowerCase() === "true" &&
+            .filter(stat =>
 
-            Number(stat["Match ID"]) ===
-            Number(lastMatch.ID)
+                String(stat.Active || "")
+                    .trim()
+                    .toLowerCase() === "true" &&
 
-        )
+                Number(stat["Match ID"]) ===
+                Number(lastMatch.ID)
 
-        .sort(
-            (a,b) =>
-                Number(b.Priority || 0) -
-                Number(a.Priority || 0)
-        )
+            )
 
-        .map(stat => ({
+            .sort(
+                (a,b) =>
+                    Number(b.Priority || 0) -
+                    Number(a.Priority || 0)
+            )
 
-            key:
-                `stat-${stat.ID}`,
+            .map(stat => ({
 
-            priority:
-                Number(stat.Priority) || 0,
+                key:
+                    stat.Key ||
+                    `stat-${stat.ID}`,
 
-            text:
-                `${stat.Number} - ${stat.Text} ${stat.Tagline}`
+                priority:
+                    Number(stat.Priority) || 0,
 
-        }));
+                text:
+                    `${stat.Number} - ${stat.Text} ${stat.Tagline}`
+
+            }));
+
+    }
+
+    catch{
+
+        return [];
+
+    }
 
 }
 
