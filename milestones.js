@@ -255,9 +255,9 @@ for(let i=1;i<=11;i++){
     const player =
         lastMatch[`Player name ${i}`];
 
-    if(player){
-        starters.add(player);
-    }
+    if(isValidPerson(player)){
+    starters.add(player);
+}
 
 }
 
@@ -325,7 +325,7 @@ if(
 
     insights.push({
 
-        priority:140,
+        priority:150,
 
         text:
             `⭐ ${scorer} recorded a goal and an assist in the same match.`
