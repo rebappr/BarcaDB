@@ -264,6 +264,21 @@ for(let i=1;i<=11;i++){
     // Goalscorers in latest match
 
     const scorers = new Set();
+    
+    const assistProviders = new Set();
+
+for(let i=1;i<=12;i++){
+
+    const player =
+        lastMatch[`Assist Player ${i}`];
+
+    if(
+        isValidPerson(player)
+    ){
+        assistProviders.add(player);
+    }
+
+}
 
 for(let i=1;i<=12;i++){
 
