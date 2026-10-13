@@ -354,15 +354,35 @@
     gap:10px;
 }
 
+.compare-options{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+
+    margin:4px 0 8px;
+
+    color:var(--muted);
+    font-weight:600;
+}
+
 #matchLimit{
     width:90px;
-    box-sizing:border-box;
-    padding:12px;
+
+    padding:10px 12px;
+
     border-radius:10px;
     border:1px solid var(--divider);
+
     background:#ffffff;
+
     color:var(--barca-blue);
+
     font-size:16px;
+    font-weight:800;
+
+    text-align:center;
 }
 
 #matchLimit::placeholder{
@@ -373,24 +393,6 @@
 #matchLimit:focus{
     outline:none;
     border-color:var(--barca-blue);
-}
-
-#compareScopeInfo{
-    color:var(--muted);
-    font-size:.9rem;
-}
-
-.compare-options{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    flex-wrap:wrap;
-
-    background:var(--card-bg);
-    border:1px solid var(--card-border);
-    border-radius:12px;
-
-    padding:12px 16px;
 }
 
 @media(max-width:820px){
