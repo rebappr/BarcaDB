@@ -190,8 +190,7 @@ text-decoration:underline;
     padding:0 16px;
     border:none;
     border-radius:16px;
-    border:1px solid var(--divider);
-    background:var(--select-bg);
+	background:rgba(255,255,255,.12);
     color:#A9A9A9;
     font-size:16px;
 }
