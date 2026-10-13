@@ -308,14 +308,15 @@ text-decoration:underline;
     padding:0 16px;
     border:none;
     border-radius:14px;
-    background:rgba(255,255,255,.12);
-    color:#A9A9A9;
+    background:#ffffff;
+    color:var(--barca-blue);
     font-size:16px;
     margin:0;
 }
 
 .mobile-search-input::placeholder{
-    color:#A9A9A9;
+    color:#64748b;
+    opacity:1;
 }
 
 .menu-toggle{
