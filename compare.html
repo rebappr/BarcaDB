@@ -367,12 +367,33 @@
     font-weight:600;
 }
 
+.compare-filter-card{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+
+    padding:12px 16px;
+
+    background:var(--card-bg);
+    border:1px solid var(--card-border);
+    border-radius:12px;
+
+    margin-bottom:16px;
+}
+
+.compare-filter-card span{
+    color:var(--muted);
+    font-weight:600;
+}
+
 #matchLimit{
     width:90px;
     padding:10px 12px;
     border-radius:10px;
     border:1px solid var(--divider);
-    background:#ffffff;
+    background:var(--select-bg);
     color:var(--barca-blue);
     font-size:16px;
     text-align:center;
@@ -520,11 +541,9 @@
 
     </div>
 
-<div class="compare-options">
+<div class="compare-filter-card">
 
-    <span>
-        Compare first
-    </span>
+    <span>Compare first</span>
 
     <input
         type="number"
@@ -532,9 +551,7 @@
         min="1"
         placeholder="Career">
 
-    <span>
-        matches
-    </span>
+    <span>Barcelona matches</span>
 
 </div>
 
