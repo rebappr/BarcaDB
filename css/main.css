@@ -190,7 +190,7 @@ text-decoration:underline;
     padding:12px;
     border-radius:10px;
     border:1px solid var(--divider);
-    background:var(--select-bg);
+    background:#ffffff;
     color:var(--barca-blue);
     font-size:16px;
     height:auto;
@@ -208,7 +208,7 @@ text-decoration:underline;
 }
 
 .desktop-search-input::placeholder{
-    color:var(--muted);
+    color:#64748b;
     opacity:1;
 }
 
