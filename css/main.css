@@ -207,7 +207,8 @@ text-decoration:underline;
 }
 
 .desktop-search-input::placeholder{
-    color:#A9A9A9;
+    color:var(--muted);
+    opacity:1;
 }
 
 .mobile-menu-search{
