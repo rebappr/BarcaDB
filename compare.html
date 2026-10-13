@@ -364,6 +364,22 @@
     gap:10px;
 }
 
+#matchLimit{
+    width:120px;
+    padding:10px 14px;
+    border-radius:10px;
+    border:1px solid var(--divider);
+    background:var(--select-bg);
+    color:var(--text);
+    font-size:15px;
+    font-weight:600;
+}
+
+#compareScopeInfo{
+    color:var(--muted);
+    font-size:.9rem;
+}
+
 @media(max-width:820px){
 
     .summary-row{
@@ -560,6 +576,40 @@
 
     </div>
 
+<div class="compare-card">
+
+    <div class="compare-result-title">
+        Match Range Filter
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:8px;">
+
+        <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+
+            <label for="matchLimit">
+                Compare first:
+            </label>
+
+            <input
+                type="number"
+                id="matchLimit"
+                min="1"
+                placeholder="Career stats">
+
+            <span id="compareScopeInfo">
+                Comparing full careers.
+            </span>
+
+        </div>
+
+        <small style="color:var(--muted);">
+            Leave empty to compare entire Barcelona careers.
+        </small>
+
+    </div>
+
+</div>
+
 <div
     class="compare-card"
     id="basicInfoCard"
@@ -570,6 +620,20 @@
     </div>
 
     <div class="summary-table">
+
+		<div class="summary-row">
+		
+		    <span id="playerAComparedMatches">-</span>
+		
+		    <div class="summary-center">
+		        <span class="summary-label">
+		            Matches Compared
+		        </span>
+		    </div>
+		
+		    <span id="playerBComparedMatches">-</span>
+		
+		</div>
 
         <div class="summary-row">
 
@@ -1524,7 +1588,10 @@ function getCompetitionRecord(
     let goals = 0;
     let assists = 0;
 
-    allMatches.forEach(match => {
+    const playerMatches =
+    getLimitedMatches(playerName);
+
+	playerMatches.forEach(match => {
 
         if(
             match.Competition !== competition
@@ -1638,7 +1705,10 @@ function getGoalkeeperCompetitionRecord(
     let conceded = 0;
     let cleanSheets = 0;
 
-    allMatches.forEach(match => {
+    const playerMatches =
+    getLimitedMatches(playerName);
+
+	playerMatches.forEach(match => {
 
         if(
             match.Competition !== competition
@@ -2378,7 +2448,10 @@ function getMatchResults(playerName){
     let draws = 0;
     let losses = 0;
 
-    allMatches.forEach(match => {
+    const matchesData =
+    getLimitedMatches(playerName);
+
+	matchesData.forEach(match => {
 
         if(
     !playerPlayedMatch(
@@ -2502,6 +2575,16 @@ document.getElementById(
 document.getElementById(
     "playerBSeasons"
 ).textContent = playerB.seasons;
+
+document.getElementById(
+    "playerAComparedMatches"
+).textContent =
+    getLimitedMatches(selectedPlayerA).length;
+
+document.getElementById(
+    "playerBComparedMatches"
+).textContent =
+    getLimitedMatches(selectedPlayerB).length;
 
 highlightWinner(
     "playerASeasons",
@@ -2631,13 +2714,104 @@ function isGoalkeeper(playerName){
 
 }
 
+function getPlayerMatches(playerName){
+
+    const matches = [];
+
+    allMatches.forEach(match => {
+
+        if(playerPlayedMatch(match, playerName)){
+            matches.push(match);
+        }
+
+    });
+
+    // zoradenie od debutu po posledný zápas
+    return matches.reverse();
+
+}
+
+function getLimitedMatches(playerName){
+
+    const matches =
+        getPlayerMatches(playerName);
+
+    const limitInput =
+        document.getElementById("matchLimit");
+
+    if(!limitInput){
+        return matches;
+    }
+
+    const limit =
+        parseInt(limitInput.value);
+
+    if(
+        !limit ||
+        limit <= 0
+    ){
+        return matches;
+    }
+
+    return matches.slice(0, limit);
+
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const input =
+        document.getElementById("matchLimit");
+
+    if(!input){
+        return;
+    }
+
+    input.addEventListener("input", () => {
+
+        const value =
+            parseInt(input.value);
+
+        const info =
+            document.getElementById(
+                "compareScopeInfo"
+            );
+
+        if(
+            !value ||
+            value <= 0
+        ){
+
+            info.textContent =
+                "Comparing full careers.";
+
+        }else{
+
+            info.textContent =
+                `Comparing first ${value} matches played for FC Barcelona.`;
+
+        }
+
+        if(
+            selectedPlayerA &&
+            selectedPlayerB
+        ){
+            updateCompareResult();
+        }
+
+    });
+
+});
+
 function getPerformanceStats(playerName){
 
     let matches = 0;
     let goals = 0;
     let assists = 0;
 
-    allMatches.forEach(match => {
+    const matchesData =
+    getLimitedMatches(playerName);
+
+		matchesData.forEach(match => {
 
         if(
     !playerPlayedMatch(
@@ -3125,7 +3299,10 @@ function getGoalkeeperStats(playerName){
     let conceded = 0;
     let cleanSheets = 0;
 
-    allMatches.forEach(match => {
+    const matchesData =
+    getLimitedMatches(playerName);
+
+	matchesData.forEach(match => {
 
         if(
             !playerPlayedMatch(
