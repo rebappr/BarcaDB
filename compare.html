@@ -357,20 +357,25 @@
 }
 
 #matchLimit{
-    width:100px;
-    padding:10px 14px;
+    width:140px;
+    box-sizing:border-box;
+    padding:12px;
     border-radius:10px;
     border:1px solid var(--divider);
     background:var(--select-bg);
-    color:white;
+    color:var(--barca-blue);
     font-size:16px;
-    font-weight:600;
+    font-weight:800;
 }
 
-#matchLimit input::placeholder{
+#matchLimit::placeholder{
     color:var(--muted);
     opacity:1;
+}
 
+#matchLimit:focus{
+    outline:none;
+    border-color:var(--barca-blue);
 }
 
 #compareScopeInfo{
