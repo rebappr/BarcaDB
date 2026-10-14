@@ -123,6 +123,11 @@ font-size:18px;
 color:var(--text);
 }
 
+.widgetd-card p{
+    color:var(--muted);
+    line-height:1.7;
+}
+
 .player-link,
 .opponent-link{
 color:var(--link-color);
