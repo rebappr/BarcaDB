@@ -559,372 +559,396 @@ Loading...
 let allMatches = [];
 
 Promise.all([
-fetch("data.json").then(r => r.json()),
-fetch("current-season.json").then(r => r.json())
+    fetch("data.json").then(r => r.json()),
+    fetch("current-season.json").then(r => r.json())
 ])
-.then(([matchesData,currentData]) => {
+.then(([matchesData, currentData]) => {
 
-function normalizeName(name){
-return String(name || "")
-.toLowerCase()
-.replace(/fc /g,"")
-.replace(/ cf/g,"")
-.replace(/./g,"")
-.replace(/\s+/g," ")
-.trim();
-}
+    // Spojenie historických a aktuálnych zápasov
+    allMatches = [
+        ...matchesData,
+        ...currentData
+    ];
 
-function renderHome(){
+    function normalizeName(name) {
+        return String(name || "")
+            .toLowerCase()
+            .replace(/fc /g, "")
+            .replace(/ cf/g, "")
+            .replace(/\./g, "")
+            .replace(/\s+/g, " ")
+            .trim();
+    }
 
-renderLastMatch();
-renderNextMatch();
-initPersonSearch();
+    function parseDate(date) {
 
-}
+        const [day, month, year] = date.split(".");
 
-function parseDate(date){
+        return new Date(
+            Number(year),
+            Number(month) - 1,
+            Number(day)
+        );
+    }
 
-    const [day, month, year] = date.split(".");
+    function renderHome() {
 
-    return new Date(
-        Number(year),
-        Number(month)-1,
-        Number(day)
-    );
-}
+        renderLastMatch();
+        renderNextMatch();
+        initPersonSearch();
 
-function renderLastMatch(){
+    }
 
-const today = new Date();
+    function renderLastMatch() {
 
-today.setHours(0,0,0,0);
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
 
-const played = allMatches
-.filter(m =>
-parseDate(m.Date) < today
-)
-.sort((a,b) =>
-parseDate(b.Date) - parseDate(a.Date)
-);
-
-const match = played[0];
-
-if(!match) return;
-
-const homeTeam =
-    match["Home/Away"] === "Home"
-        ? "FC Barcelona"
-        : `<a class="opponent-link fixture-opponent"
-              href="opponent.html?name=${encodeURIComponent(match["Opp. Team"])}">
-              ${match["Opp. Team"]}
-           </a>`;
-
-const awayTeam =
-    match["Home/Away"] === "Home"
-        ? `<a class="opponent-link fixture-opponent"
-              href="opponent.html?name=${encodeURIComponent(match["Opp. Team"])}">
-              ${match["Opp. Team"]}
-           </a>`
-        : "FC Barcelona";
-
-document.getElementById("lastMatch").innerHTML = `
-<div class="fixture-link">
-
-    <div class="fixture-title">
-        LAST MATCH
-    </div>
-
-    <div class="fixture-card">
-
-        <div class="fixture-team">
-            ${homeTeam}
-        </div>
-
-        <div class="fixture-center">
-            <a
-			href="match.html?id=${match.ID}"
-			class="fixture-score"
-			style="display:inline-block;text-decoration:none;color:white;"
-			>
-			${match.Result}
-			</a>
-        </div>
-
-        <div class="fixture-team">
-            ${awayTeam}
-        </div>
-
-    </div>
-
-    <div class="fixture-meta">
-        ${match.Date} • ${match.Competition}
-    </div>
-
-</div>
-`;
-}
-
-function renderNextMatch(){
-
-const today = new Date();
-
-today.setHours(0,0,0,0);
-
-const next = allMatches
-.filter(m =>
-parseDate(m.Date) >= today
-)
-.sort((a,b) =>
-parseDate(a.Date) - parseDate(b.Date)
-)[0];
-
-if(!next){
-
-document.getElementById("nextMatch").innerHTML =
-"No upcoming matches";
-
-return;
-}
-
-const homeTeam =
-    next["Home/Away"] === "Home"
-        ? "FC Barcelona"
-        : `<a class="opponent-link fixture-opponent"
-              href="opponent.html?name=${encodeURIComponent(next["Opp. Team"])}">
-              ${next["Opp. Team"]}
-           </a>`;
-
-const awayTeam =
-    next["Home/Away"] === "Home"
-        ? `<a class="opponent-link fixture-opponent"
-              href="opponent.html?name=${encodeURIComponent(next["Opp. Team"])}">
-              ${next["Opp. Team"]}
-           </a>`
-        : "FC Barcelona";
-
-document.getElementById("nextMatch").innerHTML = `
-<div class="fixture-link">
-
-    <div class="fixture-title">
-        UPCOMING MATCH
-    </div>
-
-    <div class="fixture-card">
-
-        <div class="fixture-team">
-            ${homeTeam}
-        </div>
-
-		<div class="fixture-center">
-		    <a
-		        href="match.html?id=${next.ID}"
-		        class="fixture-vs"
-		        style="display:inline-block;text-decoration:none;color:inherit;"
-		    >
-		        VS
-		    </a>
-		</div>
-
-        <div class="fixture-team">
-            ${awayTeam}
-        </div>
-
-    </div>
-
-    <div class="fixture-meta">
-        ${next.Date} • ${next.Competition}
-    </div>
-
-</div>
-`;
-}
-
-function initPersonSearch(){
-
-    const searchItems = new Map();
-
-    allMatches.forEach(match => {
-
-        // Barcelona manager
-        if(match.Manager){
-
-            searchItems.set(
-                `manager-${match.Manager}`,
-                {
-                    name: match.Manager,
-                    type: "Manager"
-                }
+        const played = allMatches
+            .filter(match => parseDate(match.Date) < today)
+            .sort((a, b) =>
+                parseDate(b.Date) - parseDate(a.Date)
             );
 
-        }
+        const match = played[0];
 
-        // Opponent manager
-        if(match["Opp. Manager"]){
-
-            searchItems.set(
-                `manager-${match["Opp. Manager"]}`,
-                {
-                    name: match["Opp. Manager"],
-                    type: "Manager"
-                }
-            );
-
-        }
-
-		// Opponent team
-		if(match["Opp. Team"]){
-		
-		    searchItems.set(
-		        `opponent-${match["Opp. Team"]}`,
-		        {
-		            name: match["Opp. Team"],
-		            type: "Opponent"
-		        }
-		    );
-		
-		}
-
-        // Starting XI
-        for(let i=1;i<=11;i++){
-
-            if(match[`Player name ${i}`]){
-
-                searchItems.set(
-                    `player-${match[`Player name ${i}`]}`,
-                    {
-                        name: match[`Player name ${i}`],
-                        type: "Player"
-                    }
-                );
-
-            }
-
-            if(match[`Opp. Player name ${i}`]){
-
-                searchItems.set(
-                    `player-${match[`Opp. Player name ${i}`]}`,
-                    {
-                        name: match[`Opp. Player name ${i}`],
-                        type: "Player"
-                    }
-                );
-
-            }
-
-        }
-
-        // Bench
-        for(let i=1;i<=12;i++){
-
-            if(match[`On the bench name ${i}`]){
-
-                searchItems.set(
-                    `player-${match[`On the bench name ${i}`]}`,
-                    {
-                        name: match[`On the bench name ${i}`],
-                        type: "Player"
-                    }
-                );
-
-            }
-
-            if(match[`Opp. On the bench name ${i}`]){
-
-                searchItems.set(
-                    `player-${match[`Opp. On the bench name ${i}`]}`,
-                    {
-                        name: match[`Opp. On the bench name ${i}`],
-                        type: "Player"
-                    }
-                );
-
-            }
-
-        }
-
-    });
-
-    const itemList =
-        [...searchItems.values()]
-        .sort((a,b) => a.name.localeCompare(b.name));
-
-    function attachSearch(inputId, resultsId){
-
-    const input = document.getElementById(inputId);
-    const results = document.getElementById(resultsId);
-
-    if(!input || !results) return;
-
-    input.addEventListener("input", () => {
-
-        const value =
-            input.value
-            .trim()
-            .toLowerCase();
-
-        if(!value){
-            results.innerHTML = "";
+        if (!match) {
+            document.getElementById("lastMatch").innerHTML =
+                "No completed matches";
             return;
         }
 
-        const filtered =
-            itemList
-            .filter(item =>
-                item.name.toLowerCase().includes(value)
-            )
-            .slice(0,20);
+        const homeTeam =
+            match["Home/Away"] === "Home"
+                ? "FC Barcelona"
+                : `<a class="opponent-link fixture-opponent"
+                     href="opponent.html?name=${encodeURIComponent(match["Opp. Team"])}">
+                     ${match["Opp. Team"]}
+                   </a>`;
 
-        results.innerHTML = `
-            <div class="player-search-results">
-                ${filtered.map(item => {
+        const awayTeam =
+            match["Home/Away"] === "Home"
+                ? `<a class="opponent-link fixture-opponent"
+                     href="opponent.html?name=${encodeURIComponent(match["Opp. Team"])}">
+                     ${match["Opp. Team"]}
+                   </a>`
+                : "FC Barcelona";
 
-                    let url = "";
+        document.getElementById("lastMatch").innerHTML = `
+            <div class="fixture-link">
 
-                    if(item.type === "Manager"){
-                        url = "manager.html?name=" + encodeURIComponent(item.name);
-                    }else if(item.type === "Opponent"){
-                        url = "opponent.html?name=" + encodeURIComponent(item.name);
-                    }else{
-                        url = "player.html?name=" + encodeURIComponent(item.name);
-                    }
+                <div class="fixture-title">
+                    LAST MATCH
+                </div>
 
-                    return `
-                  
-    <a 
-        class="player-search-item"
-        href="${url}">
+                <div class="fixture-card">
 
-        ${item.name}
+                    <div class="fixture-team">
+                        ${homeTeam}
+                    </div>
 
-        <span class="search-type ${item.type.toLowerCase()}">
-            (${item.type})
-        </span>
+                    <div class="fixture-center">
+                        <a
+                            href="match.html?id=${match.ID}"
+                            class="fixture-score"
+                            style="display:inline-block;text-decoration:none;color:white;">
+                            ${match.Result}
+                        </a>
+                    </div>
 
-    </a>
-                    `;
-                }).join("")}
+                    <div class="fixture-team">
+                        ${awayTeam}
+                    </div>
+
+                </div>
+
+                <div class="fixture-meta">
+                    ${match.Date} • ${match.Competition}
+                </div>
+
             </div>
         `;
-    });
+    }
 
-    input.addEventListener("blur", () => {
-        setTimeout(() => {
-            results.innerHTML = "";
-        }, 200);
-    });
+    function renderNextMatch() {
 
-}
-attachSearch(
-    "personSearch",
-    "personSearchResults"
-);
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
 
-attachSearch(
-    "mobilePersonSearch",
-    "mobileSearchResults"
-);
+        const next = allMatches
+            .filter(match => parseDate(match.Date) >= today)
+            .sort((a, b) =>
+                parseDate(a.Date) - parseDate(b.Date)
+            )[0];
 
-}
+        if (!next) {
+
+            document.getElementById("nextMatch").innerHTML =
+                "No upcoming matches";
+
+            return;
+        }
+
+        const homeTeam =
+            next["Home/Away"] === "Home"
+                ? "FC Barcelona"
+                : `<a class="opponent-link fixture-opponent"
+                     href="opponent.html?name=${encodeURIComponent(next["Opp. Team"])}">
+                     ${next["Opp. Team"]}
+                   </a>`;
+
+        const awayTeam =
+            next["Home/Away"] === "Home"
+                ? `<a class="opponent-link fixture-opponent"
+                     href="opponent.html?name=${encodeURIComponent(next["Opp. Team"])}">
+                     ${next["Opp. Team"]}
+                   </a>`
+                : "FC Barcelona";
+
+        document.getElementById("nextMatch").innerHTML = `
+            <div class="fixture-link">
+
+                <div class="fixture-title">
+                    UPCOMING MATCH
+                </div>
+
+                <div class="fixture-card">
+
+                    <div class="fixture-team">
+                        ${homeTeam}
+                    </div>
+
+                    <div class="fixture-center">
+                        <a
+                            href="match.html?id=${next.ID}"
+                            class="fixture-vs"
+                            style="display:inline-block;text-decoration:none;color:inherit;">
+                            VS
+                        </a>
+                    </div>
+
+                    <div class="fixture-team">
+                        ${awayTeam}
+                    </div>
+
+                </div>
+
+                <div class="fixture-meta">
+                    ${next.Date} • ${next.Competition}
+                </div>
+
+            </div>
+        `;
+    }
+
+    function initPersonSearch() {
+
+        const searchItems = new Map();
+
+        allMatches.forEach(match => {
+
+            if (match.Manager) {
+                searchItems.set(
+                    `manager-${match.Manager}`,
+                    {
+                        name: match.Manager,
+                        type: "Manager"
+                    }
+                );
+            }
+
+            if (match["Opp. Manager"]) {
+                searchItems.set(
+                    `manager-${match["Opp. Manager"]}`,
+                    {
+                        name: match["Opp. Manager"],
+                        type: "Manager"
+                    }
+                );
+            }
+
+            if (match["Opp. Team"]) {
+                searchItems.set(
+                    `opponent-${match["Opp. Team"]}`,
+                    {
+                        name: match["Opp. Team"],
+                        type: "Opponent"
+                    }
+                );
+            }
+
+            for (let i = 1; i <= 11; i++) {
+
+                const player =
+                    match[`Player name ${i}`];
+
+                const oppPlayer =
+                    match[`Opp. Player name ${i}`];
+
+                if (player) {
+                    searchItems.set(
+                        `player-${player}`,
+                        {
+                            name: player,
+                            type: "Player"
+                        }
+                    );
+                }
+
+                if (oppPlayer) {
+                    searchItems.set(
+                        `player-${oppPlayer}`,
+                        {
+                            name: oppPlayer,
+                            type: "Player"
+                        }
+                    );
+                }
+            }
+
+            for (let i = 1; i <= 12; i++) {
+
+                const player =
+                    match[`On the bench name ${i}`];
+
+                const oppPlayer =
+                    match[`Opp. On the bench name ${i}`];
+
+                if (player) {
+                    searchItems.set(
+                        `player-${player}`,
+                        {
+                            name: player,
+                            type: "Player"
+                        }
+                    );
+                }
+
+                if (oppPlayer) {
+                    searchItems.set(
+                        `player-${oppPlayer}`,
+                        {
+                            name: oppPlayer,
+                            type: "Player"
+                        }
+                    );
+                }
+            }
+        });
+
+        const itemList = [...searchItems.values()]
+            .sort((a, b) =>
+                a.name.localeCompare(b.name)
+            );
+
+        function attachSearch(inputId, resultsId) {
+
+            const input =
+                document.getElementById(inputId);
+
+            const results =
+                document.getElementById(resultsId);
+
+            if (!input || !results) {
+                return;
+            }
+
+            input.addEventListener("input", () => {
+
+                const value = input.value
+                    .trim()
+                    .toLowerCase();
+
+                if (!value) {
+                    results.innerHTML = "";
+                    return;
+                }
+
+                const filtered = itemList
+                    .filter(item =>
+                        item.name
+                            .toLowerCase()
+                            .includes(value)
+                    )
+                    .slice(0, 20);
+
+                results.innerHTML = `
+                    <div class="player-search-results">
+                        ${filtered.map(item => {
+
+                            let url;
+
+                            switch (item.type) {
+                                case "Manager":
+                                    url =
+                                        "manager.html?name=" +
+                                        encodeURIComponent(item.name);
+                                    break;
+
+                                case "Opponent":
+                                    url =
+                                        "opponent.html?name=" +
+                                        encodeURIComponent(item.name);
+                                    break;
+
+                                default:
+                                    url =
+                                        "player.html?name=" +
+                                        encodeURIComponent(item.name);
+                            }
+
+                            return `
+                                <a
+                                    class="player-search-item"
+                                    href="${url}">
+
+                                    ${item.name}
+
+                                    <span class="search-type ${item.type.toLowerCase()}">
+                                        (${item.type})
+                                    </span>
+
+                                </a>
+                            `;
+                        }).join("")}
+                    </div>
+                `;
+            });
+
+            input.addEventListener("blur", () => {
+
+                setTimeout(() => {
+                    results.innerHTML = "";
+                }, 200);
+
+            });
+        }
+
+        attachSearch(
+            "personSearch",
+            "personSearchResults"
+        );
+
+        attachSearch(
+            "mobilePersonSearch",
+            "mobileSearchResults"
+        );
+    }
+
+    renderHome();
+
+})
+.catch(error => {
+
+    console.error("Failed to load data:", error);
+
+    document.getElementById("lastMatch").innerHTML =
+        "Unable to load match data";
+
+    document.getElementById("nextMatch").innerHTML =
+        "Unable to load match data";
+
+});
 
 document.addEventListener("DOMContentLoaded", () => {
 
