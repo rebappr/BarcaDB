@@ -1004,36 +1004,27 @@ function renderSeasonDebutants(){
 
 function renderSeasonTopScorers(){
 
-    const latestSeason =
-        [...new Set(allMatches.map(x => x.Season))]
-        .sort()
-        .reverse()[0];
-
     const stats = {};
 
-    allMatches
-        .filter(m => m.Season === latestSeason)
-        .forEach(match => {
+    allMatches.forEach(match => {
 
-            for(let i = 1; i <= 12; i++){
+        for(let i = 1; i <= 20; i++){
 
-                const player =
-                    match[`Goal Player ${i}`];
+            const player = match[`Goal Player ${i}`];
 
-                if(
-                    !player ||
-                    player.includes("(OG)")
-                ){
-                    continue;
-                }
-
-                stats[player] =
-                    (stats[player] || 0) + 1;
+            if(
+                !player ||
+                player.includes("(OG)")
+            ){
+                continue;
             }
-        });
 
-    const top =
-        Object.entries(stats)
+            stats[player] =
+                (stats[player] || 0) + 1;
+        }
+    });
+
+    const top = Object.entries(stats)
         .sort((a,b) => b[1] - a[1])
         .slice(0,10);
 
@@ -1058,7 +1049,6 @@ function renderSeasonTopScorers(){
                         ${player}
                     </a>
                 </td>
-
                 <td>${goals}</td>
             </tr>
         `;
@@ -1069,38 +1059,29 @@ function renderSeasonTopScorers(){
         </table>
     `;
 
-    document.getElementById(
-        "seasonTopScorers"
-    ).innerHTML = html;
+    document.getElementById("seasonTopScorers").innerHTML = html;
 }
 
 function renderSeasonTopAssists(){
 
-    const latestSeason =
-        [...new Set(allMatches.map(x => x.Season))]
-        .sort()
-        .reverse()[0];
-
     const stats = {};
 
-    allMatches
-        .filter(m => m.Season === latestSeason)
-        .forEach(match => {
+    allMatches.forEach(match => {
 
-            for(let i = 1; i <= 12; i++){
+        for(let i = 1; i <= 20; i++){
 
-                const player =
-                    match[`Assist Player ${i}`];
+            const player = match[`Assist Player ${i}`];
 
-                if(!player) continue;
-
-                stats[player] =
-                    (stats[player] || 0) + 1;
+            if(!player){
+                continue;
             }
-        });
 
-    const top =
-        Object.entries(stats)
+            stats[player] =
+                (stats[player] || 0) + 1;
+        }
+    });
+
+    const top = Object.entries(stats)
         .sort((a,b) => b[1] - a[1])
         .slice(0,10);
 
@@ -1125,7 +1106,6 @@ function renderSeasonTopAssists(){
                         ${player}
                     </a>
                 </td>
-
                 <td>${assists}</td>
             </tr>
         `;
@@ -1136,9 +1116,7 @@ function renderSeasonTopAssists(){
         </table>
     `;
 
-    document.getElementById(
-        "seasonTopAssists"
-    ).innerHTML = html;
+    document.getElementById("seasonTopAssists").innerHTML = html;
 }
 
     function initPersonSearch() {
