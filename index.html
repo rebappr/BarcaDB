@@ -1459,13 +1459,48 @@ document.addEventListener("DOMContentLoaded", () => {
         closeMenu
     );
 
-    window.addEventListener("resize", () => {
+function reorderMobileHomepage() {
 
-        if(window.innerWidth > 820){
-            closeMenu();
-        }
+    const homePage =
+        document.querySelector(".home-page");
 
-    });
+    const homeMain =
+        document.querySelector(".home-main");
+
+    const homeSidebar =
+        document.querySelector(".home-sidebar");
+
+    const discover =
+        document.querySelector(".home-discover");
+
+    if (!homePage || !homeMain || !homeSidebar || !discover) {
+        return;
+    }
+
+    if (window.innerWidth <= 820) {
+
+        homePage.appendChild(homeSidebar);
+        homePage.appendChild(discover);
+
+    } else {
+
+        homeMain.appendChild(discover);
+
+        homePage.appendChild(homeMain);
+        homePage.appendChild(homeSidebar);
+
+    }
+}
+
+reorderMobileHomepage();
+
+window.addEventListener("resize", () => {
+
+    reorderMobileHomepage();
+
+    if(window.innerWidth > 820){
+        closeMenu();
+    }
 
 });
 
