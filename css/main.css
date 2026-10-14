@@ -222,7 +222,7 @@ text-decoration:underline;
     z-index:9999;
     border-radius:16px;
     overflow:hidden;
-    background:var(--card-bg);
+    background:var(--search-bg);
 }
 
 .desktop-search-input::placeholder{
