@@ -12,6 +12,7 @@
 
     --bg:#0f172a;
     --text:#ffffff;
+    --search-bg:#1e293b;
 
     --card-bg:rgba(255,255,255,.08);
     --card-border:rgba(255,255,255,.12);
@@ -59,6 +60,7 @@
     
         --bg:#f8fafc;
         --text:#0f172a;
+        --search-bg:#ffffff;
 
         --card-bg:#f1f5f9;
         --card-border:rgba(0,77,152,.25);
