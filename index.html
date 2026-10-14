@@ -413,11 +413,6 @@
         order:2;
     }
 
-    .hero-card:nth-of-type(2),
-    .home-card{
-        order:3;
-    }
-
     .fixture-team{
         font-size:14px;
     }
@@ -1394,6 +1389,34 @@ document.addEventListener("DOMContentLoaded", () => {
     if(!menuToggle || !menuOverlay || !mainMenu){
         return;
     }
+
+      function reorderMobileHomepage() {
+      
+          if (window.innerWidth > 820) {
+              return;
+          }
+      
+          const sidebar =
+              document.querySelector(".home-sidebar");
+      
+          const discoverTitle =
+              [...document.querySelectorAll(".widget-title")]
+              .find(el =>
+                  el.textContent.trim() ===
+                  "Discover What's Inside"
+              );
+      
+          if (!sidebar || !discoverTitle) {
+              return;
+          }
+      
+          sidebar.parentNode.insertBefore(
+              sidebar,
+              discoverTitle
+          );
+      }
+      
+      reorderMobileHomepage();
 
     function closeMenu(){
 
