@@ -102,7 +102,7 @@ font-weight:500;
     );
 
     color:white;
-    font-size:14px;
+    font-size:15px;
     font-weight:700;
     text-transform:uppercase;
     border-radius:18px;
@@ -308,6 +308,10 @@ text-decoration:underline;
 }
 
 @media(max-width:820px){
+
+.widget-title{
+    font-size:14px;
+}
       
 .desktop-search{
     display:none;
