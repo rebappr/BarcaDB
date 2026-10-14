@@ -84,23 +84,19 @@
     display:flex;
     flex-direction:column;
     gap:8px;
-    grid-column:1;
 }
 
 .home-sidebar{
     display:flex;
     flex-direction:column;
     gap:8px;
-    grid-column:2;
 }
 
 .home-discover{
-    grid-column:1 / -1;
     display:flex;
     flex-direction:column;
     gap:8px;
 }
-
 
 .sidebar-card{
     background:var(--card-bg);
@@ -548,10 +544,6 @@ Loading...
       </div>
 
 </section>
-
-
-</div>
-
 <div class="home-discover">
 
 <div class="widget-title">
@@ -603,6 +595,8 @@ Discover What's Inside
 
 
         </div>
+
+</div>
 
     </section>
 
@@ -1396,6 +1390,30 @@ document.addEventListener("DOMContentLoaded", () => {
     if(!menuToggle || !menuOverlay || !mainMenu){
         return;
     }
+
+      function reorderMobileHomepage() {
+      
+          if (window.innerWidth > 820) {
+              return;
+          }
+      
+          const homePage =
+              document.querySelector(".home-page");
+      
+          const sidebar =
+              document.querySelector(".home-sidebar");
+      
+          const discover =
+              document.querySelector(".home-discover");
+      
+          if (!homePage || !sidebar || !discover) {
+              return;
+          }
+      
+          homePage.append(sidebar, discover);
+      }
+      
+      reorderMobileHomepage();
       
     function closeMenu(){
 
