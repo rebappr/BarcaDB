@@ -235,7 +235,102 @@
     z-index: 9998;
 }
 
+.widget-card{
+    background:var(--card-bg);
+    backdrop-filter:blur(20px);
+    border:1px solid var(--card-border);
+    border-radius:24px;
+    padding:14px;
+    margin-bottom:4px;
+    transition:.3s;
+}
+
+.fixture-card{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:8px;
+    text-align:center;
+}
+
+.fixture-title{
+    text-align:center;
+    font-size:13px;
+    font-weight:700;
+    margin-bottom:12px;
+    padding:8px;
+    border-radius:12px;
+}
+
+.fixture-team{
+    flex:1;
+    text-align:center;
+    font-size:18px;
+    font-weight:800;
+    text-transform:uppercase;
+}
+
+.fixture-opponent{
+    font-weight:800 !important;
+}
+
+.fixture-center{
+    min-width:120px;
+}
+
+.fixture-score{
+    font-size:34px;
+    font-weight:800;
+    padding:8px 20px;
+    border-radius:16px;
+    color:white;
+    background:linear-gradient(
+        135deg,
+        #004D98,
+        #1e3a8a
+    );
+}
+
+.fixture-vs{
+    font-size:22px;
+    font-weight:800;
+    padding:8px 20px;
+    border-radius:16px;
+}
+
+.fixture-meta{
+    margin-top:10px;
+    text-align:center;
+    color:var(--muted);
+    font-size:13px;
+}
+
+.fixture-link{
+    display:block;
+    text-decoration:none;
+    color:inherit;
+}
+
 @media(max-width:820px){
+
+    .fixture-team{
+        font-size:14px;
+    }
+
+    .fixture-center{
+        min-width:80px;
+    }
+
+    .fixture-score{
+        font-size:24px;
+        padding:6px 14px;
+        border-radius:12px;
+    }
+
+    .fixture-vs{
+        font-size:16px;
+        padding:6px 14px;
+    }
 
     .hero-card{
         padding:32px 18px;
@@ -322,6 +417,22 @@
     </a>
 
 </nav>
+
+<div class="widget-title">
+Matches
+</div>
+
+<div class="widget-card">
+<div id="lastMatch">
+Loading...
+</div>
+</div>
+
+<div class="widget-card">
+<div id="nextMatch">
+Loading...
+</div>
+</div>
 
 <div class="home-page">
 
@@ -447,20 +558,185 @@
 
 let allMatches = [];
 
-fetch("data.json")
-    .then(r => r.json())
-    .then(data => {
+Promise.all([
+fetch("data.json").then(r => r.json()),
+fetch("current-season.json").then(r => r.json())
+])
+.then(([matchesData,currentData]) => {
 
-        allMatches = data;
-
-        renderHome();
-
-    });
+function normalizeName(name){
+return String(name || "")
+.toLowerCase()
+.replace(/fc /g,"")
+.replace(/ cf/g,"")
+.replace(/./g,"")
+.replace(/\s+/g," ")
+.trim();
+}
 
 function renderHome(){
 
+renderLastMatch();
+renderNextMatch();
 initPersonSearch();
 
+}
+
+function parseDate(date){
+
+    const [day, month, year] = date.split(".");
+
+    return new Date(
+        Number(year),
+        Number(month)-1,
+        Number(day)
+    );
+}
+
+function renderLastMatch(){
+
+const today = new Date();
+
+today.setHours(0,0,0,0);
+
+const played = allMatches
+.filter(m =>
+parseDate(m.Date) < today
+)
+.sort((a,b) =>
+parseDate(b.Date) - parseDate(a.Date)
+);
+
+const match = played[0];
+
+if(!match) return;
+
+const homeTeam =
+    match["Home/Away"] === "Home"
+        ? "FC Barcelona"
+        : `<a class="opponent-link fixture-opponent"
+              href="opponent.html?name=${encodeURIComponent(match["Opp. Team"])}">
+              ${match["Opp. Team"]}
+           </a>`;
+
+const awayTeam =
+    match["Home/Away"] === "Home"
+        ? `<a class="opponent-link fixture-opponent"
+              href="opponent.html?name=${encodeURIComponent(match["Opp. Team"])}">
+              ${match["Opp. Team"]}
+           </a>`
+        : "FC Barcelona";
+
+document.getElementById("lastMatch").innerHTML = `
+<div class="fixture-link">
+
+    <div class="fixture-title">
+        LAST MATCH
+    </div>
+
+    <div class="fixture-card">
+
+        <div class="fixture-team">
+            ${homeTeam}
+        </div>
+
+        <div class="fixture-center">
+            <a
+			href="match.html?id=${match.ID}"
+			class="fixture-score"
+			style="display:inline-block;text-decoration:none;color:white;"
+			>
+			${match.Result}
+			</a>
+        </div>
+
+        <div class="fixture-team">
+            ${awayTeam}
+        </div>
+
+    </div>
+
+    <div class="fixture-meta">
+        ${match.Date} • ${match.Competition}
+    </div>
+
+</div>
+`;
+}
+
+function renderNextMatch(){
+
+const today = new Date();
+
+today.setHours(0,0,0,0);
+
+const next = allMatches
+.filter(m =>
+parseDate(m.Date) >= today
+)
+.sort((a,b) =>
+parseDate(a.Date) - parseDate(b.Date)
+)[0];
+
+if(!next){
+
+document.getElementById("nextMatch").innerHTML =
+"No upcoming matches";
+
+return;
+}
+
+const homeTeam =
+    next["Home/Away"] === "Home"
+        ? "FC Barcelona"
+        : `<a class="opponent-link fixture-opponent"
+              href="opponent.html?name=${encodeURIComponent(next["Opp. Team"])}">
+              ${next["Opp. Team"]}
+           </a>`;
+
+const awayTeam =
+    next["Home/Away"] === "Home"
+        ? `<a class="opponent-link fixture-opponent"
+              href="opponent.html?name=${encodeURIComponent(next["Opp. Team"])}">
+              ${next["Opp. Team"]}
+           </a>`
+        : "FC Barcelona";
+
+document.getElementById("nextMatch").innerHTML = `
+<div class="fixture-link">
+
+    <div class="fixture-title">
+        UPCOMING MATCH
+    </div>
+
+    <div class="fixture-card">
+
+        <div class="fixture-team">
+            ${homeTeam}
+        </div>
+
+		<div class="fixture-center">
+		    <a
+		        href="match.html?id=${next.ID}"
+		        class="fixture-vs"
+		        style="display:inline-block;text-decoration:none;color:inherit;"
+		    >
+		        VS
+		    </a>
+		</div>
+
+        <div class="fixture-team">
+            ${awayTeam}
+        </div>
+
+    </div>
+
+    <div class="fixture-meta">
+        ${next.Date} • ${next.Competition}
+    </div>
+
+</div>
+`;
 }
 
 function initPersonSearch(){
