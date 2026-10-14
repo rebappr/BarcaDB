@@ -394,7 +394,16 @@
 @media(max-width:820px){
 
     .home-page{
-        grid-template-columns:1fr;
+        display:flex;
+        flex-direction:column;
+    }
+
+    .home-main{
+        order:1;
+    }
+
+    .home-sidebar{
+        order:2;
     }
 
     .fixture-team{
@@ -651,11 +660,21 @@ Discover What's Inside
     </div>
 
     <div class="widget-title">
-        Season Statistics
+        Top Scorers
     </div>
 
     <div class="widget-card">
-        <div id="seasonStatistics">
+        <div id="seasonTopScorers">
+            Loading...
+        </div>
+    </div>
+
+    <div class="widget-title">
+        Top Assists
+    </div>
+
+    <div class="widget-card">
+        <div id="seasonTopAssists">
             Loading...
         </div>
     </div>
@@ -703,10 +722,11 @@ Promise.all([
         );
     }
 
-function renderHome() {
+function renderHome(){
 
     renderLastMatch();
     renderNextMatch();
+
     renderRecentForm();
 
     renderSeasonDebutants();
@@ -714,7 +734,6 @@ function renderHome() {
     renderSeasonTopAssists();
 
     initPersonSearch();
-
 }
 
     function renderLastMatch() {
@@ -996,7 +1015,7 @@ function renderSeasonTopScorers(){
         .filter(m => m.Season === latestSeason)
         .forEach(match => {
 
-            for(let i=1;i<=12;i++){
+            for(let i = 1; i <= 12; i++){
 
                 const player =
                     match[`Goal Player ${i}`];
@@ -1011,21 +1030,28 @@ function renderSeasonTopScorers(){
                 stats[player] =
                     (stats[player] || 0) + 1;
             }
-
         });
 
     const top =
         Object.entries(stats)
-        .sort((a,b) => b[1]-a[1])
+        .sort((a,b) => b[1] - a[1])
         .slice(0,10);
 
-    let html = `<table class="stats-table">`;
+    let html = `
+        <table class="stats-table">
+            <thead>
+                <tr>
+                    <th>Player</th>
+                    <th>G</th>
+                </tr>
+            </thead>
+            <tbody>
+    `;
 
     top.forEach(([player,goals]) => {
 
         html += `
             <tr>
-
                 <td>
                     <a class="player-link"
                        href="player.html?name=${encodeURIComponent(player)}">
@@ -1034,13 +1060,14 @@ function renderSeasonTopScorers(){
                 </td>
 
                 <td>${goals}</td>
-
             </tr>
         `;
-
     });
 
-    html += `</table>`;
+    html += `
+            </tbody>
+        </table>
+    `;
 
     document.getElementById(
         "seasonTopScorers"
@@ -1060,47 +1087,54 @@ function renderSeasonTopAssists(){
         .filter(m => m.Season === latestSeason)
         .forEach(match => {
 
-            for(let i=1;i<=12;i++){
+            for(let i = 1; i <= 12; i++){
 
                 const player =
                     match[`Assist Player ${i}`];
 
-                if(!player){
-                    continue;
-                }
+                if(!player) continue;
 
                 stats[player] =
                     (stats[player] || 0) + 1;
             }
-
         });
 
     const top =
         Object.entries(stats)
-        .sort((a,b) => b[1]-a[1])
+        .sort((a,b) => b[1] - a[1])
         .slice(0,10);
 
-    let html = `<table class="stats-table">`;
+    let html = `
+        <table class="stats-table">
+            <thead>
+                <tr>
+                    <th>Player</th>
+                    <th>A</th>
+                </tr>
+            </thead>
+            <tbody>
+    `;
 
     top.forEach(([player,assists]) => {
 
         html += `
             <tr>
-
                 <td>
-                    ">
+                    <a class="player-link"
+                       href="player.html?name=${encodeURIComponent(player)}">
                         ${player}
                     </a>
                 </td>
 
                 <td>${assists}</td>
-
             </tr>
         `;
-
     });
 
-    html += `</table>`;
+    html += `
+            </tbody>
+        </table>
+    `;
 
     document.getElementById(
         "seasonTopAssists"
