@@ -547,6 +547,8 @@ Loading...
 
 </section>
 
+<div class="home-discover">
+
 <div class="widget-title">
 Discover What's Inside
 </div>
@@ -642,6 +644,7 @@ Discover What's Inside
 
     </section>
 
+</div>
 </div>
 
 <aside class="home-sidebar">
@@ -1391,28 +1394,21 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
       function reorderMobileHomepage() {
-
+      
           if (window.innerWidth > 820) {
               return;
           }
       
-          const homePage =
-              document.querySelector(".home-page");
+          const homePage = document.querySelector(".home-page");
+          const sidebar = document.querySelector(".home-sidebar");
+          const discover = document.querySelector(".home-discover");
       
-          const homeSidebar =
-              document.querySelector(".home-sidebar");
-      
-          const homeMain =
-              document.querySelector(".home-main");
-      
-          if (!homePage || !homeSidebar || !homeMain) {
+          if (!homePage || !sidebar || !discover) {
               return;
           }
       
-          homePage.insertBefore(
-              homeSidebar,
-              homeMain.nextSibling
-          );
+          homePage.appendChild(sidebar);
+          homePage.appendChild(discover);
       }
       
       reorderMobileHomepage();
