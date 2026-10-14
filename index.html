@@ -324,6 +324,41 @@
     color:inherit;
 }
 
+.form-list{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    justify-content:center;
+    align-items:center;
+}
+
+.form-win,
+.form-draw,
+.form-loss{
+    width:35px;
+    height:35px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    font-weight:700;
+}
+
+.form-win{
+    background:#22c55e;
+    color:white;
+}
+
+.form-draw{
+    background:#f59e0b;
+    color:white;
+}
+
+.form-loss{
+    background:#ef4444;
+    color:white;
+}
+
 @media(max-width:820px){
 
     .home-page{
@@ -587,11 +622,19 @@ Loading...
 
     </div>
 
-    <aside class="home-sidebar">
+<aside class="home-sidebar">
 
-        <!-- Budúci obsah -->
+    <div class="widget-title">
+        Recent Form
+    </div>
 
-    </aside>
+    <div class="widget-card">
+        <div id="recentForm">
+            Loading...
+        </div>
+    </div>
+
+</aside>
 
 </div>
 
@@ -634,13 +677,14 @@ Promise.all([
         );
     }
 
-    function renderHome() {
-
-        renderLastMatch();
-        renderNextMatch();
-        initPersonSearch();
-
-    }
+      function renderHome() {
+      
+          renderLastMatch();
+          renderNextMatch();
+          renderRecentForm();
+          initPersonSearch();
+      
+      }
 
     function renderLastMatch() {
 
@@ -783,6 +827,38 @@ Promise.all([
             </div>
         `;
     }
+
+function renderRecentForm(){
+
+    const matches = allMatches
+        .filter(m => m["Result type"])
+        .sort((a,b) =>
+            parseDate(b.Date) - parseDate(a.Date)
+        )
+        .slice(0,8);
+
+    let html = "<div class='form-list'>";
+
+    matches.forEach(match => {
+
+        if(match["Result type"] === "W"){
+            html += `<div class="form-win">W</div>`;
+        }
+
+        if(match["Result type"] === "D"){
+            html += `<div class="form-draw">D</div>`;
+        }
+
+        if(match["Result type"] === "L"){
+            html += `<div class="form-loss">L</div>`;
+        }
+
+    });
+
+    html += "</div>";
+
+    document.getElementById("recentForm").innerHTML = html;
+}
 
     function initPersonSearch() {
 
