@@ -2785,28 +2785,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const value =
             parseInt(input.value);
 
-        const info =
-            document.getElementById("compareScopeInfo");
-
-        if(info){
-
-            if(
-                !value ||
-                value <= 0
-            ){
-
-                info.textContent =
-                    "Comparing full careers.";
-
-            }else{
-
-                info.textContent =
-                    `Comparing first ${value} matches played for FC Barcelona.`;
-
-            }
-
-        }
-
         if(
             selectedPlayerA &&
             selectedPlayerB
