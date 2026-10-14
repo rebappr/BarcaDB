@@ -2738,9 +2738,20 @@ function getPlayerMatches(playerName){
 
     });
 
-    // zoradenie od debutu po posledný zápas
-    return matches.reverse();
+    matches.sort((a,b) => {
 
+        const da = new Date(
+            a.Date.split(".").reverse().join("-")
+        );
+
+        const db = new Date(
+            b.Date.split(".").reverse().join("-")
+        );
+
+        return da - db;
+    });
+
+    return matches;
 }
 
 function getLimitedMatches(playerName){
@@ -2748,25 +2759,16 @@ function getLimitedMatches(playerName){
     const matches =
         getPlayerMatches(playerName);
 
-    const limitInput =
-        document.getElementById("matchLimit");
-
-    if(!limitInput){
-        return matches;
-    }
-
     const limit =
-        parseInt(limitInput.value);
+        parseInt(
+            document.getElementById("matchLimit").value
+        );
 
-    if(
-        !limit ||
-        limit <= 0
-    ){
+    if(!limit || limit <= 0){
         return matches;
     }
 
     return matches.slice(0, limit);
-
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -2784,22 +2786,24 @@ document.addEventListener("DOMContentLoaded", () => {
             parseInt(input.value);
 
         const info =
-            document.getElementById(
-                "compareScopeInfo"
-            );
+            document.getElementById("compareScopeInfo");
 
-        if(
-            !value ||
-            value <= 0
-        ){
+        if(info){
 
-            info.textContent =
-                "Comparing full careers.";
+            if(
+                !value ||
+                value <= 0
+            ){
 
-        }else{
+                info.textContent =
+                    "Comparing full careers.";
 
-            info.textContent =
-                `Comparing first ${value} matches played for FC Barcelona.`;
+            }else{
+
+                info.textContent =
+                    `Comparing first ${value} matches played for FC Barcelona.`;
+
+            }
 
         }
 
