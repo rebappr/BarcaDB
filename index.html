@@ -1391,33 +1391,32 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
       function reorderMobileHomepage() {
-      
+
           if (window.innerWidth > 820) {
               return;
           }
       
-          const sidebar =
+          const homePage =
+              document.querySelector(".home-page");
+      
+          const homeSidebar =
               document.querySelector(".home-sidebar");
       
-          const discoverTitle =
-              [...document.querySelectorAll(".widget-title")]
-              .find(el =>
-                  el.textContent.trim() ===
-                  "Discover What's Inside"
-              );
+          const homeMain =
+              document.querySelector(".home-main");
       
-          if (!sidebar || !discoverTitle) {
+          if (!homePage || !homeSidebar || !homeMain) {
               return;
           }
       
-          sidebar.parentNode.insertBefore(
-              sidebar,
-              discoverTitle
+          homePage.insertBefore(
+              homeSidebar,
+              homeMain.nextSibling
           );
       }
       
       reorderMobileHomepage();
-
+      
     function closeMenu(){
 
         mainMenu.classList.remove("open");
