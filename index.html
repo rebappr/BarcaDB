@@ -659,25 +659,15 @@ Discover What's Inside
         </div>
     </div>
 
-    <div class="widget-title">
-        Top Scorers
-    </div>
-
-    <div class="widget-card">
-        <div id="seasonTopScorers">
-            Loading...
-        </div>
-    </div>
-
-    <div class="widget-title">
-        Top Assists
-    </div>
-
-    <div class="widget-card">
-        <div id="seasonTopAssists">
-            Loading...
-        </div>
-    </div>
+      <div class="widget-title">
+          Season Statistics
+      </div>
+      
+      <div class="widget-card">
+          <div id="seasonStatistics">
+              Loading...
+          </div>
+      </div>
 
 </aside>
 
@@ -730,8 +720,7 @@ function renderHome(){
     renderRecentForm();
 
     renderSeasonDebutants();
-    renderSeasonTopScorers();
-    renderSeasonTopAssists();
+    renderSeasonStatistics();
 
     initPersonSearch();
 }
@@ -1002,135 +991,94 @@ function renderSeasonDebutants(){
     ).innerHTML = html;
 }
 
-function renderSeasonTopScorers(){
+function renderSeasonStatistics(){
 
     const latestSeason =
         [...new Set(allMatches.map(x => x.Season))]
         .sort()
         .reverse()[0];
 
-    const seasonMatches =
+    const matches =
         allMatches.filter(
             x => x.Season === latestSeason
         );
 
-    const stats = {};
+    const players = {};
 
-    seasonMatches.forEach(match => {
+    function addPlayer(name){
+
+        if(!name || !String(name).trim()) return;
+
+        name = String(name).trim();
+
+        if(name.includes("(OG)")) return;
+
+        if(!players[name]){
+
+            players[name] = {
+                goals: 0,
+                assists: 0
+            };
+
+        }
+
+    }
+
+    matches.forEach(match => {
 
         for(let i = 1; i <= 12; i++){
 
-            const player =
+            const scorer =
                 match[`Goal Player ${i}`];
 
             if(
-                !player ||
-                String(player).includes("(OG)")
+                scorer &&
+                !String(scorer).includes("(OG)")
             ){
-                continue;
+
+                addPlayer(scorer);
+
+                players[scorer].goals++;
             }
 
-            stats[player] =
-                (stats[player] || 0) + 1;
-        }
-
-    });
-
-    const top =
-        Object.entries(stats)
-        .sort((a,b) => b[1] - a[1])
-        .slice(0,10);
-
-    let html = `
-        <table class="stats-table">
-            <thead>
-                <tr>
-                    <th>Player</th>
-                    <th>G</th>
-                </tr>
-            </thead>
-            <tbody>
-    `;
-
-    top.forEach(([player,goals]) => {
-
-        html += `
-            <tr>
-                <td>
-                    <a class="player-link"
-                       href="player.html?name=${encodeURIComponent(player)}">
-                        ${player}
-                    </a>
-                </td>
-
-                <td>${goals}</td>
-            </tr>
-        `;
-
-    });
-
-    html += `
-            </tbody>
-        </table>
-    `;
-
-    document.getElementById(
-        "seasonTopScorers"
-    ).innerHTML = html;
-}
-
-
-function renderSeasonTopAssists(){
-
-    const latestSeason =
-        [...new Set(allMatches.map(x => x.Season))]
-        .sort()
-        .reverse()[0];
-
-    const seasonMatches =
-        allMatches.filter(
-            x => x.Season === latestSeason
-        );
-
-    const stats = {};
-
-    seasonMatches.forEach(match => {
-
-        for(let i = 1; i <= 12; i++){
-
-            const player =
+            const assister =
                 match[`Assist Player ${i}`];
 
             if(
-                !player ||
-                String(player).includes("(OG)")
+                assister &&
+                !String(assister).includes("(OG)")
             ){
-                continue;
-            }
 
-            stats[player] =
-                (stats[player] || 0) + 1;
+                addPlayer(assister);
+
+                players[assister].assists++;
+            }
         }
 
     });
 
-    const top =
-        Object.entries(stats)
-        .sort((a,b) => b[1] - a[1])
+    const topScorers =
+        Object.entries(players)
+        .sort((a,b) => b[1].goals - a[1].goals)
+        .slice(0,10);
+
+    const topAssists =
+        Object.entries(players)
+        .sort((a,b) => b[1].assists - a[1].assists)
         .slice(0,10);
 
     let html = `
-        <table class="stats-table">
-            <thead>
-                <tr>
-                    <th>Player</th>
-                    <th>A</th>
-                </tr>
-            </thead>
-            <tbody>
+        <div style="display:grid;gap:20px;">
+        
+            <div>
+                <h4 style="margin:0 0 10px;">
+                    Top Scorers
+                </h4>
+
+                <table class="stats-table">
     `;
 
-    top.forEach(([player,assists]) => {
+    topScorers.forEach(([player,stats]) => {
 
         html += `
             <tr>
@@ -1141,19 +1089,48 @@ function renderSeasonTopAssists(){
                     </a>
                 </td>
 
-                <td>${assists}</td>
+                <td>${stats.goals}</td>
             </tr>
         `;
-
     });
 
     html += `
-            </tbody>
-        </table>
+                </table>
+            </div>
+
+            <div>
+                <h4 style="margin:0 0 10px;">
+                    Top Assists
+                </h4>
+
+                <table class="stats-table">
+    `;
+
+    topAssists.forEach(([player,stats]) => {
+
+        html += `
+            <tr>
+                <td>
+                    <a class="player-link"
+                       href="player.html?name=${encodeURIComponent(player)}">
+                        ${player}
+                    </a>
+                </td>
+
+                <td>${stats.assists}</td>
+            </tr>
+        `;
+    });
+
+    html += `
+                </table>
+            </div>
+
+        </div>
     `;
 
     document.getElementById(
-        "seasonTopAssists"
+        "seasonStatistics"
     ).innerHTML = html;
 }
 
