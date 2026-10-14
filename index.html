@@ -921,11 +921,11 @@ function renderSeasonDebutants(){
             }
         }
 
-        for(let i=1;i<=12;i++){
-            if(match[`Substitution IN Player ${i}`]){
-                players.push(match[`Substitution IN Player ${i}`]);
-            }
-        }
+      for(let i=1;i<=12;i++){
+          if(match[`Sub on ${i}`]){
+              players.push(match[`Sub on ${i}`]);
+          }
+      }
 
         players.forEach(player => {
 
