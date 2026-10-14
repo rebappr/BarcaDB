@@ -1403,31 +1403,6 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
     }
 
-      function reorderMobileHomepage() {
-      
-          if (window.innerWidth > 820) {
-              return;
-          }
-      
-          const homePage =
-              document.querySelector(".home-page");
-      
-          const sidebar =
-              document.querySelector(".home-sidebar");
-      
-          const discover =
-              document.querySelector(".home-discover");
-      
-          if (!homePage || !sidebar || !discover) {
-              return;
-          }
-      
-          homePage.appendChild(sidebar);
-          homePage.appendChild(discover);
-      }
-      
-      reorderMobileHomepage();
-      
     function closeMenu(){
 
         mainMenu.classList.remove("open");
