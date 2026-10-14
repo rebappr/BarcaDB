@@ -360,6 +360,37 @@
     color:white;
 }
 
+.table-scroll{
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+}
+
+.debutants-table{
+    width:100%;
+    table-layout:fixed;
+}
+
+.stats-table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+.stats-table th,
+.stats-table td,
+.debutants-table th,
+.debutants-table td{
+    padding:8px 4px;
+    border-bottom:1px solid var(--meta-border);
+    font-size:13px;
+}
+
+.stats-table th:first-child,
+.stats-table td:first-child,
+.debutants-table th:first-child,
+.debutants-table td:first-child{
+    text-align:left;
+}
+
 @media(max-width:820px){
 
     .home-page{
@@ -609,6 +640,26 @@ Discover What's Inside
         </div>
     </div>
 
+    <div class="widget-title">
+        Season Debutants
+    </div>
+
+    <div class="widget-card">
+        <div id="seasonDebutants">
+            Loading...
+        </div>
+    </div>
+
+    <div class="widget-title">
+        Season Statistics
+    </div>
+
+    <div class="widget-card">
+        <div id="seasonStatistics">
+            Loading...
+        </div>
+    </div>
+
 </aside>
 
 </div>
@@ -652,14 +703,19 @@ Promise.all([
         );
     }
 
-      function renderHome() {
-      
-          renderLastMatch();
-          renderNextMatch();
-          renderRecentForm();
-          initPersonSearch();
-      
-      }
+function renderHome() {
+
+    renderLastMatch();
+    renderNextMatch();
+    renderRecentForm();
+
+    renderSeasonDebutants();
+    renderSeasonTopScorers();
+    renderSeasonTopAssists();
+
+    initPersonSearch();
+
+}
 
     function renderLastMatch() {
 
@@ -833,6 +889,222 @@ function renderRecentForm(){
     html += "</div>";
 
     document.getElementById("recentForm").innerHTML = html;
+}
+
+function renderSeasonDebutants(){
+
+    const latestSeason =
+        [...new Set(allMatches.map(x => x.Season))]
+        .sort()
+        .reverse()[0];
+
+    const seasonMatches =
+        allMatches.filter(
+            x => x.Season === latestSeason
+        );
+
+    const firstAppearance = {};
+
+    allMatches.forEach(match => {
+
+        const players = [];
+
+        for(let i=1;i<=11;i++){
+            if(match[`Player name ${i}`]){
+                players.push(match[`Player name ${i}`]);
+            }
+        }
+
+        for(let i=1;i<=12;i++){
+            if(match[`Substitution IN Player ${i}`]){
+                players.push(match[`Substitution IN Player ${i}`]);
+            }
+        }
+
+        players.forEach(player => {
+
+            const date =
+                new Date(
+                    match.Date
+                    .split(".")
+                    .reverse()
+                    .join("-")
+                );
+
+            if(
+                !firstAppearance[player] ||
+                date < firstAppearance[player].date
+            ){
+
+                firstAppearance[player] = {
+                    season: match.Season,
+                    date,
+                    dateText: match.Date
+                };
+
+            }
+
+        });
+
+    });
+
+    const debutants =
+        Object.entries(firstAppearance)
+        .filter(([name,data]) =>
+            data.season === latestSeason
+        )
+        .slice(0,10);
+
+    let html = `
+        <table class="debutants-table">
+    `;
+
+    debutants.forEach(([player,data]) => {
+
+        html += `
+            <tr>
+                <td>
+                    <a
+                        class="player-link"
+                        href="player.html?name=${encodeURIComponent(player)}">
+                        ${player}
+                    </a>
+                </td>
+
+                <td>${data.dateText}</td>
+            </tr>
+        `;
+    });
+
+    html += "</table>";
+
+    document.getElementById(
+        "seasonDebutants"
+    ).innerHTML = html;
+}
+
+function renderSeasonTopScorers(){
+
+    const latestSeason =
+        [...new Set(allMatches.map(x => x.Season))]
+        .sort()
+        .reverse()[0];
+
+    const stats = {};
+
+    allMatches
+        .filter(m => m.Season === latestSeason)
+        .forEach(match => {
+
+            for(let i=1;i<=12;i++){
+
+                const player =
+                    match[`Goal Player ${i}`];
+
+                if(
+                    !player ||
+                    player.includes("(OG)")
+                ){
+                    continue;
+                }
+
+                stats[player] =
+                    (stats[player] || 0) + 1;
+            }
+
+        });
+
+    const top =
+        Object.entries(stats)
+        .sort((a,b) => b[1]-a[1])
+        .slice(0,10);
+
+    let html = `<table class="stats-table">`;
+
+    top.forEach(([player,goals]) => {
+
+        html += `
+            <tr>
+
+                <td>
+                    <a class="player-link"
+                       href="player.html?name=${encodeURIComponent(player)}">
+                        ${player}
+                    </a>
+                </td>
+
+                <td>${goals}</td>
+
+            </tr>
+        `;
+
+    });
+
+    html += `</table>`;
+
+    document.getElementById(
+        "seasonTopScorers"
+    ).innerHTML = html;
+}
+
+function renderSeasonTopAssists(){
+
+    const latestSeason =
+        [...new Set(allMatches.map(x => x.Season))]
+        .sort()
+        .reverse()[0];
+
+    const stats = {};
+
+    allMatches
+        .filter(m => m.Season === latestSeason)
+        .forEach(match => {
+
+            for(let i=1;i<=12;i++){
+
+                const player =
+                    match[`Assist Player ${i}`];
+
+                if(!player){
+                    continue;
+                }
+
+                stats[player] =
+                    (stats[player] || 0) + 1;
+            }
+
+        });
+
+    const top =
+        Object.entries(stats)
+        .sort((a,b) => b[1]-a[1])
+        .slice(0,10);
+
+    let html = `<table class="stats-table">`;
+
+    top.forEach(([player,assists]) => {
+
+        html += `
+            <tr>
+
+                <td>
+                    ">
+                        ${player}
+                    </a>
+                </td>
+
+                <td>${assists}</td>
+
+            </tr>
+        `;
+
+    });
+
+    html += `</table>`;
+
+    document.getElementById(
+        "seasonTopAssists"
+    ).innerHTML = html;
 }
 
     function initPersonSearch() {
