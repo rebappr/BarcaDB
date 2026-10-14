@@ -92,7 +92,7 @@ font-weight:500;
 }
 
 .widget-title{
-    margin:6px 0 6px;
+    margin:0 0 4px;
     padding:8px 14px;
 
     background:linear-gradient(
@@ -102,11 +102,9 @@ font-weight:500;
     );
 
     color:white;
-
     font-size:14px;
     font-weight:700;
     text-transform:uppercase;
-
     border-radius:18px;
 }
 
