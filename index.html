@@ -75,9 +75,34 @@
 
 .home-page{
     margin-top:16px;
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:16px;
+    align-items:start;
+}
+
+.home-main{
     display:flex;
     flex-direction:column;
     gap:16px;
+}
+
+.home-sidebar{
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+}
+
+.sidebar-card{
+    background:var(--card-bg);
+    border:1px solid var(--card-border);
+    border-radius:16px;
+    padding:20px;
+}
+
+.sidebar-card h3{
+    margin-top:0;
+    margin-bottom:12px;
 }
 
 .hero-card{
@@ -312,6 +337,10 @@
 }
 
 @media(max-width:820px){
+
+    .home-page{
+        grid-template-columns:1fr;
+    }
 
     .fixture-team{
         font-size:14px;
