@@ -392,6 +392,12 @@
     text-align:left;
 }
 
+.debutants-table th:nth-child(2),
+.debutants-table td:nth-child(2){
+    text-align:right;
+}
+
+
 @media(max-width:820px){
 
     .home-page{
@@ -962,9 +968,18 @@ function renderSeasonDebutants(){
         )
         .slice(0,10);
 
-    let html = `
-        <table class="debutants-table">
-    `;
+      let html = `
+          <table class="debutants-table">
+      
+              <thead>
+                  <tr>
+                      <th>Player</th>
+                      <th>Debut Date</th>
+                  </tr>
+              </thead>
+      
+              <tbody>
+      `;
 
     debutants.forEach(([player,data]) => {
 
@@ -983,7 +998,10 @@ function renderSeasonDebutants(){
         `;
     });
 
-    html += "</table>";
+      html += `
+              </tbody>
+          </table>
+      `;
 
     document.getElementById(
         "seasonDebutants"
