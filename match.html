@@ -575,6 +575,12 @@ display:inline-block;
 margin:0 4px;
 }
 
+.event-icon img{
+    width:16px;
+    height:16px;
+    vertical-align:middle;
+}
+
 .h2h-summary{
 display:grid;
 grid-template-columns:repeat(3,1fr);
@@ -1629,7 +1635,7 @@ content = `
 if(event.side === "right"){
 
 content = `
-           <span class="event-icon">🔄</span>
+           <img src="icons/sub.png" class="event-icon" alt="Substitution">
             <strong>${playerLink(event.on)}</strong>
             for
             ${playerLink(event.off)}
@@ -1641,7 +1647,7 @@ content = `
             <strong>${playerLink(event.on)}</strong>
             for
             ${playerLink(event.off)}
-           <span class="event-icon">🔄</span>
+           <img src="icons/sub.png" class="event-icon" alt="Substitution">
        `;
 
 }
