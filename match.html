@@ -1596,19 +1596,20 @@ if(event.assist !== undefined){
 if(event.side === "right"){
 
 content = `
-           ${
-               event.assist
-                   ? `<span style="color:var(--muted);">Assist by ${playerLink(event.assist)}</span>`
-                   : ""
-           }
+           <span class="event-icon">⚽</span>
 
            <strong>${playerLink(event.player)}</strong>
 
            <span class="timeline-score">
                ${event.score}
            </span>
+		   
+		   ${
+               event.assist
+                   ? `<br><span style="color:var(--muted);">Assist by ${playerLink(event.assist)}</span>`
+                   : ""
+           }
 
-           <span class="event-icon">⚽</span>
        `;
 
 }else{
