@@ -1611,7 +1611,7 @@ if(event.side === "right"){
 content = `
            ${
                event.assist
-                   ? `<span style="color:var(--muted);">${playerLink(event.assist)}</span>`
+                   ? `<span style="color:var(--muted);">Assist by ${playerLink(event.assist)}</span>`
                    : ""
            }
 
@@ -1633,7 +1633,7 @@ content = `
                ${event.score}
            </span>
 
-           <strong>${playerLink(event.player)}</strong>
+           <strong>${playerLink(event.player)}</strong><br>
 
            ${
                event.assist
