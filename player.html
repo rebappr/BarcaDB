@@ -598,6 +598,10 @@ font-size:13px;
 
 </nav>
 
+<div id="playerProfile" class="player-profile">
+    Loading...
+</div>
+
 <div class="content-layout">
 
     <div class="left-panel">
@@ -1044,6 +1048,9 @@ ${lastMatch ? `
 </div>
 
 </div>
+`;
+
+document.getElementById("playerContent").innerHTML = `
 
 <div class="widget-title">
 Statistics
@@ -1137,6 +1144,28 @@ Season Breakdown
 </tbody>
 
 </table>
+
+</div>
+
+`;
+
+document.getElementById("playerSidebar").innerHTML = `
+
+<div class="widget-title">
+    Career Summary
+</div>
+
+<div class="summary-grid">
+
+    <div class="summary-box">
+        <b>${clubs.length}</b>
+        Clubs
+    </div>
+
+    <div class="summary-box">
+        <b>${playerMatches.length}</b>
+        Matches
+    </div>
 
 </div>
 
