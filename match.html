@@ -1590,13 +1590,13 @@ if(event.assist !== undefined){
 
         currentHome++;
 
-		event.score = `<span class="score-changed">${currentHome}</span>:${currentAway}`;
+		event.score = `(<span class="score-changed">${currentHome}</span>:${currentAway})`;
 
     }else{
 
         currentAway++;
 
-		event.score = `${currentHome}:<span class="score-changed">${currentAway}</span>`;
+		event.score = `(${currentHome}:<span class="score-changed">${currentAway}</span>)`;
 
     }
 }
