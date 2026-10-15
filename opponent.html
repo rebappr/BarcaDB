@@ -518,9 +518,20 @@ height:18px;
     text-align:left;
 }
 
-.summary-grid{
-grid-template-columns:repeat(2,3fr);
-}
+    .summary-grid{
+        grid-template-columns:repeat(6,1fr);
+    }
+
+    .summary-grid .summary-box:nth-child(1),
+    .summary-grid .summary-box:nth-child(2){
+        grid-column:span 3;
+    }
+
+    .summary-grid .summary-box:nth-child(3),
+    .summary-grid .summary-box:nth-child(4),
+    .summary-grid .summary-box:nth-child(5){
+        grid-column:span 2;
+    }
 
 .summary-box{
 font-size:13px;
