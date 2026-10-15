@@ -1614,20 +1614,20 @@ content = `
 }else{
 
 content = `
-           <span class="event-icon">⚽</span>
-
-           <span class="timeline-score">
-               ${event.score}
-           </span>
-
-           <strong>${playerLink(event.player)}</strong><br>
-
-           ${
-               event.assist
-                   ? `<span style="color:#d3d3d3;">Assist by ${playerLink(event.assist)}</span>`
-                   : ""
-           }
-       `;
+	   <strong>${playerLink(event.player)}</strong>
+	
+	   <span class="timeline-score">
+	       ${event.score}
+	   </span>
+	
+	   <span class="event-icon">⚽</span>
+	
+	   ${
+	      event.assist
+	      ? `<br><span style="color:#d3d3d3">Assist by ${playerLink(event.assist)}</span>`
+	      : ""
+	   }
+	`;
 
 }
 
