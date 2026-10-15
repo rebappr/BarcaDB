@@ -529,6 +529,11 @@ font-size:12.5px;
 font-weight:800;
 }
 
+.score-changed{
+    color:#004D98;
+    font-weight:800;
+}
+
 .assist-text,
 .sub-text{
     font-size:11px;
@@ -1582,13 +1587,23 @@ events.forEach(event => {
 
 if(event.assist !== undefined){
 
-if(event.side === "left"){
-currentHome++;
-}else{
-currentAway++;
-}
+    if(event.side === "left"){
 
-event.score = `${currentHome}:${currentAway}`;
+        currentHome++;
+
+        event.score = `
+            <span class="score-changed">${currentHome}</span>:${currentAway}
+        `;
+
+    }else{
+
+        currentAway++;
+
+        event.score = `
+            ${currentHome}:<span class="score-changed">${currentAway}</span>
+        `;
+
+    }
 }
 
 });
