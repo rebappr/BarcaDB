@@ -519,7 +519,7 @@ height:18px;
 }
 
 .summary-grid{
-grid-template-columns:repeat(5,1fr);
+grid-template-columns:repeat(2,3fr);
 }
 
 .summary-box{
@@ -794,6 +794,11 @@ function renderOpponent(team,data){
             Matches
         </div>
 
+    <div class="summary-box goals">
+        <b>${goalsFor}:${goalsAgainst}</b>
+        Score
+    </div>
+
     <div class="summary-box wins">
         <b>${statValue(wins)}</b>
         Wins
@@ -807,11 +812,6 @@ function renderOpponent(team,data){
     <div class="summary-box losses">
         <b>${statValue(losses)}</b>
         Losses
-    </div>
-
-    <div class="summary-box goals">
-        <b>${goalsFor}:${goalsAgainst}</b>
-        Score
     </div>
 
     </div>
