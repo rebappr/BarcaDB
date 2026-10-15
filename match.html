@@ -548,10 +548,25 @@ color:#dc2626;
 font-weight:700;
 }
 
-.timeline-break{
-height:1px;
-background:var(--divider);
-margin:10px 0;
+.timeline-break-row{
+    display:grid;
+    grid-template-columns:1fr auto 1fr;
+    align-items:center;
+    gap:12px;
+    margin:12px 0;
+}
+
+.timeline-break-line{
+    height:1px;
+    background:var(--meta-border);
+}
+
+.timeline-break-label{
+    font-size:11px;
+    font-weight:700;
+    color:var(--muted);
+    text-transform:uppercase;
+    text-align:center;
 }
 
 .event-home{
@@ -1545,6 +1560,23 @@ player: match[`Opp. Red player ${i}`]
 
 sortByMinute(events);
 
+const halftimeIndex = events.findIndex(event => {
+
+    const minute =
+        parseInt(String(event.minute).match(/\d+/)?.[0] || 0);
+
+    return minute > 45;
+
+});
+
+if(halftimeIndex !== -1){
+
+    events.splice(halftimeIndex, 0, {
+        halftime: true
+    });
+
+}
+
 let currentHome = 0;
 let currentAway = 0;
 
@@ -1596,6 +1628,23 @@ let timelineHtml = `
 `;
 
 events.forEach(event => {
+
+if(event.halftime){
+
+    timelineHtml += `
+        <div class="timeline-break-row">
+            <div class="timeline-break-line"></div>
+
+            <div class="timeline-break-label">
+                HT
+            </div>
+
+            <div class="timeline-break-line"></div>
+        </div>
+    `;
+
+    return;
+}
 
 let content = "";
 
