@@ -478,55 +478,46 @@ gap:4px;
 }
 
 .timeline-row{
-display:flex;
-width:100%;
-margin-bottom:8px;
+    display:grid;
+    grid-template-columns:1fr 70px 1fr;
+    align-items:center;
+    gap:12px;
+    margin-bottom:8px;
+}
+
+.timeline-home{
+    text-align:right;
+    justify-self:end;
+}
+
+.timeline-away{
+    text-align:left;
+    justify-self:start;
+}
+
+.timeline-minute{
+    text-align:center;
+    font-size:13px;
+    font-weight:700;
+    opacity:.8;
+    white-space:nowrap;
+}
+
+.timeline-event{
+    font-size:13px;
+    line-height:1.5;
+}
+
+.timeline-home .event-icon{
+    margin-left:4px;
+}
+
+.timeline-away .event-icon{
+    margin-right:4px;
 }
 
 .timeline-row:last-child{
 border-bottom:none;
-}
-
-.timeline-home{
-display:flex;
-align-items:center;
-gap:5px;
-}
-
-.timeline-away{
-display:flex;
-align-items:center;
-gap:4px;
-margin-left:auto;
-justify-content:flex-end;
-}
-
-.timeline-away .timeline-event{
-display:flex;
-align-items:center;
-gap:4px;
-}
-
-.timeline-home{
-flex-shrink:0;
-}
-
-.timeline-away{
-flex-shrink:0;
-}
-
-.timeline-event{
-font-size:12px;
-line-height:1.3;
-max-width:none;
-}
-
-.timeline-minute{
-font-size:13px;
-font-weight:700;
-white-space:nowrap;
-min-width:auto;
-opacity:.8;
 }
 
 .timeline-away .timeline-event{
@@ -1566,32 +1557,28 @@ event.score = `${currentHome}:${currentAway}`;
 
 function eventRow(side, minute, content){
 
-const minuteLabel =
-/^\d+(\+\d+)?$/.test(String(minute).trim())
-? `${minute}'`
-: escapeHtml(minute);
+    const minuteLabel =
+    /^\d+(\+\d+)?$/.test(String(minute).trim())
+    ? `${minute}'`
+    : escapeHtml(minute);
 
-return `
-       <div class="timeline-row">
+    return `
+        <div class="timeline-row">
 
-           ${
-               side === "left"
-               ? `
-                   <div class="timeline-home">
-                       <div class="timeline-minute">${minuteLabel}</div>
-                       <div class="timeline-event">${content}</div>
-                   </div>
-               `
-               : `
-                   <div class="timeline-away">
-                       <div class="timeline-event">${content}</div>
-                       <div class="timeline-minute">${minuteLabel}</div>
-                   </div>
-               `
-           }
+            <div class="timeline-home">
+                ${side === "left" ? content : ""}
+            </div>
 
-       </div>
-   `;
+            <div class="timeline-minute">
+                ${minuteLabel}
+            </div>
+
+            <div class="timeline-away">
+                ${side === "right" ? content : ""}
+            </div>
+
+        </div>
+    `;
 }
 
 let timelineHtml = `
