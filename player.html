@@ -207,56 +207,38 @@ margin:8px 0 0 0;
 display:block;
 }
 
+.matches-header,
+.player-match{
+	display:grid;
+    grid-template-columns:
+    30px
+    75px
+    60px
+    1fr
+    70px
+    35px
+    35px
+    35px
+    35px
+    35px
+    35px;
+	font-size:12px;
+	gap:8px;
+}
+
 .matches-header{
-display:grid;
-grid-template-columns:
-35px
-90px
-80px
-1fr
-90px
-40px
-40px
-40px
-40px
-40px
-40px;
-
-gap:10px;
-
-font-size:12px;
-font-weight:700;
-text-transform:uppercase;
-
-padding:8px;
-margin-bottom:6px;
-
-opacity:.7;
+	font-weight:700;
+	text-transform:uppercase;
+	padding:8px;
+	margin-bottom:6px;
+	opacity:.7;
 }
 
 .player-match{
-display:grid;
-grid-template-columns:
-35px
-90px
-80px
-1fr
-90px
-40px
-40px
-40px
-40px
-40px
-40px;
-
-gap:10px;
-align-items:center;
-
-padding:8px;
-font-size:13px;
-
-border-bottom:1px solid var(--meta-border);
-transition:.2s;
+	align-items:center;
+	padding:8px;
+	border-bottom:1px solid var(--meta-border);
+	transition:.2s;
 }
 
 .stats-table th:first-child,
