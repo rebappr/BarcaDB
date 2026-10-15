@@ -402,11 +402,14 @@ flex-shrink:0;
         gap:8px;
     }
 
-    .left-panel,
-    .right-panel{
-        flex:none;
-        width:100%;
-    }
+.left-panel,
+.right-panel{
+    min-width:0;
+
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
 
 .player-match div:nth-child(6),
 .player-match div:nth-child(7),
