@@ -1629,19 +1629,19 @@ content = `
 if(event.side === "right"){
 
 content = `
+           <span class="event-icon">🔄</span>
             <strong>${playerLink(event.on)}</strong>
             for
             ${playerLink(event.off)}
-           <span class="event-icon">🔄</span>
        `;
 
 }else{
 
 content = `
-           <span class="event-icon">🔄</span>
             <strong>${playerLink(event.on)}</strong>
             for
             ${playerLink(event.off)}
+           <span class="event-icon">🔄</span>
        `;
 
 }
@@ -1651,15 +1651,15 @@ content = `
 if(event.side === "right"){
 
 content = `
-           ${playerLink(event.player)}
            <span class="event-icon">${event.icon}</span>
+           ${playerLink(event.player)}
        `;
 
 }else{
 
 content = `
-           <span class="event-icon">${event.icon}</span>
            ${playerLink(event.player)}
+           <span class="event-icon">${event.icon}</span>
        `;
 
 }
