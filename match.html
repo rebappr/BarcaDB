@@ -530,6 +530,13 @@ font-size:12.5px;
 font-weight:800;
 }
 
+.assist-text{
+    font-size:10px;
+    color:var(--muted);
+    opacity:.8;
+    font-weight:400;
+}
+
 .sub-in{
 color:#16a34a;
 font-weight:700;
@@ -1605,7 +1612,7 @@ content = `
 		   
 		   ${
                event.assist
-                   ? `<br><span style="color:var(--muted);">Assist by ${playerLink(event.assist)}</span>`
+                   ? `<br><span class="assist-text">Assist by ${playerLink(event.assist)}</span>`
                    : ""
            }
 
@@ -1624,7 +1631,7 @@ content = `
 	
 	   ${
 	      event.assist
-	      ? `<br><span style="color:var(--muted);">Assist by ${playerLink(event.assist)}</span>`
+	      ? `<br><span class="assist-text">Assist by ${playerLink(event.assist)}</span>`
 	      : ""
 	   }
 	`;
