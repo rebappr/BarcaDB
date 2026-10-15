@@ -365,7 +365,9 @@ flex-shrink:0;
     color:#ffffff;
 }
 
-.player-profile{
+.player-profile,
+.player-content,
+.player-sidebar{
     display:flex;
     flex-direction:column;
     gap:8px;
@@ -608,11 +610,11 @@ font-size:13px;
 <div class="content-layout">
 
     <div class="left-panel">
-        <div id="playerContent"></div>
+        <div id="playerContent" class="player-content"></div>
     </div>
 
     <div class="right-panel">
-        <div id="playerSidebar"></div>
+        <div id="playerSidebar" class="player-sidebar"></div>
     </div>
 
 </div>
