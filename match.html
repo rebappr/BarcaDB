@@ -486,13 +486,13 @@ gap:4px;
 }
 
 .timeline-home{
+    justify-content:flex-end;
     text-align:right;
-    justify-self:end;
 }
 
 .timeline-away{
+    justify-content:flex-start;
     text-align:left;
-    justify-self:start;
 }
 
 .timeline-minute{
@@ -508,12 +508,15 @@ gap:4px;
     line-height:1.5;
 }
 
-.timeline-home .event-icon{
-    margin-left:4px;
+.timeline-home,
+.timeline-away{
+    display:flex;
+    align-items:center;
 }
 
-.timeline-away .event-icon{
-    margin-right:4px;
+.timeline-home{
+    justify-content:flex-end;
+    text-align:right;
 }
 
 .timeline-row:last-child{
