@@ -480,9 +480,8 @@ gap:4px;
 .timeline-row{
     display:grid;
     grid-template-columns:1fr 50px 1fr;
-    gap:12px;
     align-items:start;
-    margin-bottom:10px;
+    gap:12px;
 }
 
 .timeline-home{
@@ -494,10 +493,26 @@ gap:4px;
 }
 
 .timeline-minute{
-    text-align:center;
+    width:36px;
+    height:36px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    margin:auto;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.05);
+    backdrop-filter:blur(8px);
+
+    border:1px solid var(--meta-border);
+
+    color:var(--muted);
+
+    font-size:12px;
     font-weight:700;
-    white-space:nowrap;
-    opacity:.8;
 }
 
 .timeline-event{
