@@ -530,7 +530,8 @@ font-size:12.5px;
 font-weight:800;
 }
 
-.assist-text{
+.assist-text,
+.sub-text{
     font-size:10px;
     color:var(--muted);
     opacity:.8;
@@ -1646,17 +1647,17 @@ if(event.side === "right"){
 content = `
            <img src="icons/sub.png" class="event-icon" alt="Substitution">
             <strong>${playerLink(event.on)}</strong>
-            for
+            <span class="sub-text">for</span>
             ${playerLink(event.off)}
        `;
 
 }else{
 
 content = `
-            <strong>${playerLink(event.on)}</strong>
-            for
-            ${playerLink(event.off)}
-           <img src="icons/sub.png" class="event-icon" alt="Substitution">
+		<strong>${playerLink(event.on)}</strong>
+		<span class="sub-text">for</span>
+		${playerLink(event.off)}
+		<img src="icons/sub.png" class="event-icon" alt="Substitution">
        `;
 
 }
