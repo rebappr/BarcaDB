@@ -776,7 +776,7 @@ color:var(--muted);
 }
 
 .fixture-center{
-    min-width:120px;
+    min-width:90px;
 }
 
 .fixture-score{
@@ -1539,7 +1539,14 @@ function renderTopAppearances(){
 
     const sorted =
         Object.entries(appearances)
-        .sort((a,b) => b[1] - a[1])
+        .sort((a,b) => {
+			    if(b[1] !== a[1]){
+			        return b[1] - a[1];
+			    }
+			
+			    return a[0].localeCompare(b[0]);
+			
+			})
         .slice(0,10);
 
     const maxApps =
@@ -1630,7 +1637,14 @@ getFilteredClasicos().forEach(match => {
 
     const sorted =
         Object.entries(managers)
-        .sort((a,b) => b[1] - a[1])
+        .sort((a,b) => {
+			    if(b[1] !== a[1]){
+			        return b[1] - a[1];
+			    }
+			
+			    return a[0].localeCompare(b[0]);
+			
+			})
         .slice(0,10);
 
     const max =
@@ -1729,7 +1743,14 @@ getFilteredClasicos().forEach(match => {
 
     const sorted =
         Object.entries(wins)
-        .sort((a,b) => b[1] - a[1])
+        .sort((a,b) => {
+			    if(b[1] !== a[1]){
+			        return b[1] - a[1];
+			    }
+			
+			    return a[0].localeCompare(b[0]);
+			
+			})
         .slice(0,10);
 
     const max =
@@ -2098,18 +2119,28 @@ function renderUpcomingClasicos(){
                     ${homeTeam}
                 </div>
 
-			<div class="fixture-center">
+		<div class="fixture-center">
+		
+			${dataMatch ? `
 			
-			    <a
-			        href="match.html?id=${dataMatch?.ID || ''}"
-			        class="fixture-vs"
-			        style="display:inline-block;text-decoration:none;color:inherit;">
+			<a
+			    href="match.html?id=${dataMatch.ID}"
+			    class="fixture-vs"
+			    style="display:inline-block;text-decoration:none;color:inherit;">
 			
-			        VS
+			    VS
 			
-			    </a>
+			</a>
 			
-			</div>
+			` : `
+			
+			<span class="fixture-vs">
+			    VS
+			</span>
+			
+			`}
+		
+		</div>
 
                 <div class="fixture-team">
                     ${awayTeam}
@@ -2318,7 +2349,11 @@ function updateMatchesTitle(){
             `${selectedCompetition} Match History`;
     }
 
-    title.textContent = mainTitle;
+    const total =
+	    getFilteredClasicos().length;
+	
+	title.textContent =
+	    `${mainTitle} (${total})`;
 
     const details = [];
 
@@ -2460,9 +2495,6 @@ function renderHome(){
 	
 	updateMatchesLimitFilter();
 	
-	renderHeadToHead();
-	renderGoals();
-
 	renderUpcomingClasicos();
 	
 	refreshDashboard();
