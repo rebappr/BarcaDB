@@ -748,13 +748,17 @@ function renderHome(){
         const today = new Date();
         today.setHours(0, 0, 0, 0);
 
-        const played = allMatches
-            .filter(match => parseDate(match.Date) < today)
-            .sort((a, b) =>
-                parseDate(b.Date) - parseDate(a.Date)
-            );
-
-        const match = played[0];
+      const played = currentMatches
+          .filter(match =>
+              match.Result &&
+              match.Result !== "-:-" &&
+              parseDate(match.Date) <= today
+          )
+          .sort((a, b) =>
+              parseDate(b.Date) - parseDate(a.Date)
+          );
+      
+      const match = played[0];
 
         if (!match) {
             document.getElementById("lastMatch").innerHTML =
@@ -793,7 +797,7 @@ function renderHome(){
 
                     <div class="fixture-center">
                         <a
-                            href="match.html?id=${match.ID}"
+                            href="match.html?id=${match.apiID}"
                             class="fixture-score"
                             style="display:inline-block;text-decoration:none;color:white;">
                             ${match.Result}
