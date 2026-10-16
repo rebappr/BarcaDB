@@ -1063,9 +1063,20 @@ records and head-to-head comparisons.
     
 <section id="head-to-head" class="widget-card">
 
-<h2 id="h2hTitle">
-    All Time Head-to-Head
-</h2>
+		<h2 id="h2hTitle">
+		    All-Time Head-to-Head
+		</h2>
+		
+		<div
+		    id="h2hSubtitle"
+		    style="
+		        display:none;
+		        margin-top:-8px;
+		        margin-bottom:12px;
+		        font-size:13px;
+		        color:var(--muted);
+		    ">
+		</div>
 
             <div class="h2h-dashboard">
 
@@ -2113,6 +2124,48 @@ function toggleClasicos(){
 
 }
 
+function updateH2HTitle(){
+
+    const title =
+        document.getElementById("h2hTitle");
+
+    const subtitle =
+        document.getElementById("h2hSubtitle");
+
+    let mainTitle = "All-Time Head-to-Head";
+
+    if(selectedCompetition !== "All"){
+        mainTitle =
+            `${selectedCompetition} Head-to-Head`;
+    }
+
+    title.textContent = mainTitle;
+
+    const details = [];
+
+    if(selectedSeason !== "All"){
+        details.push(`Season: ${selectedSeason}`);
+    }
+
+    if(selectedVenue !== "All"){
+        details.push(`Venue: ${selectedVenue}`);
+    }
+
+    if(details.length){
+
+        subtitle.textContent =
+            details.join(" • ");
+
+        subtitle.style.display = "block";
+
+    }else{
+
+        subtitle.style.display = "none";
+
+    }
+
+}
+
 function renderHeadToHead(){
 
     let clasicos = getFilteredClasicos();
@@ -2192,8 +2245,10 @@ function renderHome(){
     initPersonSearch();
 
     renderGlobalFilters();
-
-    renderHeadToHead();
+	
+	updateH2HTitle();
+    
+	renderHeadToHead();
     renderGoals();
 
     renderUpcomingClasicos();
