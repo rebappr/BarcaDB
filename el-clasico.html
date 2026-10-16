@@ -1213,7 +1213,9 @@ records and head-to-head comparisons.
         <section id="top-scorers"
          class="widget-card">
 
-    <h2>All-Time Top Goalscorers</h2>
+    <h2 id="topScorersTitle">
+	    All-Time Top Goalscorers
+	</h2>
 
     <div id="topScorers"></div>
 
@@ -1222,7 +1224,9 @@ records and head-to-head comparisons.
 <section id="top-appearances"
          class="widget-card">
 
-    <h2>All-Time Top Appearances</h2>
+    <h2 id="topAppearancesTitle">
+	    All-Time Top Appearances
+	</h2>
 
     <div id="topAppearances"></div>
 
@@ -1231,7 +1235,9 @@ records and head-to-head comparisons.
 <section id="top-managers"
          class="widget-card">
 
-    <h2>All-Time Managers by Matches</h2>
+    <h2 id="topManagersTitle">
+	    All-Time Managers by Matches
+	</h2>
 
     <div id="topManagers"></div>
 
@@ -1240,7 +1246,9 @@ records and head-to-head comparisons.
 <section id="top-manager-wins"
          class="widget-card">
 
-    <h2>All-Time Managers by Wins</h2>
+    <h2 id="topManagersTitle">
+	    All-Time Managers by Matches
+	</h2>
 
     <div id="topManagerWins"></div>
 
@@ -1957,6 +1965,7 @@ selectedVenue =
 	
 	updateH2HTitle();
 	updateMatchesTitle();
+	updateSidebarTitles();
 	
 	renderHeadToHead();
 	renderGoals();
@@ -2227,6 +2236,35 @@ function updateMatchesTitle(){
 
 }
 
+function updateSidebarTitles(){
+
+    const prefix =
+        selectedCompetition !== "All"
+        ? `${selectedCompetition} `
+        : "All-Time ";
+
+    document.getElementById(
+        "topScorersTitle"
+    ).textContent =
+        `${prefix}Top Goalscorers`;
+
+    document.getElementById(
+        "topAppearancesTitle"
+    ).textContent =
+        `${prefix}Top Appearances`;
+
+    document.getElementById(
+        "topManagersTitle"
+    ).textContent =
+        `${prefix}Managers by Matches`;
+
+    document.getElementById(
+        "topManagerWinsTitle"
+    ).textContent =
+        `${prefix}Managers by Wins`;
+
+}
+
 function renderHeadToHead(){
 
     let clasicos = getFilteredClasicos();
@@ -2309,6 +2347,7 @@ function renderHome(){
 	
 	updateH2HTitle();
 	updateMatchesTitle();
+	updateSidebarTitles();
 	
 	renderHeadToHead();
 	renderGoals();
