@@ -11,6 +11,7 @@
     --stats-right:#BA8E23;
 
     --bg:#0f172a;
+    --bg-match:#0f172a;
     --text:#ffffff;
     --search-bg:#1e293b;
 
@@ -59,6 +60,7 @@
         --stats-left:#A50044;
     
         --bg:#f8fafc;
+        --bg-match:#ffffff;
         --text:#0f172a;
         --search-bg:#ffffff;
 
