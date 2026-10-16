@@ -997,8 +997,6 @@ every official El Clásico ever played.
 
 </section>
 
-</section>
-
 <div class="widget-title">
 	Upcoming El Clásicos
 </div>
@@ -1444,7 +1442,12 @@ for(let i = 1; i <= 12; i++){
 
     const sorted =
         Object.entries(scorers)
-        .sort((a,b) => b[1] - a[1])
+        .sort((a,b) => {
+			    if(b[1] !== a[1]){
+			        return b[1] - a[1];
+			    }
+			    return a[0].localeCompare(b[0]);
+			})
         .slice(0,10);
 
     const maxGoals =
@@ -1818,6 +1821,20 @@ function getFilteredClasicos(){
 
 }
 
+function refreshDashboard(){
+
+    const clasicos = getFilteredClasicos();
+
+    renderHeadToHead(clasicos);
+    renderGoals(clasicos);
+    renderTopScorers(clasicos);
+    renderTopAppearances(clasicos);
+    renderClasicoMatches(clasicos);
+    renderTopManagers(clasicos);
+    renderTopManagerWins(clasicos);
+
+}
+
 function renderGlobalFilters(){
 
     const allClasicos = getClasicos();
@@ -2019,14 +2036,7 @@ selectedVenue =
 	
 	updateMatchesLimitFilter();
 	
-	renderHeadToHead();
-	renderGoals();
-	renderTopScorers();
-	renderTopAppearances();
-	renderClasicoMatches();
-	
-	renderTopManagers();
-	renderTopManagerWins();
+	refreshDashboard();
 
 }
 
@@ -2261,7 +2271,12 @@ function updateH2HTitle(){
             `${selectedCompetition} Head-to-Head`;
     }
 
-    title.textContent = mainTitle;
+    const total =
+	    getFilteredClasicos().length;
+	
+	title.textContent =
+	    `${mainTitle} (${total})`;
+
 
     const details = [];
 
@@ -2448,15 +2463,9 @@ function renderHome(){
 	renderHeadToHead();
 	renderGoals();
 
-    renderUpcomingClasicos();
-
-    renderClasicoMatches();
-
-    renderTopScorers();
-    renderTopAppearances();
-
-    renderTopManagers();
-    renderTopManagerWins();
+	renderUpcomingClasicos();
+	
+	refreshDashboard();
 
 }
 
@@ -2588,12 +2597,23 @@ function initPersonSearch(){
             return;
         }
 
-        const filtered =
-            itemList
-            .filter(item =>
-                item.name.toLowerCase().includes(value)
-            )
-            .slice(0,20);
+	const filtered =
+	    itemList
+	    .filter(item =>
+	        item.name.toLowerCase().includes(value)
+	    )
+	    .sort((a,b)=>{
+	
+	        const aStarts =
+	            a.name.toLowerCase().startsWith(value);
+	
+	        const bStarts =
+	            b.name.toLowerCase().startsWith(value);
+	
+	        return Number(bStarts) - Number(aStarts);
+	
+	    })
+	    .slice(0,20);
 
         results.innerHTML = `
             <div class="player-search-results">
