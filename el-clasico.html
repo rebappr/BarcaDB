@@ -1820,7 +1820,9 @@ function getFilteredClasicos(){
 
 function renderGlobalFilters(){
 
-	let competitionSource = allClasicos;
+    const allClasicos = getClasicos();
+
+    let competitionSource = allClasicos;
 	
 	if(selectedSeason !== "All"){
 	
@@ -2123,12 +2125,8 @@ function renderUpcomingClasicos(){
 
 function renderClasicoMatches(){
 
-    let clasicos =
-    getFilteredClasicos();
-
-clasicos.sort(
-    (a,b) => Number(b.ID) - Number(a.ID)
-);
+	const clasicos = [...getFilteredClasicos()]
+	    .sort((a,b) => Number(b.ID) - Number(a.ID));
 
 	const selectedLimit =
 	    document.getElementById(
@@ -2188,9 +2186,12 @@ clasicos.sort(
 
     });
 
-    document.getElementById(
-        "clasicoMatches"
-    ).innerHTML = html;
+	const matchesContainer =
+	    document.getElementById("clasicoMatches");
+	
+	if(matchesContainer){
+	    matchesContainer.innerHTML = html;
+	}
 
 }
 
