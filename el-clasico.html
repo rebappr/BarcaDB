@@ -1166,16 +1166,32 @@ records and head-to-head comparisons.
 <section id="matches"
          class="widget-card">
 
-    <div class="section-header">
-
-        <h2>All time Match History</h2>
-
-        <button id="toggleClasicosBtn"
-                onclick="toggleClasicos()">
-            Show All
-        </button>
-
-    </div>
+	<div class="section-header">
+	
+	    <div>
+	
+	        <h2 id="matchesTitle">
+	            All-Time Match History
+	        </h2>
+	
+	        <div
+	            id="matchesSubtitle"
+	            style="
+	                display:none;
+	                margin-top:4px;
+	                font-size:13px;
+	                color:var(--muted);
+	            ">
+	        </div>
+	
+	    </div>
+	
+	    <button id="toggleClasicosBtn"
+	            onclick="toggleClasicos()">
+	        Show All
+	    </button>
+	
+	</div>
 
     <div class="matches-header">
 
@@ -1940,6 +1956,7 @@ selectedVenue =
 	renderGlobalFilters();
 	
 	updateH2HTitle();
+	updateMatchesTitle();
 	
 	renderHeadToHead();
 	renderGoals();
@@ -2168,6 +2185,48 @@ function updateH2HTitle(){
 
 }
 
+function updateMatchesTitle(){
+
+    const title =
+        document.getElementById("matchesTitle");
+
+    const subtitle =
+        document.getElementById("matchesSubtitle");
+
+    let mainTitle = "All-Time Match History";
+
+    if(selectedCompetition !== "All"){
+        mainTitle =
+            `${selectedCompetition} Match History`;
+    }
+
+    title.textContent = mainTitle;
+
+    const details = [];
+
+    if(selectedSeason !== "All"){
+        details.push(`Season: ${selectedSeason}`);
+    }
+
+    if(selectedVenue !== "All"){
+        details.push(`Venue: ${selectedVenue}`);
+    }
+
+    if(details.length){
+
+        subtitle.textContent =
+            details.join(" • ");
+
+        subtitle.style.display = "block";
+
+    }else{
+
+        subtitle.style.display = "none";
+
+    }
+
+}
+
 function renderHeadToHead(){
 
     let clasicos = getFilteredClasicos();
@@ -2246,12 +2305,13 @@ function renderHome(){
 
     initPersonSearch();
 
-    renderGlobalFilters();
+	renderGlobalFilters();
 	
 	updateH2HTitle();
-    
+	updateMatchesTitle();
+	
 	renderHeadToHead();
-    renderGoals();
+	renderGoals();
 
     renderUpcomingClasicos();
 
