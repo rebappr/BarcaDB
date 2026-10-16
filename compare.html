@@ -1212,14 +1212,25 @@ function attachCompareSearch(
 
         }
 
-        const matches =
-            comparePlayers
-            .filter(player =>
-                player.name
-                .toLowerCase()
-                .includes(value)
-            )
-            .slice(0,15);
+		const matches =
+		    comparePlayers
+		    .filter(player =>
+		        player.name
+		        .toLowerCase()
+		        .includes(value)
+		    )
+		    .sort((a,b) => {
+		
+		        const aStarts =
+		            a.name.toLowerCase().startsWith(value);
+		
+		        const bStarts =
+		            b.name.toLowerCase().startsWith(value);
+		
+		        return Number(bStarts) - Number(aStarts);
+		
+		    })
+		    .slice(0,15);
 
         results.innerHTML = `
 
