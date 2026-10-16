@@ -1186,10 +1186,22 @@ records and head-to-head comparisons.
 	
 	    </div>
 	
-	    <button id="toggleClasicosBtn"
-	            onclick="toggleClasicos()">
-	        Show All
-	    </button>
+		<select
+		    id="matchesLimitFilter"
+		    onchange="renderClasicoMatches()"
+		    style="
+		        height:40px;
+		        padding:0 12px;
+		        border-radius:14px;
+		        border:1px solid var(--card-border);
+		        background:var(--card-bg);
+		        color:var(--text);
+		        font-size:12px;
+		        font-weight:700;
+		        text-transform:uppercase;
+		        cursor:pointer;
+		    ">
+		</select>
 	
 	</div>
 
@@ -1284,7 +1296,6 @@ records and head-to-head comparisons.
 
 let allMatches = [];
 let currentMatches = [];
-let showAllClasicos = false;
 
 let selectedCompetition = "All";
 let selectedSeason = "All";
@@ -1967,6 +1978,8 @@ selectedVenue =
 	updateMatchesTitle();
 	updateSidebarTitles();
 	
+	updateMatchesLimitFilter();
+	
 	renderHeadToHead();
 	renderGoals();
 	renderTopScorers();
@@ -2080,10 +2093,18 @@ clasicos.sort(
     (a,b) => Number(b.ID) - Number(a.ID)
 );
 
-    const matches =
-        showAllClasicos
-        ? clasicos
-        : clasicos.slice(0,10);
+	const selectedLimit =
+	    document.getElementById(
+	        "matchesLimitFilter"
+	    )?.value || "10";
+	
+	const matches =
+	    selectedLimit === "all"
+	        ? clasicos
+	        : clasicos.slice(
+	            0,
+	            Number(selectedLimit)
+	        );
 
     let html = "";
 
@@ -2136,19 +2157,52 @@ clasicos.sort(
 
 }
 
-function toggleClasicos(){
+function updateMatchesLimitFilter(){
 
-    showAllClasicos =
-        !showAllClasicos;
+    const total =
+        getFilteredClasicos().length;
 
-    document.getElementById(
-        "toggleClasicosBtn"
-    ).textContent =
-        showAllClasicos
-        ? "Show only 10"
-        : "Show All";
+    const select =
+        document.getElementById(
+            "matchesLimitFilter"
+        );
 
-    renderClasicoMatches();
+    const limits =
+        [10, 25, 50, 100, 200];
+
+    let html = "";
+
+    limits.forEach(limit => {
+
+        if(limit < total){
+
+            html += `
+                <option value="${limit}">
+                    Last ${limit}
+                </option>
+            `;
+
+        }
+
+    });
+
+    html += `
+        <option value="all">
+            All Matches (${total})
+        </option>
+    `;
+
+    const currentValue =
+        select.value;
+
+    select.innerHTML = html;
+
+    if(
+        [...select.options]
+        .some(o => o.value === currentValue)
+    ){
+        select.value = currentValue;
+    }
 
 }
 
@@ -2348,6 +2402,8 @@ function renderHome(){
 	updateH2HTitle();
 	updateMatchesTitle();
 	updateSidebarTitles();
+	
+	updateMatchesLimitFilter();
 	
 	renderHeadToHead();
 	renderGoals();
