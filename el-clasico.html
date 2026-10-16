@@ -1271,6 +1271,18 @@ function parseDate(date){
 
 }
 
+function normalizeName(name) {
+
+    return String(name || "")
+        .toLowerCase()
+        .replace(/fc /g, "")
+        .replace(/ cf/g, "")
+        .replace(/\./g, "")
+        .replace(/\s+/g, " ")
+        .trim();
+
+}
+
 function getClasicos(){
 
     return allMatches.filter(match => {
@@ -1944,6 +1956,13 @@ function renderUpcomingClasicos(){
 
     upcoming.forEach(match => {
 
+		const dataMatch = allMatches.find(m =>
+		    m.Date === match.Date &&
+		    m.Competition === match.Competition &&
+		    m["Home/Away"] === match["Home/Away"] &&
+		    normalizeName(m["Opp. Team"]) === normalizeName(match["Opp. Team"])
+		);
+
         const homeTeam =
             match["Home/Away"] === "Home"
                 ? "FC Barcelona"
@@ -1968,11 +1987,18 @@ function renderUpcomingClasicos(){
                     ${homeTeam}
                 </div>
 
-                <div class="fixture-center">
-                    <div class="fixture-vs">
-                        VS
-                    </div>
-                </div>
+			<div class="fixture-center">
+			
+			    <a
+			        href="match.html?id=${dataMatch?.ID || ''}"
+			        class="fixture-vs"
+			        style="display:inline-block;text-decoration:none;color:inherit;">
+			
+			        VS
+			
+			    </a>
+			
+			</div>
 
                 <div class="fixture-team">
                     ${awayTeam}
