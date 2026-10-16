@@ -1844,8 +1844,6 @@ function getFilteredClasicos(){
 
 function refreshDashboard(){
 
-    const clasicos = getFilteredClasicos();
-
     renderHeadToHead(clasicos);
     renderGoals(clasicos);
     renderTopScorers(clasicos);
@@ -2302,11 +2300,7 @@ function updateH2HTitle(){
             `${selectedCompetition} Head-to-Head`;
     }
 
-    const total =
-	    getFilteredClasicos().length;
-	
-	title.textContent =
-	    `${mainTitle} (${total})`;
+	title.textContent = mainTitle;
 
 
     const details = [];
@@ -2349,11 +2343,7 @@ function updateMatchesTitle(){
             `${selectedCompetition} Match History`;
     }
 
-    const total =
-	    getFilteredClasicos().length;
-	
-	title.textContent =
-	    `${mainTitle} (${total})`;
+	title.textContent = mainTitle;
 
     const details = [];
 
