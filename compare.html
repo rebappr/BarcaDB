@@ -1095,12 +1095,23 @@ comparePlayers =
             return;
         }
 
-        const filtered =
-            itemList
-            .filter(item =>
-                item.name.toLowerCase().includes(value)
-            )
-            .slice(0,20);
+		const filtered =
+		    itemList
+		    .filter(item =>
+		        item.name.toLowerCase().includes(value)
+		    )
+		    .sort((a,b)=>{
+		
+		        const aStarts =
+		            a.name.toLowerCase().startsWith(value);
+		
+		        const bStarts =
+		            b.name.toLowerCase().startsWith(value);
+		
+		        return Number(bStarts) - Number(aStarts);
+		
+		    })
+		    .slice(0,20);
 
         results.innerHTML = `
             <div class="player-search-results">
