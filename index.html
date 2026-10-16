@@ -758,20 +758,20 @@ function renderHome(){
               parseDate(b.Date) - parseDate(a.Date)
           );
       
-      const match = played[0];
-
-      const dataMatch = allMatches.find(m =>
-          m.Date === match.Date &&
-          m.Competition === match.Competition &&
-          m["Home/Away"] === match["Home/Away"] &&
-          normalizeName(m["Opp. Team"]) === normalizeName(match["Opp. Team"])
-      );
-
-        if (!match) {
-            document.getElementById("lastMatch").innerHTML =
-                "No completed matches";
-            return;
-        }
+            const match = played[0];
+            
+            if (!match) {
+                document.getElementById("lastMatch").innerHTML =
+                    "No completed matches";
+                return;
+            }
+            
+            const dataMatch = allMatches.find(m =>
+                m.Date === match.Date &&
+                m.Competition === match.Competition &&
+                m["Home/Away"] === match["Home/Away"] &&
+                normalizeName(m["Opp. Team"]) === normalizeName(match["Opp. Team"])
+            );
 
         const homeTeam =
             match["Home/Away"] === "Home"
@@ -843,6 +843,13 @@ function renderHome(){
 
             return;
         }
+
+      const dataMatch = allMatches.find(m =>
+          m.Date === next.Date &&
+          m.Competition === next.Competition &&
+          m["Home/Away"] === next["Home/Away"] &&
+          normalizeName(m["Opp. Team"]) === normalizeName(next["Opp. Team"])
+      );
 
         const homeTeam =
             next["Home/Away"] === "Home"
