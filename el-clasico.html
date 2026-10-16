@@ -1818,21 +1818,27 @@ function getFilteredClasicos(){
 
 function renderGlobalFilters(){
 
-    const allClasicos = getClasicos();
-
-    // Competition options podľa vybranej sezóny
-
-    let competitionSource = allClasicos;
-
-    if(selectedSeason !== "All"){
-
-        competitionSource =
-            competitionSource.filter(
-                match =>
-                match.Season === selectedSeason
-            );
-
-    }
+	let competitionSource = allClasicos;
+	
+	if(selectedSeason !== "All"){
+	
+	    competitionSource =
+	        competitionSource.filter(
+	            match =>
+	            match.Season === selectedSeason
+	        );
+	
+	}
+	
+	if(selectedVenue !== "All"){
+	
+	    competitionSource =
+	        competitionSource.filter(
+	            match =>
+	            match.Venue === selectedVenue
+	        );
+	
+	}
 
     const competitions =
         [...new Set(
@@ -1842,19 +1848,27 @@ function renderGlobalFilters(){
         )]
         .sort();
 
-    // Season options podľa vybranej súťaže
-
-    let seasonSource = allClasicos;
-
-    if(selectedCompetition !== "All"){
-
-        seasonSource =
-            seasonSource.filter(
-                match =>
-                match.Competition === selectedCompetition
-            );
-
-    }
+	let seasonSource = allClasicos;
+	
+	if(selectedCompetition !== "All"){
+	
+	    seasonSource =
+	        seasonSource.filter(
+	            match =>
+	            match.Competition === selectedCompetition
+	        );
+	
+	}
+	
+	if(selectedVenue !== "All"){
+	
+	    seasonSource =
+	        seasonSource.filter(
+	            match =>
+	            match.Venue === selectedVenue
+	        );
+	
+	}
 
     const seasons =
         [...new Set(
@@ -1876,23 +1890,44 @@ if(selectedCompetition !== "All"){
 
 }
 
-if(selectedSeason !== "All"){
+	if(selectedSeason !== "All"){
+	
+	    venueSource = venueSource.filter(
+	        match =>
+	        match.Season === selectedSeason
+	    );
+	
+	}
 
-    venueSource = venueSource.filter(
-        match =>
-        match.Season === selectedSeason
-    );
+	const venues =
+	    [...new Set(
+	        venueSource.map(
+	            match => match.Venue
+	        )
+	    )]
+	    .sort();
 
-}
-
-const venues =
-    [...new Set(
-        venueSource.map(
-            match => match.Venue
-        )
-    )]
-    .sort();
-
+	if(
+	    selectedCompetition !== "All" &&
+	    !competitions.includes(selectedCompetition)
+	){
+	    selectedCompetition = "All";
+	}
+	
+	if(
+	    selectedSeason !== "All" &&
+	    !seasons.includes(selectedSeason)
+	){
+	    selectedSeason = "All";
+	}
+	
+	if(
+	    selectedVenue !== "All" &&
+	    !venues.includes(selectedVenue)
+	){
+	    selectedVenue = "All";
+	}
+	
     document.getElementById(
         "globalCompetitionFilter"
     ).innerHTML = `
