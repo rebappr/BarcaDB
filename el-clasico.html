@@ -1258,8 +1258,8 @@ records and head-to-head comparisons.
 <section id="top-manager-wins"
          class="widget-card">
 
-    <h2 id="topManagersTitle">
-	    All-Time Managers by Matches
+	<h2 id="topManagerWinsTitle">
+	    All-Time Managers by Wins
 	</h2>
 
     <div id="topManagerWins"></div>
@@ -2192,15 +2192,19 @@ function updateMatchesLimitFilter(){
         }
 
     });
-
-    select.innerHTML = html;
-
-    if(
-        [...select.options]
-        .some(o => o.value === currentValue)
-    ){
-        select.value = currentValue;
-    }
+	
+	select.innerHTML = html;
+	if(
+	    [...select.options]
+	    .some(o => o.value === currentValue)
+	){
+	    select.value = currentValue;
+	
+	}else{
+	    select.value =
+	        total > 10 ? "10" : "all";
+	}
+	select.dataset.initialized = "true";
 
 }
 
