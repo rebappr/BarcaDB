@@ -19719,13 +19719,13 @@
     "season": "2026/27",
     "position": "2",
     "club": "Atlético de Madrid",
-    "matches": "8",
-    "wins": "6",
+    "matches": "9",
+    "wins": "7",
     "draws": "1",
     "losses": "1",
-    "goals": "18:8",
-    "difference": "10",
-    "points": "19"
+    "goals": "19:8",
+    "difference": "11",
+    "points": "22"
   },
   {
     "season": "2026/27",
@@ -19802,6 +19802,18 @@
   {
     "season": "2026/27",
     "position": "9",
+    "club": "Villarreal CF",
+    "matches": "9",
+    "wins": "2",
+    "draws": "3",
+    "losses": "4",
+    "goals": "13:13",
+    "difference": "0",
+    "points": "9"
+  },
+  {
+    "season": "2026/27",
+    "position": "10",
     "club": "Celta de Vigo",
     "matches": "8",
     "wins": "1",
@@ -19813,7 +19825,7 @@
   },
   {
     "season": "2026/27",
-    "position": "10",
+    "position": "11",
     "club": "Athletic Club",
     "matches": "6",
     "wins": "2",
@@ -19825,26 +19837,14 @@
   },
   {
     "season": "2026/27",
-    "position": "11",
-    "club": "Villarreal CF",
-    "matches": "8",
-    "wins": "2",
-    "draws": "2",
-    "losses": "4",
-    "goals": "13:13",
-    "difference": "0",
-    "points": "8"
-  },
-  {
-    "season": "2026/27",
     "position": "12",
     "club": "RCD Espanyol",
-    "matches": "8",
+    "matches": "9",
     "wins": "2",
     "draws": "2",
-    "losses": "4",
-    "goals": "11:11",
-    "difference": "0",
+    "losses": "5",
+    "goals": "11:12",
+    "difference": "-1",
     "points": "8"
   },
   {
@@ -19911,13 +19911,13 @@
     "season": "2026/27",
     "position": "18",
     "club": "Elche CF",
-    "matches": "8",
+    "matches": "9",
     "wins": "1",
-    "draws": "3",
+    "draws": "4",
     "losses": "4",
     "goals": "11:17",
     "difference": "-6",
-    "points": "6"
+    "points": "7"
   },
   {
     "season": "2026/27",
