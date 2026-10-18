@@ -19730,6 +19730,18 @@
   {
     "season": "2026/27",
     "position": "3",
+    "club": "Real Madrid",
+    "matches": "9",
+    "wins": "7",
+    "draws": "0",
+    "losses": "2",
+    "goals": "21:8",
+    "difference": "13",
+    "points": "21"
+  },
+  {
+    "season": "2026/27",
+    "position": "4",
     "club": "Real Betis",
     "matches": "9",
     "wins": "6",
@@ -19741,39 +19753,27 @@
   },
   {
     "season": "2026/27",
-    "position": "4",
-    "club": "Real Madrid",
-    "matches": "8",
-    "wins": "6",
-    "draws": "0",
-    "losses": "2",
-    "goals": "19:8",
-    "difference": "11",
-    "points": "18"
-  },
-  {
-    "season": "2026/27",
     "position": "5",
-    "club": "FC Sevilla",
-    "matches": "8",
-    "wins": "4",
-    "draws": "2",
-    "losses": "2",
-    "goals": "13:12",
-    "difference": "1",
-    "points": "14"
+    "club": "Real Sociedad",
+    "matches": "9",
+    "wins": "5",
+    "draws": "1",
+    "losses": "3",
+    "goals": "17:17",
+    "difference": "0",
+    "points": "16"
   },
   {
     "season": "2026/27",
     "position": "6",
-    "club": "Real Sociedad",
-    "matches": "8",
+    "club": "FC Sevilla",
+    "matches": "9",
     "wins": "4",
-    "draws": "1",
+    "draws": "2",
     "losses": "3",
-    "goals": "12:15",
-    "difference": "-3",
-    "points": "13"
+    "goals": "13:14",
+    "difference": "-1",
+    "points": "14"
   },
   {
     "season": "2026/27",
@@ -19783,7 +19783,7 @@
     "wins": "3",
     "draws": "2",
     "losses": "4",
-    "goals": "12:9",
+    "goals": "13:10",
     "difference": "3",
     "points": "11"
   },
@@ -19795,7 +19795,7 @@
     "wins": "2",
     "draws": "5",
     "losses": "2",
-    "goals": "9:6",
+    "goals": "10:7",
     "difference": "3",
     "points": "11"
   },
@@ -19935,12 +19935,12 @@
     "season": "2026/27",
     "position": "20",
     "club": "Málaga CF",
-    "matches": "8",
+    "matches": "9",
     "wins": "0",
     "draws": "4",
-    "losses": "4",
-    "goals": "4:13",
-    "difference": "-9",
+    "losses": "5",
+    "goals": "6:18",
+    "difference": "-12",
     "points": "4"
   }
 ]
