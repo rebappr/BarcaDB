@@ -246,7 +246,7 @@ margin-top:10px;
 
 .featured-image{
     width:100%;
-    aspect-ratio:16/9;
+    aspect-ratio:4/3;
     object-fit:cover;
     display:block;
 }
@@ -294,7 +294,13 @@ margin-top:10px;
     background:var(--meta-bg);
 }
 
+.featured-insight,
+.insight-item{
+    transition:.2s;
+}
+
 .insight-item:hover{
+    transform:translateY(-2px);
     border-color:var(--barca-blue);
 }
 
@@ -305,7 +311,7 @@ margin-top:10px;
     margin-bottom:4px;
 }
 
-.insight-title{
+.secondary-insight-title{
     font-weight:700;
     line-height:1.4;
 }
@@ -1045,6 +1051,20 @@ document.getElementById(
 ).innerHTML=html;
 }
 
+function formatInsightDate(dateString){
+
+    const date = new Date(dateString);
+
+    return date.toLocaleDateString(
+        "en-GB",
+        {
+            day:"numeric",
+            month:"short",
+            year:"numeric"
+        }
+    );
+}
+
 async function renderMilestones(){
 
     const insights = await fetch("milestones.json")
@@ -1066,60 +1086,75 @@ async function renderMilestones(){
 
     if(featured){
 
-        html += `
-            <a
-                href="${featured.link}"
-                class="featured-insight">
+const wrapperStart = featured.link
+    ? `<a href="${featured.link}" class="featured-insight">`
+    : `<div class="featured-insight">`;
 
-                <img
-                    src="${featured.image}"
-                    alt="${featured.title}"
-                    class="featured-image">
+const wrapperEnd = featured.link
+    ? `</a>`
+    : `</div>`;
 
-                <div class="featured-body">
-
-                    <div class="featured-tagline">
-                        ${featured.tagline}
-                    </div>
-
-                    <div class="featured-title">
-                        ${featured.title}
-                    </div>
-
-                    <div class="featured-text">
-                        ${featured.text}
-                    </div>
-
-                </div>
-
-            </a>
-        `;
+		html += `
+		    ${wrapperStart}
+		
+		        <img
+		            src="${featured.image}"
+		            alt="${featured.title}"
+		            class="featured-image">
+		
+		        <div class="featured-body">
+		
+		            <div class="featured-tagline">
+		                ${featured.tagline}
+		            </div>
+		
+		            <div class="featured-title">
+		                ${featured.title}
+		            </div>
+		
+		            <div class="featured-text">
+		                ${featured.text}
+		            </div>
+		
+		            <div class="insight-date">
+		                ${formatInsightDate(featured.date)}
+		            </div>
+		
+		        </div>
+		
+		    ${wrapperEnd}
+		`;
     }
 
     html += `<div class="insight-list">`;
 
     secondary.forEach(item => {
 
-        html += `
-            <a
-                href="${item.link}"
-                class="insight-item">
-
-                <div class="insight-tagline">
-                    ${item.tagline}
-                </div>
-
-                <div class="insight-title">
-                    ${item.title}
-                </div>
-
-                <div class="insight-date">
-                    ${item.date}
-                </div>
-
-            </a>
-        `;
-    });
+		const itemStart = item.link
+		    ? `<a href="${item.link}" class="insight-item">`
+		    : `<div class="insight-item">`;
+		
+		const itemEnd = item.link
+		    ? `</a>`
+		    : `</div>`;
+		
+		html += `
+		    ${itemStart}
+		
+		        <div class="insight-tagline">
+		            ${item.tagline}
+		        </div>
+		
+		        <div class="secondary-insight-title">
+		            ${item.title}
+		        </div>
+		
+		        <div class="insight-date">
+		            ${formatInsightDate(item.date)}
+		        </div>
+		
+		    ${itemEnd}
+		`;
 
     html += `</div>`;
 
