@@ -1070,7 +1070,10 @@ async function renderMilestones(){
         .then(r => r.json());
 
     const activeInsights = insights
-        .filter(item => item.active);
+        .filter(item =>
+    String(item.Active || item.active)
+        .toUpperCase() === "TRUE"
+)
 
     const featured = activeInsights.find(
         item => item.featured
