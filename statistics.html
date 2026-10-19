@@ -1076,12 +1076,16 @@ async function renderMilestones(){
 )
 
     const featured = activeInsights.find(
-        item => item.featured
-    );
+    item =>
+        String(item.Featured || item.featured)
+            .toUpperCase() === "TRUE"
+);
 
-    const secondary = activeInsights
-        .filter(item => !item.featured)
-        .sort((a,b) => b.priority - a.priority)
+const secondary = activeInsights
+    .filter(item =>
+        String(item.Featured || item.featured)
+            .toUpperCase() !== "TRUE"
+    )
         .slice(0,4);
 
     let html = "";
