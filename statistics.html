@@ -1083,10 +1083,14 @@ async function renderMilestones(){
 
 const secondary = activeInsights
     .filter(item =>
-        String(item.Featured || item.featured)
+        String(item.Featured)
             .toUpperCase() !== "TRUE"
     )
-        .slice(0,4);
+    .sort((a,b) =>
+        Number(a.Priority || 0) -
+        Number(b.Priority || 0)
+    )
+    .slice(0,4);
 
     let html = "";
 
