@@ -833,11 +833,14 @@ function renderHome(){
         const today = new Date();
         today.setHours(0, 0, 0, 0);
 
-      const next = currentMatches
-          .filter(match => parseDate(match.Date) >= today)
-          .sort((a, b) =>
-              parseDate(a.Date) - parseDate(b.Date)
-          )[0];
+		const next = currentMatches
+		    .filter(match =>
+		        (!match.Result || match.Result === "-:-") &&
+		        parseDate(match.Date) >= today
+		    )
+		    .sort((a, b) =>
+		        parseDate(a.Date) - parseDate(b.Date)
+		    )[0];
 
         if (!next) {
 
