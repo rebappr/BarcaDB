@@ -19850,6 +19850,30 @@
   {
     "season": "2026/27",
     "position": "13",
+    "club": "Rayo Vallecano",
+    "matches": "8",
+    "wins": "2",
+    "draws": "3",
+    "losses": "3",
+    "goals": "12:17",
+    "difference": "-5",
+    "points": "9"
+  },
+  {
+    "season": "2026/27",
+    "position": "14",
+    "club": "Getafe CF",
+    "matches": "9",
+    "wins": "2",
+    "draws": "3",
+    "losses": "4",
+    "goals": "5:11",
+    "difference": "-6",
+    "points": "9"
+  },
+  {
+    "season": "2026/27",
+    "position": "15",
     "club": "RCD Espanyol",
     "matches": "9",
     "wins": "2",
@@ -19857,30 +19881,6 @@
     "losses": "5",
     "goals": "11:12",
     "difference": "-1",
-    "points": "8"
-  },
-  {
-    "season": "2026/27",
-    "position": "14",
-    "club": "Rayo Vallecano",
-    "matches": "7",
-    "wins": "2",
-    "draws": "2",
-    "losses": "3",
-    "goals": "11:16",
-    "difference": "-5",
-    "points": "8"
-  },
-  {
-    "season": "2026/27",
-    "position": "15",
-    "club": "Getafe CF",
-    "matches": "8",
-    "wins": "2",
-    "draws": "2",
-    "losses": "4",
-    "goals": "4:10",
-    "difference": "-6",
     "points": "8"
   },
   {
