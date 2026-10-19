@@ -1071,13 +1071,13 @@ async function renderMilestones(){
 
     const activeInsights = insights
         .filter(item =>
-    String(item.Active || item.active)
+    String(item.Active || item.Active)
         .toUpperCase() === "TRUE"
 )
 
     const featured = activeInsights.find(
     item =>
-        String(item.Featured || item.featured)
+        String(item.Featured || item.Featured)
             .toUpperCase() === "TRUE"
 );
 
@@ -1136,11 +1136,11 @@ const wrapperEnd = featured.Link
 
     secondary.forEach(item => {
 
-		const itemStart = item.link
-		    ? `<a href="${item.link}" class="insight-item">`
+		const itemStart = item.Link
+		    ? `<a href="${item.Link}" class="insight-item">`
 		    : `<div class="insight-item">`;
 		
-		const itemEnd = item.link
+		const itemEnd = item.Link
 		    ? `</a>`
 		    : `</div>`;
 		
@@ -1148,11 +1148,11 @@ const wrapperEnd = featured.Link
 		    ${itemStart}
 		
 		        <div class="insight-tagline">
-		            ${item.tagline}
+		            ${item.Tagline}
 		        </div>
 		
 		        <div class="secondary-insight-title">
-		            ${item.title}
+		            ${item.Title}
 		        </div>
 		
 		        <div class="insight-date">
