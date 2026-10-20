@@ -83,7 +83,7 @@ async function run(){
 
       const home = CLUB_MAP[match.homeTeam.name] || match.homeTeam.name;
       const away = CLUB_MAP[match.awayTeam.name] || match.awayTeam.name;
-      const isHome = home === "FC Barcelona";
+      const isHome = home === "Barcelona";
       const opponent = isHome ? away : home;
 
       let result = "-:-";
