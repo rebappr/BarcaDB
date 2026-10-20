@@ -269,13 +269,6 @@ border-left:4px solid #f59e0b;
 padding-left:10px;
 }
 
-.bench-label{
-font-size:11px;
-font-weight:700;
-color:#f59e0b;
-margin-left:6px;
-}
-
 .result-badge{
 display:inline-block;
 min-width:60px;
@@ -1148,9 +1141,6 @@ const stats={};
 
 data.forEach(match=>{
 
-let started=false;
-let bench=false;
-
 let appeared=false;
 let forBarca=false;
 let forOpponent=false;
@@ -1186,17 +1176,6 @@ for(let i=1;i<=6;i++){
 }
 
 let played = appeared;
-
-for(let i=1;i<=12;i++){
-
-if(
-match[`On the bench name ${i}`]===player ||
-match[`Opp. On the bench name ${i}`]===player
-){
-bench=true;
-}
-
-}
 
 if(!played){
 return;
@@ -1718,63 +1697,6 @@ attachSearch(
 
 }
 
-function showMobileSection(section, button){
-
-if(window.innerWidth > 820) return;
-
-document.querySelectorAll(
-'.mobile-section-btn'
-).forEach(btn =>
-btn.classList.remove('active')
-);
-
-button.classList.add('active');
-
-document.getElementById(
-'mobileMatchesSection'
-).style.display = 'none';
-
-document.getElementById(
-'laligaWidget'
-).style.display = 'none';
-
-document.getElementById(
-'mobileDebutantsSection'
-).style.display = 'none';
-
-document.getElementById(
-'mobileStatisticsSection'
-).style.display = 'none';
-
-if(section === 'matches'){
-document.getElementById(
-'mobileMatchesSection'
-).style.display = 'flex';
-}
-
-if(section === 'table'){
-
-    document.getElementById(
-        'laligaWidget'
-    ).style.display = 'flex';
-
-    renderLaLigaTable();
-}
-
-if(section === 'debutants'){
-document.getElementById(
-'mobileDebutantsSection'
-).style.display = 'flex';
-}
-
-if(section === 'statistics'){
-document.getElementById(
-'mobileStatisticsSection'
-).style.display = 'flex';
-}
-
-}
-
 document.addEventListener("DOMContentLoaded", () => {
 
     const menuToggle = document.getElementById("menuToggle");
@@ -1816,19 +1738,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
     });
-
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-
-    if(window.innerWidth <= 820){
-
-        document.getElementById("laligaWidget").style.display = "none";
-        document.getElementById("mobileDebutantsSection").style.display = "none";
-        document.getElementById("mobileStatisticsSection").style.display = "none";
-
-        document.getElementById("mobileMatchesSection").style.display = "block";
-    }
 
 });
 
