@@ -35,7 +35,7 @@
       content="Compare FC Barcelona players side by side with detailed statistics, records and career achievements.">
 
 <meta property="og:url"
-      content="https://barcadb.com/compare-players">
+      content="https://barcadb.com/compare.html">
 
 <meta property="og:image"
       content="https://barcadb.com/logos/barcadb-logo.png">
@@ -156,21 +156,8 @@
     text-align:center;
 }
 
-.compare-result-text{
-    color:var(--muted);
-}
-
 .compare-search{
     position:relative;
-}
-
-#compareResultsA,
-#compareResultsB{
-    position:absolute;
-    left:18px;
-    right:18px;
-    top:88px;
-    z-index:500;
 }
 
 .compare-search-item{
@@ -352,19 +339,6 @@
     display:flex;
     flex-direction:column;
     gap:10px;
-}
-
-.compare-options{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    gap:10px;
-    flex-wrap:wrap;
-
-    margin:4px 0 8px;
-
-    color:var(--muted);
-    font-weight:600;
 }
 
 .compare-filter-card{
@@ -944,7 +918,6 @@ function initPersonSearch(){
 
     allMatches.forEach(match => {
 
-        // Barcelona manager
         if(match.Manager){
 
             searchItems.set(
@@ -957,7 +930,6 @@ function initPersonSearch(){
 
         }
 
-        // Opponent manager
         if(match["Opp. Manager"]){
 
             searchItems.set(
@@ -970,7 +942,6 @@ function initPersonSearch(){
 
         }
 
-		// Opponent team
 		if(match["Opp. Team"]){
 		
 		    searchItems.set(
@@ -983,7 +954,6 @@ function initPersonSearch(){
 		
 		}
 
-        // Starting XI
         for(let i=1;i<=11;i++){
 
             if(match[`Player name ${i}`]){
@@ -1012,7 +982,6 @@ function initPersonSearch(){
 
         }
 
-        // Bench
         for(let i=1;i<=12;i++){
 
             if(match[`Sub on ${i}`]){
@@ -1069,15 +1038,14 @@ allMatches.forEach(match => {
 
 });
 
-comparePlayers =
-    [...barcaPlayers]
-    .sort((a,b) =>
-        a.localeCompare(b)
-    )
-    .map(name => ({
-        name:name,
-        type:"Player"
-    }));
+	comparePlayers =
+	    [...barcaPlayers]
+	    .sort((a,b) =>
+	        a.localeCompare(b)
+	    )
+	    .map(name => ({
+	        name
+	    }));
 
     const itemList =
         [...searchItems.values()]
@@ -1573,8 +1541,6 @@ matches.forEach(match => {
 });
 
 return {
-
-    name:playerName,
 
 position:
         getMainPosition(playerName),
@@ -2551,25 +2517,18 @@ function getMatchResults(playerName){
 
 function updateBasicInfo(){
       
-if(
-    !selectedPlayerA ||
-    !selectedPlayerB
-){
-
-    document.getElementById(
-        "basicInfoCard"
-    ).style.display = "none";
-
-    return;
-
-}
-
-    if(
-        !selectedPlayerA ||
-        !selectedPlayerB
-    ){
-        return;
-    }
+	if(
+	    !selectedPlayerA ||
+	    !selectedPlayerB
+	){
+	
+	    document.getElementById(
+	        "basicInfoCard"
+	    ).style.display = "none";
+	
+	    return;
+	
+	}
 
     const playerA =
         getPlayerInfo(selectedPlayerA);
@@ -2810,9 +2769,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     input.addEventListener("input", () => {
-
-        const value =
-            parseInt(input.value);
 
         if(
             selectedPlayerA &&
