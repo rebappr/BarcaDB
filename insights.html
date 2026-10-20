@@ -475,22 +475,19 @@ async function renderInsights(){
 	        String(item.Active).toUpperCase() === "TRUE"
 	);
 	
-	const featured = activeInsights
-	    .filter(
-	        item =>
-	            String(item.Featured).toUpperCase() === "TRUE"
-	    )
-	    .sort(
-	        (a,b) => new Date(b.Date) - new Date(a.Date)
-	    )[0];
+	const sortedInsights = activeInsights.sort(
+	    (a,b) => new Date(b.Date) - new Date(a.Date)
+	);
 	
-	const secondary = activeInsights
+	const featured = sortedInsights.find(
+	    item =>
+	        String(item.Featured).toUpperCase() === "TRUE"
+	);
+	
+	const secondary = sortedInsights
 	    .filter(
 	        item =>
 	            String(item.Featured).toUpperCase() !== "TRUE"
-	    )
-	    .sort(
-	        (a,b) => new Date(b.Date) - new Date(a.Date)
 	    );
 
     let html = "";
@@ -508,10 +505,11 @@ async function renderInsights(){
 		html += `
 		    ${wrapperStart}
 		
-		        <img
-		            src="${featured.Image}"
-		            alt="${featured.Title}"
-		            class="featured-image">
+				<img
+				    src="${featured.Image}"
+				    alt="${featured.Title}"
+				    class="featured-image"
+				    loading="lazy">
 		
 		        <div class="featured-body">
 		
