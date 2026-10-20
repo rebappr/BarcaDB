@@ -131,53 +131,6 @@ gap:8px;
     transform:translateY(-2px);
 }
 
-.match-card{
-display:flex;
-justify-content:space-between;
-align-items:center;
-gap:20px;
-}
-
-.match-main{
-flex:1;
-}
-
-.match-main h3{
-margin:0 0 5px;
-}
-
-.match-meta{
-color:var(--muted);
-font-size:13px;
-}
-
-.season-card{
-background:var(--card-bg);
-border:1px solid var(--card-border);
-border-radius:24px;
-padding:14px;
-}
-
-.season-header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:12px;
-}
-
-.season-name{
-font-size:18px;
-font-weight:800;
-}
-
-.season-goals{
-padding:6px 12px;
-border-radius:999px;
-background:rgba(0,77,152,.15);
-border:1px solid #004D98;
-font-weight:700;
-}
-
 .stats-table{
 width:100%;
 border-collapse:collapse;
@@ -239,24 +192,6 @@ font-weight:700;
 .flick-table th:not(:first-child){
     cursor:pointer;
     user-select:none;
-}
-
-.btn{
-display:inline-block;
-
-background:
-linear-gradient(
-135deg,
-#004D98,
-#A50044
-);
-
-color:white;
-text-decoration:none;
-
-padding:10px 16px;
-border-radius:16px;
-margin-top:10px;
 }
 
 .home-card{
@@ -395,26 +330,6 @@ a.featured-insight:hover{
 #topManagers th:nth-child(7),
 #topManagers td:nth-child(7){
     display:none;
-}
-
-.content-layout{
-display:flex;
-flex-direction:column;
-gap:0;
-}
-
-.left-panel,
-.right-panel{
-flex:none !important;
-width:100% !important;
-min-width:0;
-max-width:100%;
-margin:0;
-}
-
-.right-panel{
-position:static !important;
-top:auto;
 }
 
 .container{
@@ -574,7 +489,7 @@ Top Assists
 Loading...
 </div>
 
-</div> <!-- left-column -->
+</div> <!-- top assists widget -->
 </div> <!-- right-column -->
 </div> <!-- dashboard -->
 </div> <!-- container -->
@@ -591,16 +506,6 @@ let managerTableSortDirection = "desc";
 fetch("data.json")
     .then(r => r.json())
     .then(matchesData => {
-
-function normalizeName(name){
-return String(name || "")
-.toLowerCase()
-.replace(/fc /g,"")
-.replace(/ cf/g,"")
-.replace(/./g,"")
-.replace(/\s+/g," ")
-.trim();
-}
 
 allMatches = matchesData;
 
@@ -1444,63 +1349,6 @@ attachSearch(
 
 }
 
-function showMobileSection(section, button){
-
-if(window.innerWidth > 820) return;
-
-document.querySelectorAll(
-'.mobile-section-btn'
-).forEach(btn =>
-btn.classList.remove('active')
-);
-
-button.classList.add('active');
-
-document.getElementById(
-'mobileMatchesSection'
-).style.display = 'none';
-
-document.getElementById(
-'laligaWidget'
-).style.display = 'none';
-
-document.getElementById(
-'mobileDebutantsSection'
-).style.display = 'none';
-
-document.getElementById(
-'mobileStatisticsSection'
-).style.display = 'none';
-
-if(section === 'matches'){
-document.getElementById(
-'mobileMatchesSection'
-).style.display = 'block';
-}
-
-if(section === 'table'){
-
-    document.getElementById(
-        'laligaWidget'
-    ).style.display = 'block';
-
-    renderLaLigaTable();
-}
-
-if(section === 'debutants'){
-document.getElementById(
-'mobileDebutantsSection'
-).style.display = 'block';
-}
-
-if(section === 'statistics'){
-document.getElementById(
-'mobileStatisticsSection'
-).style.display = 'block';
-}
-
-}
-
 document.addEventListener("DOMContentLoaded", () => {
 
     const menuToggle = document.getElementById("menuToggle");
@@ -1542,19 +1390,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
     });
-
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-
-    if(window.innerWidth <= 820){
-
-        document.getElementById("laligaWidget").style.display = "none";
-        document.getElementById("mobileDebutantsSection").style.display = "none";
-        document.getElementById("mobileStatisticsSection").style.display = "none";
-
-        document.getElementById("mobileMatchesSection").style.display = "block";
-    }
 
 });
 
