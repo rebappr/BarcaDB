@@ -316,6 +316,13 @@ a.featured-insight:hover{
     line-height:1.4;
 }
 
+.secondary-insight-text{
+    margin-top:6px;
+    color:var(--muted);
+    font-size:13px;
+    line-height:1.5;
+}
+
 .insight-date{
     margin-top:6px;
     font-size:12px;
@@ -1153,7 +1160,7 @@ const wrapperEnd = featured.Link
 		    ? `</a>`
 		    : `</div>`;
 		
-		html += `
+				html += `
 		    ${itemStart}
 		
 		        <div class="insight-tagline">
@@ -1162,6 +1169,10 @@ const wrapperEnd = featured.Link
 		
 		        <div class="secondary-insight-title">
 		            ${item.Title}
+		        </div>
+		
+		        <div class="secondary-insight-text">
+		            ${item.Text}
 		        </div>
 		
 		        <div class="insight-date">
