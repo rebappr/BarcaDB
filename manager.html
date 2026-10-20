@@ -93,15 +93,6 @@ gap:20px;
 margin-bottom:10px;
 }
 
-.manager-photo{
-width:130px;
-height:130px;
-border-radius:50%;
-object-fit:cover;
-border:4px solid #004D98;
-display:none;
-}
-
 .manager-info h1{
 margin:0;
 font-size:22px;
@@ -247,13 +238,6 @@ background:var(--card-bg);
 border-bottom:none;
 }
 
-.bench-label{
-font-size:11px;
-font-weight:700;
-color:#f59e0b;
-margin-left:6px;
-}
-
 .result-badge{
 display:inline-block;
 min-width:60px;
@@ -295,13 +279,6 @@ object-fit:contain;
 flex-shrink:0;
 }
 
-.manager-club{
-    margin-top:6px;
-    font-size:16px;
-    font-weight:600;
-    color:var(--muted);
-}
-
 .club-title{
     background:#004D98;
     color:#ffffff;
@@ -312,27 +289,6 @@ flex-shrink:0;
     font-size:14px;
     color:var(--muted);
     font-weight:600;
-}
-
-.season-block{
-    margin-bottom:8px;
-}
-
-.season-header{
-    padding:10px 14px;
-    background:var(--meta-bg);
-    border:1px solid var(--meta-border);
-    border-radius:12px;
-    cursor:pointer;
-    font-weight:700;
-}
-
-.season-header:hover{
-    background:var(--card-bg);
-}
-
-.season-matches{
-    margin-top:6px;
 }
 
 .matches-list{
@@ -388,50 +344,7 @@ flex-shrink:0;
     border-bottom:none;
 }
 
-.player-search-results{
-    display:flex;
-    flex-direction:column;
-    gap:2px;
-}
-
-.search-type{
-    font-size:11px;
-    font-weight:700;
-    padding:2px 8px;
-    border-radius:999px;
-}
-
-.search-type.player{
-    background:rgba(0,77,152,.15);
-    color:#3b82f6;
-}
-
-.search-type.manager{
-    background:rgba(165,0,68,.15);
-    color:#e11d48;
-}
-
-.search-type.opponent{
-    background:rgba(34,197,94,.15);
-    color:#16a34a;
-}
-
-.player-search-item{
-    display:flex;
-    align-items:center;
-    padding:8px 10px;
-    border-radius:10px;
-    text-decoration:none;
-    color:var(--text);
-    font-size:12px;
-    font-weight:600;
-    gap:6px;
-}
-
-.player-search-item:hover{
-    background:var(--meta-bg);
-}
-    
+   
 .manager-clubs a{
     color:var(--link-color);
     text-decoration:none;
@@ -466,8 +379,7 @@ flex-shrink:0;
     text-align:center;
 }
 
-.flick-selected,
-.flick-column-selected{
+.flick-selected{
     color:white;
     background:linear-gradient(
         135deg,
@@ -493,66 +405,6 @@ font-weight:600;
 color:#A50044;
 }
 
-.main-menu{
-    display:flex;
-    justify-content:flex-start;
-    align-items:center;
-    gap:6px;
-
-    margin-bottom:12px;
-    padding-left:0;
-}
-
-.main-menu a{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    min-width:120px;
-    padding:12px 20px;
-
-    border-radius:14px;
-
-    text-decoration:none;
-
-    background:#004D98;
-    border-color:#0a5fb3;
-
-    color:white;
-
-    font-size:14px;
-    font-weight:700;
-    text-transform:uppercase;
-
-    transition:.2s;
-
-    box-shadow:
-        0 4px 12px rgba(0,77,152,.25);
-}
-
-.main-menu a img{
-    display:none;
-}
-
-.main-menu a:hover{
-    transform:translateY(-2px);
-
-    background:#0a5fb3;
-
-    box-shadow:
-        0 8px 20px rgba(0,77,152,.35);
-}
-
-.main-menu a.active{
-    background:#A50044;
-    border-color:#8b0038;
-    color:white;
-}
-
-.main-menu a img{
-    display:none;
-}
-
 	.opponent-link{
 	    color:var(--link-color);
 	    text-decoration:none;
@@ -563,54 +415,6 @@ color:#A50044;
 	    text-decoration:underline;
 	}
     
-.menu-toggle{
-    display:none;
-}
-
-.desktop-search{
-    width:340px;
-    position:relative;
-    margin-left:auto;
-}
-
-.desktop-search-input{
-    width:100%;
-    height:48px;
-    padding:0 16px;
-    border:none;
-    border-radius:16px;
-    background:rgba(255,255,255,.12);
-    font-size:16px;
-    color:#A9A9A9;
-}
-
-.desktop-search-input::placeholder{
-    color:#A9A9A9;
-}
-
-.mobile-menu-search{
-    display:none;
-}
-
-#personSearchResults{
-
-    position:absolute;
-
-    top:54px;
-
-    left:0;
-
-    right:0;
-
-    z-index:9999;
-
-    border-radius:16px;
-
-    overflow:hidden;
-
-    background:var(--card-bg);
-}
-
 #managerContent{
     display:flex;
     flex-direction:column;
@@ -1094,7 +898,6 @@ if (canonical) {
 }
 
 let allMatches = [];
-let allPlayers = [];
 
 let managerSortColumn = "total";
 let managerSortDirection = "desc";
@@ -1147,20 +950,6 @@ const managerMatches = data.filter(match =>
     match["Opp. Manager"] === manager
 
 );
-
-const seasonMatches = {};
-
-managerMatches.forEach(match => {
-
-    const season = match.Season || "Unknown";
-
-    if(!seasonMatches[season]){
-        seasonMatches[season] = [];
-    }
-
-    seasonMatches[season].push(match);
-
-});
 
 const clubs = [];
 
@@ -1539,7 +1328,6 @@ if(coachedBarcelona){
 }
 
 renderManagerStats(manager,data);
-renderTopManagerPlayers(manager,data);
 
 }
 
@@ -2229,63 +2017,6 @@ attachSearch(
 
 }
 
-function showMobileSection(section, button){
-
-if(window.innerWidth > 820) return;
-
-document.querySelectorAll(
-'.mobile-section-btn'
-).forEach(btn =>
-btn.classList.remove('active')
-);
-
-button.classList.add('active');
-
-document.getElementById(
-'mobileMatchesSection'
-).style.display = 'none';
-
-document.getElementById(
-'laligaWidget'
-).style.display = 'none';
-
-document.getElementById(
-'mobileDebutantsSection'
-).style.display = 'none';
-
-document.getElementById(
-'mobileStatisticsSection'
-).style.display = 'none';
-
-if(section === 'matches'){
-document.getElementById(
-'mobileMatchesSection'
-).style.display = 'block';
-}
-
-if(section === 'table'){
-
-    document.getElementById(
-        'laligaWidget'
-    ).style.display = 'block';
-
-    renderLaLigaTable();
-}
-
-if(section === 'debutants'){
-document.getElementById(
-'mobileDebutantsSection'
-).style.display = 'block';
-}
-
-if(section === 'statistics'){
-document.getElementById(
-'mobileStatisticsSection'
-).style.display = 'block';
-}
-
-}
-
 document.addEventListener("DOMContentLoaded", () => {
 
     const menuToggle = document.getElementById("menuToggle");
@@ -2327,19 +2058,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
     });
-
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-
-    if(window.innerWidth <= 820){
-
-        document.getElementById("laligaWidget").style.display = "none";
-        document.getElementById("mobileDebutantsSection").style.display = "none";
-        document.getElementById("mobileStatisticsSection").style.display = "none";
-
-        document.getElementById("mobileMatchesSection").style.display = "block";
-    }
 
 });
 
