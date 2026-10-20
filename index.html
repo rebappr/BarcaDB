@@ -939,8 +939,14 @@ function renderHome(){
 
 function renderRecentForm(){
 
+    const today = new Date();
+    today.setHours(0,0,0,0);
+
     const matches = allMatches
-        .filter(m => m["Result type"])
+        .filter(match =>
+            match["Result type"] &&
+            parseDate(match.Date) <= today
+        )
         .sort((a,b) =>
             parseDate(b.Date) - parseDate(a.Date)
         )
@@ -950,17 +956,18 @@ function renderRecentForm(){
 
     matches.forEach(match => {
 
-        if(match["Result type"] === "W"){
-            html += `<div class="form-win">W</div>`;
-        }
+        const cls =
+            match["Result type"] === "W"
+                ? "form-win"
+                : match["Result type"] === "D"
+                ? "form-draw"
+                : "form-loss";
 
-        if(match["Result type"] === "D"){
-            html += `<div class="form-draw">D</div>`;
-        }
-
-        if(match["Result type"] === "L"){
-            html += `<div class="form-loss">L</div>`;
-        }
+        html += `
+            <div class="${cls}">
+                ${match["Result type"]}
+            </div>
+        `;
 
     });
 
