@@ -193,29 +193,24 @@ border-collapse:collapse;
 
 .matches-table th:nth-child(1),
 .matches-table td:nth-child(1){
-width:90px; /* Date */
+width:90px;
 padding-left:15px;
 }
 
 .matches-table th:nth-child(2),
 .matches-table td:nth-child(2){
-width:120px; /* Matchday */
+width:auto;
 }
 
 .matches-table th:nth-child(3),
 .matches-table td:nth-child(3){
-width:auto; /* Competition */
+width:100px;
+text-align:center;
 }
 
 .matches-table th:nth-child(4),
 .matches-table td:nth-child(4){
-width:100px; /* Venue */
-text-align:center;
-}
-
-.matches-table th:nth-child(5),
-.matches-table td:nth-child(5){
-width:90px; /* Result */
+width:90px;
 text-align:center;
 padding-right:15px;
 }
@@ -817,21 +812,16 @@ padding-left:5px;
 
 .matches-table th:nth-child(2),
 .matches-table td:nth-child(2){
-width:85px;
+width:auto;
 }
 
 .matches-table th:nth-child(3),
 .matches-table td:nth-child(3){
-width:auto;
+width:55px;
 }
 
 .matches-table th:nth-child(4),
 .matches-table td:nth-child(4){
-width:55px;
-}
-
-.matches-table th:nth-child(5),
-.matches-table td:nth-child(5){
 width:55px;
 padding-right:5px;
 }
@@ -1973,7 +1963,6 @@ let html = `
                    <thead>
                        <tr>
                            <th>Date</th>
-                           <th>Matchday</th>
                            <th>Competition</th>
                            <th>Venue</th>
                            <th>Result</th>
@@ -2007,10 +1996,6 @@ html += `
 
                <td>
                    ${row.Date || ""}
-               </td>
-
-               <td>
-                   ${row.Matchday || ""}
                </td>
 
                <td>
