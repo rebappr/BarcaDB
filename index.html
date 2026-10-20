@@ -827,7 +827,9 @@ function renderRecentForm(){
 
 	const matches = currentMatches
 	    .filter(m => m["Result type"])
-	    .sort(...)
+	    .sort((a,b) =>
+	        parseDate(b.Date) - parseDate(a.Date)
+	    )
 	    .slice(0,8);
 
     let html = "<div class='form-list'>";
@@ -978,8 +980,7 @@ function renderSeasonStatistics() {
 	    if (!players[name]) {
 			players[name] = {
 			    goals: 0,
-			    assists: 0,
-			    squad: 0
+			    assists: 0
 			};
 	
 	        return true;
@@ -1015,8 +1016,6 @@ function renderSeasonStatistics() {
             ) {
 
                 addPlayer(player);
-
-                players[player].squad++;
 
             }
 
