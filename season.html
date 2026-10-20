@@ -229,28 +229,6 @@ font-size:22px;
 font-weight:700;
 }
 
-.filters{
-display:flex;
-flex-wrap:wrap;
-gap:8px;
-background:var(--card-bg);
-backdrop-filter:blur(20px);
-border:1px solid var(--card-border);
-padding:12px;
-border-radius:24px;
-margin-bottom:10px;
-}
-
-.filter-group{
-flex:1 1 0;
-min-width:200px;
-}
-
-.filter-group label{
-font-weight:700;
-font-size:13px;
-}
-
 table{
 width:100%;
 border-collapse:collapse;
@@ -763,17 +741,6 @@ top:auto;
 padding:6px;
 }
 
-.filters{
-flex-direction:column;
-gap:8px;
-padding:12px;
-}
-
-.filter-group{
-width:100%;
-min-width:0;
-}
-
 input[list],
 select,
 .toggle-btn{
@@ -1080,8 +1047,6 @@ Loading...
 let allMatches = [];
 let playerBirthDates = {};
 let tableView = "short";
-
-let matchFilter = "played"; 
 let matchesView = "all";
 
 let season =
@@ -1542,16 +1507,6 @@ statsSortDirection = "desc";
 renderSeason();
 
 }
-
-function setMatchFilter(filter){
-
-matchFilter = filter;
-
-renderSeason();
-
-}
-
-window.setMatchFilter = setMatchFilter;
 
 function renderStatistics(matches) {
 
