@@ -80,6 +80,36 @@ flex-direction:column;
 gap:8px;
 }
 
+.hero-actions{
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.hero-btn{
+    padding:12px 20px;
+    border-radius:10px;
+    text-decoration:none;
+    font-weight:700;
+    transition:.2s;
+}
+
+.hero-btn.primary{
+    background:var(--barca-blue);
+    color:white;
+}
+
+.hero-btn.secondary{
+    background:var(--meta-bg);
+    color:var(--text);
+    border:1px solid var(--meta-border);
+}
+
+.hero-btn:hover{
+    transform:translateY(-2px);
+}
+
 .match-card{
 display:flex;
 justify-content:space-between;
