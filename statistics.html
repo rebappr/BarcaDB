@@ -1106,23 +1106,21 @@ async function renderMilestones(){
 	            String(item.Featured).toUpperCase() !== "TRUE"
 	    )
 	    .sort(
-	        (a,b) =>
-	            Number(a.Priority || 0) -
-	            Number(b.Priority || 0)
+	        (a,b) => new Date(b.Date) - new Date(a.Date)
 	    )
-	    .slice(0,4);
+	    .slice(0,3);
 
     let html = "";
 
     if(featured){
 
-const wrapperStart = featured.Link
-    ? `<a href="${featured.Link}" class="featured-insight">`
-    : `<div class="featured-insight">`;
-
-const wrapperEnd = featured.Link
-    ? `</a>`
-    : `</div>`;
+	const wrapperStart = featured.Link
+	    ? `<a href="${featured.Link}" class="featured-insight">`
+	    : `<div class="featured-insight">`;
+	
+	const wrapperEnd = featured.Link
+	    ? `</a>`
+	    : `</div>`;
 
 		html += `
 		    ${wrapperStart}
