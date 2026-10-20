@@ -136,22 +136,6 @@ object-fit:contain;
 flex-shrink:0;
 }
 
-.header-row{
-display:flex;
-align-items:center;
-gap:12px;
-}
-
-.season-badge{
-padding:4px 10px;
-border-radius:999px;
-background:rgba(255,255,255,.2);
-border:1px solid rgba(255,255,255,.3);
-font-size:13px;
-font-weight:600;
-color:white;
-}
-
 .season-selector{
 margin-top:8px;   /* bolo 12px */
 max-width:200px;  /* môže byť aj širší */
@@ -267,29 +251,6 @@ font-weight:700;
 font-size:13px;
 }
 
-.match-filter{
-display:flex;
-gap:8px;
-margin-bottom:10px;
-}
-
-.match-filter button{
-padding:8px 14px;
-border:none;
-border-radius:20px;
-cursor:pointer;
-font-size:13px;
-font-weight:700;
-background:var(--card-bg);
-color:var(--text);
-border:1px solid var(--card-border);
-}
-
-.match-filter button.active{
-background:#004D98;
-color:white;
-}
-
 table{
 width:100%;
 border-collapse:collapse;
@@ -351,15 +312,6 @@ user-select:none;
 width:50px;
 text-align:center;
 font-size:12px;
-}
-
-.badge{
-display:inline-block;
-padding:4px 8px;
-border-radius:999px;
-background:#dbeafe;
-color:#1e40af;
-font-weight:600;
 }
 
 .result-badge{
@@ -631,9 +583,9 @@ display:none;
 .table-club{
     display:flex;
     align-items:center;
-    gap:8px;
-
     font-weight:600;
+    gap:8px;
+    min-width:0;
 }
 
 .table-club img{
@@ -663,13 +615,6 @@ display:none;
 .barca-row .table-club{
     font-weight:800;
 	color:#A50044;
-}
-
-.table-club{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    min-width:0;
 }
 
 .table-club span{
@@ -1134,7 +1079,6 @@ Loading...
 <script>
 
 let allMatches = [];
-let allPlayers = [];
 let playerBirthDates = {};
 let tableView = "short";
 
@@ -1444,29 +1388,6 @@ fetch("tablelaliga.json")
     document.getElementById("laligaWidget").style.display = "none";
 
 });
-}
-
-function getResultClass(match){
-
-if(match.Result === "-:-"){
-return "result-badge result-empty";
-}
-
-switch(match["Result type"]){
-
-case "W":
-return "result-badge result-win";
-
-case "D":
-return "result-badge result-draw";
-
-case "L":
-return "result-badge result-loss";
-
-default:
-return "result-badge";
-}
-
 }
 
 function renderSeasonSummary(matches) {
@@ -2203,8 +2124,6 @@ season = [...new Set(matchesData.map(x => x.Season))]
 .sort()
 .reverse()[0];
 }
-
-allPlayers = playersData;
 
 playersData.forEach(player => {
 playerBirthDates[player.Player.trim()] =
