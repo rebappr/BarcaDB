@@ -1069,28 +1069,27 @@ async function renderMilestones(){
     const insights = await fetch("milestones.json")
         .then(r => r.json());
 
-    const activeInsights = insights
-        .filter(item =>
-    String(item.Active || item.Active)
-        .toUpperCase() === "TRUE"
-)
-
-    const featured = activeInsights.find(
-    item =>
-        String(item.Featured || item.Featured)
-            .toUpperCase() === "TRUE"
-);
-
-const secondary = activeInsights
-    .filter(item =>
-        String(item.Featured)
-            .toUpperCase() !== "TRUE"
-    )
-    .sort((a,b) =>
-        Number(a.Priority || 0) -
-        Number(b.Priority || 0)
-    )
-    .slice(0,4);
+	const activeInsights = insights.filter(
+	    item =>
+	        String(item.Active).toUpperCase() === "TRUE"
+	);
+	
+	const featured = activeInsights.find(
+	    item =>
+	        String(item.Featured).toUpperCase() === "TRUE"
+	);
+	
+	const secondary = activeInsights
+	    .filter(
+	        item =>
+	            String(item.Featured).toUpperCase() !== "TRUE"
+	    )
+	    .sort(
+	        (a,b) =>
+	            Number(a.Priority || 0) -
+	            Number(b.Priority || 0)
+	    )
+	    .slice(0,4);
 
     let html = "";
 
