@@ -322,6 +322,12 @@ a.featured-insight:hover{
     color:var(--muted);
 }
 
+.insights-container{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
 @media(max-width:820px){
 
 .flick-table th:not(:first-child),
@@ -459,7 +465,7 @@ grid-template-columns:1fr;
       Latest Insights
     </div>
 
-    <div id="milestones"></div>
+    <div id="milestones" class="insights-container"></div>
 
 </section>
 
