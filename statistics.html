@@ -258,18 +258,6 @@ border-radius:16px;
 margin-top:10px;
 }
 
-.milestone-item{
-
-    padding:12px 0;
-    border-bottom:1px solid var(--meta-border);
-    line-height:1.6;
-
-}
-
-.milestone-item:last-child{
-    border-bottom:none;
-}
-
 .home-card{
     display:flex;
     flex-direction:column;
@@ -594,8 +582,6 @@ Loading...
 </div> <!-- dashboard -->
 </div> <!-- container -->
 
-<script src="milestones.js"></script>
-
 <script>
 
 let allMatches = [];
@@ -636,7 +622,7 @@ initPersonSearch();
 renderTopScorers();
 renderTopAssists();
 
-renderMilestones();
+renderInsights();
 }
 
 function sortFlick(column){
@@ -1148,9 +1134,9 @@ function formatInsightDate(dateString){
     );
 }
 
-async function renderMilestones(){
+async function renderInsights(){
 
-    const insights = await fetch("milestones.json")
+    const insights = await fetch("insights.json")
         .then(r => r.json());
 
 	const activeInsights = insights.filter(
