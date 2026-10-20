@@ -937,10 +937,37 @@ function renderHome(){
         `;
     }
 
+function getResultType(match){
+
+    const home = Number(match["Goals home team"]);
+    const away = Number(match["Goals away team"]);
+
+    if(isNaN(home) || isNaN(away)){
+        return "";
+    }
+
+    const barcaHome =
+        match["Home team"] === "Barcelona";
+
+    if(barcaHome){
+
+        if(home > away) return "W";
+        if(home < away) return "L";
+        return "D";
+
+    } else {
+
+        if(away > home) return "W";
+        if(away < home) return "L";
+        return "D";
+
+    }
+}
+
 function renderRecentForm(){
 
     const matches = allMatches
-        .filter(m => m["Result type"])
+        .filter(m => getResultType(m))
         .sort((a,b) =>
             parseDate(b.Date) - parseDate(a.Date)
         )
@@ -950,15 +977,17 @@ function renderRecentForm(){
 
     matches.forEach(match => {
 
-        if(match["Result type"] === "W"){
+        const result = getResultType(match);
+
+        if(result === "W"){
             html += `<div class="form-win">W</div>`;
         }
 
-        if(match["Result type"] === "D"){
+        if(result === "D"){
             html += `<div class="form-draw">D</div>`;
         }
 
-        if(match["Result type"] === "L"){
+        if(result === "L"){
             html += `<div class="form-loss">L</div>`;
         }
 
