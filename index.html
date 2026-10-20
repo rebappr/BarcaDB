@@ -404,6 +404,11 @@
     color:var(--muted);
 }
 
+.insights-container{
+    display:flex;
+    flex-direction:column;
+}
+
 
 @media(max-width:820px){
 
@@ -1213,13 +1218,28 @@ function renderSeasonStatistics() {
     ).innerHTML = html;
 }
 
+function formatInsightDate(dateString){
+
+    const date = new Date(dateString);
+
+    return date.toLocaleDateString(
+        "en-GB",
+        {
+            day:"numeric",
+            month:"short",
+            year:"numeric"
+        }
+    );
+}
+
 async function renderInsights(){
 
     const insights = await fetch("insights.json")
         .then(r => r.json());
 
     const activeInsights = insights.filter(
-        item => String(item.Active).toUpperCase() === "TRUE"
+        item =>
+            String(item.Active).toUpperCase() === "TRUE"
     );
 
     const sortedInsights = activeInsights.sort(
@@ -1227,12 +1247,14 @@ async function renderInsights(){
     );
 
     const featured = sortedInsights.find(
-        item => String(item.Featured).toUpperCase() === "TRUE"
+        item =>
+            String(item.Featured).toUpperCase() === "TRUE"
     );
 
     const secondary = sortedInsights
         .filter(
-            item => String(item.Featured).toUpperCase() !== "TRUE"
+            item =>
+                String(item.Featured).toUpperCase() !== "TRUE"
         )
         .slice(0,1);
 
@@ -1240,63 +1262,83 @@ async function renderInsights(){
 
     if(featured){
 
+        const wrapperStart = featured.Link
+            ? `<a href="${featured.Link}" class="featured-insight">`
+            : `<div class="featured-insight">`;
+
+        const wrapperEnd = featured.Link
+            ? `</a>`
+            : `</div>`;
+
         html += `
-        ${featured.Link}
+            ${wrapperStart}
 
-            ${featured.Image}
+                <img
+                    src="${featured.Image}"
+                    alt="${featured.Title}"
+                    class="featured-image"
+                    loading="lazy">
 
-            <div class="featured-body">
+                <div class="featured-body">
 
-                <div class="featured-tagline">
-                    ${featured.Tagline}
+                    <div class="featured-tagline">
+                        ${featured.Tagline}
+                    </div>
+
+                    <div class="featured-title">
+                        ${featured.Title}
+                    </div>
+
+                    <div class="featured-text">
+                        ${featured.Text}
+                    </div>
+
+                    <div class="insight-date">
+                        ${formatInsightDate(featured.Date)}
+                    </div>
+
                 </div>
 
-                <div class="featured-title">
-                    ${featured.Title}
-                </div>
-
-                <div class="featured-text">
-                    ${featured.Text}
-                </div>
-
-                <div class="insight-date">
-                    ${formatInsightDate(featured.Date)}
-                </div>
-
-            </div>
-
-        </a>
+            ${wrapperEnd}
         `;
     }
 
-    html += '<div class="insight-list">';
+    html += `<div class="insight-list">`;
 
     secondary.forEach(item => {
 
+        const itemStart = item.Link
+            ? `<a href="${item.Link}" class="insight-item">`
+            : `<div class="insight-item">`;
+
+        const itemEnd = item.Link
+            ? `</a>`
+            : `</div>`;
+
         html += `
-        ${item.Link}
+            ${itemStart}
 
-            <div class="insight-tagline">
-                ${item.Tagline}
-            </div>
+                <div class="insight-tagline">
+                    ${item.Tagline}
+                </div>
 
-            <div class="secondary-insight-title">
-                ${item.Title}
-            </div>
+                <div class="secondary-insight-title">
+                    ${item.Title}
+                </div>
 
-            <div class="secondary-insight-text">
-                ${item.Text}
-            </div>
+                <div class="secondary-insight-text">
+                    ${item.Text}
+                </div>
 
-            <div class="insight-date">
-                ${formatInsightDate(item.Date)}
-            </div>
+                <div class="insight-date">
+                    ${formatInsightDate(item.Date)}
+                </div>
 
-        </a>
+            ${itemEnd}
         `;
     });
 
-    html += '</div>';
+    html += `</div>`;
 
     document.getElementById("insights").innerHTML = html;
 }
