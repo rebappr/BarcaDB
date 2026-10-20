@@ -98,29 +98,12 @@
     gap:8px;
 }
 
-.sidebar-card{
-    background:var(--card-bg);
-    border:1px solid var(--card-border);
-    border-radius:16px;
-    padding:20px;
-}
-
-.sidebar-card h3{
-    margin-top:0;
-    margin-bottom:12px;
-}
-
 .hero-card{
     background:var(--card-bg);
     border:1px solid var(--card-border);
     border-radius:16px;
     padding:16px;
     text-align:center;
-}
-
-.hero-card h2{
-    margin:0 0 12px;
-    font-size:2rem;
 }
 
 .hero-card p{
@@ -177,68 +160,6 @@
     line-height:1.7;
 }
 
-.stats-grid{
-    display:grid;
-    grid-template-columns:
-        repeat(auto-fit,minmax(180px,1fr));
-    gap:8px;
-}
-
-.stat-card{
-    background:var(--card-bg);
-    border:1px solid var(--card-border);
-    border-radius:16px;
-    padding:24px;
-    text-align:center;
-}
-
-.stat-number{
-    font-size:2rem;
-    font-weight:800;
-    color:var(--barca-blue);
-}
-
-.stat-label{
-    margin-top:6px;
-    color:var(--muted);
-}
-
-.navigation-grid{
-    display:grid;
-    grid-template-columns:
-        repeat(auto-fit,minmax(240px,1fr));
-    gap:8px;
-}
-
-.nav-tile{
-    display:block;
-    text-decoration:none;
-    color:inherit;
-
-    background:var(--card-bg);
-    border:1px solid var(--card-border);
-    border-radius:16px;
-
-    padding:24px;
-
-    transition:.2s;
-}
-
-.nav-tile:hover{
-    transform:translateY(-3px);
-    border-color:var(--barca-blue);
-}
-
-.nav-tile h3{
-    margin-top:0;
-    margin-bottom:10px;
-}
-
-.nav-tile p{
-    color:var(--muted);
-    margin:0;
-}
-
 .features-list{
     display:grid;
     grid-template-columns:
@@ -256,14 +177,6 @@
 .feature-item strong{
     display:block;
     margin-bottom:6px;
-}
-
-.header.sticky{
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 9998;
 }
 
 .fixture-card{
@@ -441,10 +354,6 @@
     .fixture-vs{
         font-size:16px;
         padding:6px 14px;
-    }
-
-    .hero-card h2{
-        font-size:1.7rem;
     }
 
 }
@@ -953,11 +862,6 @@ function renderSeasonDebutants(){
         .sort()
         .reverse()[0];
 
-    const seasonMatches =
-        allMatches.filter(
-            x => x.Season === latestSeason
-        );
-
     const firstAppearance = {};
 
     allMatches.forEach(match => {
@@ -1073,15 +977,10 @@ function renderSeasonStatistics() {
         if (name.includes("(OG)")) return false;
 
         if (!players[name]) {
-            players[name] = {
-                squad: 0,
-                xi: 0,
-                goals: 0,
-                assists: 0,
-                yellow: 0,
-                red: 0
-            };
-        }
+			players[name] = {
+			    goals: 0,
+			    assists: 0
+			};
 
         return true;
     }
@@ -1099,9 +998,6 @@ function renderSeasonStatistics() {
             ) {
 
                 addPlayer(player);
-
-                players[player].squad++;
-                players[player].xi++;
 
             }
 
