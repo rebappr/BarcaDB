@@ -825,12 +825,12 @@ function renderHome(){
 
 function renderRecentForm(){
 
-	const matches = currentMatches
-	    .filter(m => m["Result type"])
-	    .sort((a,b) =>
-	        parseDate(b.Date) - parseDate(a.Date)
-	    )
-	    .slice(0,8);
+    const matches = allMatches
+        .filter(m => m["Result type"])
+        .sort((a,b) =>
+            parseDate(b.Date) - parseDate(a.Date)
+        )
+        .slice(0,8);
 
     let html = "<div class='form-list'>";
 
