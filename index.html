@@ -499,7 +499,7 @@ Discover What's Inside
             </a>
 
             <a
-                href="seasons.html"
+                href="season.html"
                 class="hero-btn secondary">
 
                 Seasons Overview
@@ -825,12 +825,10 @@ function renderHome(){
 
 function renderRecentForm(){
 
-    const matches = allMatches
-        .filter(m => m["Result type"])
-        .sort((a,b) =>
-            parseDate(b.Date) - parseDate(a.Date)
-        )
-        .slice(0,8);
+	const matches = currentMatches
+	    .filter(m => m["Result type"])
+	    .sort(...)
+	    .slice(0,8);
 
     let html = "<div class='form-list'>";
 
@@ -907,12 +905,13 @@ function renderSeasonDebutants(){
 
     });
 
-    const debutants =
-        Object.entries(firstAppearance)
-        .filter(([name,data]) =>
-            data.season === latestSeason
-        )
-        .slice(0,10);
+		const debutants =
+		    Object.entries(firstAppearance)
+		    .filter(([name,data]) =>
+		        data.season === latestSeason
+		    )
+		    .sort((a,b) => a[1].date - b[1].date)
+		    .slice(0,10);
 
       let html = `
           <table class="debutants-table">
@@ -968,22 +967,24 @@ function renderSeasonStatistics() {
 
     const players = {};
 
-    function addPlayer(name) {
-
-        if (!name || !String(name).trim()) return false;
-
-        name = String(name).trim();
-
-        if (name.includes("(OG)")) return false;
-
-        if (!players[name]) {
+	function addPlayer(name) {
+	
+	    if (!name || !String(name).trim()) return false;
+	
+	    name = String(name).trim();
+	
+	    if (name.includes("(OG)")) return false;
+	
+	    if (!players[name]) {
 			players[name] = {
 			    goals: 0,
-			    assists: 0
+			    assists: 0,
+			    squad: 0
 			};
-
-        return true;
-    }
+	
+	        return true;
+	    }
+	}
 
     matches.forEach(match => {
 
