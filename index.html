@@ -806,7 +806,7 @@ function renderHome(){
 
         const homeTeam =
             match["Home/Away"] === "Home"
-                ? "FC Barcelona"
+                ? "Barcelona"
                 : `<a class="opponent-link fixture-opponent"
                      href="opponent.html?name=${encodeURIComponent(match["Opp. Team"])}">
                      ${match["Opp. Team"]}
@@ -818,7 +818,7 @@ function renderHome(){
                      href="opponent.html?name=${encodeURIComponent(match["Opp. Team"])}">
                      ${match["Opp. Team"]}
                    </a>`
-                : "FC Barcelona";
+                : "Barcelona";
 
         document.getElementById("lastMatch").innerHTML = `
             <div class="fixture-link">
@@ -887,7 +887,7 @@ function renderHome(){
 
         const homeTeam =
             next["Home/Away"] === "Home"
-                ? "FC Barcelona"
+                ? "Barcelona"
                 : `<a class="opponent-link fixture-opponent"
                      href="opponent.html?name=${encodeURIComponent(next["Opp. Team"])}">
                      ${next["Opp. Team"]}
@@ -899,7 +899,7 @@ function renderHome(){
                      href="opponent.html?name=${encodeURIComponent(next["Opp. Team"])}">
                      ${next["Opp. Team"]}
                    </a>`
-                : "FC Barcelona";
+                : "Barcelona";
 
         document.getElementById("nextMatch").innerHTML = `
             <div class="fixture-link">
