@@ -1144,10 +1144,14 @@ async function renderInsights(){
 	        String(item.Active).toUpperCase() === "TRUE"
 	);
 	
-	const featured = activeInsights.find(
-	    item =>
-	        String(item.Featured).toUpperCase() === "TRUE"
-	);
+	const featured = activeInsights
+	    .filter(
+	        item =>
+	            String(item.Featured).toUpperCase() === "TRUE"
+	    )
+	    .sort(
+	        (a,b) => new Date(b.Date) - new Date(a.Date)
+	    )[0];
 	
 	const secondary = activeInsights
 	    .filter(
