@@ -88,11 +88,6 @@ gap:8px;
     text-align:center;
 }
 
-.hero-card h2{
-    margin:0 0 12px;
-    font-size:2rem;
-}
-
 .hero-card p{
     max-width:760px;
     margin:0 auto 12px;
@@ -574,7 +569,6 @@ function renderTopFlickPlayers(){
 
     const stats = {};
 
-    // iba zápasy pod Flickom
     const flickMatches = allMatches.filter(
         m => m.Manager === "Hansi Flick"
     );
@@ -600,7 +594,6 @@ function renderTopFlickPlayers(){
 
     flickMatches.forEach(match => {
 
-// základná zostava = odohraný zápas
 for(let i=1;i<=11;i++){
 
     const player = match[`Player name ${i}`];
@@ -1046,22 +1039,19 @@ async function renderInsights(){
 	        String(item.Active).toUpperCase() === "TRUE"
 	);
 	
-	const featured = activeInsights
-	    .filter(
-	        item =>
-	            String(item.Featured).toUpperCase() === "TRUE"
-	    )
-	    .sort(
-	        (a,b) => new Date(b.Date) - new Date(a.Date)
-	    )[0];
+	const sortedInsights = activeInsights.sort(
+	    (a,b) => new Date(b.Date) - new Date(a.Date)
+	);
 	
-	const secondary = activeInsights
+	const featured = sortedInsights.find(
+	    item =>
+	        String(item.Featured).toUpperCase() === "TRUE"
+	);
+	
+	const secondary = sortedInsights
 	    .filter(
 	        item =>
 	            String(item.Featured).toUpperCase() !== "TRUE"
-	    )
-	    .sort(
-	        (a,b) => new Date(b.Date) - new Date(a.Date)
 	    )
 	    .slice(0,3);
 
@@ -1080,10 +1070,11 @@ async function renderInsights(){
 		html += `
 		    ${wrapperStart}
 		
-		        <img
-		            src="${featured.Image}"
-		            alt="${featured.Title}"
-		            class="featured-image">
+				<img
+				    src="${featured.Image}"
+				    alt="${featured.Title}"
+				    class="featured-image"
+				    loading="lazy">
 		
 		        <div class="featured-body">
 		
