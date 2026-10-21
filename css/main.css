@@ -60,7 +60,7 @@ padding:8px;
 }
 
 .desktop-search{
-    width:300px;
+    width:150px;
     position:relative;
     margin-left:auto;
     padding-left:12px;
@@ -69,7 +69,7 @@ padding:8px;
 .desktop-search-input{
     width:100%;
     box-sizing:border-box;
-    padding:12px;
+    padding:8px;
     border-radius:10px;
     border:1px solid var(--divider);
     background:#ffffff;
