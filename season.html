@@ -1980,21 +1980,12 @@ function updatePageTitles(){
             "tableTitle"
         );
 
-    if(tableTitle){
-
-        if(selectedCompetition === "All"){
-
-            tableTitle.textContent =
-                `${suffix} La Liga Table`;
-
-        }else{
-
-            tableTitle.textContent =
-                `${suffix} Table`;
-
-        }
-
-    }
+	if(tableTitle){
+	
+	    tableTitle.textContent =
+	        `${season} La Liga Table`;
+	
+	}
 
 }
 
