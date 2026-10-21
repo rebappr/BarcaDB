@@ -63,6 +63,8 @@ box-shadow:
     display:flex;
     align-items:center;
     gap:12px;
+	padding-left:16px;
+
 }
 
 .header-logo{
@@ -200,6 +202,7 @@ text-decoration:underline;
     width:340px;
     position:relative;
     margin-left:auto;
+	padding-left:16px;
 }
 
 .desktop-search-input{
