@@ -15,7 +15,7 @@ const CLUB_MAP = {
   "Rayo Vallecano de Madrid":"Rayo Vallecano",
   "CA Osasuna":"Osasuna",
   "RC Celta de Vigo":"Celta de Vigo",
-  "RCD Espanyol de Barcelona":"RCD Espanyol",
+  "RCD Espanyol de Barcelona":"Espanyol",
   "Deportivo Alavés":"Deportivo Alavés",
   "Levante UD":"Levante",
   "Elche CF":"Elche",
@@ -24,7 +24,7 @@ const CLUB_MAP = {
   "Real Racing Club de Santander":"Racing Santander",
   "Girona FC":"Girona",
   "CD Leganés":"Leganés",
-  "RCD Mallorca":"RCD Mallorca",
+  "RCD Mallorca":"Mallorca",
   "UD Las Palmas":"Las Palmas",
   "Real Valladolid CF":"Valladolid",
   "Real Oviedo":"Real Oviedo",
@@ -87,11 +87,11 @@ async function run(){
   
   const isHome =
     home === "Barcelona" ||
-    home === "FC Barcelona";
+    home === "Barcelona";
   
   const isAway =
     away === "Barcelona" ||
-    away === "FC Barcelona";
+    away === "Barcelona";
   
   if (!isHome && !isAway) {
     return null;
