@@ -1628,12 +1628,12 @@ if (name.includes("(OG)")) return false;
 
 if (!players[name]) {
 players[name] = {
-squad: 0,
-xi: 0,
-goals: 0,
-assists: 0,
-yellow: 0,
-red: 0
+    matchesPlayed: 0,
+    xi: 0,
+    goals: 0,
+    assists: 0,
+    yellow: 0,
+    red: 0
 };
 }
 
@@ -1655,29 +1655,28 @@ player &&
 
 addPlayer(player);
 
-players[player].squad++;
+players[player].matchesPlayed++;
 players[player].xi++;
 
 }
 
 }
 
-// lavička
 for (let i = 1; i <= 12; i++) {
 
-const player =
-match[`On the bench name ${i}`];
+    const player =
+    match[`Sub on ${i}`];
 
-if (
-player &&
-!String(player).includes("(OG)")
-) {
+    if (
+    player &&
+    !String(player).includes("(OG)")
+    ) {
 
-addPlayer(player);
+        addPlayer(player);
 
-players[player].squad++;
+        players[player].matchesPlayed++;
 
-}
+    }
 
 }
 
@@ -1781,7 +1780,7 @@ let html = `
       <thead>
           <tr>
               <th class="${statsSortColumn==='name'?'stats-selected':''}" onclick="sortStats('name')">Player</th>
-              <th class="${statsSortColumn==='squad'?'stats-selected':''}" onclick="sortStats('squad')">Sq</th>
+              <th class="${statsSortColumn==='matchesPlayed'?'stats-selected':''}" onclick="sortStats('matchesPlayed')">MP</th>
               <th class="${statsSortColumn==='xi'?'stats-selected':''}" onclick="sortStats('xi')">XI</th>
               <th class="${statsSortColumn==='goals'?'stats-selected':''}" onclick="sortStats('goals')">G</th>
               <th class="${statsSortColumn==='assists'?'stats-selected':''}" onclick="sortStats('assists')">A</th>
@@ -1801,8 +1800,8 @@ html += `
         ${name}
      </a>
   </td>
-  <td class="${statsSortColumn==='squad'?'stats-selected':''}">
-      ${stats.squad}
+  <td class="${statsSortColumn==='matchesPlayed'?'stats-selected':''}">
+      ${stats.matchesPlayed}
   </td>
   <td class="${statsSortColumn==='xi'?'stats-selected':''}">
       ${stats.xi}
