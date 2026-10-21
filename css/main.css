@@ -295,8 +295,8 @@ text-decoration:underline;
 .mobile-search-input{
     display:block;
     width:100%;
-    height:52px;
-    padding:0 16px;
+    height:42px;
+    padding:0 8px;
     border:none;
     border-radius:14px;
     background:#ffffff;
