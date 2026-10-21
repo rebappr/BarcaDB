@@ -2,6 +2,7 @@ const fs = require("fs");
 
 const CLUB_MAP = {
   "FC Barcelona":"Barcelona",
+  "Barcelona":"Barcelona",
   "Real Madrid CF":"Real Madrid",
   "Club Atlético de Madrid":"Atlético Madrid",
   "Athletic Club":"Athletic Club",
@@ -81,10 +82,22 @@ async function run(){
     })
     .map(match => {
 
-      const home = CLUB_MAP[match.homeTeam.name] || match.homeTeam.name;
-      const away = CLUB_MAP[match.awayTeam.name] || match.awayTeam.name;
-      const isHome = home === "Barcelona";
-      const opponent = isHome ? away : home;
+  const home = CLUB_MAP[match.homeTeam.name] || match.homeTeam.name;
+  const away = CLUB_MAP[match.awayTeam.name] || match.awayTeam.name;
+  
+  const isHome =
+    home === "Barcelona" ||
+    home === "FC Barcelona";
+  
+  const isAway =
+    away === "Barcelona" ||
+    away === "FC Barcelona";
+  
+  if (!isHome && !isAway) {
+    return null;
+  }
+  
+  const opponent = isHome ? away : home;
 
       let result = "-:-";
 
@@ -109,7 +122,8 @@ async function run(){
         "Home/Away": isHome ? "Home" : "Away",
         Result: result
       };
-    });
+    })
+    .filter(Boolean);
 
   fs.writeFileSync(
     "current-season.json",
