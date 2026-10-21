@@ -19826,14 +19826,14 @@
   {
     "season": "2026/27",
     "position": "11",
-    "club": "Athletic Club",
-    "matches": "7",
+    "club": "Levante",
+    "matches": "9",
     "wins": "2",
-    "draws": "3",
-    "losses": "2",
-    "goals": "7:6",
-    "difference": "1",
-    "points": "9"
+    "draws": "4",
+    "losses": "3",
+    "goals": "15:17",
+    "difference": "-2",
+    "points": "10"
   },
   {
     "season": "2026/27",
@@ -19850,6 +19850,18 @@
   {
     "season": "2026/27",
     "position": "13",
+    "club": "Athletic Club",
+    "matches": "8",
+    "wins": "2",
+    "draws": "3",
+    "losses": "3",
+    "goals": "8:9",
+    "difference": "-1",
+    "points": "9"
+  },
+  {
+    "season": "2026/27",
+    "position": "14",
     "club": "Rayo Vallecano",
     "matches": "8",
     "wins": "2",
@@ -19861,7 +19873,7 @@
   },
   {
     "season": "2026/27",
-    "position": "14",
+    "position": "15",
     "club": "Getafe",
     "matches": "9",
     "wins": "2",
@@ -19873,7 +19885,7 @@
   },
   {
     "season": "2026/27",
-    "position": "15",
+    "position": "16",
     "club": "Espanyol",
     "matches": "9",
     "wins": "2",
@@ -19885,7 +19897,7 @@
   },
   {
     "season": "2026/27",
-    "position": "16",
+    "position": "17",
     "club": "Racing Santander",
     "matches": "9",
     "wins": "2",
@@ -19894,18 +19906,6 @@
     "goals": "13:25",
     "difference": "-12",
     "points": "8"
-  },
-  {
-    "season": "2026/27",
-    "position": "17",
-    "club": "Levante",
-    "matches": "8",
-    "wins": "1",
-    "draws": "4",
-    "losses": "3",
-    "goals": "12:16",
-    "difference": "-4",
-    "points": "7"
   },
   {
     "season": "2026/27",
