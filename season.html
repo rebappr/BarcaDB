@@ -1931,15 +1931,15 @@ function updateSeasonFilters(){
 
 function updatePageTitles(){
 
-    let suffix = season;
-
-    if(selectedCompetition !== "All"){
-        suffix += ` • ${selectedCompetition}`;
-    }
-
-    if(selectedVenue !== "All"){
-        suffix += ` • ${selectedVenue}`;
-    }
+	let matchesSuffix = season;
+	
+	if(selectedCompetition !== "All"){
+	    matchesSuffix += ` • ${selectedCompetition}`;
+	}
+	
+	if(selectedVenue !== "All"){
+	    matchesSuffix += ` • ${selectedVenue}`;
+	}
 
     document.getElementById(
         "overviewTitle"
@@ -1951,22 +1951,19 @@ function updatePageTitles(){
     ).textContent =
         `${suffix} Matches`;
 
-    const debutantsTitle =
-        document.getElementById(
-            "debutantsTitle"
-        );
-
-    if(debutantsTitle){
-
-        debutantsTitle.textContent =
-            `${suffix} Debutants`;
-
-    }
-
-    const statisticsTitle =
-        document.getElementById(
-            "statisticsTitle"
-        );
+	if(debutantsTitle){
+	
+	    debutantsTitle.textContent =
+	        `${season} Debutants`;
+	
+	}
+	
+	if(statisticsTitle){
+	
+	    statisticsTitle.textContent =
+	        `${season} Statistics`;
+	
+	}
 
     if(statisticsTitle){
 
