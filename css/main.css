@@ -125,7 +125,7 @@ font-size:18px;
 color:var(--text);
 }
 
-.widgetd-card p{
+.widget-card p{
     color:var(--muted);
     line-height:1.7;
 }
