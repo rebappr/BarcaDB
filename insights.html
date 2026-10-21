@@ -483,102 +483,101 @@ async function renderInsights(){
 	    (a,b) => new Date(b.Date) - new Date(a.Date)
 	);
 	
-	const featured = sortedInsights.find(
-	    item =>
-	        String(item.Featured).toUpperCase() === "TRUE"
-	);
-	
-	const secondary = sortedInsights
-	    .filter(
-	        item =>
-	            String(item.Featured).toUpperCase() !== "TRUE"
-	    );
+let html = `<div class="insight-list">`;
 
-    let html = "";
+sortedInsights.forEach(item => {
 
-    if(featured){
+    const isFeatured =
+        String(item.Featured).toUpperCase() === "TRUE";
 
-	const wrapperStart = featured.Link
-	    ? `<a href="${featured.Link}" class="featured-insight">`
-	    : `<div class="featured-insight">`;
-	
-	const wrapperEnd = featured.Link
-	    ? `</a>`
-	    : `</div>`;
+    if(isFeatured){
 
-		html += `
-		    ${wrapperStart}
-		
-				<img
-				    src="${featured.Image}"
-				    alt="${featured.Title}"
-				    class="featured-image"
-				    loading="lazy">
-		
-		        <div class="featured-body">
-		
-		            <div class="featured-tagline">
-		                ${featured.Tagline}
-		            </div>
-		
-		            <div class="featured-title">
-		                ${featured.Title}
-		            </div>
-		
-		            <div class="featured-text">
-		                ${featured.Text}
-		            </div>
-		
-		            <div class="insight-date">
-		                ${formatInsightDate(featured.Date)}
-		            </div>
-		
-		        </div>
-		
-		    ${wrapperEnd}
-		`;
+        const wrapperStart = item.Link
+            ? `<a href="${item.Link}" class="featured-insight">`
+            : `<div class="featured-insight">`;
+
+        const wrapperEnd = item.Link
+            ? `</a>`
+            : `</div>`;
+
+        html += `
+            ${wrapperStart}
+
+                ${
+                    item.Image
+                        ? `
+                            <img
+                                src="${item.Image}"
+                                alt="${item.Title || 'Insight'}"
+                                class="featured-image"
+                                loading="lazy"
+                                onerror="this.style.display='none';"
+                            >
+                        `
+                        : ""
+                }
+
+                <div class="featured-body">
+
+                    <div class="featured-tagline">
+                        ${item.Tagline || ""}
+                    </div>
+
+                    <div class="featured-title">
+                        ${item.Title || ""}
+                    </div>
+
+                    <div class="featured-text">
+                        ${item.Text || ""}
+                    </div>
+
+                    <div class="insight-date">
+                        ${formatInsightDate(item.Date)}
+                    </div>
+
+                </div>
+
+            ${wrapperEnd}
+        `;
+
+    }else{
+
+        const itemStart = item.Link
+            ? `<a href="${item.Link}" class="insight-item">`
+            : `<div class="insight-item">`;
+
+        const itemEnd = item.Link
+            ? `</a>`
+            : `</div>`;
+
+        html += `
+            ${itemStart}
+
+                <div class="insight-tagline">
+                    ${item.Tagline || ""}
+                </div>
+
+                <div class="secondary-insight-title">
+                    ${item.Title || ""}
+                </div>
+
+                <div class="secondary-insight-text">
+                    ${item.Text || ""}
+                </div>
+
+                <div class="insight-date">
+                    ${formatInsightDate(item.Date)}
+                </div>
+
+            ${itemEnd}
+        `;
     }
 
-    html += `<div class="insight-list">`;
+});
 
-    secondary.forEach(item => {
+html += `</div>`;
 
-		const itemStart = item.Link
-		    ? `<a href="${item.Link}" class="insight-item">`
-		    : `<div class="insight-item">`;
-		
-		const itemEnd = item.Link
-		    ? `</a>`
-		    : `</div>`;
-		
-				html += `
-		    ${itemStart}
-		
-		        <div class="insight-tagline">
-		            ${item.Tagline}
-		        </div>
-		
-		        <div class="secondary-insight-title">
-		            ${item.Title}
-		        </div>
-		
-		        <div class="secondary-insight-text">
-		            ${item.Text}
-		        </div>
-		
-		        <div class="insight-date">
-		            ${formatInsightDate(item.Date)}
-		        </div>
-		
-		    ${itemEnd}
-		`;
-	});
-
-    html += `</div>`;
-
-    document.getElementById(
-        "insights"
-    ).innerHTML = html;
+document.getElementById("insights").innerHTML = html;
 }
 
 function initPersonSearch(){
