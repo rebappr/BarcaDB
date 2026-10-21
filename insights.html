@@ -177,17 +177,14 @@ gap:8px;
 }
 
 .insight-list{
-    display:grid;
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:8px;
-    align-items:start;
-    grid-auto-flow:row;
+    column-count:2;
+    column-gap:8px;
 }
 
 .insight-item,
 .featured-insight{
-    height:fit-content;
-    margin:0;
+    break-inside:avoid;
+    margin-bottom:12px;
 }
 
 .insight-item{
@@ -254,9 +251,18 @@ a.featured-insight:hover{
 
 @media(max-width:820px){
 
-.insight-list{
-    grid-template-columns:1fr;
-}
+    .insight-list{
+        column-count:1;
+    }
+
+    .featured-image{
+        width:100%;
+        height:auto;
+    }
+
+    .featured-body{
+        padding:8px;
+    }
 
 .flick-table th:not(:first-child),
 .flick-table td:not(:first-child){
