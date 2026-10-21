@@ -142,6 +142,8 @@ gap:8px;
     overflow:hidden;
 
     background:var(--card-bg);
+    width:100%;
+    box-sizing:border-box;
 }
 
 .featured-image{
@@ -174,9 +176,16 @@ gap:8px;
 }
 
 .insight-list{
-    display:flex;
-    flex-direction:column;
-    gap:8px;
+    column-count:2;
+    column-gap:8px;
+}
+
+.insight-item,
+.featured-insight{
+    display:block;
+    break-inside:avoid;
+    -webkit-column-break-inside:avoid;
+    margin-bottom:8px;
 }
 
 .insight-item{
@@ -243,6 +252,10 @@ a.featured-insight:hover{
 }
 
 @media(max-width:820px){
+
+.insight-list{
+    column-count:1;
+}
 
 .flick-table th:not(:first-child),
 .flick-table td:not(:first-child){
