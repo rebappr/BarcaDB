@@ -2035,12 +2035,12 @@ const showSquads = hasSquads(match);
 const homeMatch = isHomeMatch(match);
 
 const teamA = homeMatch
-? "Barcelona"
+? "FC Barcelona"
 : (match["Opp. Team"] || "");
 
 const teamB = homeMatch
 ? (match["Opp. Team"] || "")
-: "Barcelona";
+: "FC Barcelona";
 
 const opponentName = match["Opp. Team"] || "";
 
@@ -2060,12 +2060,12 @@ if (canonical) {
 }
 
 const barcaTitle = homeMatch
-? "Barcelona"
+? "FC Barcelona"
 : (match["Opp. Team"] || "");
 
 const oppTitle = homeMatch
 ? (match["Opp. Team"] || "")
-: "Barcelona";
+: "FC Barcelona";
 
 const barcaPlayers = homeMatch
 ? getPlayers(match)
