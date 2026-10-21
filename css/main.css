@@ -330,6 +330,7 @@ text-decoration:underline;
 
 .header-text{
     flex:1;
+	font-size:30px;
 }
 
 .menu-overlay{
