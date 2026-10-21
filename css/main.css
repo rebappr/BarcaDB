@@ -48,15 +48,30 @@ padding:8px;
 .header-logo{
     width:72px;
     height:72px;
+    flex-shrink:0;
+}
+
+.header-text{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    min-width:0;
 }
 
 .header h1{
+    margin:0;
     font-size:22px;
+    font-weight:700;
+    line-height:1.1;
+    color:#fff;
 }
 
 .hero-subtitle{
-    font-size:13px;
     margin-top:2px;
+    font-size:13px;
+    font-weight:500;
+    line-height:1.2;
+    opacity:.9;
 }
 
 .desktop-search{
