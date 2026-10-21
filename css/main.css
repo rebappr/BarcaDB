@@ -30,9 +30,9 @@ rgba(0,77,152,.95),
 rgba(165,0,68,.95)
 );
 
-padding:16px;
+padding:8px 12ox;
 margin-bottom:6px;
-border-radius:28px;
+border-radius:12px;
 color:white;
 
 box-shadow:
@@ -379,7 +379,7 @@ text-decoration:underline;
 }
 
 .header{
-        border-radius: 0;
+        border-radius: 12px;
         padding: 4px 10px 6px;
         position: sticky;
         top: 0;
