@@ -769,6 +769,8 @@ function renderHome(){
     renderSeasonDebutants();
     renderSeasonStatistics();
 
+	renderInsights();
+
     initPersonSearch();
 }
 
@@ -777,19 +779,30 @@ function renderHome(){
         const today = new Date();
         today.setHours(0, 0, 0, 0);
 
-        const played = allMatches
-            .filter(match => parseDate(match.Date) < today)
-            .sort((a, b) =>
-                parseDate(b.Date) - parseDate(a.Date)
+      const played = currentMatches
+          .filter(match =>
+              match.Result &&
+              match.Result !== "-:-" &&
+              parseDate(match.Date) <= today
+          )
+          .sort((a, b) =>
+              parseDate(b.Date) - parseDate(a.Date)
+          );
+      
+            const match = played[0];
+            
+            if (!match) {
+                document.getElementById("lastMatch").innerHTML =
+                    "No completed matches";
+                return;
+            }
+            
+            const dataMatch = allMatches.find(m =>
+                m.Date === match.Date &&
+                m.Competition === match.Competition &&
+                m["Home/Away"] === match["Home/Away"] &&
+                normalizeName(m["Opp. Team"]) === normalizeName(match["Opp. Team"])
             );
-
-        const match = played[0];
-
-        if (!match) {
-            document.getElementById("lastMatch").innerHTML =
-                "No completed matches";
-            return;
-        }
 
         const homeTeam =
             match["Home/Away"] === "Home"
@@ -822,7 +835,7 @@ function renderHome(){
 
                     <div class="fixture-center">
                         <a
-                            href="match.html?id=${match.ID}"
+                            href="match.html?id=${dataMatch?.ID || ''}"
                             class="fixture-score"
                             style="display:inline-block;text-decoration:none;color:white;">
                             ${match.Result}
@@ -848,11 +861,14 @@ function renderHome(){
         const today = new Date();
         today.setHours(0, 0, 0, 0);
 
-      const next = currentMatches
-          .filter(match => parseDate(match.Date) >= today)
-          .sort((a, b) =>
-              parseDate(a.Date) - parseDate(b.Date)
-          )[0];
+		const next = currentMatches
+		    .filter(match =>
+		        (!match.Result || match.Result === "-:-") &&
+		        parseDate(match.Date) >= today
+		    )
+		    .sort((a, b) =>
+		        parseDate(a.Date) - parseDate(b.Date)
+		    )[0];
 
         if (!next) {
 
@@ -861,6 +877,13 @@ function renderHome(){
 
             return;
         }
+
+      const dataMatch = allMatches.find(m =>
+          m.Date === next.Date &&
+          m.Competition === next.Competition &&
+          m["Home/Away"] === next["Home/Away"] &&
+          normalizeName(m["Opp. Team"]) === normalizeName(next["Opp. Team"])
+      );
 
         const homeTeam =
             next["Home/Away"] === "Home"
@@ -893,7 +916,7 @@ function renderHome(){
 
                     <div class="fixture-center">
                         <a
-                            href="match.html?id=${next.ID}"
+                            href="match.html?id=${dataMatch?.ID || ''}"
                             class="fixture-vs"
                             style="display:inline-block;text-decoration:none;color:inherit;">
                             VS
