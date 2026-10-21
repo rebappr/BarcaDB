@@ -833,8 +833,10 @@ padding:3px 8px;
 .stats-table th:nth-child(6),
 .stats-table td:nth-child(6),
 .stats-table th:nth-child(7),
-.stats-table td:nth-child(7){
-width:35px;
+.stats-table td:nth-child(7),
+.stats-table th:nth-child(8),
+.stats-table td:nth-child(8){
+    width:30px;
 }
 
 .summary-box{
@@ -1139,7 +1141,7 @@ new URLSearchParams(
 location.search
 ).get("season");
 
-let statsSortColumn = "goals";
+let statsSortColumn = "goalContributions";
 let statsSortDirection = "desc";
 
 let selectedCompetition = "All";
@@ -1632,6 +1634,7 @@ players[name] = {
     xi: 0,
     goals: 0,
     assists: 0,
+    goalContributions: 0,
     yellow: 0,
     red: 0
 };
@@ -1753,11 +1756,15 @@ sortedPlayers.sort((a,b) => {
 const valueA =
 statsSortColumn === "name"
 ? a[0]
+: statsSortColumn === "goalContributions"
+? a[1].goals + a[1].assists
 : a[1][statsSortColumn];
 
 const valueB =
 statsSortColumn === "name"
 ? b[0]
+: statsSortColumn === "goalContributions"
+? b[1].goals + b[1].assists
 : b[1][statsSortColumn];
 
 if (typeof valueA === "string") {
@@ -1784,6 +1791,7 @@ let html = `
               <th class="${statsSortColumn==='xi'?'stats-selected':''}" onclick="sortStats('xi')">XI</th>
               <th class="${statsSortColumn==='goals'?'stats-selected':''}" onclick="sortStats('goals')">G</th>
               <th class="${statsSortColumn==='assists'?'stats-selected':''}" onclick="sortStats('assists')">A</th>
+			  <th class="${statsSortColumn==='goalContributions'?'stats-selected':''}" onclick="sortStats('goalContributions')">G+A</th>
               <th class="${statsSortColumn==='yellow'?'stats-selected':''}" onclick="sortStats('yellow')">Y</th>
               <th class="${statsSortColumn==='red'?'stats-selected':''}" onclick="sortStats('red')">R</th>
           </tr>
@@ -1812,6 +1820,9 @@ html += `
   <td class="${statsSortColumn==='assists'?'stats-selected':''}">
       ${stats.assists}
   </td>
+  <td class="${statsSortColumn==='goalContributions'?'stats-selected':''}">
+    ${stats.goals + stats.assists}
+</td>
   <td class="${statsSortColumn==='yellow'?'stats-selected':''}">
       ${stats.yellow}
   </td>
