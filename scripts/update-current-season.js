@@ -83,21 +83,18 @@ return startYear + "/" + String(endYear).slice(2) === currentSeason;
 
 const home = CLUB_MAP[match.homeTeam.name] || match.homeTeam.name;
 const away = CLUB_MAP[match.awayTeam.name] || match.awayTeam.name;
-      const isHome = home === "FC Barcelona";
-      const isHome = home === "FC Barcelona";
+
+const isHome = home === "FC Barcelona";
 const opponent = isHome ? away : home;
 
 let result = "-:-";
 
-if(
-match.status === "FINISHED" &&
-match.score &&
-match.score.fullTime
-){
-result =
-match.score.fullTime.home +
-":" +
-match.score.fullTime.away;
+if (
+  match.status === "FINISHED" &&
+  match.score?.fullTime?.home != null &&
+  match.score?.fullTime?.away != null
+) {
+  result = `${match.score.fullTime.home}:${match.score.fullTime.away}`;
 }
 
 return {
