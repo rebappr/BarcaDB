@@ -1,7 +1,7 @@
 const fs = require("fs");
 
 const CLUB_MAP = {
-  "FC Barcelona": "Barcelona",
+  "FC Barcelona": "FC Barcelona",
   "Real Madrid CF": "Real Madrid",
   "Club Atlético de Madrid": "Atlético Madrid",
   "Athletic Club": "Athletic Club",
@@ -14,8 +14,8 @@ const CLUB_MAP = {
   "Rayo Vallecano de Madrid": "Rayo Vallecano",
   "CA Osasuna": "Osasuna",
   "RC Celta de Vigo": "Celta Vigo",
-  "RCD Espanyol de Barcelona": "RCD Espanyol",
-  "Deportivo Alavés": "Deportivo Alavés",
+  "RCD Espanyol de Barcelona": "spanyol",
+  "Deportivo Alavés": "Alavés",
   "Levante UD": "Levante",
   "Elche CF": "Elche",
   "RC Deportivo La Coruña": "Deportivo La Coruña",
@@ -23,8 +23,8 @@ const CLUB_MAP = {
   "Real Racing Club de Santander": "Racing Santander",
   "Girona FC": "Girona",
   "CD Leganés": "Leganés",
-  "RCD Mallorca": "RCD Mallorca",
-  "UD Las Palmas": " Las Palmas",
+  "RCD Mallorca": "Mallorca",
+  "UD Las Palmas": "Las Palmas",
   "Real Valladolid CF": "Valladolid",
   "Real Oviedo": "Real Oviedo",
   "Real Zaragoza": "Real Zaragoza"
