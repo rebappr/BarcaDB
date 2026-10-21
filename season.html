@@ -1931,44 +1931,47 @@ function updateSeasonFilters(){
 
 function updatePageTitles(){
 
-	let matchesSuffix = season;
-	
-	if(selectedCompetition !== "All"){
-	    matchesSuffix += ` • ${selectedCompetition}`;
-	}
-	
-	if(selectedVenue !== "All"){
-	    matchesSuffix += ` • ${selectedVenue}`;
-	}
+    let matchesSuffix = season;
+
+    if(selectedCompetition !== "All"){
+        matchesSuffix += ` • ${selectedCompetition}`;
+    }
+
+    if(selectedVenue !== "All"){
+        matchesSuffix += ` • ${selectedVenue}`;
+    }
 
     document.getElementById(
         "overviewTitle"
     ).textContent =
-        `${suffix} Overview`;
+        `${matchesSuffix} Overview`;
 
     document.getElementById(
         "matchesTitle"
     ).textContent =
-        `${suffix} Matches`;
+        `${matchesSuffix} Matches`;
 
-	if(debutantsTitle){
-	
-	    debutantsTitle.textContent =
-	        `${season} Debutants`;
-	
-	}
-	
-	if(statisticsTitle){
-	
-	    statisticsTitle.textContent =
-	        `${season} Statistics`;
-	
-	}
+    const debutantsTitle =
+        document.getElementById(
+            "debutantsTitle"
+        );
+
+    if(debutantsTitle){
+
+        debutantsTitle.textContent =
+            `${season} Debutants`;
+
+    }
+
+    const statisticsTitle =
+        document.getElementById(
+            "statisticsTitle"
+        );
 
     if(statisticsTitle){
 
         statisticsTitle.textContent =
-            `${suffix} Statistics`;
+            `${season} Statistics`;
 
     }
 
@@ -1977,12 +1980,12 @@ function updatePageTitles(){
             "tableTitle"
         );
 
-	if(tableTitle){
-	
-	    tableTitle.textContent =
-	        `${season} La Liga Table`;
-	
-	}
+    if(tableTitle){
+
+        tableTitle.textContent =
+            `${season} La Liga Table`;
+
+    }
 
 }
 
