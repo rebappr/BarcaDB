@@ -1071,7 +1071,7 @@ By Competition
 
 <div id="laligaWidget" class="mobile-hidden-section">
 
-<div class="widget-title">
+<div class="widget-title" id="tableTitle">
 La Liga Table
 </div>
 
@@ -1963,19 +1963,38 @@ function updatePageTitles(){
 
     }
 
-    const statisticsTitle =
-        document.getElementById(
-            "statisticsTitle"
-        );
-
-    if(statisticsTitle){
-
-        statisticsTitle.textContent =
-            `${suffix} Statistics`;
-
-    }
-
-}
+	const statisticsTitle =
+	    document.getElementById(
+	        "statisticsTitle"
+	    );
+	
+	if(statisticsTitle){
+	
+	    statisticsTitle.textContent =
+	        `${suffix} Statistics`;
+	
+	}
+	
+	const tableTitle =
+	    document.getElementById(
+	        "tableTitle"
+	    );
+	
+	if(tableTitle){
+	
+	    if(selectedCompetition === "All"){
+	
+	        tableTitle.textContent =
+	            `${suffix} La Liga Table`;
+	
+	    }else{
+	
+	        tableTitle.textContent =
+	            `${suffix} Table`;
+	
+	    }
+	
+	}
 
 function setMatchesView(view){
 
