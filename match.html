@@ -2210,29 +2210,7 @@ const squadsHtml = `
 
 		${hasBarcaLineup && hasOpponentLineup ? `
 		
-		<div class="lineup-tabs">
-		
-		    <button
-		        class="lineup-tab active"
-		        onclick="showLineup('barca')">
-		
-		        ${escapeHtml(barcaTitle)}
-		
-		    </button>
-		
-		    <button
-		        class="lineup-tab"
-		        onclick="showLineup('opp')">
-		
-		        ${escapeHtml(oppTitle)}
-		
-		    </button>
-		
-		</div>
-		
-		` : ""}
-
-       <button
+		<button
            class="lineup-tab active"
            onclick="showLineup('barca')">
 
