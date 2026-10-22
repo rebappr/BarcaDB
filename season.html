@@ -1024,11 +1024,6 @@ onclick="setMatchesView('upcoming')">
 Upcoming
 </button>
 
-<button data-view="competition"
-onclick="setMatchesView('competition')">
-By Competition
-</button>
-
 </div>
 
 <div class="matches-header">
@@ -1268,10 +1263,19 @@ const latestSeason =
 .sort()
 .reverse()[0];
 
-document.querySelector('[data-view="upcoming"]').style.display =
-season === latestSeason
-? ""
-: "none";
+const switcher =
+document.querySelector(".matches-view-switch");
+
+if(season === latestSeason){
+
+    switcher.style.display = "flex";
+
+}else{
+
+    switcher.style.display = "none";
+    matchesView = "all";
+
+}
 
 renderSeasonSummary(
     seasonMatches
