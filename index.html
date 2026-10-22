@@ -202,6 +202,11 @@
     font-size:18px;
     font-weight:800;
     text-transform:uppercase;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
 }
 
 .fixture-opponent{
@@ -940,7 +945,7 @@ function renderHome(){
       );
 
 			const homeTeam =
-			    match["Home/Away"] === "Home"
+			    next["Home/Away"] === "Home"
 			        ? `
 			            <img
 			                src="logos/clubs/fc-barcelona.png"
@@ -950,32 +955,32 @@ function renderHome(){
 			          `
 	                : `
 			            <a class="opponent-link fixture-opponent"
-			               href="opponent.html?name=${encodeURIComponent(match["Opp. Team"])}">
+			               href="opponent.html?name=${encodeURIComponent(next["Opp. Team"])}">
 			
 			                <img
-			                    src="logos/clubs/${getClubLogo(match["Opp. Team"])}"
+			                    src="logos/clubs/${getClubLogo(next["Opp. Team"])}"
 			                    class="fixture-team-logo"
-			                    alt="${match["Opp. Team"]}"
+			                    alt="${next["Opp. Team"]}"
 			                    onerror="this.src='logos/clubs/default.png'">
 			
-			                ${match["Opp. Team"]}
+			                ${next["Opp. Team"]}
 			
 			            </a>
 				        `;
 
 			const awayTeam =
-			    match["Home/Away"] === "Home"
+			    next["Home/Away"] === "Home"
 			        ? `
 			            <a class="opponent-link fixture-opponent"
-			               href="opponent.html?name=${encodeURIComponent(match["Opp. Team"])}">
+			               href="opponent.html?name=${encodeURIComponent(next["Opp. Team"])}">
 			
 			                <img
-			                    src="logos/clubs/${getClubLogo(match["Opp. Team"])}"
+			                    src="logos/clubs/${getClubLogo(next["Opp. Team"])}"
 			                    class="fixture-team-logo"
-			                    alt="${match["Opp. Team"]}"
+			                    alt="${next["Opp. Team"]}"
 			                    onerror="this.src='logos/clubs/default.png'">
 			
-			                ${match["Opp. Team"]}
+			                ${next["Opp. Team"]}
 			
 			            </a>
 				        `
