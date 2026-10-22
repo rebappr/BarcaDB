@@ -939,21 +939,53 @@ function renderHome(){
           normalizeName(m["Opp. Team"]) === normalizeName(next["Opp. Team"])
       );
 
-        const homeTeam =
-            next["Home/Away"] === "Home"
-                ? "FC Barcelona"
-                : `<a class="opponent-link fixture-opponent"
-                     href="opponent.html?name=${encodeURIComponent(next["Opp. Team"])}">
-                     ${next["Opp. Team"]}
-                   </a>`;
+			const homeTeam =
+			    match["Home/Away"] === "Home"
+			        ? `
+			            <img
+			                src="logos/clubs/fc-barcelona.png"
+			                class="fixture-team-logo"
+			                alt="FC Barcelona">
+			            FC Barcelona
+			          `
+	                : `
+			            <a class="opponent-link fixture-opponent"
+			               href="opponent.html?name=${encodeURIComponent(match["Opp. Team"])}">
+			
+			                <img
+			                    src="logos/clubs/${getClubLogo(match["Opp. Team"])}"
+			                    class="fixture-team-logo"
+			                    alt="${match["Opp. Team"]}"
+			                    onerror="this.src='logos/clubs/default.png'">
+			
+			                ${match["Opp. Team"]}
+			
+			            </a>
+				        `;
 
-        const awayTeam =
-            next["Home/Away"] === "Home"
-                ? `<a class="opponent-link fixture-opponent"
-                     href="opponent.html?name=${encodeURIComponent(next["Opp. Team"])}">
-                     ${next["Opp. Team"]}
-                   </a>`
-                : "FC Barcelona";
+			const awayTeam =
+			    match["Home/Away"] === "Home"
+			        ? `
+			            <a class="opponent-link fixture-opponent"
+			               href="opponent.html?name=${encodeURIComponent(match["Opp. Team"])}">
+			
+			                <img
+			                    src="logos/clubs/${getClubLogo(match["Opp. Team"])}"
+			                    class="fixture-team-logo"
+			                    alt="${match["Opp. Team"]}"
+			                    onerror="this.src='logos/clubs/default.png'">
+			
+			                ${match["Opp. Team"]}
+			
+			            </a>
+				        `
+		                : `
+						    <img
+						        src="logos/clubs/fc-barcelona.png"
+						        class="fixture-team-logo"
+						        alt="FC Barcelona">
+						    FC Barcelona
+						`;
 
         document.getElementById("nextMatch").innerHTML = `
             <div class="fixture-link">
