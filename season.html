@@ -560,8 +560,8 @@ display:none;
 }
 
 .table-club img{
-    width:20px;
-    height:20px;
+    width:22px;
+    height:22px;
     object-fit:contain;
     flex-shrink:0;
 }
@@ -720,6 +720,11 @@ border:none;
 }
 
 @media(max-width:820px){
+
+    .table-club img{
+        width:18px;
+        height:18px;
+    }
 
     .opponent-cell img{
         width:16px;
@@ -1423,17 +1428,24 @@ fetch("tablelaliga.json")
 		                </div>
 		            </div>
 		
-		            <div class="table-club">
-		                ${
-		                row.club !== "FC Barcelona"
-		                ? `<a href="opponent.html?name=${encodeURIComponent(row.club)}"
-		                      class="opponent-link"
-		                      onclick="event.stopPropagation();">
-		                      ${row.club}
-		                   </a>`
-		                : row.club
-		                }
-		            </div>
+					<div class="table-club">
+					
+					    <img
+					        src="logos/clubs/${getClubLogo(row.club)}"
+					        alt="${row.club}"
+					        onerror="this.src='logos/clubs/default.png'">
+					
+					    ${
+					    row.club !== "FC Barcelona"
+					    ? `<a href="opponent.html?name=${encodeURIComponent(row.club)}"
+					          class="opponent-link"
+					          onclick="event.stopPropagation();">
+					          ${row.club}
+					       </a>`
+					    : row.club
+					    }
+					
+					</div>
 		
 		            <div class="table-played">${row.matches}</div>
 		
@@ -1459,17 +1471,24 @@ fetch("tablelaliga.json")
 		                </div>
 		            </div>
 		
-		            <div class="table-club">
-		                ${
-		                row.club !== "FC Barcelona"
-		                ? `<a href="opponent.html?name=${encodeURIComponent(row.club)}"
-		                      class="opponent-link"
-		                      onclick="event.stopPropagation();">
-		                      ${row.club}
-		                   </a>`
-		                : row.club
-		                }
-		            </div>
+					<div class="table-club">
+					
+					    <img
+					        src="logos/clubs/${getClubLogo(row.club)}"
+					        alt="${row.club}"
+					        onerror="this.src='logos/clubs/default.png'">
+					
+					    ${
+					    row.club !== "FC Barcelona"
+					    ? `<a href="opponent.html?name=${encodeURIComponent(row.club)}"
+					          class="opponent-link"
+					          onclick="event.stopPropagation();">
+					          ${row.club}
+					       </a>`
+					    : row.club
+					    }
+					
+					</div>
 		
 					<div class="table-played">${row.matches}</div>
 					<div>${row.wins}</div>
