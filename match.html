@@ -2262,15 +2262,15 @@ document.getElementById("app").innerHTML = `
    <div class="teams">
 		<div class="team-header home">
 		
+		    <div class="team-name">
+		        ${escapeHtml(teamA)}
+		    </div>
+		
 		<img
 		    src="logos/clubs/${getClubLogo(teamA)}"
 		    class="team-logo"
 		    alt="${escapeHtml(teamA)}"
 		    onerror="this.src='logos/clubs/default.png'">
-		
-		    <div class="team-name">
-		        ${escapeHtml(teamA)}
-		    </div>
 		
 		</div>
 		
