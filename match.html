@@ -1849,34 +1849,50 @@ return false;
 
 function showLineup(team){
 
-const barca =
-document.getElementById("lineup-barca");
+    const barca =
+    document.getElementById("lineup-barca");
 
-const opp =
-document.getElementById("lineup-opp");
+    const opp =
+    document.getElementById("lineup-opp");
 
-const tabs =
-document.querySelectorAll(".lineup-tab");
+    const tabs =
+    document.querySelectorAll(".lineup-tab");
 
-tabs.forEach(tab =>
-tab.classList.remove("active")
-);
+    tabs.forEach(tab =>
+        tab.classList.remove("active")
+    );
 
-if(team === "barca"){
+    if(team === "barca"){
 
-barca.classList.remove("mobile-hidden");
-opp.classList.add("mobile-hidden");
+        if(barca){
+            barca.classList.remove("mobile-hidden");
+        }
 
-tabs[0].classList.add("active");
+        if(opp){
+            opp.classList.add("mobile-hidden");
+        }
 
-}else{
+        if(tabs[0]){
+            tabs[0].classList.add("active");
+        }
 
-opp.classList.remove("mobile-hidden");
-barca.classList.add("mobile-hidden");
+        return;
 
-tabs[1].classList.add("active");
+    }
 
-}
+    if(!opp){
+        return;
+    }
+
+    opp.classList.remove("mobile-hidden");
+
+    if(barca){
+        barca.classList.add("mobile-hidden");
+    }
+
+    if(tabs[1]){
+        tabs[1].classList.add("active");
+    }
 
 }
 
@@ -2118,6 +2134,9 @@ const oppManager = homeMatch
 ? (match["Opp. Manager"] || "-")
 : (match["Manager"] || "-");
 
+const hasOpponentLineup =
+    hasStartingXI(match, "Opp. ");
+
 const timeline = getTimeline(match);
 
 const competition = String(match["Competition"] || "").trim();
@@ -2161,6 +2180,7 @@ const infoHtml = `
 const squadsHtml = `
 <div class="card">
 
+   ${hasOpponentLineup ? `
    <div class="lineup-tabs">
 
        <button
@@ -2180,6 +2200,7 @@ const squadsHtml = `
        </button>
 
    </div>
+   ` : ""}
 
    <div class="lineups">
 
@@ -2188,58 +2209,60 @@ const squadsHtml = `
            class="team-card">
 
            <h3>${escapeHtml(barcaTitle)}</h3>
-           
+
            ${barcaPlayers}
 
            <h4>Bench</h4>
 
            ${barcaBench}
-           
-            <h4>Manager</h4>
-            
-            <div class="player">
-            
-                <a
-                    class="player-link"
-                    href="manager.html?name=${encodeURIComponent(barcaManager)}">
-            
-                    ${escapeHtml(barcaManager)}
-            
-                </a>
-            
-            </div>
-            
-            </div>
-            
-            <div
-                id="lineup-opp"
-                class="team-card">
-            
-                <h3>${escapeHtml(oppTitle)}</h3>
-            
-                ${oppPlayers}
-            
-                <h4>Bench</h4>
-            
-                ${oppBench}
-            
-                <h4>Manager</h4>
-            
-                <div class="player">
-            
-                    <a
-                        class="player-link"
-                        href="manager.html?name=${encodeURIComponent(oppManager)}">
-            
-                        ${escapeHtml(oppManager)}
-            
-                    </a>
-            
-                </div>
-            
-            </div>
+
+           <h4>Manager</h4>
+
+           <div class="player">
+
+               <a
+                   class="player-link"
+                   href="manager.html?name=${encodeURIComponent(barcaManager)}">
+
+                   ${escapeHtml(barcaManager)}
+
+               </a>
+
+           </div>
 
        </div>
+
+       ${hasOpponentLineup ? `
+
+       <div
+           id="lineup-opp"
+           class="team-card">
+
+           <h3>${escapeHtml(oppTitle)}</h3>
+
+           ${oppPlayers}
+
+           <h4>Bench</h4>
+
+           ${oppBench}
+
+           <h4>Manager</h4>
+
+           <div class="player">
+
+               <a
+                   class="player-link"
+                   href="manager.html?name=${encodeURIComponent(oppManager)}">
+
+                   ${escapeHtml(oppManager)}
+
+               </a>
+
+           </div>
+
+       </div>
+
+       ` : ""}
 
    </div>
 
@@ -2380,14 +2403,14 @@ document.getElementById("app").innerHTML = `
     
     `;
 
-if(window.innerWidth <= 820){
+if(window.innerWidth <= 820 && hasOpponentLineup){
 
-const opp =
-document.getElementById("lineup-opp");
+    const opp =
+    document.getElementById("lineup-opp");
 
-if(opp){
-opp.classList.add("mobile-hidden");
-}
+    if(opp){
+        opp.classList.add("mobile-hidden");
+    }
 
 }
 
