@@ -1,6 +1,6 @@
 const fs = require("fs");
 const CLUB_MAP = require("./data/clubMap");
-const COMPETITION_MAP = require("./data/CompetitionMap");
+const COMPETITION_MAP = require("./data/competitionMap");
 
 function formatDate(dateStr){
 const d = new Date(dateStr);
