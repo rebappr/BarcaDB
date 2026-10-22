@@ -691,8 +691,7 @@ font-weight:600;
 }
 
 .match-tabs,
-.lineup-tabs,
-.lineup-tab{
+.lineup-tabs{
     display:none;
 }
 
@@ -2209,26 +2208,29 @@ const infoHtml = `
 const squadsHtml = `
 <div class="card">
 
-		${hasBarcaLineup && hasOpponentLineup ? `
-		
-		<button
-           class="lineup-tab active"
-           onclick="showLineup('barca')">
-
-           ${escapeHtml(barcaTitle)}
-
-       </button>
-
-       <button
-           class="lineup-tab"
-           onclick="showLineup('opp')">
-
-           ${escapeHtml(oppTitle)}
-
-       </button>
-
-   </div>
-   ` : ""}
+	${hasBarcaLineup && hasOpponentLineup ? `
+	
+	<div class="lineup-tabs">
+	
+	    <button
+	        class="lineup-tab active"
+	        onclick="showLineup('barca')">
+	
+	        ${escapeHtml(barcaTitle)}
+	
+	    </button>
+	
+	    <button
+	        class="lineup-tab"
+	        onclick="showLineup('opp')">
+	
+	        ${escapeHtml(oppTitle)}
+	
+	    </button>
+	
+	</div>
+	
+	` : ""}
 
    <div class="lineups">
 
