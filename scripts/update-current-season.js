@@ -1,42 +1,5 @@
 const fs = require("fs");
-
-const CLUB_MAP = {
-"FC Barcelona":"FC Barcelona",
-"Real Madrid CF":"Real Madrid",
-"Club Atlético de Madrid":"Atlético Madrid",
-"Athletic Club":"Athletic Club",
-"Real Betis Balompié":"Real Betis",
-"Real Sociedad de Fútbol":"Real Sociedad",
-"Villarreal CF":"Villarreal",
-"Valencia CF":"Valencia",
-"Sevilla FC":"Sevilla",
-"Getafe CF":"Getafe",
-"Rayo Vallecano de Madrid":"Rayo Vallecano",
-"CA Osasuna":"Osasuna",
-"RC Celta de Vigo":"Celta de Vigo",
-"RCD Espanyol de Barcelona":"Espanyol",
-"Deportivo Alavés":"Deportivo Alavés",
-"Levante UD":"Levante",
-"Elche CF":"Elche",
-"RC Deportivo La Coruña":"Deportivo La Coruña",
-"Málaga CF":"Málaga",
-"Real Racing Club de Santander":"Racing Santander",
-"Girona FC":"Girona",
-"CD Leganés":"Leganés",
-"RCD Mallorca":"Mallorca",
-"UD Las Palmas":"Las Palmas",
-"Real Valladolid CF":"Valladolid",
-"Real Oviedo":"Real Oviedo",
-"Real Zaragoza":"Real Zaragoza",
-"Feyenoord Rotterdam":"Feyenoord Rotterdam",
-"Galatasaray SK":"Galatasaray",
-"Paris Saint-Germain FC":"PSG",
-"Aston Villa FC":"Aston Villa",
-"Sabah FK":"Sabah",
-"Manchester City FC":"Manchester City",
-"Sporting Clube de Portugal":"Sporting CP",
-"Como 1907":"Como 1907"
-};
+const CLUB_MAP = require("./clubMap");
 
 const COMPETITION_MAP = {
 "Primera Division":"La Liga",
