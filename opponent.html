@@ -83,30 +83,31 @@
 }
 
 .opponent-card{
-    position:relative;
-    display:flex;
+    background:var(--card-bg);
+    border:1px solid var(--card-border);
+    border-radius:24px;
+    padding:20px;
+
+    display:grid;
+    grid-template-columns:80px 1fr;
     align-items:center;
-    justify-content:center;
-    min-height:120px;
+    gap:20px;
 }
 
 .opponent-logo{
-    position:absolute;
-    left:20px;
     width:80px;
     height:80px;
     object-fit:contain;
-    flex-shrink:0;
+
+    position:static;
 }
 
 .opponent-info{
-    width:100%;
     text-align:center;
 }
 
 .opponent-info h1{
     margin:0;
-    text-align:center;
 }
 
 .summary-grid{
@@ -344,6 +345,20 @@ flex-shrink:0;
 
 @media(max-width:820px){
 
+    .opponent-card{
+        grid-template-columns:60px 1fr;
+        gap:16px;
+    }
+
+    .opponent-logo{
+        width:60px;
+        height:60px;
+    }
+
+    .opponent-info{
+        text-align:center;
+    }
+
     .content-layout{
         gap:8px;
     }
@@ -394,34 +409,6 @@ height:18px;
 
 .competition-cell span{
     display:none;
-}
-
-.opponent-card{
-    position:relative;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    min-height:90px;
-}
-
-.opponent-logo{
-    position:absolute;
-    left:16px;
-    top:50%;
-    transform:translateY(-50%);
-    width:60px;
-    height:60px;
-}
-
-.opponent-info{
-    width:100%;
-    text-align:center;
-}
-
-.opponent-info h1{
-    margin:0;
-    text-align:center;
-    width:100%;
 }
 
     .summary-grid{
