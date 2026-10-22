@@ -30,7 +30,7 @@ const clubNameMap = {
   "Nottingham Forest FC": "Nottingham Forest",
   "Tottenham Hotspur FC": "Tottenham Hotspur",
   "Wolverhampton Wanderers FC": "Wolves",
-  "Leeds United FC": "Leeds",
+  "Leeds United FC": "Leeds United",
   "Ipswich Town FC": "Ipswich Town",
   "Sheffield Wednesday FC": "Sheffield Wednesday",
   "Birmingham City FC": "Birmingham City",
