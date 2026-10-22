@@ -1036,6 +1036,15 @@ font-size:10px;
 <script src="data/competitionMap.js"></script>
 <script>
 
+function getClubLogo(team){
+    return String(team || "")
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-z0-9]+/g, "-")
+        + ".png";
+}
+
 console.log("SCRIPT STARTED");
 
 const params = new URLSearchParams(location.search);
@@ -1088,15 +1097,6 @@ document.getElementById("app").innerHTML =
 "<div class='card'>Match not found</div>";
 
 return;
-}
-
-function getClubLogo(team){
-    return String(team || "")
-        .toLowerCase()
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "")
-        .replace(/[^a-z0-9]+/g, "-")
-        + ".png";
 }
 
 renderMatch(match, data);
