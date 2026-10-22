@@ -2262,10 +2262,11 @@ document.getElementById("app").innerHTML = `
    <div class="teams">
 		<div class="team-header home">
 		
-		    <img
-		        src="logos/clubs/${getClubLogo(teamA)}"
-		        class="team-logo"
-		        alt="${escapeHtml(teamA)}">
+		<img
+		    src="logos/clubs/${getClubLogo(teamA)}"
+		    class="team-logo"
+		    alt="${escapeHtml(teamA)}"
+		    onerror="this.src='logos/clubs/default.png'">
 		
 		    <div class="team-name">
 		        ${escapeHtml(teamA)}
@@ -2279,10 +2280,11 @@ document.getElementById("app").innerHTML = `
 		
 		<div class="team-header away">
 		
-		    <img
-		        src="logos/clubs/${getClubLogo(teamB)}"
-		        class="team-logo"
-		        alt="${escapeHtml(teamB)}">
+		<img
+		    src="logos/clubs/${getClubLogo(teamB)}"
+		    class="team-logo"
+		    alt="${escapeHtml(teamB)}"
+		    onerror="this.src='logos/clubs/default.png'">
 		
 		    <div class="team-name">
 		        ${escapeHtml(teamB)}
