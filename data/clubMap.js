@@ -58,7 +58,7 @@ const clubNameMap = {
   "CD Leganés": "Leganés",
   "Real Valladolid CF": "Real Valladolid",
   "Real Zaragoza": "Real Zaragoza",
-  "Real Oviedo": "Real Oviedo",
+  "Real Oviedo": "Oviedo",
   "Real Murcia CF": "Real Murcia",
   "Málaga CF": "Málaga",
   "RCD Mallorca": "Mallorca",
