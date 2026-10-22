@@ -1340,6 +1340,15 @@ Promise.all([
 
 });
 
+function getClubLogo(team){
+    return String(team || "")
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-z0-9]+/g, "-")
+        + ".png";
+}
+
 function parseDate(date){
 
     const [day, month, year] =
