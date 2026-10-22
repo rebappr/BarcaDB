@@ -1,9 +1,9 @@
 const clubNameMap = {
   // Nemecko
-  "1. FC Kaiserslautern": "1. Kaiserslautern",
-  "1. FC Köln": "1. Köln",
-  "1. FC Magdeburg": "1. Magdeburg",
-  "1. FC Lokomotive Leipzig": "1. Lokomotive Leipzig",
+  "1. FC Kaiserslautern": "Kaiserslautern",
+  "1. FC Köln": "Köln",
+  "1. FC Magdeburg": "Magdeburg",
+  "1. FC Lokomotive Leipzig": "Lokomotive Leipzig",
   "Bayer 04 Leverkusen": "Bayer Leverkusen",
   "FC Bayern München": "Bayern München",
   "Borussia Dortmund": "Borussia Dortmund",
@@ -77,7 +77,7 @@ const clubNameMap = {
   "Arenas Club de Getxo": "Arenas Club",
 
   // Taliansko
-  "AC Milan": "AC Milan",
+  "AC Milan": "Milan",
   "FC Internazionale Milano": "Inter Milan",
   "AS Roma": "Roma",
   "ACF Fiorentina": "Fiorentina",
