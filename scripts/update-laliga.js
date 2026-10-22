@@ -1,34 +1,5 @@
 const fs = require("fs");
-
-const CLUB_MAP = {
-  "FC Barcelona": "FC Barcelona",
-  "Real Madrid CF": "Real Madrid",
-  "Club Atlético de Madrid": "Atlético Madrid",
-  "Athletic Club": "Athletic Club",
-  "Real Betis Balompié": "Real Betis",
-  "Real Sociedad de Fútbol": "Real Sociedad",
-  "Villarreal CF": "Villarreal",
-  "Valencia CF": "Valencia",
-  "Sevilla FC": "Sevilla",
-  "Getafe CF": "Getafe",
-  "Rayo Vallecano de Madrid": "Rayo Vallecano",
-  "CA Osasuna": "Osasuna",
-  "RC Celta de Vigo": "Celta Vigo",
-  "RCD Espanyol de Barcelona": "Espanyol",
-  "Deportivo Alavés": "Deportivo Alavés",
-  "Levante UD": "Levante",
-  "Elche CF": "Elche",
-  "RC Deportivo La Coruña": "Deportivo La Coruña",
-  "Málaga CF": "Málaga",
-  "Real Racing Club de Santander": "Racing Santander",
-  "Girona FC": "Girona",
-  "CD Leganés": "Leganés",
-  "RCD Mallorca": "Mallorca",
-  "UD Las Palmas": "Las Palmas",
-  "Real Valladolid CF": "Valladolid",
-  "Real Oviedo": "Real Oviedo",
-  "Real Zaragoza": "Real Zaragoza"
-};
+const CLUB_MAP = require("./data/clubMap");
 
 async function run() {
 
