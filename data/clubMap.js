@@ -77,21 +77,21 @@ const clubNameMap = {
 
   // Taliansko
   "AC Milan": "AC Milan",
-  "FC Internazionale Milano": "Internazionale Milan",
-  "AS Roma": "AS Roma",
+  "FC Internazionale Milano": "Inter Milan",
+  "AS Roma": "Roma",
   "ACF Fiorentina": "Fiorentina",
-  "Atalanta BC": "Atalanta BC",
+  "Atalanta BC": "Atalanta",
   "Juventus FC": "Juventus",
   "SS Lazio": "Lazio",
   "SSC Napoli": "Napoli",
-  "UC Sampdoria": "UC Sampdoria",
+  "UC Sampdoria": "Sampdoria",
   "Udinese Calcio": "Udinese Calcio",
   "Como 1907": "Como",
 
   // Francúzsko
   "Paris Saint-Germain FC": "PSG",
   "Olympique Lyonnais": "Olympique Lyon",
-  "AS Monaco FC": "AS Monaco",
+  "AS Monaco FC": "Monaco",
   "OGC Nice": "Nice",
   "FC Metz": "Metz",
   "RC Strasbourg Alsace": "Racing Strasbourg",
@@ -102,8 +102,8 @@ const clubNameMap = {
   "AZ": "Alkmaar",
   "PSV": "PSV Eindhoven",
   "FC Utrecht": "Utrecht",
-  "Feyenoord": "Feyenoord Rotterdam",
-  "NEC": "NEC Nijmegen",
+  "Feyenoord": "Feyenoord",
+  "NEC": "Nijmegen",
 
   // Portugalsko
   "SL Benfica": "Benfica",
@@ -142,7 +142,7 @@ const clubNameMap = {
   "FC Shakhtar Donetsk": "Shakhtar Donetsk",
 
   // Grécko
-  "Olympiacos FC": "Olympiacos Piraeus",
+  "Olympiacos FC": "Olympiacos",
   "Panathinaikos FC": "Panathinaikos",
   "PAOK FC": "PAOK Thessaloniki",
 
@@ -156,8 +156,8 @@ const clubNameMap = {
   "FK Austria Wien": "Austria Vienna",
 
   // Švajčiarsko
-  "BSC Young Boys": "BSC Young Boys",
-  "FC Basel 1893": "Basel 1893",
+  "BSC Young Boys": "Young Boys",
+  "FC Basel 1893": "Basel",
   "FC Zürich": "Zürich",
   "FC Lugano": "Lugano",
 
@@ -171,7 +171,7 @@ const clubNameMap = {
   "Lech Poznań": "Lech Poznań",
 
   // Cyprus
-  "APOEL FC": "APOEL Nicosia",
+  "APOEL FC": "APOEL",
   "AEK Larnaca FC": "AEK Larnaca",
   "Apollon Limassol FC": "Apollon Limassol",
 
