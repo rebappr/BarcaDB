@@ -86,7 +86,7 @@ const clubNameMap = {
   "SS Lazio": "Lazio",
   "SSC Napoli": "Napoli",
   "UC Sampdoria": "Sampdoria",
-  "Udinese Calcio": "Udinese Calcio",
+  "Udinese Calcio": "Udinese",
   "Como 1907": "Como",
 
   // Francúzsko
