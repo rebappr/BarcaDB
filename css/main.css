@@ -82,15 +82,16 @@ padding:8px;
 }
 
 .desktop-search-input{
+    display:block;
     width:100%;
-    box-sizing:border-box;
-    padding:12px;
+    height:42px;
+    padding:0 12px;
+    border:none;
     border-radius:10px;
-    border:1px solid var(--divider);
     background:#ffffff;
     color:var(--barca-blue);
     font-size:16px;
-    height:auto;
+    margin:0;
 }
 
 .widget-title{
