@@ -37,8 +37,14 @@ return startYear + "/" + String(endYear).slice(2) === currentSeason;
 })
 .map(match => {
 
-const home = CLUB_MAP[match.homeTeam.name] || match.homeTeam.name;
-const away = CLUB_MAP[match.awayTeam.name] || match.awayTeam.name;
+const homeApiName = match.homeTeam.name;
+const awayApiName = match.awayTeam.name;
+
+const home =
+    CLUB_MAP[homeApiName] || homeApiName;
+
+const away =
+    CLUB_MAP[awayApiName] || awayApiName;
 
 const isHome = home === "FC Barcelona";
 const opponent = isHome ? away : home;
