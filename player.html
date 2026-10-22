@@ -360,7 +360,26 @@ flex-shrink:0;
     min-width:0;
 }
 
+.opponent-cell{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    min-width:0;
+}
+
+.opponent-logo{
+    width:20px;
+    height:20px;
+    object-fit:contain;
+    flex-shrink:0;
+}
+
 @media(max-width:820px){
+
+    .opponent-logo{
+        width:16px;
+        height:16px;
+    }
 
     .content-layout{
         grid-template-columns:1fr;
@@ -580,6 +599,15 @@ font-size:13px;
 </div>
 
 <script>
+
+function getClubLogo(team){
+    return String(team || "")
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-z0-9]+/g, "-")
+        + ".png";
+}
 
 const params =
 new URLSearchParams(location.search);
@@ -1422,12 +1450,20 @@ class="player-match ${game.played ? 'player-started' : 'player-bench'}">
         
     <div>${game.venue}</div>
 
-    <div>
-		<a href="opponent.html?name=${encodeURIComponent(game.opponent)}"
-		class="opponent-link"
-		onclick="event.stopPropagation();">
-		${game.opponent}
-		</a>
+	<div class="opponent-cell">
+	
+	    <img
+	        src="logos/clubs/${getClubLogo(game.opponent)}"
+	        class="opponent-logo"
+	        alt="${game.opponent}"
+	        onerror="this.src='logos/clubs/default.png'">
+	
+	    <a href="opponent.html?name=${encodeURIComponent(game.opponent)}"
+	       class="opponent-link"
+	       onclick="event.stopPropagation();">
+	        ${game.opponent}
+	    </a>
+	
 	</div>
 
     <div>
