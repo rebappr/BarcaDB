@@ -114,7 +114,7 @@ const clubNameMap = {
 
   // Belgicko
   "Club Brugge KV": "Club Brugge",
-  "RSC Anderlecht": "RSC Anderlecht",
+  "RSC Anderlecht": "Anderlecht",
   "Royal Antwerp FC": "Royal Antwerp",
 
   // Škótsko
