@@ -1308,9 +1308,11 @@ if(player && String(player).trim()){
 
 html += `
            <div class="player">
-               <div class="number">
-                   ${escapeHtml(number || "")}
-               </div>
+				${number ? `
+				<div class="number">
+				    ${escapeHtml(number)}
+				</div>
+				` : ""}
 
                <span class="player-name">
                
@@ -1369,9 +1371,11 @@ function getBench(match, prefix="") {
             html += `
             <div class="player">
 
-                <div class="number">
-                    ${escapeHtml(number || "")}
-                </div>
+					${number ? `
+					<div class="number">
+					    ${escapeHtml(number)}
+					</div>
+					` : ""}
 
                   <span class="player-name">
                   
