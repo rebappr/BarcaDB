@@ -1041,6 +1041,19 @@ font-size:10px;
 <script src="data/competitionMap.js"></script>
 <script>
 
+function hasBench(match,prefix=""){
+
+    for(let i=1;i<=12;i++){
+
+        if(match[`${prefix}On the bench name ${i}`]){
+            return true;
+        }
+
+    }
+
+    return false;
+}
+
 function getClubLogo(team){
     return String(team || "")
         .toLowerCase()
@@ -2126,6 +2139,14 @@ const oppBench = homeMatch
 ? getBench(match,"Opp. ")
 : getBench(match);
 
+const hasBarcaBench = homeMatch
+? hasBench(match)
+: hasBench(match,"Opp. ");
+
+const hasOppBench = homeMatch
+? hasBench(match,"Opp. ")
+: hasBench(match);
+
 const barcaManager = homeMatch
 ? (match["Manager"] || "-")
 : (match["Opp. Manager"] || "-");
@@ -2212,9 +2233,11 @@ const squadsHtml = `
 
            ${barcaPlayers}
 
-           <h4>Bench</h4>
-
-           ${barcaBench}
+			${hasBarcaBench ? `
+			<h4>Bench</h4>
+			
+			${barcaBench}
+			` : ""}
 
            <h4>Manager</h4>
 
@@ -2244,9 +2267,11 @@ const squadsHtml = `
 
            <h4>Bench</h4>
 
-           ${oppBench}
-
-           <h4>Manager</h4>
+			${hasOppBench ? `
+			<h4>Bench</h4>
+			
+			${oppBench}
+			` : ""}
 
            <div class="player">
 
