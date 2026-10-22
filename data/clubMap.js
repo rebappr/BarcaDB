@@ -208,10 +208,13 @@ const officialClubNameMap = Object.fromEntries(
     .map(([official, display]) => [display, official])
 );
 
-function getOfficialClubName(name) {
-  return officialClubNameMap[name] || name;
-}
+window.getClubName = function(name){
+    return clubNameMap[name] || name;
+};
 
-function getClubName(name) {
-  return clubNameMap[name] || name;
-}
+window.getOfficialClubName = function(name){
+    return officialClubNameMap[name] || name;
+};
+
+window.CLUB_MAP = clubNameMap;
+window.OFFICIAL_CLUB_MAP = officialClubNameMap;
