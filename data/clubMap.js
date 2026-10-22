@@ -177,7 +177,7 @@ const clubNameMap = {
   "Apollon Limassol FC": "Apollon Limassol",
 
   // Švédsko
-  "AIK": "AIK Fotboll",
+  "AIK": "AIK",
   "IFK Göteborg": "Göteborg",
 
   // Maďarsko
