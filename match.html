@@ -720,8 +720,25 @@ font-weight:600;
 .timeline-card{
     margin-top:8px;
 }
+
+.team-header{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.team-logo{
+    width:56px;
+    height:56px;
+    object-fit:contain;
+}
       
 @media(max-width:820px){
+
+.team-logo{
+    width:36px;
+    height:36px;
+}
 
     .match-tabs{
         display:flex;
@@ -2243,22 +2260,35 @@ document.getElementById("app").innerHTML = `
 <div class="card">
 
    <div class="teams">
-       <div class="team-header home">
-           <div class="team-name">
-               ${escapeHtml(teamA)}
-           </div>
-       </div>
-
-       <div class="score">
-           ${escapeHtml(match["Result"] || "-:-")}
-       </div>
-
-       <div class="team-header away">
-           <div class="team-name">
-               ${escapeHtml(teamB)}
-           </div>
-       </div>
-
+		<div class="team-header home">
+		
+		    <img
+		        src="logos/clubs/${getClubLogo(teamA)}"
+		        class="team-logo"
+		        alt="${escapeHtml(teamA)}">
+		
+		    <div class="team-name">
+		        ${escapeHtml(teamA)}
+		    </div>
+		
+		</div>
+		
+		<div class="score">
+		    ${escapeHtml(match["Result"] || "-:-")}
+		</div>
+		
+		<div class="team-header away">
+		
+		    <img
+		        src="logos/clubs/${getClubLogo(teamB)}"
+		        class="team-logo"
+		        alt="${escapeHtml(teamB)}">
+		
+		    <div class="team-name">
+		        ${escapeHtml(teamB)}
+		    </div>
+		
+		</div>
    </div>
    </div>
 
