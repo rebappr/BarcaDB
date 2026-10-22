@@ -200,7 +200,11 @@ const clubNameMap = {
   "FC Dynamo Moscow": "Dynamo Moscow",
   "FC Spartak Moscow": "Spartak Moscow",
   "FC Lokomotiv Moscow": "Lokomotiv Moscow",
-  "FC Rubin Kazan": "Rubin Kazan"
+  "FC Rubin Kazan": "Rubin Kazan",
+
+  "ÍA Akranes": "Akranes",
+  "Club América": "América"
+  
 };
 
 const officialClubNameMap = Object.fromEntries(
