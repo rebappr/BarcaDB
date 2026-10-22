@@ -2159,6 +2159,9 @@ const oppManager = homeMatch
 ? (match["Opp. Manager"] || "-")
 : (match["Manager"] || "-");
 
+const hasBarcaLineup =
+    hasStartingXI(match);
+
 const hasOpponentLineup =
     hasStartingXI(match, "Opp. ");
 
@@ -2206,7 +2209,29 @@ const squadsHtml = `
 <div class="card">
 
    ${hasOpponentLineup ? `
-   <div class="lineup-tabs">
+   ${hasBarcaLineup && hasOpponentLineup ? `
+		
+		<div class="lineup-tabs">
+		
+		    <button
+		        class="lineup-tab active"
+		        onclick="showLineup('barca')">
+		
+		        ${escapeHtml(barcaTitle)}
+		
+		    </button>
+		
+		    <button
+		        class="lineup-tab"
+		        onclick="showLineup('opp')">
+		
+		        ${escapeHtml(oppTitle)}
+		
+		    </button>
+		
+		</div>
+		
+		` : ""}
 
        <button
            class="lineup-tab active"
@@ -2229,69 +2254,71 @@ const squadsHtml = `
 
    <div class="lineups">
 
-       <div
-           id="lineup-barca"
-           class="team-card">
-
-           <h3>${escapeHtml(barcaTitle)}</h3>
-
-           ${barcaPlayers}
-
-			${hasBarcaBench ? `
-			<h4>Bench</h4>
-			
-			${barcaBench}
-			` : ""}
-
-           <h4>Manager</h4>
-
-           <div class="player">
-
-               <a
-                   class="player-link"
-                   href="manager.html?name=${encodeURIComponent(barcaManager)}">
-
-                   ${escapeHtml(barcaManager)}
-
-               </a>
-
-           </div>
-
-       </div>
+		${hasBarcaLineup ? `
+		
+		<div
+		    id="lineup-barca"
+		    class="team-card">
+		
+		    <h3>${escapeHtml(barcaTitle)}</h3>
+		
+		    ${barcaPlayers}
+		
+		    ${hasBarcaBench ? `
+		    <h4>Bench</h4>
+		    ${barcaBench}
+		    ` : ""}
+		
+		    <h4>Manager</h4>
+		
+		    <div class="player">
+		
+		        <a
+		            class="player-link"
+		            href="manager.html?name=${encodeURIComponent(barcaManager)}">
+		
+		            ${escapeHtml(barcaManager)}
+		
+		        </a>
+		
+		    </div>
+		
+		</div>
+		
+		` : ""}
 
        ${hasOpponentLineup ? `
 
-       <div
-           id="lineup-opp"
-           class="team-card">
-
-           <h3>${escapeHtml(oppTitle)}</h3>
-
-           ${oppPlayers}
-
-           <h4>Bench</h4>
-
-			${hasOppBench ? `
-			<h4>Bench</h4>
-			
-			${oppBench}
-			` : ""}
-
-           <div class="player">
-
-               <a
-                   class="player-link"
-                   href="manager.html?name=${encodeURIComponent(oppManager)}">
-
-                   ${escapeHtml(oppManager)}
-
-               </a>
-
-           </div>
-
-       </div>
-
-       ` : ""}
+		<div
+		    id="lineup-opp"
+		    class="team-card">
+		
+		    <h3>${escapeHtml(oppTitle)}</h3>
+		
+		    ${oppPlayers}
+		
+		    ${hasOppBench ? `
+		    <h4>Bench</h4>
+		    ${oppBench}
+		    ` : ""}
+		
+		    <h4>Manager</h4>
+		
+		    <div class="player">
+		
+		        <a
+		            class="player-link"
+		            href="manager.html?name=${encodeURIComponent(oppManager)}">
+		
+		            ${escapeHtml(oppManager)}
+		
+		        </a>
+		
+		    </div>
+		
+		</div>
+		
+		` : ""}
 
    </div>
 
@@ -2432,13 +2459,29 @@ document.getElementById("app").innerHTML = `
     
     `;
 
-if(window.innerWidth <= 820 && hasOpponentLineup){
+if(window.innerWidth <= 820){
+
+    const barca =
+    document.getElementById("lineup-barca");
 
     const opp =
     document.getElementById("lineup-opp");
 
-    if(opp){
+    if(barca && opp){
+
+        // existujú oba line-upy
         opp.classList.add("mobile-hidden");
+
+    }else if(barca){
+
+        // existuje iba jeden line-up
+        barca.classList.remove("mobile-hidden");
+
+    }else if(opp){
+
+        // existuje iba jeden line-up
+        opp.classList.remove("mobile-hidden");
+
     }
 
 }
