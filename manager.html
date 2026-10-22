@@ -421,7 +421,36 @@ color:#A50044;
     gap:8px;
 }
 
+.opponent-cell{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    min-width:0;
+}
+
+.opponent-cell img{
+    width:20px;
+    height:20px;
+    object-fit:contain;
+    flex-shrink:0;
+}
+
 @media(max-width:820px){
+
+.opponent-cell img{
+    width:16px;
+    height:16px;
+}
+
+.opponent-cell{
+    overflow:hidden;
+}
+
+.opponent-link{
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
     
 .desktop-search{
     display:none;
@@ -856,6 +885,15 @@ font-size:13px;
 </div>
 
 <script>
+
+function getClubLogo(team){
+    return String(team || "")
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-z0-9]+/g, "-")
+        + ".png";
+}
 
 const params =
 new URLSearchParams(location.search);
@@ -1443,12 +1481,19 @@ html += `
             ${match["Home/Away"] || ""}
         </div>
 
-	    <div>
-			<a href="opponent.html?name=${encodeURIComponent(match["Opp. Team"])}"
-			class="opponent-link"
-			onclick="event.stopPropagation();">
-			${match["Opp. Team"]}
-			</a>
+		<div class="opponent-cell">
+		
+		    <img
+		        src="logos/clubs/${getClubLogo(match["Opp. Team"])}"
+		        alt="${match["Opp. Team"]}"
+		        onerror="this.src='logos/clubs/default.png'">
+		
+		    <a href="opponent.html?name=${encodeURIComponent(match["Opp. Team"])}"
+		       class="opponent-link"
+		       onclick="event.stopPropagation();">
+		        ${match["Opp. Team"]}
+		    </a>
+		
 		</div>
         
         <div>
