@@ -75,6 +75,7 @@ const clubNameMap = {
   "Sporting de Gijón": "Sporting Gijón",
   "Hércules CF": "Hércules",
   "Arenas Club de Getxo": "Arenas Club",
+  "Athletic Fútbol Club de Palma": "Athletic de Palma",
 
   // Taliansko
   "AC Milan": "Milan",
@@ -203,7 +204,10 @@ const clubNameMap = {
   "FC Rubin Kazan": "Rubin Kazan",
 
   "ÍA Akranes": "Akranes",
-  "Club América": "América"
+  "Club América": "América",
+  "Atlante FC": "Atlante",
+  "Club Atlético Tetuán": "Atlético Tetuán",
+  "Åtvidabergs FF": "Åtvidabergs"
   
 };
 
