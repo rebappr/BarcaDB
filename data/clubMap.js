@@ -74,7 +74,7 @@ const clubNameMap = {
   "RC Deportivo": "Deportivo La Coruña",
   "Sporting de Gijón": "Sporting Gijón",
   "Hércules CF": "Hércules",
-  "Arenas Club de Getxo",: "Arenas Club",
+  "Arenas Club de Getxo": "Arenas Club",
 
   // Taliansko
   "AC Milan": "AC Milan",
