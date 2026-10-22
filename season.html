@@ -706,7 +706,25 @@ border:none;
 
 }
 
+.opponent-cell{
+    display:flex;
+    align-items:center;
+    gap:6px;
+}
+
+.opponent-cell img{
+    width:20px;
+    height:20px;
+    object-fit:contain;
+    flex-shrink:0;
+}
+
 @media(max-width:820px){
+
+    .opponent-cell img{
+        width:16px;
+        height:16px;
+    }
 
     .filters{
         flex-direction:column;
@@ -1133,6 +1151,15 @@ Loading...
 <script src="data/clubMap.js"></script>
 <script src="data/competitionMap.js"></script>
 <script>
+
+function getClubLogo(team){
+    return String(team || "")
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-z0-9]+/g, "-")
+        + ".png";
+}
 
 let allMatches = [];
 let playerBirthDates = {};
@@ -2071,16 +2098,23 @@ return `
 			    <span>${match.Competition}</span>
 			</div>
 
-			<div>
-				${
-				match['Opp. Team'] !== 'FC Barcelona'
-				? `<a href="opponent.html?name=${encodeURIComponent(match['Opp. Team'])}" 
-				class="opponent-link"
-				onclick="event.stopPropagation();">
-				${match['Opp. Team']}
-				</a>`
-				: match['Opp. Team']
-				}
+			<div class="opponent-cell">
+			
+				<img
+				    src="logos/clubs/${getClubLogo(match['Opp. Team'])}"
+				    alt="${match['Opp. Team']}"
+				    onerror="this.src='logos/clubs/default.png'">
+			
+			    ${
+			    match['Opp. Team'] !== 'FC Barcelona'
+			    ? `<a href="opponent.html?name=${encodeURIComponent(match['Opp. Team'])}"
+			          class="opponent-link"
+			          onclick="event.stopPropagation();">
+			          ${match['Opp. Team']}
+			       </a>`
+			    : match['Opp. Team']
+			    }
+			
 			</div>
 
            <div>
