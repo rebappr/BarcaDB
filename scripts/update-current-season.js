@@ -1,13 +1,6 @@
 const fs = require("fs");
-const CLUB_MAP = require("./clubMap");
-
-const COMPETITION_MAP = {
-"Primera Division":"La Liga",
-"UEFA Champions League":"UEFA Champions League",
-"Copa del Rey":"Copa del Rey",
-"Super Cup":"Supercopa de España",
-"FIFA Club World Cup":"Club World Cup"
-};
+const CLUB_MAP = require("./data/clubMap");
+const COMPETITION_MAP = require("./data/CompetitionMap");
 
 function formatDate(dateStr){
 const d = new Date(dateStr);
