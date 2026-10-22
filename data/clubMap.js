@@ -202,6 +202,15 @@ const clubNameMap = {
   "FC Rubin Kazan": "Rubin Kazan"
 };
 
+const officialClubNameMap = Object.fromEntries(
+  Object.entries(clubNameMap)
+    .map(([official, display]) => [display, official])
+);
+
+function getOfficialClubName(name) {
+  return officialClubNameMap[name] || name;
+}
+
 function getClubName(name) {
   return clubNameMap[name] || name;
 }
