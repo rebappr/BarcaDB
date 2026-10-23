@@ -61,7 +61,7 @@ async function run() {
 
   const existing = JSON.parse(
     fs.readFileSync(
-      "tablelaliga.json",
+      "/data/tablelaliga.json",
       "utf8"
     )
   );
