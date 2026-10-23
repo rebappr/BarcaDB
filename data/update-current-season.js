@@ -72,7 +72,7 @@ Result: result
 });
 
 fs.writeFileSync(
-"current-season.json",
+"/data/current-season.json",
 JSON.stringify(matches,null,2)
 );
 
