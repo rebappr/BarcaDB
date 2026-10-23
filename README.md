@@ -1,2 +1,2 @@
-# BarcaDBStats
+# BarcaDB
 Barcelona Database
