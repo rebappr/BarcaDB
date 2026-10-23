@@ -641,40 +641,15 @@ function renderOpponent(team,data){
 
     });
 
-    let goalsFor = 0;
-    let goalsAgainst = 0;
-    
-    matches.forEach(match => {
-    
-        const result = (match.Result || "").trim();
-    
-        if(result === "-:-") return;
-    
-        if(!result.includes(":")) return;
-    
-        const [homeGoals, awayGoals] =
-            result.split(":").map(Number);
-    
-        if(
-            isNaN(homeGoals) ||
-            isNaN(awayGoals)
-        ){
-            return;
-        }
-    
-        if(match["Home/Away"] === "Home"){
-    
-            goalsFor += homeGoals;
-            goalsAgainst += awayGoals;
-    
-        }else{
-    
-            goalsFor += awayGoals;
-            goalsAgainst += homeGoals;
-    
-        }
-    
-    });
+	const goalsFor = matches.reduce(
+	    (sum, match) => sum + Number(match.Scored || 0),
+	    0
+	);
+	
+	const goalsAgainst = matches.reduce(
+	    (sum, match) => sum + Number(match.Conceded || 0),
+	    0
+	);
 
 	document.getElementById("opponentHeader").innerHTML = `
 	
