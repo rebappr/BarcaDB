@@ -1,2 +1,2 @@
-# BarcaStats
-Barcelona Statistics
+# BarcaDBStats
+Barcelona Database
