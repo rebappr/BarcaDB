@@ -61,7 +61,7 @@ async function run() {
 
   const existing = JSON.parse(
     fs.readFileSync(
-      "/data/tablelaliga.json",
+      "data/tablelaliga.json",
       "utf8"
     )
   );
@@ -75,7 +75,7 @@ async function run() {
   const finalData = historical.concat(currentRows);
 
   fs.writeFileSync(
-    "tablelaliga.json",
+    "data/tablelaliga.json",
     JSON.stringify(finalData, null, 2)
   );
 
