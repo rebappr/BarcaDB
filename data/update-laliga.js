@@ -1,5 +1,5 @@
 const fs = require("fs");
-const CLUB_MAP = require("../data/clubMap");
+const CLUB_MAP = require("./data/clubMap");
 
 async function run() {
 
