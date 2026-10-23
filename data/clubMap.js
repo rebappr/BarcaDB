@@ -216,13 +216,19 @@ const officialClubNameMap = Object.fromEntries(
     .map(([official, display]) => [display, official])
 );
 
-window.getClubName = function(name){
+if (typeof window !== "undefined") {
+  window.getClubName = function(name) {
     return clubNameMap[name] || name;
-};
+  };
 
-window.getOfficialClubName = function(name){
+  window.getOfficialClubName = function(name) {
     return officialClubNameMap[name] || name;
-};
+  };
 
-window.CLUB_MAP = clubNameMap;
-window.OFFICIAL_CLUB_MAP = officialClubNameMap;
+  window.CLUB_MAP = clubNameMap;
+  window.OFFICIAL_CLUB_MAP = officialClubNameMap;
+}
+
+if (typeof module !== "undefined") {
+  module.exports = clubNameMap;
+}
