@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Check Missing Logos</title>
+</head>
+<body>
+
+<h1>Missing Logos</h1>
+
+<pre id="output">Loading...</pre>
+
+<script>
+function getClubLogo(team){
+    return String(team || "")
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-z0-9]+/g, "-")
+        + ".png";
+}
+
+async function checkLogos(){
+
+    const matches = await fetch("data.json")
+        .then(r => r.json());
+
+    const clubs = [
+        ...new Set(
+            matches
+                .map(m => m["Opp. Team"])
+                .filter(Boolean)
+        )
+    ].sort();
+
+    const missing = [];
+
+    await Promise.all(
+        clubs.map(club => {
+
+            return new Promise(resolve => {
+
+                const img = new Image();
+
+                img.onload = () => resolve();
+
+                img.onerror = () => {
+                    missing.push(
+                        `${club} -> ${getClubLogo(club)}`
+                    );
+                    resolve();
+                };
+
+                img.src =
+                    `logos/clubs/${getClubLogo(club)}`;
+
+            });
+
+        })
+    );
+
+    document.getElementById("output").textContent =
+        missing.length
+            ? missing.join("\n")
+            : "All logos found.";
+
+    console.log("Missing logos:", missing);
+}
+
+checkLogos();
+</script>
+
+</body>
+</html>
