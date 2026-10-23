@@ -642,14 +642,14 @@ function renderOpponent(team,data){
     });
 
 	const goalsFor = matches.reduce(
-	    (sum, match) => sum + Number(match.Scored || 0),
-	    0
-	);
-	
-	const goalsAgainst = matches.reduce(
-	    (sum, match) => sum + Number(match.Conceded || 0),
-	    0
-	);
+    (sum, match) => sum + (Number.isFinite(+match.Scored) ? +match.Scored : 0),
+    0
+);
+
+const goalsAgainst = matches.reduce(
+    (sum, match) => sum + (Number.isFinite(+match.Conceded) ? +match.Conceded : 0),
+    0
+);
 
 	document.getElementById("opponentHeader").innerHTML = `
 	
