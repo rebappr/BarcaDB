@@ -19707,13 +19707,13 @@
     "season": "2026/27",
     "position": "1",
     "club": "FC Barcelona",
-    "matches": "9",
+    "matches": "10",
     "wins": "9",
-    "draws": "0",
+    "draws": "1",
     "losses": "0",
     "goals": "39:9",
     "difference": "30",
-    "points": "27"
+    "points": "28"
   },
   {
     "season": "2026/27",
@@ -19731,13 +19731,13 @@
     "season": "2026/27",
     "position": "3",
     "club": "Real Madrid",
-    "matches": "9",
+    "matches": "10",
     "wins": "7",
-    "draws": "0",
+    "draws": "1",
     "losses": "2",
     "goals": "23:9",
     "difference": "14",
-    "points": "21"
+    "points": "22"
   },
   {
     "season": "2026/27",
@@ -19755,13 +19755,13 @@
     "season": "2026/27",
     "position": "5",
     "club": "Real Sociedad",
-    "matches": "9",
-    "wins": "5",
+    "matches": "10",
+    "wins": "6",
     "draws": "1",
     "losses": "3",
-    "goals": "17:17",
-    "difference": "0",
-    "points": "16"
+    "goals": "19:18",
+    "difference": "1",
+    "points": "19"
   },
   {
     "season": "2026/27",
@@ -19863,12 +19863,12 @@
     "season": "2026/27",
     "position": "14",
     "club": "Levante",
-    "matches": "9",
+    "matches": "10",
     "wins": "2",
     "draws": "4",
-    "losses": "3",
-    "goals": "15:17",
-    "difference": "-2",
+    "losses": "4",
+    "goals": "16:19",
+    "difference": "-3",
     "points": "10"
   },
   {
