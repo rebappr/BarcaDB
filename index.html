@@ -745,26 +745,12 @@ Discover What's Inside
 <script>
 
 let allMatches = [];
-let currentMatches = [];
 
-Promise.all([
-    fetch("/data/data.json").then(r => r.json()),
-    fetch("/data/current-season.json").then(r => r.json())
-])
-.then(([matchesData, currentData]) => {
+fetch("/data/data.json")
+    .then(r => r.json())
+    .then(matchesData => {
 
-      allMatches = matchesData;
-      currentMatches = currentData;
-
-    function normalizeName(name) {
-        return String(name || "")
-            .toLowerCase()
-            .replace(/fc /g, "")
-            .replace(/ cf/g, "")
-            .replace(/\./g, "")
-            .replace(/\s+/g, " ")
-            .trim();
-    }
+        allMatches = matchesData;
 
     function parseDate(date) {
 
