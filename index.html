@@ -892,14 +892,25 @@ function renderHome(){
                         ${homeTeam}
                     </div>
 
-                    <div class="fixture-center">
-                        <a
-                            href="match.html?id=${dataMatch?.ID || ''}"
-                            class="fixture-score"
-                            style="display:inline-block;text-decoration:none;color:white;">
-                            ${match.Result}
-                        </a>
-                    </div>
+					<div class="fixture-center">
+					
+					    ${dataMatch?.ID
+					        ? `
+					            <a
+					                href="match.html?id=${dataMatch.ID}"
+					                class="fixture-score"
+					                style="display:inline-block;text-decoration:none;color:white;">
+					                ${match.Result}
+					            </a>
+					          `
+					        : `
+					            <span class="fixture-score">
+					                ${match.Result}
+					            </span>
+					          `
+					    }
+					
+					</div>
 
                     <div class="fixture-team">
                         ${awayTeam}
@@ -1005,14 +1016,25 @@ function renderHome(){
                         ${homeTeam}
                     </div>
 
-                    <div class="fixture-center">
-                        <a
-                            href="match.html?id=${dataMatch?.ID || ''}"
-                            class="fixture-vs"
-                            style="display:inline-block;text-decoration:none;color:inherit;">
-                            VS
-                        </a>
-                    </div>
+				<div class="fixture-center">
+				
+				    ${dataMatch?.ID
+				        ? `
+				            <a
+				                href="match.html?id=${dataMatch.ID}"
+				                class="fixture-vs"
+				                style="display:inline-block;text-decoration:none;color:inherit;">
+				                VS
+				            </a>
+				          `
+				        : `
+				            <span class="fixture-vs">
+				                VS
+				            </span>
+				          `
+				    }
+				
+				</div>
 
                     <div class="fixture-team">
                         ${awayTeam}
