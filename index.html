@@ -806,7 +806,7 @@ function renderHome(){
         const today = new Date();
         today.setHours(0, 0, 0, 0);
 
-      const played = currentMatches
+      const played = allMatches
           .filter(match =>
               match.Result &&
               match.Result !== "-:-" &&
@@ -824,13 +824,6 @@ function renderHome(){
                 return;
             }
             
-            const dataMatch = allMatches.find(m =>
-                m.Date === match.Date &&
-                m.Competition === match.Competition &&
-                m["Home/Away"] === match["Home/Away"] &&
-                normalizeName(m["Opp. Team"]) === normalizeName(match["Opp. Team"])
-            );
-
 			const homeTeam =
 			    match["Home/Away"] === "Home"
 			        ? `
@@ -897,7 +890,7 @@ function renderHome(){
 					    ${dataMatch?.ID
 					        ? `
 					            <a
-					                href="match.html?id=${dataMatch.ID}"
+					                href="match.html?id=${match.ID}"
 					                class="fixture-score"
 					                style="display:inline-block;text-decoration:none;color:white;">
 					                ${match.Result}
@@ -931,7 +924,7 @@ function renderHome(){
         const today = new Date();
         today.setHours(0, 0, 0, 0);
 
-		const next = currentMatches
+		const next = allMatches
 		    .filter(match =>
 		        (!match.Result || match.Result === "-:-") &&
 		        parseDate(match.Date) >= today
@@ -947,13 +940,6 @@ function renderHome(){
 
             return;
         }
-
-      const dataMatch = allMatches.find(m =>
-          m.Date === next.Date &&
-          m.Competition === next.Competition &&
-          m["Home/Away"] === next["Home/Away"] &&
-          normalizeName(m["Opp. Team"]) === normalizeName(next["Opp. Team"])
-      );
 
 			const homeTeam =
 			    next["Home/Away"] === "Home"
@@ -1021,7 +1007,7 @@ function renderHome(){
 				    ${dataMatch?.ID
 				        ? `
 				            <a
-				                href="match.html?id=${dataMatch.ID}"
+				                href="match.html?id=${next.ID}"
 				                class="fixture-vs"
 				                style="display:inline-block;text-decoration:none;color:inherit;">
 				                VS
