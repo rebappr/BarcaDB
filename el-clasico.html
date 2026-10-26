@@ -1022,6 +1022,16 @@ every official El Clásico ever played.
 </section>
 
 <div class="widget-title">
+    Last El Clásico
+</div>
+
+<div class="widget-card">
+    <div id="lastClasico">
+        Loading...
+    </div>
+</div>
+
+<div class="widget-title">
 	Upcoming El Clásicos
 </div>
 
@@ -2094,6 +2104,84 @@ selectedVenue =
 
 }
 
+function renderLastClasico(){
+
+	const clasico = getClasicos()
+	    .sort((a,b) => parseDate(b.Date) - parseDate(a.Date))[0];
+
+    if(!clasico){
+
+        document.getElementById(
+            "lastClasico"
+        ).innerHTML = "No completed El Clásicos";
+
+        return;
+    }
+
+    const homeTeam =
+        clasico["Home/Away"] === "Home"
+            ? `
+                logos/clubs/fc-barcelona.png
+                FC Barcelona
+              `
+            : `
+                logos/clubs/real-madrid.png
+                Real Madrid
+              `;
+
+    const awayTeam =
+        clasico["Home/Away"] === "Home"
+            ? `
+                logos/clubs/real-madrid.png
+                Real Madrid
+              `
+            : `
+                logos/clubs/fc-barcelona.png
+                FC Barcelona
+              `;
+
+    document.getElementById(
+        "lastClasico"
+    ).innerHTML = `
+
+        <div class="fixture-link">
+
+            <div class="fixture-title">
+                LAST EL CLÁSICO
+            </div>
+
+            <div class="fixture-card">
+
+                <div class="fixture-team">
+                    ${homeTeam}
+                </div>
+
+                <div class="fixture-center">
+
+                    match.html?id=${clasico.ID}
+
+                        ${clasico.Result}
+
+                    </a>
+
+                </div>
+
+                <div class="fixture-team">
+                    ${awayTeam}
+                </div>
+
+            </div>
+
+            <div class="fixture-meta">
+                ${clasico.Date} • ${clasico.Competition}
+            </div>
+
+        </div>
+
+    `;
+
+}
+
 function renderUpcomingClasicos(){
 
     const today = new Date();
@@ -2543,7 +2631,7 @@ function renderHome(){
 	updateSidebarTitles();
 	
 	updateMatchesLimitFilter();
-	
+	renderLastClasico();
 	renderUpcomingClasicos();
 	
 	refreshDashboard();
