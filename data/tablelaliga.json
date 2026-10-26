@@ -19709,11 +19709,11 @@
     "club": "FC Barcelona",
     "matches": "10",
     "wins": "9",
-    "draws": "1",
-    "losses": "0",
-    "goals": "39:9",
-    "difference": "30",
-    "points": "28"
+    "draws": "0",
+    "losses": "1",
+    "goals": "40:11",
+    "difference": "29",
+    "points": "27"
   },
   {
     "season": "2026/27",
@@ -19732,12 +19732,12 @@
     "position": "3",
     "club": "Real Madrid",
     "matches": "10",
-    "wins": "7",
-    "draws": "1",
+    "wins": "8",
+    "draws": "0",
     "losses": "2",
-    "goals": "23:9",
-    "difference": "14",
-    "points": "22"
+    "goals": "25:10",
+    "difference": "15",
+    "points": "24"
   },
   {
     "season": "2026/27",
