@@ -2121,23 +2121,33 @@ function renderLastClasico(){
     const homeTeam =
         clasico["Home/Away"] === "Home"
             ? `
-                logos/clubs/fc-barcelona.png
-                FC Barcelona
+			            <img
+			                src="logos/clubs/fc-barcelona.png"
+			                class="fixture-team-logo"
+			                alt="FC Barcelona">
+			            FC Barcelona
               `
             : `
-                logos/clubs/real-madrid.png
+			            <img
+			                src="logos/clubs/fc-barcelona.png"
+			                class="fixture-team-logo"
+			                alt="Real Madrid">
                 Real Madrid
               `;
 
     const awayTeam =
         clasico["Home/Away"] === "Home"
             ? `
-                logos/clubs/real-madrid.png
-                Real Madrid
+			            <img
+			                src="logos/clubs/fc-barcelona.png"
+			                class="fixture-team-logo"
+			                alt="Real Madrid">
               `
             : `
-                logos/clubs/fc-barcelona.png
-                FC Barcelona
+			            <img
+			                src="logos/clubs/fc-barcelona.png"
+			                class="fixture-team-logo"
+			                alt="FC Barcelona">
               `;
 
     document.getElementById(
@@ -2157,9 +2167,12 @@ function renderLastClasico(){
                 </div>
 
                 <div class="fixture-center">
-
-                    match.html?id=${clasico.ID}
-
+                        <a
+                            href="match.html?id=${dataMatch?.ID || ''}"
+                            class="fixture-score"
+                            style="display:inline-block;text-decoration:none;color:white;">
+                            ${match.Result}
+                        </a>
                         ${clasico.Result}
 
                     </a>
