@@ -2129,7 +2129,7 @@ function renderLastClasico(){
               `
             : `
 			            <img
-			                src="logos/clubs/fc-barcelona.png"
+			                src="logos/clubs/real-madrid.png"
 			                class="fixture-team-logo"
 			                alt="Real Madrid">
                 Real Madrid
@@ -2139,7 +2139,7 @@ function renderLastClasico(){
         clasico["Home/Away"] === "Home"
             ? `
 			            <img
-			                src="logos/clubs/fc-barcelona.png"
+			                src="logos/clubs/real-madrid.png"
 			                class="fixture-team-logo"
 			                alt="Real Madrid">
               `
@@ -2166,18 +2166,14 @@ function renderLastClasico(){
                     ${homeTeam}
                 </div>
 
-                <div class="fixture-center">
-                        <a
-                            href="match.html?id=${dataMatch?.ID || ''}"
-                            class="fixture-score"
-                            style="display:inline-block;text-decoration:none;color:white;">
-                            ${match.Result}
-                        </a>
-                        ${clasico.Result}
-
-                    </a>
-
-                </div>
+			<div class="fixture-center">
+			    <a
+			        href="match.html?id=${clasico.ID}"
+			        class="fixture-score"
+			        style="display:inline-block;text-decoration:none;color:white;">
+			        ${clasico.Result}
+			    </a>
+			</div>
 
                 <div class="fixture-team">
                     ${awayTeam}
