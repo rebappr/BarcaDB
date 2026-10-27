@@ -887,8 +887,15 @@ margin: 0 20px;
 text-align:center !important;
 font-size:12px;
 }
+
 .score{
-font-size:13px;
+    font-size:15px;
+    font-weight:700;
+    min-width:60px;
+    text-align:center;
+    white-space:nowrap;
+    flex-shrink:0;
+    margin:0;
 }
 
 .lineups{
@@ -1069,6 +1076,13 @@ const params = new URLSearchParams(location.search);
 const matchId = params.get("id");
 
 console.log("ID:", matchId);
+
+const scoreText =
+    match["Result"] &&
+    match["Result"].trim() &&
+    match["Result"] !== "-:-"
+        ? match["Result"]
+        : "VS";
 
 if (!matchId) {
     document.getElementById("app").innerHTML =
@@ -2339,7 +2353,7 @@ document.getElementById("app").innerHTML = `
 		</div>
 		
 		<div class="score">
-		    ${escapeHtml(match["Result"] || "-:-")}
+		    ${escapeHtml(scoreText)}
 		</div>
 		
 		<div class="team-header away">
