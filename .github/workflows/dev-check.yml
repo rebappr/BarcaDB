@@ -1,0 +1,38 @@
+name: Dev Validation
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Check JSON files
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y jq
+
+          find . -name "*.json" | while read file
+          do
+            echo "Checking $file"
+            jq empty "$file"
+          done
+
+      - name: Check JavaScript syntax
+        run: |
+          find . -name "*.js" | while read file
+          do
+            echo "Checking $file"
+            node --check "$file"
+          done
