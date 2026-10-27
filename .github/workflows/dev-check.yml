@@ -22,12 +22,27 @@ jobs:
         with:
           node-version: 22
 
-      - name: Check JSON files
+      - name: Install jq
         run: |
           sudo apt-get update
           sudo apt-get install -y jq
 
-          find . -name "*.json" | while read file
+      - name: Check important files exist
+        run: |
+          test -f index.html
+          test -f match.html
+          test -f player.html
+          test -f manager.html
+
+          test -f data/data.json
+          test -f data/players.json
+          test -f data/managers.json
+          test -f data/current-season.json
+          test -f data/tablelaliga.json
+
+      - name: Validate JSON files
+        run: |
+          find data -name "*.json" | while read file
           do
             echo "Checking $file"
             jq empty "$file"
@@ -40,3 +55,14 @@ jobs:
             echo "Checking $file"
             node --check "$file"
           done
+
+      - name: Check current season data
+        run: |
+          jq length data/current-season.json
+
+      - name: Check La Liga table data
+        run: |
+          jq length data/tablelaliga.json
+
+      - name: Success
+        run: echo "All validation checks passed"
