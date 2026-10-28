@@ -1,7 +1,20 @@
 # BarcaDB
 
-Barcelona Statistics Database.
+Barça Database is a statistical database dedicated to FC Barcelona.
 
-Explore FC Barcelona matches, players, managers, seasons, statistics and historical records.
+The project includes:
 
-🌐 https://barcadb.com
+- match results
+- player statistics
+- manager statistics
+- season data
+- head-to-head records
+- historical insights and comparisons
+
+## Website
+
+https://barcadb.com
+
+## License
+
+All rights reserved.
