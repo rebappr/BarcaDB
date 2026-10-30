@@ -2345,7 +2345,7 @@ function normalizeName(name){
 
     return String(name || "")
         .toLowerCase()
-        .replace(/\/g, "")
+        .replace(/\./g, "")
         .replace(/\bfc\b/g, "")
         .replace(/\bcf\b/g, "")
         .replace(/\s+/g, " ")
