@@ -19743,13 +19743,13 @@
     "season": "2026/27",
     "position": "4",
     "club": "Real Betis",
-    "matches": "10",
-    "wins": "6",
+    "matches": "11",
+    "wins": "7",
     "draws": "2",
     "losses": "2",
-    "goals": "16:14",
-    "difference": "2",
-    "points": "20"
+    "goals": "18:14",
+    "difference": "4",
+    "points": "23"
   },
   {
     "season": "2026/27",
@@ -19935,12 +19935,12 @@
     "season": "2026/27",
     "position": "20",
     "club": "Málaga",
-    "matches": "10",
+    "matches": "11",
     "wins": "0",
     "draws": "5",
-    "losses": "5",
-    "goals": "7:19",
-    "difference": "-12",
+    "losses": "6",
+    "goals": "7:21",
+    "difference": "-14",
     "points": "5"
   }
 ]
