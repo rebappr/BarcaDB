@@ -282,9 +282,9 @@
 }
 
 .h2h-stat.matches{
-    background:rgba(0,77,152,.10);
-    border:1px solid rgba(0,77,152,.25);
-    color:#004D98;
+    background:var(--matches-grid-bg);
+    border:1px solid var(--matches-grid-border);
+    color:var(--number);
 }
 
 #barcaWins{
@@ -327,7 +327,7 @@
 }
 
 .draw-progress{
-    background:#818589;
+   background:var(--result-draw);
 }
 
 .madrid-progress{
@@ -345,8 +345,8 @@
 .goal-team{
     text-align:center;
 
-    background:rgba(0,77,152,.10);
-    border:1px solid rgba(0,77,152,.25);
+    background:var(--matches-grid-bg);
+    border:1px solid var(--matches-grid-border);
     color:#004D98;
     border-radius:16px;
 
@@ -718,10 +718,6 @@ color:var(--muted);
         background:rgba(0,77,152,.20);
         border:1px solid #004D98;
         color:#ffffff;
-    }
-
-    .draw-progress{
-        background:#FDC52C;
     }
 
     .filter-note{
