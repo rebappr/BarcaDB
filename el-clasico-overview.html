@@ -876,7 +876,7 @@ color:var(--muted);
 
 		<div class="sidebar-brand">
 		
-		    <a href="./" class="sidebar-brand-link">
+		    <a href="/" class="sidebar-brand-link">
 		
 		        <img
 		            src="logos/barcadb-logo.png"
@@ -943,7 +943,7 @@ color:var(--muted);
 	
 		<div class="sidebar-nav">
 		
-		    <a href="./">Home</a>
+		    <a href="/">Home</a>
 
 		    <div class="sidebar-section">
 		        Current Season
@@ -1002,7 +1002,7 @@ color:var(--muted);
 	
 	    <div class="header-center">
 	
-	        <a href="./" class="header-link">
+	        <a href="/" class="header-link">
 	            <img
 	                src="logos/barcadb-logo.png"
 	                class="header-logo"
@@ -1237,8 +1237,8 @@ let allMatches = [];
 let currentMatches = [];
 
 Promise.all([
-    fetch("data/data.json").then(r => r.json()),
-    fetch("data/current-season.json").then(r => r.json())
+    fetch("/data/data.json").then(r => r.json()),
+    fetch("/data/current-season.json").then(r => r.json())
 ])
 .then(([data, currentData]) => {
 
