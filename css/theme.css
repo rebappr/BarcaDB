@@ -34,7 +34,7 @@
     --result-draw-bg:rgba(250,204,21,.15);
     --result-loss-bg:rgba(239,68,68,.15);
 
-    --select-bg:#a3a3a3;
+    --select-bg:#2f374c;
     --select-text:#ffffff;
 
     --tabs-text:#a7a7a8;
@@ -66,6 +66,8 @@
    
     --matches-grid-bg:rgba(255,255,255,.20);
     --matches-grid-border:#ffffff;
+    --section-color:#D1D5DB;
+    --select-arrow:#FFFFFF;
 }
 
 
@@ -131,4 +133,6 @@
 
     --matches-grid-bg:rgba(0,77,152,.10);
     --matches-grid-border:rgba(0,77,152,.25);
+    --section-color:#4B5563;
+    --select-arrow:#374151;
 }
