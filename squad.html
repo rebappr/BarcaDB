@@ -543,7 +543,7 @@ display:none;
 
 		<div class="sidebar-brand">
 		
-		    <a href="/" class="sidebar-brand-link">
+		    <a href="./" class="sidebar-brand-link">
 		
 		        <img
 		            src="logos/barcadb-logo.png"
@@ -610,7 +610,7 @@ display:none;
 	
 		<div class="sidebar-nav">
 		
-		    <a href="/">Home</a>
+		    <a href="./">Home</a>
 
 		    <div class="sidebar-section">
 		        Current Season
@@ -669,7 +669,7 @@ display:none;
 	
 	    <div class="header-center">
 	
-	        <a href="/" class="header-link">
+	        <a href="./" class="header-link">
 	            <img
 	                src="logos/barcadb-logo.png"
 	                class="header-logo"
@@ -1017,11 +1017,9 @@ const positionOrder = {
 	
 	            ${players.map(player => {
 	
-	                const playerPhoto =
-	                    player.Photo &&
-	                    player.Photo.trim() !== ""
-	                        ? player.Photo
-	                        : null;
+					const playerPhoto =
+					    player.Photo &&
+					    player.Photo.trim() !== "";
 	
 					const initials = player.Name
 					    .split(" ")
@@ -1030,11 +1028,6 @@ const positionOrder = {
 					    .join("")
 					    .toUpperCase();
 
-					const countryCode =
-					    window.getCountryCode
-					        ? window.getCountryCode(player.Nationality)
-					        : "default";
-					
 					const stats =
 					    playerStats[player.Name] || {
 					        apps:0,
@@ -1071,11 +1064,12 @@ const positionOrder = {
 	                                ${
 	                                playerPhoto
 	                                ? `
-	                                <img
-	                                    src="${playerPhoto}"
-	                                    alt="${player.Name}"
-	                                    class="player-photo"
-	                                    loading="lazy">
+									<img
+									    src="logos/players/${player.Photo || 'default.webp'}"
+									    alt="${player.Name}"
+									    class="player-photo"
+									    loading="lazy"
+									    onerror="this.src='logos/players/default.webp'">
 	                                `
 	                                : `
 	                                <div class="player-initials">
@@ -1199,8 +1193,8 @@ let squadData = [];
 let playerStats = {};
 
 Promise.all([
-    fetch("/data/playersCS.json").then(r => r.json()),
-    fetch("/data/data.json").then(r => r.json())
+    fetch("data/playersCS.json").then(r => r.json()),
+    fetch("data/data.json").then(r => r.json())
 ])
 .then(([players, matches]) => {
 
