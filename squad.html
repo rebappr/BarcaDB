@@ -543,7 +543,7 @@ display:none;
 
 		<div class="sidebar-brand">
 		
-		    <a href="./" class="sidebar-brand-link">
+		    <a href="/" class="sidebar-brand-link">
 		
 		        <img
 		            src="logos/barcadb-logo.png"
@@ -610,7 +610,7 @@ display:none;
 	
 		<div class="sidebar-nav">
 		
-		    <a href="./">Home</a>
+		    <a href="/">Home</a>
 
 		    <div class="sidebar-section">
 		        Current Season
@@ -669,7 +669,7 @@ display:none;
 	
 	    <div class="header-center">
 	
-	        <a href="./" class="header-link">
+	        <a href="/" class="header-link">
 	            <img
 	                src="logos/barcadb-logo.png"
 	                class="header-logo"
@@ -945,6 +945,11 @@ const positionOrder = {
 	const filtered = players
 	    .filter(player => {
 	
+	        const stats =
+	            playerStats[player.Name] || {
+	                apps: 0
+	            };
+	
 	        const searchMatch =
 	            (player.Name || "")
 	            .toLowerCase()
@@ -954,7 +959,12 @@ const positionOrder = {
 	            currentPosition === "all" ||
 	            getPositionGroup(player.Position) === currentPosition;
 	
-	        return searchMatch && positionMatch;
+	        const playedMatch =
+	            stats.apps > 0;
+	
+	        return searchMatch &&
+	               positionMatch &&
+	               playedMatch;
 	    })
 	    .sort((a, b) => {
 	
@@ -1193,8 +1203,8 @@ let squadData = [];
 let playerStats = {};
 
 Promise.all([
-    fetch("data/playersCS.json").then(r => r.json()),
-    fetch("data/data.json").then(r => r.json())
+    fetch("/data/playersCS.json").then(r => r.json()),
+    fetch("/data/data.json").then(r => r.json())
 ])
 .then(([players, matches]) => {
 
