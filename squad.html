@@ -1066,7 +1066,7 @@ const positionOrder = {
 									<img
 									    src="${getCountryLogo(player.Nationality)}"
 									    alt="${player.Nationality}"
-									    onerror="this.src='logos/countries/default.png'">
+									    onerror="this.src='/logos/countries/default.png'">
 								</div>
 	
 	                            <div class="player-top">
@@ -1075,11 +1075,11 @@ const positionOrder = {
 	                                playerPhoto
 	                                ? `
 									<img
-									    src="logos/players/${player.Photo || 'default.webp'}"
+									    src="/logos/players/${player.Photo || 'default.webp'}"
 									    alt="${player.Name}"
 									    class="player-photo"
 									    loading="lazy"
-									    onerror="this.src='logos/players/default.webp'">
+									    onerror="this.src='/logos/players/default.webp'">
 	                                `
 	                                : `
 	                                <div class="player-initials">
