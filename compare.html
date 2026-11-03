@@ -502,7 +502,7 @@
 
 		<div class="sidebar-brand">
 		
-		    <a href="./" class="sidebar-brand-link">
+		    <a href="/" class="sidebar-brand-link">
 		
 		        <img
 		            src="logos/barcadb-logo.png"
@@ -569,7 +569,7 @@
 	
 		<div class="sidebar-nav">
 		
-		    <a href="./">Home</a>
+		    <a href="/">Home</a>
 
 		    <div class="sidebar-section">
 		        Current Season
@@ -628,7 +628,7 @@
 	
 	    <div class="header-center">
 	
-	        <a href="./" class="header-link">
+	        <a href="/" class="header-link">
 	            <img
 	                src="logos/barcadb-logo.png"
 	                class="header-logo"
@@ -1076,8 +1076,8 @@ let allMatches = [];
 let playersData = [];
 
 Promise.all([
-    fetch("data/data.json").then(r => r.json()),
-    fetch("data/players.json").then(r => r.json())
+    fetch("/data/data.json").then(r => r.json()),
+    fetch("/data/players.json").then(r => r.json())
 ])
 .then(([matches, players]) => {
 
