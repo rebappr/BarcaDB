@@ -16,6 +16,9 @@
 
 <title>Barça Database | FC Barcelona Statistics, Records & El Clásico History</title>
 
+<meta name="robots" 
+	content="index, follow">
+
 <meta name="description"
       content="Explore FC Barcelona statistics, player records, managers, seasons, opponents and complete El Clásico history with head-to-head records, goalscorers and match statistics.">
 
@@ -36,9 +39,6 @@
 
 <meta name="keywords"
       content="FC Barcelona, Barcelona statistics, Barca database, El Clasico, El Clásico, Barcelona vs Real Madrid, Barcelona records, Barcelona players, FC Barcelona history, Clasico statistics">
-
-<meta name="robots"
-      content="index,follow">
 
 <meta name="author"
       content="RE">
@@ -792,6 +792,52 @@
 	</div>
 
 </div>
+
+<div class="home-page" style="margin-top:12px;">
+
+	<div class="home-column">
+
+		<div class="widget-title">
+		    Top Brazilians in Barcelona History
+		</div>
+		
+		<div class="widget-card">
+		    <div id="topBrazilians">
+		        Loading...
+		    </div>
+		</div>
+		
+	</div>
+
+	<div class="home-column">
+
+		<div class="widget-title">
+		    Top Players Under Flick
+		</div>
+		
+		<div class="widget-card">
+		    <div id="underFlick">
+		        Loading...
+		    </div>
+		</div>
+		
+	</div>
+
+	<div class="home-column">
+		
+		<div class="widget-title">
+		    Top Barcelona Managers (100+ Matches)
+		</div>
+		
+		<div class="widget-card">
+		    <div id="topManagers">
+		        Loading...
+		    </div>
+		</div>
+		
+	</div>
+
+</div>
 </div>
 </div>
 
@@ -800,12 +846,33 @@
 <script>
 
 let allMatches = [];
+let allPlayers = [];
 
-fetch("/data/data.json")
-    .then(r => r.json())
-    .then(matchesData => {
+Promise.all([
+    fetch("/data/data.json").then(r => r.json()),
+    fetch("/data/players.json").then(r => r.json())
+])
 
-        allMatches = matchesData;
+.then(([matchesData, playersData]) => {
+
+    allMatches = matchesData;
+    allPlayers = playersData;
+
+    renderHome();
+
+})
+
+.catch(error => {
+
+    console.error("Failed to load data:", error);
+
+    document.getElementById("lastMatch").innerHTML =
+        "Unable to load match data";
+
+    document.getElementById("nextMatch").innerHTML =
+        "Unable to load match data";
+
+});
 
     function parseDate(date) {
 
@@ -833,12 +900,16 @@ function renderHome(){
     renderNextMatch();
 
     renderRecentForm();
-	renderSeasonOverview();
+    renderSeasonOverview();
 
     renderSeasonDebutants();
     renderSeasonStatistics();
 
-	renderInsights();
+    renderTopBrazilians();
+	renderUnderFlick();
+	renderTopManagers();
+
+    renderInsights();
 
     initPersonSearch();
 }
@@ -1063,6 +1134,439 @@ function renderHome(){
             </div>
         `;
     }
+
+function renderTopManagers(){
+
+    const managers = {};
+
+    allMatches.forEach(match => {
+
+        const manager = match.Manager;
+
+        if(!manager) return;
+
+        if(
+            !match.Result ||
+            match.Result === "-:-"
+        ) return;
+
+        if(!managers[manager]){
+
+            managers[manager] = {
+
+                matches: 0,
+                wins: 0,
+                goalsFor: 0,
+                goalsAgainst: 0
+
+            };
+
+        }
+
+        managers[manager].matches++;
+
+        managers[manager].goalsFor +=
+            Number(match.Scored || 0);
+
+        managers[manager].goalsAgainst +=
+            Number(match.Conceded || 0);
+
+        if(match["Result type"] === "W"){
+            managers[manager].wins++;
+        }
+
+    });
+
+	const top = Object.entries(managers)
+	
+	    .map(([name, stats]) => ({
+	
+	        name,
+	
+	        matches: stats.matches,
+	
+	        gf: stats.goalsFor,
+	
+	        ga: stats.goalsAgainst,
+	
+	        winPct:
+	            stats.matches
+	            ? ((stats.wins / stats.matches) * 100)
+	            : 0
+	
+	    }))
+	
+	    .filter(manager => manager.matches >= 100)
+
+        .sort((a,b) => b.winPct - a.winPct)
+
+        .slice(0,10);
+
+    let html = `
+        <table class="stats-table">
+
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Manager</th>
+                    <th>M</th>
+                    <th>GF</th>
+                    <th>GA</th>
+                    <th>W%</th>
+                </tr>
+            </thead>
+
+            <tbody>
+    `;
+
+    top.forEach((m,index) => {
+
+        html += `
+            <tr>
+
+                <td>${index + 1}</td>
+
+                <td>
+                    <a
+                        class="player-link"
+                        href="manager.html?name=${encodeURIComponent(m.name)}">
+                        ${m.name}
+                    </a>
+                </td>
+
+                <td>${m.matches}</td>
+
+                <td>${m.gf}</td>
+
+                <td>${m.ga}</td>
+
+                <td>${m.winPct.toFixed(2)}%</td>
+
+            </tr>
+        `;
+
+    });
+
+    html += `
+            </tbody>
+        </table>
+    `;
+
+    document.getElementById(
+        "topManagers"
+    ).innerHTML = html;
+}
+
+function renderTopBrazilians(){
+
+    if(!allPlayers.length) return;
+
+    const brazilianPlayers = new Set(
+
+        allPlayers
+
+        .filter(player =>
+
+            player["Nationality 1"] === "Brazil" ||
+            player["Nationality 2"] === "Brazil"
+
+        )
+
+        .map(player => player.Player)
+
+    );
+
+    const stats = {};
+
+    function addPlayer(name){
+
+        if(!name) return null;
+
+        name = String(name).trim();
+
+        if(name.includes("(OG)")) return null;
+
+        if(!brazilianPlayers.has(name)) return null;
+
+        if(!stats[name]){
+
+            stats[name] = {
+
+                matches:0,
+                goals:0,
+                assists:0
+
+            };
+
+        }
+
+        return name;
+    }
+
+    allMatches.forEach(match => {
+
+        const appeared = new Set();
+
+        for(let i=1;i<=11;i++){
+
+            const player = addPlayer(
+                match[`Player name ${i}`]
+            );
+
+            if(player){
+                appeared.add(player);
+            }
+
+        }
+
+        for(let i=1;i<=12;i++){
+
+            const player = addPlayer(
+                match[`Sub on ${i}`]
+            );
+
+            if(player){
+                appeared.add(player);
+            }
+
+        }
+
+        appeared.forEach(player => {
+            stats[player].matches++;
+        });
+
+        for(let i=1;i<=12;i++){
+
+            const player = addPlayer(
+                match[`Goal Player ${i}`]
+            );
+
+            if(player){
+                stats[player].goals++;
+            }
+
+        }
+
+        for(let i=1;i<=12;i++){
+
+            const player = addPlayer(
+                match[`Assist Player ${i}`]
+            );
+
+            if(player){
+                stats[player].assists++;
+            }
+
+        }
+
+    });
+
+    const top = Object.entries(stats)
+
+    .sort((a,b) =>
+        (b[1].goals + b[1].assists)
+        -
+        (a[1].goals + a[1].assists)
+    )
+
+    .slice(0,10);
+
+    let html = `
+
+    <table class="stats-table">
+
+        <thead>
+
+            <tr>
+                <th>#</th>
+                <th>Player</th>
+                <th>MP</th>
+                <th>G</th>
+                <th>A</th>
+                <th>G+A</th>
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+    `;
+
+    top.forEach(([name,s], index) => {
+
+        html += `
+
+        <tr>
+
+            <td>${index+1}</td>
+
+            <td>
+                <a
+                    class="player-link"
+                    href="player.html?name=${encodeURIComponent(name)}">
+
+                    ${name}
+
+                </a>
+            </td>
+
+            <td>${s.matches}</td>
+            <td>${s.goals}</td>
+            <td>${s.assists}</td>
+            <td>${s.goals + s.assists}</td>
+
+        </tr>
+
+        `;
+
+    });
+
+    html += `
+        </tbody>
+    </table>
+    `;
+
+    document.getElementById(
+        "topBrazilians"
+    ).innerHTML = html;
+}
+
+function renderUnderFlick(){
+
+    const stats = {};
+
+    function addPlayer(name){
+
+        if(!name) return null;
+
+        name = String(name).trim();
+
+        if(name.includes("(OG)")) return null;
+
+        if(!stats[name]){
+
+            stats[name] = {
+                matches: 0,
+                goals: 0,
+                assists: 0
+            };
+
+        }
+
+        return name;
+    }
+
+    const flickMatches = allMatches.filter(
+        match => match.Manager === "Hansi Flick"
+    );
+
+    flickMatches.forEach(match => {
+
+        const appeared = new Set();
+
+        for(let i=1;i<=11;i++){
+
+            const player = addPlayer(
+                match[`Player name ${i}`]
+            );
+
+            if(player){
+                appeared.add(player);
+            }
+        }
+
+        for(let i=1;i<=12;i++){
+
+            const player = addPlayer(
+                match[`Sub on ${i}`]
+            );
+
+            if(player){
+                appeared.add(player);
+            }
+        }
+
+        appeared.forEach(player => {
+            stats[player].matches++;
+        });
+
+        for(let i=1;i<=12;i++){
+
+            const player = addPlayer(
+                match[`Goal Player ${i}`]
+            );
+
+            if(player){
+                stats[player].goals++;
+            }
+        }
+
+        for(let i=1;i<=12;i++){
+
+            const player = addPlayer(
+                match[`Assist Player ${i}`]
+            );
+
+            if(player){
+                stats[player].assists++;
+            }
+        }
+
+    });
+
+    const top = Object.entries(stats)
+        .sort((a,b) =>
+            (b[1].goals + b[1].assists)
+            -
+            (a[1].goals + a[1].assists)
+        )
+        .slice(0,10);
+
+    let html = `
+    <table class="stats-table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Player</th>
+                <th>MP</th>
+                <th>G</th>
+                <th>A</th>
+                <th>G+A</th>
+            </tr>
+        </thead>
+        <tbody>
+    `;
+
+    top.forEach(([name,s], index) => {
+
+        html += `
+        <tr>
+            <td>${index+1}</td>
+
+            <td>
+                <a
+                    class="player-link"
+                    href="player.html?name=${encodeURIComponent(name)}">
+                    ${name}
+                </a>
+            </td>
+
+            <td>${s.matches}</td>
+            <td>${s.goals}</td>
+            <td>${s.assists}</td>
+            <td>${s.goals + s.assists}</td>
+        </tr>
+        `;
+
+    });
+
+    html += `
+        </tbody>
+    </table>
+    `;
+
+    document.getElementById("underFlick").innerHTML = html;
+}
 
 function renderRecentForm(){
 
@@ -1796,21 +2300,6 @@ function initPersonSearch(){
 	);
 
 }
-
-renderHome();
-
-})
-.catch(error => {
-
-    console.error("Failed to load data:", error);
-
-    document.getElementById("lastMatch").innerHTML =
-        "Unable to load match data";
-
-    document.getElementById("nextMatch").innerHTML =
-        "Unable to load match data";
-
-});
 
 </script>
 <script src="scripts/sidebar.js"></script>
