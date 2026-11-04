@@ -67,19 +67,19 @@
 <style>
 
 .left-panel{
+    flex:3;
+    min-width:0;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+.right-panel{
     flex:2;
     min-width:0;
     display:flex;
     flex-direction:column;
-    gap:8px;
-}
-
-.right-panel{
-    flex:1;
-    min-width:0;
-    display:flex;
-    flex-direction:column;
-    gap:8px;
+    gap:12px;
 }
 
 .opponent-card{
@@ -152,40 +152,14 @@ margin-bottom:4px;
 .summary-box.matches,
 .summary-box.goals{
     background:rgba(0,77,152,.10);
-    border:1px solid rgba(0,77,152,.25);
-    color:#004D98;
+    border:1px solid var(--matches-grid-border);
+    color:var(--number);
 }
 
 .summary-box.matches b,
 .summary-box.goals b{
-    color:#004D98;
+    color:var(--number);
 }
-
-@media (prefers-color-scheme: dark){
-      
-.opponent-match:hover{
-    background:var(--card-bg);
-}
-      
-.opponent-season{
-    background:#5b5420;
-}
-
-.opponent-season:hover{
-    background:#746923;
-}
-
-.summary-box.matches,
-.summary-box.goals{
-    background:rgba(0,77,152,.20);
-    border:1px solid #004D98;
-    color:#ffffff;
-}
-
-.summary-box.matches b,
-.summary-box.goals b{
-    color:#ffffff;
-}}
 
 .stats-table{
 width:100%;
@@ -233,11 +207,22 @@ text-align:left;
 }
 
 .opponent-match:hover{
-    background:#e5e7eb;
+    background:var(--meta-bg);
 }
 
 .opponent-match:last-child{
 border-bottom:none;
+}
+
+@media (prefers-color-scheme: dark){
+      
+.opponent-season{
+    background:#5b5420;
+}
+
+.opponent-season:hover{
+    background:#746923;
+}
 }
 
 .result-badge{
@@ -335,16 +320,61 @@ flex-shrink:0;
 #opponentHeader{
     display:flex;
     flex-direction:column;
-    gap:8px;
+    gap:12px;
 }
 
 #opponentProfile{
     display:flex;
     flex-direction:column;
-    gap:8px;
+    gap:12px;
+}
+
+.flick-table{
+    width:100%;
+    border-collapse:collapse;
+    table-layout:fixed;
+}
+
+.flick-table th,
+.flick-table td{
+    padding:8px 4px;
+    border-bottom:1px solid var(--meta-border);
+    font-size:13px;
+}
+
+.flick-table th:first-child,
+.flick-table td:first-child{
+    text-align:left;
+}
+
+.flick-table th:not(:first-child),
+.flick-table td:not(:first-child){
+    width:60px;
+    text-align:center;
+}
+
+.flick-selected,
+.flick-column-selected{
+    color:white;
+    background:
+        linear-gradient(
+        135deg,
+        #004D98,
+        #1e3a8a
+        );
+}
+
+.flick-table th:not(:first-child){
+    cursor:pointer;
+    user-select:none;
 }
 
 @media(max-width:820px){
+
+.flick-table th:not(:first-child),
+.flick-table td:not(:first-child){
+    width:40px;
+}
 
     .opponent-logo{
         width:60px;
@@ -361,6 +391,10 @@ flex-shrink:0;
 		width:100% !important;
 		min-width:0;
 		max-width:100%;
+		}
+
+	.right-panel{
+		margin-top:12px;
 		}
 
 	.container{
@@ -511,31 +545,35 @@ font-size:16px;
 	
 	    </div>
 	
-	    <div class="sidebar-nav">
-	
-	        <a href="/">Home page</a>
-	
-	        <a href="statistics.html">
-	            Statistics
-	        </a>
-	
-	        <a href="season.html">
-	            Seasons
-	        </a>
-	
-	        <a href="insights.html">
-	            Insights
-	        </a>
-	
-	        <a href="compare.html">
-	            Compare
-	        </a>
-	
-	        <a href="el-clasico.html">
-	            El Clásico
-	        </a>
-	
-	    </div>
+		<div class="sidebar-nav">
+		
+		    <a href="/">Home</a>
+
+		    <div class="sidebar-section">
+		        Current Season
+		    </div>
+			
+		    <a href="matches.html">Matches</a>
+		    <a href="standings.html">Standings</a>
+		    <a href="squad.html">Squad</a>
+
+		    <div class="sidebar-section">
+		        Historical data
+		    </div>
+
+		    <a href="statistics.html">Statistics</a>
+		    <a href="season.html">Seasons</a>
+		    <a href="insights.html">Insights</a>
+		    <a href="compare.html">Compare</a>
+		
+		    <div class="sidebar-section">
+		        El Clásico
+		    </div>
+		
+		    <a href="el-clasico-overview.html">Overview</a>
+		    <a href="el-clasico-match-history.html">Match History</a>
+		
+		</div>
 	
 	</aside>
 
@@ -568,16 +606,16 @@ font-size:16px;
 	
 	    <div class="header-center">
 	
-	        <a href="/">
+	        <a href="/" class="header-link">
 	            <img
 	                src="logos/barcadb-logo.png"
 	                class="header-logo"
 	                alt="Barça DB">
-	        </a>
-	
+
 	        <div class="header-text">
 	            <h1>Barça Database</h1>
 	        </div>
+	        </a>
 	
 	    </div>
 
@@ -609,9 +647,17 @@ font-size:16px;
 
     <div class="right-panel">
 		
-	    <div class="widget-title">
-	        Statistics
-	    </div>
+		<div
+		    class="widget-title"
+		    id="topOpponentTitle">
+		    Top 5 Against Opponent
+		</div>
+		
+		<div class="widget-card">
+		    <div id="topAgainstOpponent">
+		        Loading...
+		    </div>
+		</div>
 
     </div>
 
@@ -630,11 +676,11 @@ const params =
 new URLSearchParams(location.search);
 
 const opponentName =
-params.get("name");
+params.get("name") || "Unknown opponent";
 
 const competitionLogos = {
     "Copa del Rey": "copa.png",
-    "Copa de la Liga": "copa-liga.png",
+    "Copa de La Liga": "copa-liga.png",
     "Copa de la Coronación": "copa.png",
     "FIFA Club World Cup": "fifa.png",
     "Qualification for La Liga": "laliga.png",
@@ -664,16 +710,20 @@ if (canonical) {
 }
 
 let allMatches = [];
+let opponentSortColumn = "total";
+let opponentSortDirection = "desc";
 
 fetch("/data/data.json")
 .then(r => r.json())
 .then(data => {
 
-    allMatches = data;
-
-    renderOpponent(opponentName, data);
-
-    initPersonSearch();
+	allMatches = data;
+	
+	renderOpponent(opponentName, data);
+	
+	renderTopAgainstOpponent();
+	
+	initPersonSearch();
 
 })
 .catch(error => {
@@ -686,6 +736,227 @@ function statValue(value){
     return value === 0 ? "-" : value;
 }
 
+function sortOpponent(column){
+
+    if(opponentSortColumn === column){
+
+        opponentSortDirection =
+            opponentSortDirection === "asc"
+            ? "desc"
+            : "asc";
+
+    }else{
+
+        opponentSortColumn = column;
+        opponentSortDirection = "desc";
+
+    }
+
+    renderTopAgainstOpponent();
+}
+
+window.sortOpponent = sortOpponent;
+
+function renderTopAgainstOpponent(){
+
+    const stats = {};
+
+    const opponentMatches = allMatches.filter(
+        m => m["Opp. Team"] === opponentName
+    );
+
+    function addPlayer(name){
+
+        if(!name) return;
+
+        name = String(name).trim();
+
+        if(name.includes("(OG)")) return;
+
+        if(!stats[name]){
+
+            stats[name] = {
+                appearances:0,
+                goals:0,
+                assists:0
+            };
+
+        }
+    }
+
+    opponentMatches.forEach(match => {
+
+        // základná zostava
+        for(let i=1;i<=11;i++){
+
+            const player = match[`Player name ${i}`];
+
+            if(player){
+
+                addPlayer(player);
+                stats[player].appearances++;
+
+            }
+
+        }
+
+        // striedajúci
+        for(let i=1;i<=12;i++){
+
+            const player =
+            match[`Substitution IN Player ${i}`];
+
+            if(player){
+
+                addPlayer(player);
+                stats[player].appearances++;
+
+            }
+
+        }
+
+        // góly
+        for(let i=1;i<=12;i++){
+
+            const player =
+            match[`Goal Player ${i}`];
+
+            if(player && !player.includes("(OG)")){
+
+                addPlayer(player);
+                stats[player].goals++;
+
+            }
+
+        }
+
+        // asistencie
+        for(let i=1;i<=12;i++){
+
+            const player =
+            match[`Assist Player ${i}`];
+
+            if(player){
+
+                addPlayer(player);
+                stats[player].assists++;
+
+            }
+
+        }
+
+    });
+
+    const top = Object.entries(stats)
+
+    .map(([name,s]) => ({
+        name,
+        appearances:s.appearances,
+        goals:s.goals,
+        assists:s.assists,
+        total:s.goals + s.assists
+    }))
+
+    .sort((a,b) => {
+
+        const valueA = a[opponentSortColumn];
+        const valueB = b[opponentSortColumn];
+
+        return opponentSortDirection === "asc"
+            ? valueA - valueB
+            : valueB - valueA;
+
+    })
+
+    .slice(0,5);
+
+    let html = `
+    <table class="flick-table">
+
+        <thead>
+
+            <tr>
+
+                <th>Player</th>
+
+                <th
+                    class="${opponentSortColumn==='appearances' ? 'flick-selected' : ''}"
+                    onclick="sortOpponent('appearances')">
+                    M
+                </th>
+
+                <th
+                    class="${opponentSortColumn==='goals' ? 'flick-selected' : ''}"
+                    onclick="sortOpponent('goals')">
+                    G
+                </th>
+
+                <th
+                    class="${opponentSortColumn==='assists' ? 'flick-selected' : ''}"
+                    onclick="sortOpponent('assists')">
+                    A
+                </th>
+
+                <th
+                    class="${opponentSortColumn==='total' ? 'flick-selected' : ''}"
+                    onclick="sortOpponent('total')">
+                    G+A
+                </th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+    `;
+
+    top.forEach(player => {
+
+        html += `
+        <tr>
+
+            <td>
+
+                <a
+                    class="player-link"
+                    href="player.html?name=${encodeURIComponent(player.name)}">
+
+                    ${player.name}
+
+                </a>
+
+            </td>
+
+            <td class="${opponentSortColumn==='appearances' ? 'flick-column-selected' : ''}">
+                ${player.appearances}
+            </td>
+
+            <td class="${opponentSortColumn==='goals' ? 'flick-column-selected' : ''}">
+                ${player.goals}
+            </td>
+
+            <td class="${opponentSortColumn==='assists' ? 'flick-column-selected' : ''}">
+                ${player.assists}
+            </td>
+
+            <td class="${opponentSortColumn==='total' ? 'flick-column-selected' : ''}">
+                ${player.total}
+            </td>
+
+        </tr>
+        `;
+
+    });
+
+    html += `
+        </tbody>
+    </table>
+    `;
+
+    document.getElementById(
+        "topAgainstOpponent"
+    ).innerHTML = html;
+}
 function getClubLogo(team){
     return team
         .toLowerCase()
@@ -760,6 +1031,9 @@ const goalsAgainst = matches.reduce(
 	</div>
 	
 	`;
+
+	document.getElementById("topOpponentTitle").textContent =
+    `Top 10 Against ${opponentName}`;
 
     document.getElementById("opponentProfile").innerHTML = `
 
