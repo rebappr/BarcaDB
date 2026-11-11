@@ -1,22 +1,22 @@
 {
   "Raphinha": {
-    "overall": 10,
-    "form": 10,
-    "matches": 1,
-    "minutes": 79,
-    "goals": 2,
-    "assists": 1,
-    "yellowCards": 0,
+    "overall": 8.28,
+    "form": 7.49,
+    "matches": 14,
+    "minutes": 1005,
+    "goals": 19,
+    "assists": 3,
+    "yellowCards": 1,
     "redCards": 0,
     "cleanSheets": 0,
     "savePct": null,
     "seasons": {
       "2026/27": {
-        "rating": 10,
-        "matches": 1,
-        "minutes": 79,
-        "goals": 2,
-        "assists": 1
+        "rating": 8.28,
+        "matches": 14,
+        "minutes": 1005,
+        "goals": 19,
+        "assists": 3
       }
     },
     "bestMatch": {
@@ -25,42 +25,107 @@
       "rating": 10
     },
     "worstMatch": {
-      "matchId": 4457,
+      "matchId": 4467,
       "season": "2026/27",
-      "rating": 10
+      "rating": 6.03
     },
     "history": [
       {
         "matchId": 4457,
         "season": "2026/27",
         "rating": 10
+      },
+      {
+        "matchId": 4458,
+        "season": "2026/27",
+        "rating": 7.23
+      },
+      {
+        "matchId": 4459,
+        "season": "2026/27",
+        "rating": 9.77
+      },
+      {
+        "matchId": 4460,
+        "season": "2026/27",
+        "rating": 7.95
+      },
+      {
+        "matchId": 4461,
+        "season": "2026/27",
+        "rating": 9.04
+      },
+      {
+        "matchId": 4462,
+        "season": "2026/27",
+        "rating": 8.45
+      },
+      {
+        "matchId": 4463,
+        "season": "2026/27",
+        "rating": 10
+      },
+      {
+        "matchId": 4464,
+        "season": "2026/27",
+        "rating": 10
+      },
+      {
+        "matchId": 4467,
+        "season": "2026/27",
+        "rating": 6.03
+      },
+      {
+        "matchId": 4468,
+        "season": "2026/27",
+        "rating": 6.2
+      },
+      {
+        "matchId": 4469,
+        "season": "2026/27",
+        "rating": 7.92
+      },
+      {
+        "matchId": 4470,
+        "season": "2026/27",
+        "rating": 8.5
+      },
+      {
+        "matchId": 4471,
+        "season": "2026/27",
+        "rating": 8.58
+      },
+      {
+        "matchId": 4472,
+        "season": "2026/27",
+        "rating": 6.24
       }
     ]
   },
   "Joao Cancelo": {
-    "overall": 6,
-    "form": 6,
-    "matches": 1,
-    "minutes": 11,
-    "goals": 0,
-    "assists": 0,
-    "yellowCards": 0,
+    "overall": 6.69,
+    "form": 6.5,
+    "matches": 13,
+    "minutes": 779,
+    "goals": 2,
+    "assists": 3,
+    "yellowCards": 3,
     "redCards": 0,
     "cleanSheets": 0,
     "savePct": null,
     "seasons": {
       "2026/27": {
-        "rating": 6,
-        "matches": 1,
-        "minutes": 11,
-        "goals": 0,
-        "assists": 0
+        "rating": 6.69,
+        "matches": 13,
+        "minutes": 779,
+        "goals": 2,
+        "assists": 3
       }
     },
     "bestMatch": {
-      "matchId": 4457,
+      "matchId": 4466,
       "season": "2026/27",
-      "rating": 6
+      "rating": 8.08
     },
     "worstMatch": {
       "matchId": 4457,
@@ -72,147 +137,402 @@
         "matchId": 4457,
         "season": "2026/27",
         "rating": 6
+      },
+      {
+        "matchId": 4458,
+        "season": "2026/27",
+        "rating": 6.01
+      },
+      {
+        "matchId": 4459,
+        "season": "2026/27",
+        "rating": 6.01
+      },
+      {
+        "matchId": 4461,
+        "season": "2026/27",
+        "rating": 7.92
+      },
+      {
+        "matchId": 4462,
+        "season": "2026/27",
+        "rating": 6
+      },
+      {
+        "matchId": 4463,
+        "season": "2026/27",
+        "rating": 7.6
+      },
+      {
+        "matchId": 4464,
+        "season": "2026/27",
+        "rating": 6.88
+      },
+      {
+        "matchId": 4466,
+        "season": "2026/27",
+        "rating": 8.08
+      },
+      {
+        "matchId": 4468,
+        "season": "2026/27",
+        "rating": 6.05
+      },
+      {
+        "matchId": 4469,
+        "season": "2026/27",
+        "rating": 6.92
+      },
+      {
+        "matchId": 4470,
+        "season": "2026/27",
+        "rating": 6.42
+      },
+      {
+        "matchId": 4471,
+        "season": "2026/27",
+        "rating": 7.11
+      },
+      {
+        "matchId": 4472,
+        "season": "2026/27",
+        "rating": 6
       }
     ]
   },
   "Karim Adeyemi": {
-    "overall": 7.35,
-    "form": 7.35,
-    "matches": 1,
-    "minutes": 64,
-    "goals": 1,
-    "assists": 0,
-    "yellowCards": 0,
+    "overall": 6.42,
+    "form": 6.07,
+    "matches": 15,
+    "minutes": 553,
+    "goals": 4,
+    "assists": 2,
+    "yellowCards": 2,
     "redCards": 0,
     "cleanSheets": 0,
     "savePct": null,
     "seasons": {
       "2026/27": {
-        "rating": 7.35,
-        "matches": 1,
-        "minutes": 64,
-        "goals": 1,
-        "assists": 0
+        "rating": 6.42,
+        "matches": 15,
+        "minutes": 553,
+        "goals": 4,
+        "assists": 2
       }
     },
     "bestMatch": {
-      "matchId": 4457,
+      "matchId": 4463,
       "season": "2026/27",
-      "rating": 7.35
+      "rating": 7.51
     },
     "worstMatch": {
-      "matchId": 4457,
+      "matchId": 4469,
       "season": "2026/27",
-      "rating": 7.35
+      "rating": 5.98
     },
     "history": [
       {
         "matchId": 4457,
         "season": "2026/27",
         "rating": 7.35
+      },
+      {
+        "matchId": 4458,
+        "season": "2026/27",
+        "rating": 6.03
+      },
+      {
+        "matchId": 4459,
+        "season": "2026/27",
+        "rating": 6.2
+      },
+      {
+        "matchId": 4460,
+        "season": "2026/27",
+        "rating": 6.03
+      },
+      {
+        "matchId": 4461,
+        "season": "2026/27",
+        "rating": 7.47
+      },
+      {
+        "matchId": 4462,
+        "season": "2026/27",
+        "rating": 6.59
+      },
+      {
+        "matchId": 4463,
+        "season": "2026/27",
+        "rating": 7.51
+      },
+      {
+        "matchId": 4464,
+        "season": "2026/27",
+        "rating": 6.06
+      },
+      {
+        "matchId": 4465,
+        "season": "2026/27",
+        "rating": 6.01
+      },
+      {
+        "matchId": 4466,
+        "season": "2026/27",
+        "rating": 6.75
+      },
+      {
+        "matchId": 4467,
+        "season": "2026/27",
+        "rating": 6.03
+      },
+      {
+        "matchId": 4468,
+        "season": "2026/27",
+        "rating": 6.03
+      },
+      {
+        "matchId": 4469,
+        "season": "2026/27",
+        "rating": 5.98
+      },
+      {
+        "matchId": 4470,
+        "season": "2026/27",
+        "rating": 6.3
+      },
+      {
+        "matchId": 4472,
+        "season": "2026/27",
+        "rating": 6
       }
     ]
   },
   "Dani Olmo": {
-    "overall": 6.03,
-    "form": 6.03,
-    "matches": 1,
-    "minutes": 26,
-    "goals": 0,
-    "assists": 0,
-    "yellowCards": 0,
+    "overall": 6.4,
+    "form": 6.38,
+    "matches": 12,
+    "minutes": 518,
+    "goals": 1,
+    "assists": 4,
+    "yellowCards": 2,
     "redCards": 0,
     "cleanSheets": 0,
     "savePct": null,
     "seasons": {
       "2026/27": {
-        "rating": 6.03,
-        "matches": 1,
-        "minutes": 26,
-        "goals": 0,
-        "assists": 0
+        "rating": 6.4,
+        "matches": 12,
+        "minutes": 518,
+        "goals": 1,
+        "assists": 4
       }
     },
     "bestMatch": {
-      "matchId": 4457,
+      "matchId": 4463,
       "season": "2026/27",
-      "rating": 6.03
+      "rating": 7.44
     },
     "worstMatch": {
-      "matchId": 4457,
+      "matchId": 4462,
       "season": "2026/27",
-      "rating": 6.03
+      "rating": 6.01
     },
     "history": [
       {
         "matchId": 4457,
         "season": "2026/27",
         "rating": 6.03
+      },
+      {
+        "matchId": 4458,
+        "season": "2026/27",
+        "rating": 6.12
+      },
+      {
+        "matchId": 4459,
+        "season": "2026/27",
+        "rating": 6.11
+      },
+      {
+        "matchId": 4460,
+        "season": "2026/27",
+        "rating": 6.41
+      },
+      {
+        "matchId": 4461,
+        "season": "2026/27",
+        "rating": 6.83
+      },
+      {
+        "matchId": 4462,
+        "season": "2026/27",
+        "rating": 6.01
+      },
+      {
+        "matchId": 4463,
+        "season": "2026/27",
+        "rating": 7.44
+      },
+      {
+        "matchId": 4464,
+        "season": "2026/27",
+        "rating": 6.08
+      },
+      {
+        "matchId": 4465,
+        "season": "2026/27",
+        "rating": 6.15
+      },
+      {
+        "matchId": 4466,
+        "season": "2026/27",
+        "rating": 6.93
+      },
+      {
+        "matchId": 4467,
+        "season": "2026/27",
+        "rating": 6.69
+      },
+      {
+        "matchId": 4468,
+        "season": "2026/27",
+        "rating": 6.06
       }
     ]
   },
   "Fermin López": {
-    "overall": 9.75,
-    "form": 9.75,
-    "matches": 1,
-    "minutes": 90,
-    "goals": 2,
-    "assists": 0,
-    "yellowCards": 0,
+    "overall": 7.49,
+    "form": 7.97,
+    "matches": 15,
+    "minutes": 1007,
+    "goals": 8,
+    "assists": 7,
+    "yellowCards": 3,
     "redCards": 0,
     "cleanSheets": 0,
     "savePct": null,
     "seasons": {
       "2026/27": {
-        "rating": 9.75,
-        "matches": 1,
-        "minutes": 90,
-        "goals": 2,
-        "assists": 0
+        "rating": 7.49,
+        "matches": 15,
+        "minutes": 1007,
+        "goals": 8,
+        "assists": 7
       }
     },
     "bestMatch": {
-      "matchId": 4457,
+      "matchId": 4470,
       "season": "2026/27",
-      "rating": 9.75
+      "rating": 10
     },
     "worstMatch": {
-      "matchId": 4457,
+      "matchId": 4464,
       "season": "2026/27",
-      "rating": 9.75
+      "rating": 5.94
     },
     "history": [
       {
         "matchId": 4457,
         "season": "2026/27",
         "rating": 9.75
+      },
+      {
+        "matchId": 4458,
+        "season": "2026/27",
+        "rating": 8.6
+      },
+      {
+        "matchId": 4459,
+        "season": "2026/27",
+        "rating": 6.09
+      },
+      {
+        "matchId": 4460,
+        "season": "2026/27",
+        "rating": 9.38
+      },
+      {
+        "matchId": 4461,
+        "season": "2026/27",
+        "rating": 6.09
+      },
+      {
+        "matchId": 4462,
+        "season": "2026/27",
+        "rating": 6.43
+      },
+      {
+        "matchId": 4464,
+        "season": "2026/27",
+        "rating": 5.94
+      },
+      {
+        "matchId": 4465,
+        "season": "2026/27",
+        "rating": 5.94
+      },
+      {
+        "matchId": 4466,
+        "season": "2026/27",
+        "rating": 7.57
+      },
+      {
+        "matchId": 4467,
+        "season": "2026/27",
+        "rating": 6.67
+      },
+      {
+        "matchId": 4468,
+        "season": "2026/27",
+        "rating": 7.07
+      },
+      {
+        "matchId": 4469,
+        "season": "2026/27",
+        "rating": 6.04
+      },
+      {
+        "matchId": 4470,
+        "season": "2026/27",
+        "rating": 10
+      },
+      {
+        "matchId": 4471,
+        "season": "2026/27",
+        "rating": 7.46
+      },
+      {
+        "matchId": 4472,
+        "season": "2026/27",
+        "rating": 9.3
       }
     ]
   },
   "Lamine Yamal": {
-    "overall": 6.17,
-    "form": 6.17,
-    "matches": 1,
-    "minutes": 64,
-    "goals": 0,
-    "assists": 0,
-    "yellowCards": 0,
+    "overall": 8.53,
+    "form": 8.31,
+    "matches": 16,
+    "minutes": 1351,
+    "goals": 13,
+    "assists": 12,
+    "yellowCards": 2,
     "redCards": 0,
     "cleanSheets": 0,
     "savePct": null,
     "seasons": {
       "2026/27": {
-        "rating": 6.17,
-        "matches": 1,
-        "minutes": 64,
-        "goals": 0,
-        "assists": 0
+        "rating": 8.53,
+        "matches": 16,
+        "minutes": 1351,
+        "goals": 13,
+        "assists": 12
       }
     },
     "bestMatch": {
-      "matchId": 4457,
+      "matchId": 4459,
       "season": "2026/27",
-      "rating": 6.17
+      "rating": 10
     },
     "worstMatch": {
       "matchId": 4457,
@@ -224,52 +544,197 @@
         "matchId": 4457,
         "season": "2026/27",
         "rating": 6.17
+      },
+      {
+        "matchId": 4458,
+        "season": "2026/27",
+        "rating": 7.04
+      },
+      {
+        "matchId": 4459,
+        "season": "2026/27",
+        "rating": 10
+      },
+      {
+        "matchId": 4460,
+        "season": "2026/27",
+        "rating": 10
+      },
+      {
+        "matchId": 4461,
+        "season": "2026/27",
+        "rating": 10
+      },
+      {
+        "matchId": 4462,
+        "season": "2026/27",
+        "rating": 8.54
+      },
+      {
+        "matchId": 4463,
+        "season": "2026/27",
+        "rating": 10
+      },
+      {
+        "matchId": 4464,
+        "season": "2026/27",
+        "rating": 8.59
+      },
+      {
+        "matchId": 4465,
+        "season": "2026/27",
+        "rating": 7.51
+      },
+      {
+        "matchId": 4466,
+        "season": "2026/27",
+        "rating": 8.64
+      },
+      {
+        "matchId": 4467,
+        "season": "2026/27",
+        "rating": 8.38
+      },
+      {
+        "matchId": 4468,
+        "season": "2026/27",
+        "rating": 8.58
+      },
+      {
+        "matchId": 4469,
+        "season": "2026/27",
+        "rating": 6.38
+      },
+      {
+        "matchId": 4470,
+        "season": "2026/27",
+        "rating": 10
+      },
+      {
+        "matchId": 4471,
+        "season": "2026/27",
+        "rating": 8.73
+      },
+      {
+        "matchId": 4472,
+        "season": "2026/27",
+        "rating": 7.84
       }
     ]
   },
   "Anthony Gordon": {
-    "overall": 6.68,
-    "form": 6.68,
-    "matches": 1,
-    "minutes": 26,
-    "goals": 0,
-    "assists": 2,
-    "yellowCards": 0,
+    "overall": 6.66,
+    "form": 6.54,
+    "matches": 15,
+    "minutes": 944,
+    "goals": 3,
+    "assists": 4,
+    "yellowCards": 1,
     "redCards": 0,
     "cleanSheets": 0,
     "savePct": null,
     "seasons": {
       "2026/27": {
-        "rating": 6.68,
-        "matches": 1,
-        "minutes": 26,
-        "goals": 0,
-        "assists": 2
+        "rating": 6.66,
+        "matches": 15,
+        "minutes": 944,
+        "goals": 3,
+        "assists": 4
       }
     },
     "bestMatch": {
-      "matchId": 4457,
+      "matchId": 4465,
       "season": "2026/27",
-      "rating": 6.68
+      "rating": 7.86
     },
     "worstMatch": {
-      "matchId": 4457,
+      "matchId": 4461,
       "season": "2026/27",
-      "rating": 6.68
+      "rating": 6.02
     },
     "history": [
       {
         "matchId": 4457,
         "season": "2026/27",
         "rating": 6.68
+      },
+      {
+        "matchId": 4458,
+        "season": "2026/27",
+        "rating": 6.11
+      },
+      {
+        "matchId": 4459,
+        "season": "2026/27",
+        "rating": 7.48
+      },
+      {
+        "matchId": 4460,
+        "season": "2026/27",
+        "rating": 7.04
+      },
+      {
+        "matchId": 4461,
+        "season": "2026/27",
+        "rating": 6.02
+      },
+      {
+        "matchId": 4462,
+        "season": "2026/27",
+        "rating": 6.02
+      },
+      {
+        "matchId": 4464,
+        "season": "2026/27",
+        "rating": 6.09
+      },
+      {
+        "matchId": 4465,
+        "season": "2026/27",
+        "rating": 7.86
+      },
+      {
+        "matchId": 4466,
+        "season": "2026/27",
+        "rating": 7.72
+      },
+      {
+        "matchId": 4467,
+        "season": "2026/27",
+        "rating": 6.21
+      },
+      {
+        "matchId": 4468,
+        "season": "2026/27",
+        "rating": 6.05
+      },
+      {
+        "matchId": 4469,
+        "season": "2026/27",
+        "rating": 7.02
+      },
+      {
+        "matchId": 4470,
+        "season": "2026/27",
+        "rating": 6.34
+      },
+      {
+        "matchId": 4471,
+        "season": "2026/27",
+        "rating": 6.76
+      },
+      {
+        "matchId": 4472,
+        "season": "2026/27",
+        "rating": 6.53
       }
     ]
   },
   "Gavi": {
-    "overall": 6.07,
-    "form": 6.07,
-    "matches": 1,
-    "minutes": 44,
+    "overall": 6.06,
+    "form": 6.03,
+    "matches": 9,
+    "minutes": 232,
     "goals": 0,
     "assists": 0,
     "yellowCards": 0,
@@ -278,150 +743,546 @@
     "savePct": null,
     "seasons": {
       "2026/27": {
-        "rating": 6.07,
-        "matches": 1,
-        "minutes": 44,
+        "rating": 6.06,
+        "matches": 9,
+        "minutes": 232,
         "goals": 0,
         "assists": 0
       }
     },
     "bestMatch": {
-      "matchId": 4457,
+      "matchId": 4465,
       "season": "2026/27",
-      "rating": 6.07
+      "rating": 6.25
     },
     "worstMatch": {
-      "matchId": 4457,
+      "matchId": 4471,
       "season": "2026/27",
-      "rating": 6.07
+      "rating": 5.99
     },
     "history": [
       {
         "matchId": 4457,
         "season": "2026/27",
         "rating": 6.07
+      },
+      {
+        "matchId": 4461,
+        "season": "2026/27",
+        "rating": 6
+      },
+      {
+        "matchId": 4463,
+        "season": "2026/27",
+        "rating": 6.05
+      },
+      {
+        "matchId": 4465,
+        "season": "2026/27",
+        "rating": 6.25
+      },
+      {
+        "matchId": 4466,
+        "season": "2026/27",
+        "rating": 6
+      },
+      {
+        "matchId": 4467,
+        "season": "2026/27",
+        "rating": 6.03
+      },
+      {
+        "matchId": 4468,
+        "season": "2026/27",
+        "rating": 6.09
+      },
+      {
+        "matchId": 4471,
+        "season": "2026/27",
+        "rating": 5.99
+      },
+      {
+        "matchId": 4472,
+        "season": "2026/27",
+        "rating": 6.03
       }
     ]
   },
   "Pedri": {
-    "overall": 6.08,
-    "form": 6.08,
-    "matches": 1,
-    "minutes": 46,
-    "goals": 0,
-    "assists": 0,
-    "yellowCards": 0,
+    "overall": 6.49,
+    "form": 6.41,
+    "matches": 16,
+    "minutes": 1103,
+    "goals": 1,
+    "assists": 3,
+    "yellowCards": 1,
     "redCards": 0,
     "cleanSheets": 0,
     "savePct": null,
     "seasons": {
       "2026/27": {
-        "rating": 6.08,
-        "matches": 1,
-        "minutes": 46,
-        "goals": 0,
-        "assists": 0
+        "rating": 6.49,
+        "matches": 16,
+        "minutes": 1103,
+        "goals": 1,
+        "assists": 3
       }
     },
     "bestMatch": {
-      "matchId": 4457,
+      "matchId": 4460,
       "season": "2026/27",
-      "rating": 6.08
+      "rating": 7.91
     },
     "worstMatch": {
-      "matchId": 4457,
+      "matchId": 4470,
       "season": "2026/27",
-      "rating": 6.08
+      "rating": 5.93
     },
     "history": [
       {
         "matchId": 4457,
         "season": "2026/27",
         "rating": 6.08
+      },
+      {
+        "matchId": 4458,
+        "season": "2026/27",
+        "rating": 7.32
+      },
+      {
+        "matchId": 4459,
+        "season": "2026/27",
+        "rating": 6.32
+      },
+      {
+        "matchId": 4460,
+        "season": "2026/27",
+        "rating": 7.91
+      },
+      {
+        "matchId": 4461,
+        "season": "2026/27",
+        "rating": 6.79
+      },
+      {
+        "matchId": 4462,
+        "season": "2026/27",
+        "rating": 6.06
+      },
+      {
+        "matchId": 4463,
+        "season": "2026/27",
+        "rating": 6.06
+      },
+      {
+        "matchId": 4464,
+        "season": "2026/27",
+        "rating": 6.58
+      },
+      {
+        "matchId": 4465,
+        "season": "2026/27",
+        "rating": 6.07
+      },
+      {
+        "matchId": 4466,
+        "season": "2026/27",
+        "rating": 6.24
+      },
+      {
+        "matchId": 4467,
+        "season": "2026/27",
+        "rating": 6.3
+      },
+      {
+        "matchId": 4468,
+        "season": "2026/27",
+        "rating": 6.36
+      },
+      {
+        "matchId": 4469,
+        "season": "2026/27",
+        "rating": 7.25
+      },
+      {
+        "matchId": 4470,
+        "season": "2026/27",
+        "rating": 5.93
+      },
+      {
+        "matchId": 4471,
+        "season": "2026/27",
+        "rating": 6.12
+      },
+      {
+        "matchId": 4472,
+        "season": "2026/27",
+        "rating": 6.4
       }
     ]
   },
   "Marc Bernal": {
-    "overall": 6.35,
-    "form": 6.35,
-    "matches": 1,
-    "minutes": 79,
+    "overall": 6.18,
+    "form": 6.1,
+    "matches": 14,
+    "minutes": 581,
     "goals": 0,
-    "assists": 0,
-    "yellowCards": 0,
+    "assists": 2,
+    "yellowCards": 1,
     "redCards": 0,
     "cleanSheets": 0,
     "savePct": null,
     "seasons": {
       "2026/27": {
-        "rating": 6.35,
-        "matches": 1,
-        "minutes": 79,
+        "rating": 6.18,
+        "matches": 14,
+        "minutes": 581,
         "goals": 0,
-        "assists": 0
+        "assists": 2
       }
     },
     "bestMatch": {
-      "matchId": 4457,
+      "matchId": 4459,
       "season": "2026/27",
-      "rating": 6.35
+      "rating": 7.26
     },
     "worstMatch": {
-      "matchId": 4457,
+      "matchId": 4460,
       "season": "2026/27",
-      "rating": 6.35
+      "rating": 6
     },
     "history": [
       {
         "matchId": 4457,
         "season": "2026/27",
         "rating": 6.35
+      },
+      {
+        "matchId": 4458,
+        "season": "2026/27",
+        "rating": 6.14
+      },
+      {
+        "matchId": 4459,
+        "season": "2026/27",
+        "rating": 7.26
+      },
+      {
+        "matchId": 4460,
+        "season": "2026/27",
+        "rating": 6
+      },
+      {
+        "matchId": 4461,
+        "season": "2026/27",
+        "rating": 6
+      },
+      {
+        "matchId": 4462,
+        "season": "2026/27",
+        "rating": 6.28
+      },
+      {
+        "matchId": 4463,
+        "season": "2026/27",
+        "rating": 6
+      },
+      {
+        "matchId": 4464,
+        "season": "2026/27",
+        "rating": 6.01
+      },
+      {
+        "matchId": 4465,
+        "season": "2026/27",
+        "rating": 6
+      },
+      {
+        "matchId": 4466,
+        "season": "2026/27",
+        "rating": 6.05
+      },
+      {
+        "matchId": 4468,
+        "season": "2026/27",
+        "rating": 6.03
+      },
+      {
+        "matchId": 4470,
+        "season": "2026/27",
+        "rating": 6.13
+      },
+      {
+        "matchId": 4471,
+        "season": "2026/27",
+        "rating": 6.05
+      },
+      {
+        "matchId": 4472,
+        "season": "2026/27",
+        "rating": 6.24
       }
     ]
   },
   "Jules Kounde": {
-    "overall": 6.01,
-    "form": 6.01,
-    "matches": 1,
-    "minutes": 11,
-    "goals": 0,
-    "assists": 0,
+    "overall": 6.48,
+    "form": 6.79,
+    "matches": 8,
+    "minutes": 462,
+    "goals": 1,
+    "assists": 1,
     "yellowCards": 0,
     "redCards": 0,
     "cleanSheets": 0,
     "savePct": null,
     "seasons": {
       "2026/27": {
-        "rating": 6.01,
-        "matches": 1,
-        "minutes": 11,
-        "goals": 0,
-        "assists": 0
+        "rating": 6.48,
+        "matches": 8,
+        "minutes": 462,
+        "goals": 1,
+        "assists": 1
       }
     },
     "bestMatch": {
-      "matchId": 4457,
+      "matchId": 4465,
       "season": "2026/27",
-      "rating": 6.01
+      "rating": 8.37
     },
     "worstMatch": {
-      "matchId": 4457,
+      "matchId": 4459,
       "season": "2026/27",
-      "rating": 6.01
+      "rating": 5.87
     },
     "history": [
       {
         "matchId": 4457,
         "season": "2026/27",
         "rating": 6.01
+      },
+      {
+        "matchId": 4458,
+        "season": "2026/27",
+        "rating": 6
+      },
+      {
+        "matchId": 4459,
+        "season": "2026/27",
+        "rating": 5.87
+      },
+      {
+        "matchId": 4460,
+        "season": "2026/27",
+        "rating": 6.24
+      },
+      {
+        "matchId": 4461,
+        "season": "2026/27",
+        "rating": 6.2
+      },
+      {
+        "matchId": 4465,
+        "season": "2026/27",
+        "rating": 8.37
+      },
+      {
+        "matchId": 4466,
+        "season": "2026/27",
+        "rating": 6.04
+      },
+      {
+        "matchId": 4467,
+        "season": "2026/27",
+        "rating": 7.1
       }
     ]
   },
   "Xavi Espart": {
-    "overall": 7.55,
-    "form": 7.55,
-    "matches": 1,
-    "minutes": 90,
+    "overall": 6.91,
+    "form": 6.81,
+    "matches": 9,
+    "minutes": 721,
+    "goals": 2,
+    "assists": 2,
+    "yellowCards": 1,
+    "redCards": 0,
+    "cleanSheets": 0,
+    "savePct": null,
+    "seasons": {
+      "2026/27": {
+        "rating": 6.91,
+        "matches": 9,
+        "minutes": 721,
+        "goals": 2,
+        "assists": 2
+      }
+    },
+    "bestMatch": {
+      "matchId": 4462,
+      "season": "2026/27",
+      "rating": 7.67
+    },
+    "worstMatch": {
+      "matchId": 4469,
+      "season": "2026/27",
+      "rating": 6.05
+    },
+    "history": [
+      {
+        "matchId": 4457,
+        "season": "2026/27",
+        "rating": 7.55
+      },
+      {
+        "matchId": 4458,
+        "season": "2026/27",
+        "rating": 6.41
+      },
+      {
+        "matchId": 4459,
+        "season": "2026/27",
+        "rating": 7.46
+      },
+      {
+        "matchId": 4460,
+        "season": "2026/27",
+        "rating": 6.7
+      },
+      {
+        "matchId": 4462,
+        "season": "2026/27",
+        "rating": 7.67
+      },
+      {
+        "matchId": 4465,
+        "season": "2026/27",
+        "rating": 6.43
+      },
+      {
+        "matchId": 4467,
+        "season": "2026/27",
+        "rating": 6.3
+      },
+      {
+        "matchId": 4468,
+        "season": "2026/27",
+        "rating": 7.62
+      },
+      {
+        "matchId": 4469,
+        "season": "2026/27",
+        "rating": 6.05
+      }
+    ]
+  },
+  "Gerard Martin": {
+    "overall": 6.22,
+    "form": 6.28,
+    "matches": 14,
+    "minutes": 1031,
+    "goals": 0,
+    "assists": 0,
+    "yellowCards": 1,
+    "redCards": 0,
+    "cleanSheets": 0,
+    "savePct": null,
+    "seasons": {
+      "2026/27": {
+        "rating": 6.22,
+        "matches": 14,
+        "minutes": 1031,
+        "goals": 0,
+        "assists": 0
+      }
+    },
+    "bestMatch": {
+      "matchId": 4472,
+      "season": "2026/27",
+      "rating": 6.48
+    },
+    "worstMatch": {
+      "matchId": 4462,
+      "season": "2026/27",
+      "rating": 5.97
+    },
+    "history": [
+      {
+        "matchId": 4457,
+        "season": "2026/27",
+        "rating": 6.35
+      },
+      {
+        "matchId": 4458,
+        "season": "2026/27",
+        "rating": 6.3
+      },
+      {
+        "matchId": 4460,
+        "season": "2026/27",
+        "rating": 6.25
+      },
+      {
+        "matchId": 4462,
+        "season": "2026/27",
+        "rating": 5.97
+      },
+      {
+        "matchId": 4463,
+        "season": "2026/27",
+        "rating": 6.15
+      },
+      {
+        "matchId": 4464,
+        "season": "2026/27",
+        "rating": 6.05
+      },
+      {
+        "matchId": 4465,
+        "season": "2026/27",
+        "rating": 6.35
+      },
+      {
+        "matchId": 4466,
+        "season": "2026/27",
+        "rating": 6.3
+      },
+      {
+        "matchId": 4467,
+        "season": "2026/27",
+        "rating": 6
+      },
+      {
+        "matchId": 4468,
+        "season": "2026/27",
+        "rating": 6.25
+      },
+      {
+        "matchId": 4469,
+        "season": "2026/27",
+        "rating": 6.25
+      },
+      {
+        "matchId": 4470,
+        "season": "2026/27",
+        "rating": 6
+      },
+      {
+        "matchId": 4471,
+        "season": "2026/27",
+        "rating": 6.4
+      },
+      {
+        "matchId": 4472,
+        "season": "2026/27",
+        "rating": 6.48
+      }
+    ]
+  },
+  "Andreas Christensen": {
+    "overall": 6.23,
+    "form": 6.24,
+    "matches": 8,
+    "minutes": 523,
     "goals": 0,
     "assists": 1,
     "yellowCards": 0,
@@ -430,112 +1291,154 @@
     "savePct": null,
     "seasons": {
       "2026/27": {
-        "rating": 7.55,
-        "matches": 1,
-        "minutes": 90,
+        "rating": 6.23,
+        "matches": 8,
+        "minutes": 523,
         "goals": 0,
         "assists": 1
       }
     },
     "bestMatch": {
-      "matchId": 4457,
+      "matchId": 4464,
       "season": "2026/27",
-      "rating": 7.55
+      "rating": 6.81
     },
     "worstMatch": {
-      "matchId": 4457,
+      "matchId": 4460,
       "season": "2026/27",
-      "rating": 7.55
-    },
-    "history": [
-      {
-        "matchId": 4457,
-        "season": "2026/27",
-        "rating": 7.55
-      }
-    ]
-  },
-  "Gerard Martin": {
-    "overall": 6.35,
-    "form": 6.35,
-    "matches": 1,
-    "minutes": 90,
-    "goals": 0,
-    "assists": 0,
-    "yellowCards": 0,
-    "redCards": 0,
-    "cleanSheets": 0,
-    "savePct": null,
-    "seasons": {
-      "2026/27": {
-        "rating": 6.35,
-        "matches": 1,
-        "minutes": 90,
-        "goals": 0,
-        "assists": 0
-      }
-    },
-    "bestMatch": {
-      "matchId": 4457,
-      "season": "2026/27",
-      "rating": 6.35
-    },
-    "worstMatch": {
-      "matchId": 4457,
-      "season": "2026/27",
-      "rating": 6.35
-    },
-    "history": [
-      {
-        "matchId": 4457,
-        "season": "2026/27",
-        "rating": 6.35
-      }
-    ]
-  },
-  "Andreas Christensen": {
-    "overall": 6.15,
-    "form": 6.15,
-    "matches": 1,
-    "minutes": 90,
-    "goals": 0,
-    "assists": 0,
-    "yellowCards": 0,
-    "redCards": 0,
-    "cleanSheets": 0,
-    "savePct": null,
-    "seasons": {
-      "2026/27": {
-        "rating": 6.15,
-        "matches": 1,
-        "minutes": 90,
-        "goals": 0,
-        "assists": 0
-      }
-    },
-    "bestMatch": {
-      "matchId": 4457,
-      "season": "2026/27",
-      "rating": 6.15
-    },
-    "worstMatch": {
-      "matchId": 4457,
-      "season": "2026/27",
-      "rating": 6.15
+      "rating": 6
     },
     "history": [
       {
         "matchId": 4457,
         "season": "2026/27",
         "rating": 6.15
+      },
+      {
+        "matchId": 4459,
+        "season": "2026/27",
+        "rating": 6.5
+      },
+      {
+        "matchId": 4460,
+        "season": "2026/27",
+        "rating": 6
+      },
+      {
+        "matchId": 4461,
+        "season": "2026/27",
+        "rating": 6
+      },
+      {
+        "matchId": 4462,
+        "season": "2026/27",
+        "rating": 6.15
+      },
+      {
+        "matchId": 4463,
+        "season": "2026/27",
+        "rating": 6.2
+      },
+      {
+        "matchId": 4464,
+        "season": "2026/27",
+        "rating": 6.81
+      },
+      {
+        "matchId": 4472,
+        "season": "2026/27",
+        "rating": 6.05
       }
     ]
   },
   "Eric Garcia": {
-    "overall": 6.58,
-    "form": 6.58,
-    "matches": 1,
-    "minutes": 90,
+    "overall": 6.4,
+    "form": 6.42,
+    "matches": 10,
+    "minutes": 691,
+    "goals": 1,
+    "assists": 0,
+    "yellowCards": 0,
+    "redCards": 0,
+    "cleanSheets": 0,
+    "savePct": null,
+    "seasons": {
+      "2026/27": {
+        "rating": 6.4,
+        "matches": 10,
+        "minutes": 691,
+        "goals": 1,
+        "assists": 0
+      }
+    },
+    "bestMatch": {
+      "matchId": 4467,
+      "season": "2026/27",
+      "rating": 6.9
+    },
+    "worstMatch": {
+      "matchId": 4460,
+      "season": "2026/27",
+      "rating": 6
+    },
+    "history": [
+      {
+        "matchId": 4457,
+        "season": "2026/27",
+        "rating": 6.58
+      },
+      {
+        "matchId": 4458,
+        "season": "2026/27",
+        "rating": 6.61
+      },
+      {
+        "matchId": 4460,
+        "season": "2026/27",
+        "rating": 6
+      },
+      {
+        "matchId": 4462,
+        "season": "2026/27",
+        "rating": 6.6
+      },
+      {
+        "matchId": 4463,
+        "season": "2026/27",
+        "rating": 6.13
+      },
+      {
+        "matchId": 4464,
+        "season": "2026/27",
+        "rating": 6.3
+      },
+      {
+        "matchId": 4465,
+        "season": "2026/27",
+        "rating": 6.5
+      },
+      {
+        "matchId": 4466,
+        "season": "2026/27",
+        "rating": 6.36
+      },
+      {
+        "matchId": 4467,
+        "season": "2026/27",
+        "rating": 6.9
+      },
+      {
+        "matchId": 4472,
+        "season": "2026/27",
+        "rating": 6.03
+      }
+    ]
+  },
+  "Joan Garcia": {
+    "overall": 6.03,
+    "form": 6.04,
+    "matches": 15,
+    "minutes": 1305,
     "goals": 0,
     "assists": 0,
     "yellowCards": 0,
@@ -544,32 +1447,573 @@
     "savePct": null,
     "seasons": {
       "2026/27": {
-        "rating": 6.58,
-        "matches": 1,
-        "minutes": 90,
+        "rating": 6.03,
+        "matches": 15,
+        "minutes": 1305,
         "goals": 0,
         "assists": 0
       }
     },
     "bestMatch": {
-      "matchId": 4457,
+      "matchId": 4466,
       "season": "2026/27",
-      "rating": 6.58
+      "rating": 6.2
     },
     "worstMatch": {
       "matchId": 4457,
       "season": "2026/27",
-      "rating": 6.58
+      "rating": 6
     },
     "history": [
       {
         "matchId": 4457,
         "season": "2026/27",
-        "rating": 6.58
+        "rating": 6
+      },
+      {
+        "matchId": 4458,
+        "season": "2026/27",
+        "rating": 6
+      },
+      {
+        "matchId": 4459,
+        "season": "2026/27",
+        "rating": 6
+      },
+      {
+        "matchId": 4460,
+        "season": "2026/27",
+        "rating": 6
+      },
+      {
+        "matchId": 4461,
+        "season": "2026/27",
+        "rating": 6
+      },
+      {
+        "matchId": 4462,
+        "season": "2026/27",
+        "rating": 6.05
+      },
+      {
+        "matchId": 4463,
+        "season": "2026/27",
+        "rating": 6
+      },
+      {
+        "matchId": 4465,
+        "season": "2026/27",
+        "rating": 6
+      },
+      {
+        "matchId": 4466,
+        "season": "2026/27",
+        "rating": 6.2
+      },
+      {
+        "matchId": 4467,
+        "season": "2026/27",
+        "rating": 6
+      },
+      {
+        "matchId": 4468,
+        "season": "2026/27",
+        "rating": 6
+      },
+      {
+        "matchId": 4469,
+        "season": "2026/27",
+        "rating": 6
+      },
+      {
+        "matchId": 4470,
+        "season": "2026/27",
+        "rating": 6
+      },
+      {
+        "matchId": 4471,
+        "season": "2026/27",
+        "rating": 6.2
+      },
+      {
+        "matchId": 4472,
+        "season": "2026/27",
+        "rating": 6
       }
     ]
   },
-  "Joan Garcia": {
+  "Rodri": {
+    "overall": 6.47,
+    "form": 6.74,
+    "matches": 14,
+    "minutes": 944,
+    "goals": 1,
+    "assists": 1,
+    "yellowCards": 1,
+    "redCards": 0,
+    "cleanSheets": 0,
+    "savePct": null,
+    "seasons": {
+      "2026/27": {
+        "rating": 6.47,
+        "matches": 14,
+        "minutes": 944,
+        "goals": 1,
+        "assists": 1
+      }
+    },
+    "bestMatch": {
+      "matchId": 4467,
+      "season": "2026/27",
+      "rating": 7.95
+    },
+    "worstMatch": {
+      "matchId": 4458,
+      "season": "2026/27",
+      "rating": 6
+    },
+    "history": [
+      {
+        "matchId": 4458,
+        "season": "2026/27",
+        "rating": 6
+      },
+      {
+        "matchId": 4459,
+        "season": "2026/27",
+        "rating": 6
+      },
+      {
+        "matchId": 4460,
+        "season": "2026/27",
+        "rating": 6.02
+      },
+      {
+        "matchId": 4461,
+        "season": "2026/27",
+        "rating": 6.23
+      },
+      {
+        "matchId": 4462,
+        "season": "2026/27",
+        "rating": 6.7
+      },
+      {
+        "matchId": 4463,
+        "season": "2026/27",
+        "rating": 6.35
+      },
+      {
+        "matchId": 4464,
+        "season": "2026/27",
+        "rating": 7.05
+      },
+      {
+        "matchId": 4465,
+        "season": "2026/27",
+        "rating": 6.43
+      },
+      {
+        "matchId": 4466,
+        "season": "2026/27",
+        "rating": 6.15
+      },
+      {
+        "matchId": 4467,
+        "season": "2026/27",
+        "rating": 7.95
+      },
+      {
+        "matchId": 4468,
+        "season": "2026/27",
+        "rating": 6.1
+      },
+      {
+        "matchId": 4469,
+        "season": "2026/27",
+        "rating": 6.35
+      },
+      {
+        "matchId": 4470,
+        "season": "2026/27",
+        "rating": 7.2
+      },
+      {
+        "matchId": 4471,
+        "season": "2026/27",
+        "rating": 6.08
+      }
+    ]
+  },
+  "Pau Cubarsi": {
+    "overall": 6.43,
+    "form": 6.23,
+    "matches": 13,
+    "minutes": 1141,
+    "goals": 0,
+    "assists": 2,
+    "yellowCards": 1,
+    "redCards": 0,
+    "cleanSheets": 0,
+    "savePct": null,
+    "seasons": {
+      "2026/27": {
+        "rating": 6.43,
+        "matches": 13,
+        "minutes": 1141,
+        "goals": 0,
+        "assists": 2
+      }
+    },
+    "bestMatch": {
+      "matchId": 4467,
+      "season": "2026/27",
+      "rating": 8.4
+    },
+    "worstMatch": {
+      "matchId": 4460,
+      "season": "2026/27",
+      "rating": 5.97
+    },
+    "history": [
+      {
+        "matchId": 4458,
+        "season": "2026/27",
+        "rating": 6.32
+      },
+      {
+        "matchId": 4459,
+        "season": "2026/27",
+        "rating": 6.3
+      },
+      {
+        "matchId": 4460,
+        "season": "2026/27",
+        "rating": 5.97
+      },
+      {
+        "matchId": 4461,
+        "season": "2026/27",
+        "rating": 6.4
+      },
+      {
+        "matchId": 4462,
+        "season": "2026/27",
+        "rating": 6.55
+      },
+      {
+        "matchId": 4464,
+        "season": "2026/27",
+        "rating": 6.2
+      },
+      {
+        "matchId": 4466,
+        "season": "2026/27",
+        "rating": 6.3
+      },
+      {
+        "matchId": 4467,
+        "season": "2026/27",
+        "rating": 8.4
+      },
+      {
+        "matchId": 4468,
+        "season": "2026/27",
+        "rating": 6
+      },
+      {
+        "matchId": 4469,
+        "season": "2026/27",
+        "rating": 6.3
+      },
+      {
+        "matchId": 4470,
+        "season": "2026/27",
+        "rating": 6.35
+      },
+      {
+        "matchId": 4471,
+        "season": "2026/27",
+        "rating": 6.2
+      },
+      {
+        "matchId": 4472,
+        "season": "2026/27",
+        "rating": 6.3
+      }
+    ]
+  },
+  "16 Players": {
+    "overall": 10,
+    "form": 10,
+    "matches": 3,
+    "minutes": 2970,
+    "goals": 13,
+    "assists": 10,
+    "yellowCards": 6,
+    "redCards": 0,
+    "cleanSheets": 0,
+    "savePct": null,
+    "seasons": {
+      "2026/27": {
+        "rating": 10,
+        "matches": 3,
+        "minutes": 2970,
+        "goals": 13,
+        "assists": 10
+      }
+    },
+    "bestMatch": {
+      "matchId": 4458,
+      "season": "2026/27",
+      "rating": 10
+    },
+    "worstMatch": {
+      "matchId": 4458,
+      "season": "2026/27",
+      "rating": 10
+    },
+    "history": [
+      {
+        "matchId": 4458,
+        "season": "2026/27",
+        "rating": 10
+      },
+      {
+        "matchId": 4463,
+        "season": "2026/27",
+        "rating": 10
+      },
+      {
+        "matchId": 4467,
+        "season": "2026/27",
+        "rating": 10
+      }
+    ]
+  },
+  "Hamza Abdelkarim": {
+    "overall": 6,
+    "form": 6,
+    "matches": 2,
+    "minutes": 14,
+    "goals": 0,
+    "assists": 0,
+    "yellowCards": 0,
+    "redCards": 0,
+    "cleanSheets": 0,
+    "savePct": null,
+    "seasons": {
+      "2026/27": {
+        "rating": 6,
+        "matches": 2,
+        "minutes": 14,
+        "goals": 0,
+        "assists": 0
+      }
+    },
+    "bestMatch": {
+      "matchId": 4459,
+      "season": "2026/27",
+      "rating": 6
+    },
+    "worstMatch": {
+      "matchId": 4459,
+      "season": "2026/27",
+      "rating": 6
+    },
+    "history": [
+      {
+        "matchId": 4459,
+        "season": "2026/27",
+        "rating": 6
+      },
+      {
+        "matchId": 4465,
+        "season": "2026/27",
+        "rating": 6
+      }
+    ]
+  },
+  "Gabriel Jesus": {
+    "overall": 6.52,
+    "form": 6.49,
+    "matches": 10,
+    "minutes": 291,
+    "goals": 4,
+    "assists": 1,
+    "yellowCards": 0,
+    "redCards": 0,
+    "cleanSheets": 0,
+    "savePct": null,
+    "seasons": {
+      "2026/27": {
+        "rating": 6.52,
+        "matches": 10,
+        "minutes": 291,
+        "goals": 4,
+        "assists": 1
+      }
+    },
+    "bestMatch": {
+      "matchId": 4465,
+      "season": "2026/27",
+      "rating": 8.12
+    },
+    "worstMatch": {
+      "matchId": 4464,
+      "season": "2026/27",
+      "rating": 6
+    },
+    "history": [
+      {
+        "matchId": 4460,
+        "season": "2026/27",
+        "rating": 6.01
+      },
+      {
+        "matchId": 4461,
+        "season": "2026/27",
+        "rating": 6.18
+      },
+      {
+        "matchId": 4463,
+        "season": "2026/27",
+        "rating": 6.44
+      },
+      {
+        "matchId": 4464,
+        "season": "2026/27",
+        "rating": 6
+      },
+      {
+        "matchId": 4465,
+        "season": "2026/27",
+        "rating": 8.12
+      },
+      {
+        "matchId": 4466,
+        "season": "2026/27",
+        "rating": 6.25
+      },
+      {
+        "matchId": 4467,
+        "season": "2026/27",
+        "rating": 7.75
+      },
+      {
+        "matchId": 4469,
+        "season": "2026/27",
+        "rating": 6
+      },
+      {
+        "matchId": 4470,
+        "season": "2026/27",
+        "rating": 6.37
+      },
+      {
+        "matchId": 4471,
+        "season": "2026/27",
+        "rating": 6.07
+      }
+    ]
+  },
+  "Alejandro Balde": {
+    "overall": 6.02,
+    "form": 6.02,
+    "matches": 5,
+    "minutes": 129,
+    "goals": 0,
+    "assists": 0,
+    "yellowCards": 1,
+    "redCards": 0,
+    "cleanSheets": 0,
+    "savePct": null,
+    "seasons": {
+      "2026/27": {
+        "rating": 6.02,
+        "matches": 5,
+        "minutes": 129,
+        "goals": 0,
+        "assists": 0
+      }
+    },
+    "bestMatch": {
+      "matchId": 4470,
+      "season": "2026/27",
+      "rating": 6.07
+    },
+    "worstMatch": {
+      "matchId": 4469,
+      "season": "2026/27",
+      "rating": 5.95
+    },
+    "history": [
+      {
+        "matchId": 4463,
+        "season": "2026/27",
+        "rating": 6.03
+      },
+      {
+        "matchId": 4468,
+        "season": "2026/27",
+        "rating": 6.06
+      },
+      {
+        "matchId": 4469,
+        "season": "2026/27",
+        "rating": 5.95
+      },
+      {
+        "matchId": 4470,
+        "season": "2026/27",
+        "rating": 6.07
+      },
+      {
+        "matchId": 4471,
+        "season": "2026/27",
+        "rating": 6
+      }
+    ]
+  },
+  "Wojciech Szczesny": {
+    "overall": 6,
+    "form": 6,
+    "matches": 1,
+    "minutes": 45,
+    "goals": 0,
+    "assists": 0,
+    "yellowCards": 0,
+    "redCards": 0,
+    "cleanSheets": 0,
+    "savePct": null,
+    "seasons": {
+      "2026/27": {
+        "rating": 6,
+        "matches": 1,
+        "minutes": 45,
+        "goals": 0,
+        "assists": 0
+      }
+    },
+    "bestMatch": {
+      "matchId": 4463,
+      "season": "2026/27",
+      "rating": 6
+    },
+    "worstMatch": {
+      "matchId": 4463,
+      "season": "2026/27",
+      "rating": 6
+    },
+    "history": [
+      {
+        "matchId": 4463,
+        "season": "2026/27",
+        "rating": 6
+      }
+    ]
+  },
+  "Dominik Livakovic": {
     "overall": 6,
     "form": 6,
     "matches": 1,
@@ -590,20 +2034,121 @@
       }
     },
     "bestMatch": {
-      "matchId": 4457,
+      "matchId": 4464,
       "season": "2026/27",
       "rating": 6
     },
     "worstMatch": {
-      "matchId": 4457,
+      "matchId": 4464,
       "season": "2026/27",
       "rating": 6
     },
     "history": [
       {
-        "matchId": 4457,
+        "matchId": 4464,
         "season": "2026/27",
         "rating": 6
+      }
+    ]
+  },
+  "Frenkie de Jong": {
+    "overall": 6.04,
+    "form": 6.04,
+    "matches": 4,
+    "minutes": 164,
+    "goals": 0,
+    "assists": 0,
+    "yellowCards": 0,
+    "redCards": 0,
+    "cleanSheets": 0,
+    "savePct": null,
+    "seasons": {
+      "2026/27": {
+        "rating": 6.04,
+        "matches": 4,
+        "minutes": 164,
+        "goals": 0,
+        "assists": 0
+      }
+    },
+    "bestMatch": {
+      "matchId": 4472,
+      "season": "2026/27",
+      "rating": 6.1
+    },
+    "worstMatch": {
+      "matchId": 4469,
+      "season": "2026/27",
+      "rating": 5.99
+    },
+    "history": [
+      {
+        "matchId": 4469,
+        "season": "2026/27",
+        "rating": 5.99
+      },
+      {
+        "matchId": 4470,
+        "season": "2026/27",
+        "rating": 6.09
+      },
+      {
+        "matchId": 4471,
+        "season": "2026/27",
+        "rating": 6
+      },
+      {
+        "matchId": 4472,
+        "season": "2026/27",
+        "rating": 6.1
+      }
+    ]
+  },
+  "Brian Farinas": {
+    "overall": 6.13,
+    "form": 6.13,
+    "matches": 3,
+    "minutes": 216,
+    "goals": 0,
+    "assists": 0,
+    "yellowCards": 0,
+    "redCards": 0,
+    "cleanSheets": 0,
+    "savePct": null,
+    "seasons": {
+      "2026/27": {
+        "rating": 6.13,
+        "matches": 3,
+        "minutes": 216,
+        "goals": 0,
+        "assists": 0
+      }
+    },
+    "bestMatch": {
+      "matchId": 4470,
+      "season": "2026/27",
+      "rating": 6.33
+    },
+    "worstMatch": {
+      "matchId": 4472,
+      "season": "2026/27",
+      "rating": 5.97
+    },
+    "history": [
+      {
+        "matchId": 4470,
+        "season": "2026/27",
+        "rating": 6.33
+      },
+      {
+        "matchId": 4471,
+        "season": "2026/27",
+        "rating": 6.09
+      },
+      {
+        "matchId": 4472,
+        "season": "2026/27",
+        "rating": 5.97
       }
     ]
   }
