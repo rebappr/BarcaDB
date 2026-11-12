@@ -995,27 +995,31 @@ function renderManagerCard(matches){
             href="manager.html?name=${encodeURIComponent(manager)}"
             class="player-card-link">
 
-            <article class="player-card manager-squad-card">
-
-                <img
-                    src="logos/managers/${manager}.webp"
-                    alt="${manager}"
-                    class="player-photo"
-                    onerror="this.src='logos/managers/default.webp'">
-
-                <div class="player-info">
-
-                    <div class="player-name">
-                        ${manager}
-                    </div>
-
-                    <div class="player-position">
-                        Head Coach
-                    </div>
-
-                </div>
-
-            </article>
+			<article class="player-card manager-squad-card">
+			
+			    <div class="player-top">
+			
+			        <img
+			            src="logos/managers/${manager}.webp"
+			            alt="${manager}"
+			            class="player-photo"
+			            onerror="this.src='logos/managers/default.webp'">
+			
+			        <div class="player-info">
+			
+			            <div class="player-name">
+			                ${manager}
+			            </div>
+			
+			            <div class="player-position">
+			                Manager
+			            </div>
+			
+			        </div>
+			
+			    </div>
+			
+			</article>
 
         </a>
 
