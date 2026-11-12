@@ -1292,7 +1292,8 @@ document.querySelectorAll(".position-btn")
 });
 
 let squadData = [];
-let playerStats = {};
+let playerStats = [];
+let allManagers = [];
 
 Promise.all([
     fetch("/data/playersCS.json").then(r => r.json()),
