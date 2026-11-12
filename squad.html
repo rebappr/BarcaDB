@@ -1298,20 +1298,22 @@ let playerStats = {};
 
 Promise.all([
     fetch("/data/playersCS.json").then(r => r.json()),
-    fetch("/data/data.json").then(r => r.json())
+    fetch("/data/data.json").then(r => r.json()),
+    fetch("/data/managers.json").then(r => r.json())
 ])
-.then(([players, matches]) => {
+.then(([players, matches, managers]) => {
 
     squadData = players;
+    allManagers = managers;
 
-	buildPlayerStats(matches);
-	
-	document.querySelector(".widget-title").textContent =
-	    `FC Barcelona ${currentSeason} Squad`;
-	
-	renderManagerCard(matches);
-	
-	renderSquad(squadData);
+    buildPlayerStats(matches);
+
+    document.querySelector(".widget-title").textContent =
+        `FC Barcelona ${currentSeason} Squad`;
+
+    renderManagerCard(matches);
+
+    renderSquad(squadData);
 
 })
 .catch(err => console.error(err));
