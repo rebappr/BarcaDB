@@ -976,10 +976,15 @@ function buildPlayerStats(matches){
 
 function renderManagerCard(matches){
 
+    console.log("renderManagerCard called");
+
     const seasonMatches =
         matches.filter(
             m => (m.Season || m["Season"]) === currentSeason
         );
+
+    console.log("currentSeason =", currentSeason);
+    console.log("seasonMatches =", seasonMatches.length);
 
     if(!seasonMatches.length){
         return;
@@ -988,12 +993,7 @@ function renderManagerCard(matches){
     const managerName =
         seasonMatches[0].Manager;
 
-    const manager =
-        allManagers.find(
-            m =>
-                m.Manager === managerName ||
-                m.Name === managerName
-        );
+    console.log("managerName =", managerName);
 
     document.getElementById("managerCard").innerHTML = `
 
