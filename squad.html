@@ -457,7 +457,7 @@ display:none;
     display:grid;
     grid-template-columns:repeat(auto-fill,260px);
     gap:16px;
-    justify-content:center;
+    justify-content:start;
 }
 
 .manager-card{
@@ -978,51 +978,58 @@ function renderManagerCard(matches){
 
     const seasonMatches =
         matches.filter(
-            m => m.Season === currentSeason
+            m => (m.Season || m["Season"]) === currentSeason
         );
 
     if(!seasonMatches.length){
         return;
     }
 
-    const manager =
+    const managerName =
         seasonMatches[0].Manager;
 
-	document.getElementById("managerCard").innerHTML = `
-	
-	    <a
-	        href="manager.html?name=${encodeURIComponent(manager)}"
-	        class="player-card-link">
-	
-	        <article class="player-card manager-squad-card">
-	
-	            <div class="player-top">
-	
-	                <img
-	                    src="logos/managers/${manager}.webp"
-	                    alt="${manager}"
-	                    class="player-photo"
-	                    onerror="this.src='logos/managers/default.webp'">
-	
-	                <div class="player-info">
-	
-	                    <div class="player-name">
-	                        ${manager}
-	                    </div>
-	
-	                    <div class="player-position">
-	                        Manager
-	                    </div>
-	
-	                </div>
-	
-	            </div>
-	
-	        </article>
-	
-	    </a>
-	
-	`;
+    const manager =
+        allManagers.find(
+            m =>
+                m.Manager === managerName ||
+                m.Name === managerName
+        );
+
+    document.getElementById("managerCard").innerHTML = `
+
+        <a
+            href="manager.html?name=${encodeURIComponent(managerName)}"
+            class="player-card-link">
+
+            <article class="player-card manager-squad-card">
+
+                <div class="player-top">
+
+                    <img
+                        src="logos/managers/${managerName}.webp"
+                        alt="${managerName}"
+                        class="player-photo"
+                        onerror="this.src='logos/managers/default.webp'">
+
+                    <div class="player-info">
+
+                        <div class="player-name">
+                            ${managerName}
+                        </div>
+
+                        <div class="player-position">
+                            Manager
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+        </a>
+
+    `;
 }
 
 function renderSquad(players){
