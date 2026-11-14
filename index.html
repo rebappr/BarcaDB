@@ -705,6 +705,22 @@
 
 <div class="home-page">
 
+	<div class="home-column insights-column">
+
+	    <div class="widget-title">
+	        Latest Insights
+	    </div>
+	
+	    <div id="insights" class="insights-container"></div>
+
+		<div class="leaders-footer">
+		    <a href="insights.html">
+		        View All Insights →
+		    </a>
+		</div>
+	
+	</div>
+
 	<div class="home-column stats-column">
 
 	    <div class="widget-title">
@@ -747,22 +763,6 @@
 		    </a>
 		</div>
 
-	</div>
-
-	<div class="home-column insights-column">
-
-	    <div class="widget-title">
-	        Latest Insights
-	    </div>
-	
-	    <div id="insights" class="insights-container"></div>
-
-		<div class="leaders-footer">
-		    <a href="insights.html">
-		        View All Insights →
-		    </a>
-		</div>
-	
 	</div>
 
       <div class="home-column matches-column">
@@ -849,8 +849,8 @@
 <script src="data/competitionMap.js"></script>
 <script>
 
-let allMatches = [];
-let allPlayers = [];
+window.allMatches = [];
+window.allPlayers = [];
 
 Promise.all([
     fetch("/data/data.json").then(r => r.json()),
@@ -859,8 +859,8 @@ Promise.all([
 
 .then(([matchesData, playersData]) => {
 
-    allMatches = matchesData;
-    allPlayers = playersData;
+window.allMatches = matchesData;
+window.allPlayers = playersData;
 
     renderHome();
 
@@ -914,8 +914,6 @@ function renderHome(){
 	renderTopManagers();
 
     renderInsights();
-
-    initPersonSearch();
 }
 
     function renderLastMatch() {
@@ -2117,195 +2115,8 @@ async function renderInsights(){
     document.getElementById("insights").innerHTML = html;
 }
 
-function initPersonSearch(){
-
-    const searchItems = new Map();
-
-    allMatches.forEach(match => {
-
-        if(match.Manager){
-
-            searchItems.set(
-                `manager-${match.Manager}`,
-                {
-                    name: match.Manager,
-                    type: "Manager"
-                }
-            );
-
-        }
-
-        if(match["Opp. Manager"]){
-
-            searchItems.set(
-                `manager-${match["Opp. Manager"]}`,
-                {
-                    name: match["Opp. Manager"],
-                    type: "Manager"
-                }
-            );
-
-        }
-
-        if(match["Opp. Team"]){
-
-            searchItems.set(
-                `opponent-${match["Opp. Team"]}`,
-                {
-                    name: match["Opp. Team"],
-                    type: "Opponent"
-                }
-            );
-
-        }
-
-        for(let i=1;i<=11;i++){
-
-            if(match[`Player name ${i}`]){
-
-                searchItems.set(
-                    `player-${match[`Player name ${i}`]}`,
-                    {
-                        name: match[`Player name ${i}`],
-                        type: "Player"
-                    }
-                );
-
-            }
-
-            if(match[`Opp. Player name ${i}`]){
-
-                searchItems.set(
-                    `player-${match[`Opp. Player name ${i}`]}`,
-                    {
-                        name: match[`Opp. Player name ${i}`],
-                        type: "Player"
-                    }
-                );
-
-            }
-
-        }
-
-        for(let i=1;i<=12;i++){
-
-            if(match[`On the bench name ${i}`]){
-
-                searchItems.set(
-                    `player-${match[`On the bench name ${i}`]}`,
-                    {
-                        name: match[`On the bench name ${i}`],
-                        type: "Player"
-                    }
-                );
-
-            }
-
-            if(match[`Opp. On the bench name ${i}`]){
-
-                searchItems.set(
-                    `player-${match[`Opp. On the bench name ${i}`]}`,
-                    {
-                        name: match[`Opp. On the bench name ${i}`],
-                        type: "Player"
-                    }
-                );
-
-            }
-
-        }
-
-    });
-
-    const itemList =
-        [...searchItems.values()]
-        .sort((a,b) => a.name.localeCompare(b.name));
-
-    function attachSearch(inputId, resultsId){
-
-        const input = document.getElementById(inputId);
-        const results = document.getElementById(resultsId);
-
-        if(!input || !results) return;
-
-        input.addEventListener("input", () => {
-
-            const value =
-                input.value
-                .trim()
-                .toLowerCase();
-
-            if(!value){
-                results.innerHTML = "";
-                return;
-            }
-
-            const filtered =
-                itemList
-                .filter(item =>
-                    item.name.toLowerCase().includes(value)
-                )
-                .sort((a,b)=>{
-
-                    const aStarts =
-                        a.name.toLowerCase().startsWith(value);
-
-                    const bStarts =
-                        b.name.toLowerCase().startsWith(value);
-
-                    return Number(bStarts) - Number(aStarts);
-
-                })
-                .slice(0,20);
-
-            results.innerHTML = `
-                <div class="player-search-results">
-                    ${filtered.map(item => {
-
-                        let url = "";
-
-                        if(item.type === "Manager"){
-                            url = "manager.html?name=" + encodeURIComponent(item.name);
-                        }else if(item.type === "Opponent"){
-                            url = "opponent.html?name=" + encodeURIComponent(item.name);
-                        }else{
-                            url = "player.html?name=" + encodeURIComponent(item.name);
-                        }
-
-                        return `
-                            <a
-                                class="player-search-item"
-                                href="${url}">
-                        
-                                ${item.name}
-                        
-                                <span class="search-type ${item.type.toLowerCase()}">
-                                    (${item.type})
-                                </span>
-                        
-                            </a>
-                        `;
-                    }).join("")}
-                </div>
-            `;
-        });
-
-        input.addEventListener("blur", () => {
-            setTimeout(() => {
-                results.innerHTML = "";
-            }, 200);
-        });
-
-    }
-
-	attachSearch(
-	    "sidebarPersonSearch",
-	    "sidebarSearchResults"
-	);
-
-}
-
 </script>
+<script src="scripts/search.js"></script>
 <script src="scripts/sidebar.js"></script>
 <script src="scripts/theme.js"></script>
 
