@@ -684,7 +684,7 @@ params.get("name") || "Unknown opponent";
 
 const competitionLogos = {
     "Copa del Rey": "copa.png",
-    "Copa de La Liga": "copa-liga.png",
+    "Copa de la Liga": "copa-liga.png",
     "Copa de la Coronación": "copa.png",
     "FIFA Club World Cup": "fifa.png",
     "Qualification for La Liga": "laliga.png",
@@ -713,28 +713,28 @@ if (canonical) {
     canonical.href = location.href;
 }
 
-let allMatches = [];
+window.allMatches = [];
+window.allPlayers = [];
+
 let opponentSortColumn = "total";
 let opponentSortDirection = "desc";
 
-fetch("/data/data.json")
-.then(r => r.json())
-.then(data => {
+Promise.all([
+    fetch("/data/data.json").then(r => r.json()),
+    fetch("/data/players.json").then(r => r.json())
+])
 
-	allMatches = data;
-	
-	renderOpponent(opponentName, data);
-	
-	renderTopAgainstOpponent();
-	
-	initPersonSearch();
+.then(([matchesData, playersData]) => {
+
+    allMatches = matchesData;
+    allPlayers = playersData;
+
+    renderOpponent(opponentName, matchesData);
+
+    renderTopAgainstOpponent();
 
 })
-.catch(error => {
-
-    console.error(error);
-
-});
+.catch(console.error);
     
 function statValue(value){
     return value === 0 ? "-" : value;
@@ -808,7 +808,7 @@ function renderTopAgainstOpponent(){
         for(let i=1;i<=12;i++){
 
             const player =
-            match[`Substitution IN Player ${i}`];
+                  match[`Sub on ${i}`]
 
             if(player){
 
@@ -1172,201 +1172,8 @@ html += `
     return html;
 }
 
-function initPersonSearch(){
-
-    const searchItems = new Map();
-
-    allMatches.forEach(match => {
-
-        // Barcelona manager
-        if(match.Manager){
-
-            searchItems.set(
-                `manager-${match.Manager}`,
-                {
-                    name: match.Manager,
-                    type: "Manager"
-                }
-            );
-
-        }
-
-        // Opponent manager
-        if(match["Opp. Manager"]){
-
-            searchItems.set(
-                `manager-${match["Opp. Manager"]}`,
-                {
-                    name: match["Opp. Manager"],
-                    type: "Manager"
-                }
-            );
-
-        }
-
-		// Opponent team
-		if(match["Opp. Team"]){
-		
-		    searchItems.set(
-		        `opponent-${match["Opp. Team"]}`,
-		        {
-		            name: match["Opp. Team"],
-		            type: "Opponent"
-		        }
-		    );
-		
-		}
-
-        // Starting XI
-        for(let i=1;i<=11;i++){
-
-            if(match[`Player name ${i}`]){
-
-                searchItems.set(
-                    `player-${match[`Player name ${i}`]}`,
-                    {
-                        name: match[`Player name ${i}`],
-                        type: "Player"
-                    }
-                );
-
-            }
-
-            if(match[`Opp. Player name ${i}`]){
-
-                searchItems.set(
-                    `player-${match[`Opp. Player name ${i}`]}`,
-                    {
-                        name: match[`Opp. Player name ${i}`],
-                        type: "Player"
-                    }
-                );
-
-            }
-
-        }
-
-        // Bench
-        for(let i=1;i<=12;i++){
-
-            if(match[`On the bench name ${i}`]){
-
-                searchItems.set(
-                    `player-${match[`On the bench name ${i}`]}`,
-                    {
-                        name: match[`On the bench name ${i}`],
-                        type: "Player"
-                    }
-                );
-
-            }
-
-            if(match[`Opp. On the bench name ${i}`]){
-
-                searchItems.set(
-                    `player-${match[`Opp. On the bench name ${i}`]}`,
-                    {
-                        name: match[`Opp. On the bench name ${i}`],
-                        type: "Player"
-                    }
-                );
-
-            }
-
-        }
-
-    });
-
-    const itemList =
-        [...searchItems.values()]
-        .sort((a,b) => a.name.localeCompare(b.name));
-
-    function attachSearch(inputId, resultsId){
-
-    const input = document.getElementById(inputId);
-    const results = document.getElementById(resultsId);
-
-    if(!input || !results) return;
-
-    input.addEventListener("input", () => {
-
-        const value =
-            input.value
-            .trim()
-            .toLowerCase();
-
-        if(!value){
-            results.innerHTML = "";
-            return;
-        }
-
-		const filtered =
-		    itemList
-		    .filter(item =>
-		        item.name.toLowerCase().includes(value)
-		    )
-		    .sort((a,b)=>{
-		
-		        const aStarts =
-		            a.name.toLowerCase().startsWith(value);
-		
-		        const bStarts =
-		            b.name.toLowerCase().startsWith(value);
-		
-		        return Number(bStarts) - Number(aStarts);
-		
-		    })
-		    .slice(0,20);
-
-        results.innerHTML = `
-            <div class="player-search-results">
-                ${filtered.map(item => {
-
-                    let url = "";
-
-                    if(item.type === "Manager"){
-                        url = "manager.html?name=" + encodeURIComponent(item.name);
-                    }else if(item.type === "Opponent"){
-                        url = "opponent.html?name=" + encodeURIComponent(item.name);
-                    }else{
-                        url = "player.html?name=" + encodeURIComponent(item.name);
-                    }
-
-                    return `
-                  
-    <a 
-        class="player-search-item"
-        href="${url}">
-
-        ${item.name}
-
-        <span class="search-type ${item.type.toLowerCase()}">
-            (${item.type})
-        </span>
-
-    </a>
-                    `;
-                }).join("")}
-            </div>
-        `;
-    });
-
-    input.addEventListener("blur", () => {
-        setTimeout(() => {
-            results.innerHTML = "";
-        }, 200);
-    });
-
-}
-
-attachSearch(
-    "sidebarPersonSearch",
-    "sidebarSearchResults"
-);
-
-}
-
 </script>
+<script src="scripts/search.js"></script>
 <script src="scripts/sidebar.js"></script>
 <script src="scripts/theme.js"></script>
 
