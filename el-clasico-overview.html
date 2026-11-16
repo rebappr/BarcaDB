@@ -1287,6 +1287,32 @@ function parseDate(date){
 
 }
 
+function playerHtml(name){
+    if(getRecordClub(name) === "real-madrid"){
+        return name;
+    }
+    return `
+        <a
+            href="player.html?name=${encodeURIComponent(name)}"
+            class="player-link">
+            ${name}
+        </a>
+    `;
+}
+
+function managerHtml(name){
+    if(getManagerClub(name) === "real-madrid"){
+        return name;
+    }
+    return `
+        <a
+            href="manager.html?name=${encodeURIComponent(name)}"
+            class="player-link">
+            ${name}
+        </a>
+    `;
+}
+
 function normalizeName(name) {
 
     return String(name || "")
@@ -1833,13 +1859,7 @@ function renderClasicoRecords(){
 						        class="record-person-logo"
 						        alt="">
 						
-						    <a
-						        href="player.html?name=${encodeURIComponent(name)}"
-						        class="player-link">
-						
-						        ${name}
-						
-						    </a>
+						    ${playerHtml(name)}
 						
 						</span>
 						
@@ -1872,13 +1892,7 @@ function renderClasicoRecords(){
 						        class="record-person-logo"
 						        alt="">
 						
-						    <a
-						        href="player.html?name=${encodeURIComponent(name)}"
-						        class="player-link">
-						
-						        ${name}
-						
-						    </a>
+						    ${playerHtml(name)}
 						
 						</span>
 						
@@ -1911,13 +1925,7 @@ function renderClasicoRecords(){
 						        class="record-person-logo"
 						        alt="">
 						
-						    <a
-						        href="player.html?name=${encodeURIComponent(name)}"
-						        class="player-link">
-						
-						        ${name}
-						
-						    </a>
+						    ${playerHtml(name)}
 						
 						</span>
 						
@@ -1948,13 +1956,9 @@ function renderClasicoRecords(){
 						        class="record-person-logo"
 						        alt="">
 						
-						    <a
-						        href="player.html?name=${encodeURIComponent(mostGoalsMatchPlayer || "")}"
-						        class="player-link">
-						
-						        ${mostGoalsMatchPlayer || "-"}
-						
-						    </a>
+						    ${mostGoalsMatchPlayer
+							    ? playerHtml(mostGoalsMatchPlayer)
+							    : "-"}
 						
 						</span>
 					</div>
@@ -1985,13 +1989,7 @@ function renderClasicoRecords(){
 						        class="record-person-logo"
 						        alt="">
 						
-						    <a
-						        href="manager.html?name=${encodeURIComponent(name)}"
-						        class="player-link">
-						
-						        ${name}
-						
-						    </a>
+						    ${managerHtml(name)}
 						
 						</span>
 						
@@ -2025,13 +2023,7 @@ function renderClasicoRecords(){
 						        class="record-person-logo"
 						        alt="">
 						
-						    <a
-						        href="manager.html?name=${encodeURIComponent(name)}"
-						        class="player-link">
-						
-						        ${name}
-						
-						    </a>
+						    ${managerHtml(name)}
 						
 						</span>
 						
