@@ -401,6 +401,11 @@ border-bottom:1px solid var(--meta-border);
     font-size:12px;
 }
 
+.player-link-disabled{
+    cursor:default;
+    pointer-events:none;
+}
+
 .player-icons{
 margin-left:3px;
 }
@@ -1177,61 +1182,48 @@ if (!matchId) {
     throw new Error("Missing id parameter");
 }
 
-let allMatches = [];
+window.allMatches = [];
+window.allPlayers = [];
 
-fetch("/data/data.json")
-.then(r => {
+Promise.all([
+    fetch("/data/data.json").then(r => r.json()),
+    fetch("/data/players.json").then(r => r.json())
+])
 
-if (!r.ok) {
-throw new Error(`HTTP ${r.status}`);
-}
+.then(([matchesData, playersData]) => {
 
-return r.json();
-})
-.then(data => {
+    allMatches = matchesData;
+    allPlayers = playersData;
 
-    allMatches = data;
+    const match =
+        matchesData.find(
+            row =>
+            String(row.ID).trim() ===
+            String(matchId).trim()
+        );
 
-    initPersonSearch();
+    if (!match) {
 
-    console.log("DATA LOADED");
-    console.log(data);
+        document.getElementById("app").innerHTML =
+            "<div class='card'>Match not found</div>";
 
-    if (!Array.isArray(data)) {
-        throw new Error("data/data.json is not an array");
+        return;
     }
 
-console.log("Looking for ID:", matchId);
-
-const match =
-data.find(
-row =>
-String(row.ID).trim() ===
-String(matchId).trim()
-);
-
-if (!match) {
-
-document.getElementById("app").innerHTML =
-"<div class='card'>Match not found</div>";
-
-return;
-}
-
-renderMatch(match, data);
+    renderMatch(match, matchesData);
 
 })
 
 .catch(error => {
 
-console.error(error);
+    console.error(error);
 
-document.getElementById("app").innerHTML = `
-       <div class="card">
-           Error:<br>
-           ${error.message}
-       </div>
-   `;
+    document.getElementById("app").innerHTML = `
+        <div class="card">
+            Error:<br>
+            ${error.message}
+        </div>
+    `;
 
 });
 
@@ -1282,6 +1274,31 @@ function escapeHtml(str){
         .replace(/>/g,"&gt;")
         .replace(/"/g,"&quot;")
         .replace(/'/g,"&#39;");
+}
+
+function renderPlayerName(name, isBarcaPlayer = true){
+
+    if(!name){
+        return "";
+    }
+
+    if(!isBarcaPlayer){
+    return `
+        <span class="player-link player-link-disabled">
+            ${escapeHtml(name)}
+        </span>
+    `;
+}
+
+    return `
+        <a
+            class="player-link"
+            href="player.html?name=${encodeURIComponent(name)}">
+
+            ${escapeHtml(name)}
+
+        </a>
+    `;
 }
 
 function getPlayerIcons(match, playerName, prefix="") {
@@ -1380,7 +1397,7 @@ function getPlayerIcons(match, playerName, prefix="") {
     return events.map(e => e.icon).join(" ");
 }
 
-function getPlayers(match,prefix=""){
+function getPlayers(match,prefix="",isBarcaTeam=true){
 
 const captain = match[`${prefix}Captain`] || "";
 
@@ -1417,13 +1434,10 @@ html += `
 
                <span class="player-name">
                
-                   <a
-                      class="player-link"
-                      href="player.html?name=${encodeURIComponent(player)}">
-               
-                      ${escapeHtml(player)}
-               
-                   </a>
+                  ${renderPlayerName(
+                      player,
+                      isBarcaTeam
+                  )}
                
                    ${
                        String(player).trim() === String(captain).trim()
@@ -1444,7 +1458,7 @@ html += `
 return html;
 }
 
-function getBench(match, prefix="") {
+function getBench(match, prefix="", isBarcaTeam=true) {
 
     const subbedOn = [];
 
@@ -1480,13 +1494,10 @@ function getBench(match, prefix="") {
 
                   <span class="player-name">
                   
-                      <a
-                         class="player-link"
-                         href="player.html?name=${encodeURIComponent(player)}">
-                  
-                         ${escapeHtml(player)}
-                  
-                      </a>
+                      ${renderPlayerName(
+                            player,
+                            isBarcaTeam
+                        )}
                   
                       <span class="player-icons">
                          ${getPlayerIcons(match, player, prefix)}
@@ -1504,18 +1515,29 @@ function getBench(match, prefix="") {
 
 function getTimeline(match){
 
-function playerLink(name){
+function playerLink(name, isBarcaPlayer = true){
 
-return `
-<a
-   class="player-link"
-   href="player.html?name=${encodeURIComponent(name)}">
+    if(!name){
+        return "";
+    }
 
-   ${escapeHtml(name)}
+    if(!isBarcaPlayer){
+    return `
+        <span class="player-link player-link-disabled">
+            ${escapeHtml(name)}
+        </span>
+    `;
+}
 
-</a>
-`;
+    return `
+        <a
+           class="player-link"
+           href="player.html?name=${encodeURIComponent(name)}">
 
+           ${escapeHtml(name)}
+
+        </a>
+    `;
 }
 
 const events = [];
@@ -1560,6 +1582,7 @@ minute: match[`Goal min ${i}`],
 side: homeMatch ? "left":"right",
 player: match[`Goal Player ${i}`],
 assist: match[`Assist Player ${i}`] || "",
+isBarcaPlayer: true,
 penalty:
 match[`Penalty player ${i}`] &&
 String(match[`Penalty scored ${i}`] || "")
@@ -1576,6 +1599,7 @@ minute: match[`Opp. Goal min ${i}`],
 side: homeMatch ? "right":"left",
 player: match[`Opp. Goal Player ${i}`],
 assist: match[`Opp. Assist player ${i}`] || "",
+isBarcaPlayer: false,
 penalty:
 match[`Opp. Penalty player ${i}`] &&
 String(match[`Opp. Penalty scored ${i}`] || "")
@@ -1602,7 +1626,8 @@ events.push({
 minute: match[`Penalty min ${i}`],
 side: homeMatch ? "left":"right",
 player: match[`Penalty player ${i}`],
-missedPenalty: true
+missedPenalty: true,
+isBarcaPlayer: true,
 });
 
 }
@@ -1618,7 +1643,8 @@ events.push({
 minute: match[`Opp. Penalty min ${i}`],
 side: homeMatch ? "right":"left",
 player: match[`Opp. Penalty player ${i}`],
-missedPenalty: true
+missedPenalty: true,
+isBarcaPlayer: false
 });
 
 }
@@ -1634,7 +1660,8 @@ events.push({
 minute: match[`Sub min ${i}`],
 side: homeMatch ? "left":"right",
 on: match[`Sub on ${i}`],
-off: match[`Sub off ${i}`]
+off: match[`Sub off ${i}`],
+isBarcaPlayer: true
 });
 
 }
@@ -1645,7 +1672,8 @@ events.push({
 minute: match[`Opp. Sub min ${i}`],
 side: homeMatch ? "right":"left",
 on: match[`Opp. Sub on ${i}`],
-off: match[`Opp. Sub off ${i}`]
+off: match[`Opp. Sub off ${i}`],
+isBarcaPlayer: false
 });
 
 }
@@ -1662,7 +1690,8 @@ events.push({
 minute: match[`Yellow min ${i}`],
 side: homeMatch ? "left":"right",
 icon: "🟨",
-player: match[`Yellow player ${i}`]
+player: match[`Yellow player ${i}`],
+isBarcaPlayer: true
 });
 
 }
@@ -1673,7 +1702,8 @@ events.push({
 minute: match[`Opp. Yellow min ${i}`],
 side: homeMatch ? "right":"left",
 icon: "🟨",
-player: match[`Opp. Yellow player ${i}`]
+player: match[`Opp. Yellow player ${i}`],
+isBarcaPlayer: false
 });
 
 }
@@ -1690,7 +1720,8 @@ events.push({
 minute: match[`Red min ${i}`],
 side: homeMatch ? "left":"right",
 icon: "🟥",
-player: match[`Red player ${i}`]
+player: match[`Red player ${i}`],
+isBarcaPlayer: true
 });
 
 }
@@ -1701,7 +1732,8 @@ events.push({
 minute: match[`Opp. Red min ${i}`],
 side: homeMatch ? "right":"left",
 icon: "🟥",
-player: match[`Opp. Red player ${i}`]
+player: match[`Opp. Red player ${i}`],
+isBarcaPlayer: false
 });
 
 }
@@ -1812,7 +1844,7 @@ if(event.side === "right"){
 content = `
            <span class="event-icon">⚽</span>
 
-           <strong>${playerLink(event.player)}</strong>
+           <strong>${playerLink(event.player, event.isBarcaPlayer)}</strong>
 
            <span class="timeline-score">
                ${event.score}
@@ -1820,7 +1852,7 @@ content = `
 		   
 		   ${
                event.assist
-                   ? `<span class="assist-text">Assist by ${playerLink(event.assist)}</span>`
+                   ? `<span class="assist-text">Assist by ${playerLink(event.assist, event.isBarcaPlayer)}</span>`
                    : ""
            }
 
@@ -1829,7 +1861,7 @@ content = `
 }else{
 
 content = `
-	   <strong>${playerLink(event.player)}</strong>
+	   <strong>${playerLink(event.player, event.isBarcaPlayer)}</strong>
 	
 	   <span class="timeline-score">
 	       ${event.score}
@@ -1839,7 +1871,7 @@ content = `
 	
 	   ${
 	      event.assist
-	      ? `<span class="assist-text">Assist by ${playerLink(event.assist)}</span>`
+	      ? `<span class="assist-text">Assist by ${playerLink(event.assist, event.isBarcaPlayer)}</span>`
 	      : ""
 	   }
 	`;
@@ -1852,17 +1884,17 @@ if(event.side === "right"){
 
 content = `
            <img src="icons/sub.png" class="event-icon" alt="Substitution">
-            <strong>${playerLink(event.on)}</strong>
+            <strong>${playerLink(event.on, event.isBarcaPlayer)}</strong>
             <span class="sub-text">for</span>
-            ${playerLink(event.off)}
+            ${playerLink(event.off, event.isBarcaPlayer)}
        `;
 
 }else{
 
 content = `
-		<strong>${playerLink(event.on)}</strong>
+		<strong>${playerLink(event.on, event.isBarcaPlayer)}</strong>
 		<span class="sub-text">for</span>
-		${playerLink(event.off)}
+		${playerLink(event.off, event.isBarcaPlayer)}
 		<img src="icons/sub.png" class="event-icon" alt="Substitution">
        `;
 
@@ -1874,13 +1906,13 @@ if(event.side === "right"){
 
 content = `
            <span class="event-icon">${event.icon}</span>
-           ${playerLink(event.player)}
+           ${playerLink(event.player, event.isBarcaPlayer)}
        `;
 
 }else{
 
 content = `
-           ${playerLink(event.player)}
+           ${playerLink(event.player, event.isBarcaPlayer)}
            <span class="event-icon">${event.icon}</span>
        `;
 
@@ -1954,48 +1986,32 @@ return false;
 function showLineup(team){
 
     const barca =
-    document.getElementById("lineup-barca");
+        document.getElementById("lineup-barca");
 
     const opp =
-    document.getElementById("lineup-opp");
+        document.getElementById("lineup-opp");
 
-    const tabs =
-    document.querySelectorAll(".lineup-tab");
+    document
+        .querySelectorAll(".lineup-tab")
+        .forEach(tab => tab.classList.remove("active"));
 
-    tabs.forEach(tab =>
-        tab.classList.remove("active")
-    );
+    const activeButton =
+        document.querySelector(
+            `.lineup-tab[data-team="${team}"]`
+        );
+
+    activeButton?.classList.add("active");
 
     if(team === "barca"){
 
-        if(barca){
-            barca.classList.remove("mobile-hidden");
-        }
+        barca?.classList.remove("mobile-hidden");
+        opp?.classList.add("mobile-hidden");
 
-        if(opp){
-            opp.classList.add("mobile-hidden");
-        }
+    }else{
 
-        if(tabs[0]){
-            tabs[0].classList.add("active");
-        }
+        opp?.classList.remove("mobile-hidden");
+        barca?.classList.add("mobile-hidden");
 
-        return;
-
-    }
-
-    if(!opp){
-        return;
-    }
-
-    opp.classList.remove("mobile-hidden");
-
-    if(barca){
-        barca.classList.add("mobile-hidden");
-    }
-
-    if(tabs[1]){
-        tabs[1].classList.add("active");
     }
 
 }
@@ -2213,45 +2229,27 @@ if (canonical) {
     canonical.href = location.href;
 }
 
-const barcaTitle = homeMatch
-? "FC Barcelona"
-: (match["Opp. Team"] || "");
+const barcaTitle = "FC Barcelona";
 
-const oppTitle = homeMatch
-? (match["Opp. Team"] || "")
-: "FC Barcelona";
+const oppTitle = match["Opp. Team"] || "";
 
-const barcaPlayers = homeMatch
-? getPlayers(match)
-: getPlayers(match,"Opp. ");
+const barcaPlayers = getPlayers(match, "", true);
+const oppPlayers = getPlayers(match, "Opp. ", false);
 
-const oppPlayers = homeMatch
-? getPlayers(match,"Opp. ")
-: getPlayers(match);
+const barcaBench = getBench(match, "", true);
+const oppBench = getBench(match, "Opp. ", false);
 
-const barcaBench = homeMatch
-? getBench(match)
-: getBench(match,"Opp. ");
+const hasBarcaBench =
+    hasBench(match);
 
-const oppBench = homeMatch
-? getBench(match,"Opp. ")
-: getBench(match);
+const hasOppBench =
+    hasBench(match,"Opp. ");
 
-const hasBarcaBench = homeMatch
-? hasBench(match)
-: hasBench(match,"Opp. ");
+const barcaManager =
+    match["Manager"] || "-";
 
-const hasOppBench = homeMatch
-? hasBench(match,"Opp. ")
-: hasBench(match);
-
-const barcaManager = homeMatch
-? (match["Manager"] || "-")
-: (match["Opp. Manager"] || "-");
-
-const oppManager = homeMatch
-? (match["Opp. Manager"] || "-")
-: (match["Manager"] || "-");
+const oppManager =
+    match["Opp. Manager"] || "-";
 
 const hasBarcaLineup =
     hasStartingXI(match);
@@ -2275,6 +2273,72 @@ const heroMatchday =
 isNumericMatchday
 ? `${matchday}. Matchday`
 : matchday;
+
+const barcaLineupHtml = hasBarcaLineup ? `
+
+<div
+    id="lineup-barca"
+    class="team-card">
+
+    <h3>FC Barcelona</h3>
+
+    ${barcaPlayers}
+
+    ${hasBarcaBench ? `
+    <h4>Bench</h4>
+    ${barcaBench}
+    ` : ""}
+
+    <h4>Manager</h4>
+
+    <div class="player">
+
+        <a
+            class="player-link"
+            href="manager.html?name=${encodeURIComponent(barcaManager)}">
+
+            ${escapeHtml(barcaManager)}
+
+        </a>
+
+    </div>
+
+</div>
+
+` : "";
+
+const oppLineupHtml = hasOpponentLineup ? `
+
+<div
+    id="lineup-opp"
+    class="team-card">
+
+    <h3>${escapeHtml(oppTitle)}</h3>
+
+    ${oppPlayers}
+
+    ${hasOppBench ? `
+    <h4>Bench</h4>
+    ${oppBench}
+    ` : ""}
+
+    <h4>Manager</h4>
+
+    <div class="player">
+
+        <a
+            class="player-link"
+            href="manager.html?name=${encodeURIComponent(oppManager)}">
+
+            ${escapeHtml(oppManager)}
+
+        </a>
+
+    </div>
+
+</div>
+
+` : "";
 
 const infoHtml = `
 <div class="card">
@@ -2304,97 +2368,61 @@ const squadsHtml = `
 
 	${hasBarcaLineup && hasOpponentLineup ? `
 	
-	<div class="lineup-tabs">
-	
-	    <button
-	        class="lineup-tab active"
-	        onclick="showLineup('barca')">
-	
-	        ${escapeHtml(barcaTitle)}
-	
-	    </button>
-	
-	    <button
-	        class="lineup-tab"
-	        onclick="showLineup('opp')">
-	
-	        ${escapeHtml(oppTitle)}
-	
-	    </button>
-	
-	</div>
+<div class="lineup-tabs">
+
+    ${homeMatch ? `
+
+        <button
+            class="lineup-tab active"
+            data-team="barca"
+            onclick="showLineup('barca')">
+
+            FC Barcelona
+
+        </button>
+
+        <button
+            class="lineup-tab"
+            data-team="opp"
+            onclick="showLineup('opp')">
+
+            ${escapeHtml(oppTitle)}
+
+        </button>
+
+    ` : `
+
+        <button
+            class="lineup-tab active"
+            data-team="opp"
+            onclick="showLineup('opp')">
+
+            ${escapeHtml(oppTitle)}
+
+        </button>
+
+        <button
+            class="lineup-tab"
+            data-team="barca"
+            onclick="showLineup('barca')">
+
+            FC Barcelona
+
+        </button>
+
+    `}
+
+</div>
 	
 	` : ""}
 
-   <div class="lineups">
+<div class="lineups">
 
-		${hasBarcaLineup ? `
-		
-		<div
-		    id="lineup-barca"
-		    class="team-card">
-		
-		    <h3>${escapeHtml(barcaTitle)}</h3>
-		
-		    ${barcaPlayers}
-		
-		    ${hasBarcaBench ? `
-		    <h4>Bench</h4>
-		    ${barcaBench}
-		    ` : ""}
-		
-		    <h4>Manager</h4>
-		
-		    <div class="player">
-		
-		        <a
-		            class="player-link"
-		            href="manager.html?name=${encodeURIComponent(barcaManager)}">
-		
-		            ${escapeHtml(barcaManager)}
-		
-		        </a>
-		
-		    </div>
-		
-		</div>
-		
-		` : ""}
+    ${homeMatch
+        ? `${barcaLineupHtml}${oppLineupHtml}`
+        : `${oppLineupHtml}${barcaLineupHtml}`}
 
-       ${hasOpponentLineup ? `
-
-		<div
-		    id="lineup-opp"
-		    class="team-card">
-		
-		    <h3>${escapeHtml(oppTitle)}</h3>
-		
-		    ${oppPlayers}
-		
-		    ${hasOppBench ? `
-		    <h4>Bench</h4>
-		    ${oppBench}
-		    ` : ""}
-		
-		    <h4>Manager</h4>
-		
-		    <div class="player">
-		
-		        <a
-		            class="player-link"
-		            href="manager.html?name=${encodeURIComponent(oppManager)}">
-		
-		            ${escapeHtml(oppManager)}
-		
-		        </a>
-		
-		    </div>
-		
-		</div>
-		
-		` : ""}
-
-   </div>
+</div>
 
 </div>
 `;
@@ -2543,17 +2571,24 @@ if(window.innerWidth <= 820){
 
     if(barca && opp){
 
-        // existujú oba line-upy
+    if(homeMatch){
+
         opp.classList.add("mobile-hidden");
+        barca.classList.remove("mobile-hidden");
 
-    }else if(barca){
+    }else{
 
-        // existuje iba jeden line-up
+        barca.classList.add("mobile-hidden");
+        opp.classList.remove("mobile-hidden");
+
+    }
+
+}else if(barca){
+
         barca.classList.remove("mobile-hidden");
 
     }else if(opp){
 
-        // existuje iba jeden line-up
         opp.classList.remove("mobile-hidden");
 
     }
@@ -2591,200 +2626,6 @@ opp.classList.add("mobile-hidden");
 }
 
 });
-
-function initPersonSearch(){
-
-    const searchItems = new Map();
-
-    allMatches.forEach(match => {
-
-        // Barcelona manager
-        if(match.Manager){
-
-            searchItems.set(
-                `manager-${match.Manager}`,
-                {
-                    name: match.Manager,
-                    type: "Manager"
-                }
-            );
-
-        }
-
-        // Opponent manager
-        if(match["Opp. Manager"]){
-
-            searchItems.set(
-                `manager-${match["Opp. Manager"]}`,
-                {
-                    name: match["Opp. Manager"],
-                    type: "Manager"
-                }
-            );
-
-        }
-
-		// Opponent team
-		if(match["Opp. Team"]){
-		
-		    searchItems.set(
-		        `opponent-${match["Opp. Team"]}`,
-		        {
-		            name: match["Opp. Team"],
-		            type: "Opponent"
-		        }
-		    );
-		
-		}
-
-        // Starting XI
-        for(let i=1;i<=11;i++){
-
-            if(match[`Player name ${i}`]){
-
-                searchItems.set(
-                    `player-${match[`Player name ${i}`]}`,
-                    {
-                        name: match[`Player name ${i}`],
-                        type: "Player"
-                    }
-                );
-
-            }
-
-            if(match[`Opp. Player name ${i}`]){
-
-                searchItems.set(
-                    `player-${match[`Opp. Player name ${i}`]}`,
-                    {
-                        name: match[`Opp. Player name ${i}`],
-                        type: "Player"
-                    }
-                );
-
-            }
-
-        }
-
-        // Bench
-        for(let i=1;i<=12;i++){
-
-            if(match[`On the bench name ${i}`]){
-
-                searchItems.set(
-                    `player-${match[`On the bench name ${i}`]}`,
-                    {
-                        name: match[`On the bench name ${i}`],
-                        type: "Player"
-                    }
-                );
-
-            }
-
-            if(match[`Opp. On the bench name ${i}`]){
-
-                searchItems.set(
-                    `player-${match[`Opp. On the bench name ${i}`]}`,
-                    {
-                        name: match[`Opp. On the bench name ${i}`],
-                        type: "Player"
-                    }
-                );
-
-            }
-
-        }
-
-    });
-
-    const itemList =
-        [...searchItems.values()]
-        .sort((a,b) => a.name.localeCompare(b.name));
-
-    function attachSearch(inputId, resultsId){
-
-    const input = document.getElementById(inputId);
-    const results = document.getElementById(resultsId);
-
-    if(!input || !results) return;
-
-    input.addEventListener("input", () => {
-
-        const value =
-            input.value
-            .trim()
-            .toLowerCase();
-
-        if(!value){
-            results.innerHTML = "";
-            return;
-        }
-
-		const filtered =
-		    itemList
-		    .filter(item =>
-		        item.name.toLowerCase().includes(value)
-		    )
-		    .sort((a,b)=>{
-		
-		        const aStarts =
-		            a.name.toLowerCase().startsWith(value);
-		
-		        const bStarts =
-		            b.name.toLowerCase().startsWith(value);
-		
-		        return Number(bStarts) - Number(aStarts);
-		
-		    })
-		    .slice(0,20);
-
-        results.innerHTML = `
-            <div class="player-search-results">
-                ${filtered.map(item => {
-
-                    let url = "";
-
-                    if(item.type === "Manager"){
-                        url = "manager.html?name=" + encodeURIComponent(item.name);
-                    }else if(item.type === "Opponent"){
-                        url = "opponent.html?name=" + encodeURIComponent(item.name);
-                    }else{
-                        url = "player.html?name=" + encodeURIComponent(item.name);
-                    }
-
-                    return `
-                  
-    <a 
-        class="player-search-item"
-        href="${url}">
-
-        ${item.name}
-
-        <span class="search-type ${item.type.toLowerCase()}">
-            (${item.type})
-        </span>
-
-    </a>
-                    `;
-                }).join("")}
-            </div>
-        `;
-    });
-
-    input.addEventListener("blur", () => {
-        setTimeout(() => {
-            results.innerHTML = "";
-        }, 200);
-    });
-
-}
-
-attachSearch(
-    "sidebarPersonSearch",
-    "sidebarSearchResults"
-);
-
-}
 
 function showMobileSection(section, button){
 
@@ -2844,6 +2685,7 @@ document.getElementById(
 }
 
 </script>
+<script src="scripts/search.js"></script>
 <script src="scripts/sidebar.js"></script>
 <script src="scripts/theme.js"></script>
 
