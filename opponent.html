@@ -368,7 +368,168 @@ flex-shrink:0;
     user-select:none;
 }
 
+.section-header{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ gap:12px;
+ margin-bottom:12px;
+}
+
+.section-header h2{
+ margin:0;
+}
+
+.matches-filter-wrap{
+ position:relative;
+ display:inline-block;
+}
+
+.matches-filter-wrap::after{
+ content:"▼";
+ position:absolute;
+ right:14px;
+ bottom:10px;
+ color:var(--select-arrow);
+ font-size:12px;
+ pointer-events:none;
+}
+
+#matchesLimitFilter{
+ height:40px;
+ padding:0 40px 0 12px;
+
+ border-radius:14px;
+ border:1px solid var(--card-border);
+
+ background:var(--select-bg);
+ color:var(--select-text);
+
+ font-size:12px;
+ font-weight:700;
+ text-transform:uppercase;
+
+ cursor:pointer;
+
+ appearance:none;
+ -webkit-appearance:none;
+ -moz-appearance:none;
+}
+
+#matchesLimitFilter option{
+ background:var(--select-bg);
+ color:var(--select-text);
+}
+
+.filters{
+ display:flex;
+ flex-direction:column;
+ gap:14px;
+
+ padding:16px;
+
+ background:var(--card-bg);
+ border:1px solid var(--card-border);
+ border-radius:24px;
+}
+
+.filter-section{
+ display:flex;
+ flex-direction:column;
+ gap:6px;
+}
+
+.filter-label{
+ font-size:12px;
+ font-weight:700;
+ text-transform:uppercase;
+ letter-spacing:.4px;
+ color:var(--muted);
+}
+
+.season-filters{
+ display:flex;
+ flex-direction:row;
+ align-items:flex-start;
+ gap:24px;
+}
+
+.season-filters .filter-section:first-child{
+ flex:1;
+ min-width:0;
+}
+
+.season-filters .filter-section:last-child{
+ flex:0 0 200px;
+}
+
+.matches-view-switch{
+ display:flex;
+ flex-wrap:wrap;
+ gap:6px;
+}
+
+.venue-switch{
+ flex-wrap:nowrap;
+}
+
+.matches-view-switch::-webkit-scrollbar{
+ display:none;
+}
+
+.matches-view-switch button{
+
+ padding:8px 12px;
+
+ border-radius:14px;
+
+ cursor:pointer;
+
+ font-size:12px;
+ text-transform:uppercase;
+
+ background:var(--card-bg);
+ color:var(--text);
+
+ border:1px solid var(--card-border);
+
+ white-space:nowrap;
+}
+
+.matches-view-switch button.active{
+ background:#004D98;
+ color:white;
+ border-color:#004D98;
+}
+
 @media(max-width:820px){
+
+ .filters{
+  margin-bottom:12px;
+  flex-direction:column;
+ }
+
+ .season-filters{
+  flex-direction:column;
+  gap:12px;
+ }
+
+ .filter-section{
+  width:100%;
+ }
+
+ .season-filters .filter-section{
+  flex:none !important;
+ }
+
+ .matches-view-switch{
+  width:100%;
+ }
+
+.venue-switch{
+ display:inline-flex;
+ width:auto;
+}
 
 .flick-table th:not(:first-child),
 .flick-table td:not(:first-child){
@@ -685,7 +846,7 @@ params.get("name") || "Unknown opponent";
 
 const competitionLogos = {
     "Copa del Rey": "copa.png",
-    "Copa de la Liga": "copa-liga.png",
+    "Copa de La Liga": "copa-liga.png",
     "Copa de la Coronación": "copa.png",
     "FIFA Club World Cup": "fifa.png",
     "Qualification for La Liga": "laliga.png",
@@ -720,6 +881,9 @@ window.allPlayers = [];
 let opponentSortColumn = "total";
 let opponentSortDirection = "desc";
 
+let selectedCompetition = "All";
+let selectedVenue = "All";
+
 Promise.all([
     fetch("/data/data.json").then(r => r.json()),
     fetch("/data/players.json").then(r => r.json())
@@ -730,7 +894,7 @@ Promise.all([
     allMatches = matchesData;
     allPlayers = playersData;
 
-    renderOpponent(opponentName, matchesData);
+    renderOpponent(opponentName);
 
     renderTopAgainstOpponent();
 
@@ -766,9 +930,8 @@ function renderTopAgainstOpponent(){
 
     const stats = {};
 
-    const opponentMatches = allMatches.filter(
-        m => m["Opp. Team"] === opponentName
-    );
+    const opponentMatches =
+ 		getFilteredOpponentMatches();
 
     function addPlayer(name){
 
@@ -857,8 +1020,15 @@ const limit =
         ? 5
         : 10;
 
-document.getElementById("topOpponentTitle").textContent =
-    `Top ${limit} Against ${getOfficialClubName(opponentName)}`;
+const compLabel =
+ selectedCompetition !== "All"
+ ? selectedCompetition
+ : "All Competitions";
+
+document.getElementById(
+ "topOpponentTitle"
+).textContent =
+`${compLabel} Top ${limit} Against ${getOfficialClubName(opponentName)}`;
 
 const top = Object.entries(stats)
 
@@ -979,11 +1149,10 @@ function getClubLogo(team){
         + ".png";
 }
 
-function renderOpponent(team,data){
+function renderOpponent(team){
 
-    const matches = data.filter(
-        match => match["Opp. Team"] === team
-    );
+    const matches =
+ 		getFilteredOpponentMatches();
 
     if(!matches.length){
 
@@ -1045,13 +1214,65 @@ const goalsAgainst = matches.reduce(
 	
 	`;
 
-    document.getElementById("opponentProfile").innerHTML = `
-
-	<div class="widget-title">
-	    Overview
+	document.getElementById("opponentProfile").innerHTML = `
+	
+	 <div class="filters season-filters">
+	
+	  <div class="filter-section">
+	
+	   <div class="filter-label">
+	    Competition
+	   </div>
+	
+	<div
+	 id="competitionSwitch"
+	 class="matches-view-switch">
 	</div>
 	
-    <div class="summary-grid">
+	  </div>
+	
+	  <div class="filter-section">
+	
+	   <div class="filter-label">
+	    Venue
+	   </div>
+	
+	   <div class="matches-view-switch venue-switch">
+	
+		<button
+		 class="${selectedVenue === 'All' ? 'active' : ''}"
+		 data-venue="All"
+		 onclick="setVenueFilter('All')">
+		 All
+		</button>
+		
+		<button
+		 class="${selectedVenue === 'Home' ? 'active' : ''}"
+		 data-venue="Home"
+		 onclick="setVenueFilter('Home')">
+		 Home
+		</button>
+		
+		<button
+		 class="${selectedVenue === 'Away' ? 'active' : ''}"
+		 data-venue="Away"
+		 onclick="setVenueFilter('Away')">
+		 Away
+		</button>
+	
+	   </div>
+	
+	  </div>
+	
+	 </div>
+	
+	 <div
+	  class="widget-title"
+	  id="overviewTitle">
+	  Overview
+	 </div>
+	
+	 <div class="summary-grid">
 
         <div class="summary-box matches">
             <b>${matches.length}</b>
@@ -1080,25 +1301,40 @@ const goalsAgainst = matches.reduce(
 
     </div>
 
-    <div class="widget-title">
-        Matches
-    </div>
-        
-        <div class="widget-card">
-            ${buildOpponentMatches(team, data)}
-        </div>
+	<div class="widget-card">
+	
+	 <div class="section-header">
+	
+	  <h2 id="matchesTitle">
+		 Matches
+	  </h2>
+	
+	  <div class="matches-filter-wrap">
+	
+	   <select
+	    id="matchesLimitFilter"
+	    onchange="updateOpponentMatches()">
+	   </select>
+	
+	  </div>
+	
+	 </div>
+	
+	 <div id="opponentMatchesContainer"></div>
+	
+	</div>
 
     `;
 
+	updateMatchesLimitFilter();
+	updateOpponentMatches();
+	
+	renderOpponentFilters();
+	updateOpponentTitles();
+
 }
 
-function buildOpponentMatches(team, data){
-
-        const matches = data.filter(match =>
-        
-            match["Opp. Team"] === team
-        
-        );
+function buildOpponentMatches(matches){
 
         let html = `
             <div class="matches-header">
@@ -1171,6 +1407,271 @@ html += `
     `;
 
     return html;
+}
+
+function updateMatchesLimitFilter(){
+
+const total =
+ getFilteredOpponentMatches().length;
+
+ const select =
+ document.getElementById(
+  "matchesLimitFilter"
+ );
+
+ if(!select) return;
+
+ const currentValue =
+ select.value || "10";
+
+ const limits =
+ [10,25,50,100,200];
+
+ let html = `
+ <option value="all">
+ All Matches (${total})
+ </option>
+ `;
+
+ limits.forEach(limit => {
+
+  if(limit < total){
+
+   html += `
+   <option value="${limit}">
+   Last ${limit}
+   </option>
+   `;
+  }
+
+ });
+
+ select.innerHTML = html;
+
+ if(
+  [...select.options]
+  .some(o => o.value === currentValue)
+ ){
+  select.value = currentValue;
+ }else{
+  select.value =
+   total >= 20 ? "10" : "all";
+ }
+
+}
+
+function updateOpponentMatches(){
+
+ const filteredMatches =
+ [...getFilteredOpponentMatches()]
+ .sort((a,b) => Number(b.ID) - Number(a.ID));
+
+ const limit =
+ document.getElementById(
+  "matchesLimitFilter"
+ )?.value || "10";
+
+ const matches =
+ limit === "all"
+ ? filteredMatches
+ : filteredMatches.slice(
+    0,
+    Number(limit)
+   );
+
+ document.getElementById(
+  "opponentMatchesContainer"
+ ).innerHTML =
+ buildOpponentMatches(matches);
+
+}
+
+function getFilteredOpponentMatches(){
+
+ let matches =
+ allMatches.filter(
+  m => m["Opp. Team"] === opponentName
+ );
+
+ if(selectedCompetition !== "All"){
+
+  matches = matches.filter(
+   m => m.Competition === selectedCompetition
+  );
+
+ }
+
+ if(selectedVenue !== "All"){
+
+  matches = matches.filter(
+   m => m["Home/Away"] === selectedVenue
+  );
+
+ }
+
+ return matches;
+}
+
+function renderOpponentFilters(){
+
+const competitionOrder = [
+ "UEFA Champions League",
+ "La Liga",
+ "Copa del Rey",
+ "Supercopa de España",
+ "European Cup",
+ "UEFA Europa League",
+ "UEFA Cup",
+ "Cup Winners' Cup",
+ "UEFA Super Cup",
+ "FIFA Club World Cup",
+ "Inter-Cities Fairs Cup",
+ "Copa de La Liga",
+ "Copa de la Coronación",
+ "Qualification for La Liga"
+];
+
+const competitions =
+ [...new Set(
+  allMatches
+   .filter(m => m["Opp. Team"] === opponentName)
+   .map(m => m.Competition)
+ )]
+ .sort((a,b) => {
+
+  const ia = competitionOrder.indexOf(a);
+  const ib = competitionOrder.indexOf(b);
+
+  if(ia === -1 && ib === -1) return a.localeCompare(b);
+  if(ia === -1) return 1;
+  if(ib === -1) return -1;
+
+  return ia - ib;
+ });
+
+ document.getElementById(
+  "competitionSwitch"
+ ).innerHTML = `
+
+ <button
+  data-competition="All"
+  class="${
+   selectedCompetition === "All"
+   ? "active"
+   : ""
+  }"
+  onclick="setCompetitionFilter('All')">
+
+  All
+
+ </button>
+
+	${competitions.map(comp => `
+	
+	<button
+	 data-competition="${comp}"
+	 class="${
+	  selectedCompetition === comp
+	  ? "active"
+	  : ""
+	 }"
+	 onclick="setCompetitionFilter(this.dataset.competition)">
+	
+	${
+	 comp
+	 .replace("UEFA Champions League","UCL")
+	 .replace("UEFA Europa League","UEL")
+	 .replace("UEFA Super Cup","Super Cup")
+	 .replace("Supercopa de España","Supercopa")
+	 .replace("Copa del Rey","Copa")
+	 .replace("Copa de La Liga","League Cup")
+	 .replace("Cup Winners' Cup","CWC")
+	 .replace("Inter-Cities Fairs Cup","Fairs Cup")
+	 .replace("European Cup","European Cup")
+	 .replace("FIFA Club World Cup","Club WC")
+	 .replace("Qualification for La Liga","La Liga Qual.")
+     .replace("Copa de la Coronación","Coronación")
+	 }
+	
+	</button>
+	
+	`).join("")}
+ `;
+}
+
+function setCompetitionFilter(comp){
+
+ selectedCompetition = comp;
+
+ document
+ .querySelectorAll("[data-competition]")
+ .forEach(btn =>
+  btn.classList.remove("active")
+ );
+
+document
+ .querySelector(
+  `[data-competition="${comp}"]`
+ )
+ ?.classList.add("active");
+
+ refreshOpponentPage();
+}
+
+function setVenueFilter(venue){
+
+ selectedVenue = venue;
+
+ document
+ .querySelectorAll("[data-venue]")
+ .forEach(btn =>
+  btn.classList.remove("active")
+ );
+
+document
+ .querySelector(
+  `[data-venue="${venue}"]`
+ )
+ ?.classList.add("active");
+
+ refreshOpponentPage();
+}
+
+function updateOpponentTitles(){
+
+ const compLabel =
+ selectedCompetition !== "All"
+ ? selectedCompetition
+ : "All Competitions";
+
+ document.getElementById(
+  "overviewTitle"
+ ).textContent =
+ `${compLabel} Overview`;
+
+ const matchesTitle =
+ document.getElementById("matchesTitle");
+
+ if(matchesTitle){
+
+  matchesTitle.textContent =
+  selectedCompetition !== "All"
+  ? `${selectedCompetition} Match History`
+  : "All Competitions Match History";
+
+ }
+
+}
+
+function refreshOpponentPage(){
+
+ renderOpponent(
+  opponentName,
+  allMatches
+ );
+
+ renderTopAgainstOpponent();
+
 }
 
 </script>
