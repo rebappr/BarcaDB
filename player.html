@@ -1766,7 +1766,7 @@ function populateCompetitionFilter(playerName){
 
         for(let i = 1; i <= 11; i++){
 
-            if(match[`Player name ${i}`] === playerName){
+            if(match["Player name " + i] === playerName){
 
                 appeared = true;
                 break;
@@ -1881,7 +1881,7 @@ function getPlayerMatches(playerName){
         for(let i = 1; i <= 11; i++){
 
             if(
-                match[`Player name ${i}`] === playerName
+                match["Player name " + i] === playerName
             ){
 
                 played = true;
@@ -2646,7 +2646,7 @@ function renderPlayer(player){
 		);
 
 	document.title =
-	    `${player.Name} | Barça Database`;
+	 `${player.Name} | Barça Database`;
 
 document.getElementById("playerProfile").innerHTML = `
 
@@ -2710,7 +2710,7 @@ document.getElementById("playerProfile").innerHTML = `
 			            for(let i = 1; i <= 11; i++){
 			
 			                if(
-			                    match[`Player name ${i}`] === player.Name
+			                    match["Player name " + i] === player.Name
 			                ){
 			                    return true;
 			                }
@@ -3487,7 +3487,7 @@ function renderPlayerMatches(){
         for(let i = 1; i <= 11; i++){
 
             if(
-                match[`Player name ${i}`] === playerName
+                match["Player name " + i] === playerName
             ){
                 started = true;
                 appeared = true;
@@ -3888,7 +3888,7 @@ function populateCareerCompetitionFilter(playerName){
 
         for(let i = 1; i <= 11; i++){
 
-            if(match[`Player name ${i}`] === playerName){
+            if(match["Player name " + i] === playerName){
                 played = true;
                 break;
             }
@@ -3981,7 +3981,7 @@ function populateSeasonFilter(playerName){
 
         for(let i = 1; i <= 11; i++){
 
-            if(match[`Player name ${i}`] === playerName){
+            if(match["Player name " + i] === playerName){
 
                 found = true;
                 break;
