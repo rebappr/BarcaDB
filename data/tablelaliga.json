@@ -19730,6 +19730,18 @@
   {
     "season": "2026/27",
     "position": "3",
+    "club": "Real Betis",
+    "matches": "13",
+    "wins": "9",
+    "draws": "2",
+    "losses": "2",
+    "goals": "21:15",
+    "difference": "6",
+    "points": "29"
+  },
+  {
+    "season": "2026/27",
+    "position": "4",
     "club": "Atlético Madrid",
     "matches": "12",
     "wins": "9",
@@ -19738,18 +19750,6 @@
     "goals": "23:10",
     "difference": "13",
     "points": "28"
-  },
-  {
-    "season": "2026/27",
-    "position": "4",
-    "club": "Real Betis",
-    "matches": "12",
-    "wins": "8",
-    "draws": "2",
-    "losses": "2",
-    "goals": "20:15",
-    "difference": "5",
-    "points": "26"
   },
   {
     "season": "2026/27",
@@ -19767,12 +19767,12 @@
     "season": "2026/27",
     "position": "6",
     "club": "Sevilla",
-    "matches": "12",
+    "matches": "13",
     "wins": "5",
     "draws": "3",
-    "losses": "4",
-    "goals": "17:19",
-    "difference": "-2",
+    "losses": "5",
+    "goals": "17:20",
+    "difference": "-3",
     "points": "18"
   },
   {
