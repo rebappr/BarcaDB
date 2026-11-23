@@ -1435,21 +1435,21 @@
     ]
   },
   "Joan Garcia": {
-    "overall": 6.19,
-    "form": 6.39,
-    "matches": 15,
-    "minutes": 1305,
+    "overall": 5.91,
+    "form": 5.44,
+    "matches": 16,
+    "minutes": 1395,
     "goals": 0,
     "assists": 0,
     "yellowCards": 0,
     "redCards": 0,
     "cleanSheets": 5,
-    "savePct": 69.8,
+    "savePct": 65.1,
     "seasons": {
       "2026/27": {
-        "rating": 6.19,
-        "matches": 15,
-        "minutes": 1305,
+        "rating": 5.91,
+        "matches": 16,
+        "minutes": 1395,
         "goals": 0,
         "assists": 0
       }
@@ -1460,9 +1460,9 @@
       "rating": 7.9
     },
     "worstMatch": {
-      "matchId": 4463,
+      "matchId": 4473,
       "season": "2026/27",
-      "rating": 4.05
+      "rating": 1.7
     },
     "history": [
       {
@@ -1539,6 +1539,11 @@
         "matchId": 4472,
         "season": "2026/27",
         "rating": 6.45
+      },
+      {
+        "matchId": 4473,
+        "season": "2026/27",
+        "rating": 1.7
       }
     ]
   },
