@@ -151,7 +151,8 @@ font-weight:600;
 
 .player-link:hover,
 .opponent-link:hover{
-text-decoration:underline;
+ text-decoration:underline;
+ color:var(--link-hover-color);
 }
 
 .menu-toggle{
@@ -404,14 +405,19 @@ text-decoration:underline;
     gap:10px;
 
     text-decoration:none;
-    color:#fff;
 }
 
 .sidebar-brand-text{
     font-size:15px;
     font-weight:700;
     letter-spacing:.2px;
-    color:#fff;
+    background:var(--header-title-gradient);
+
+    -webkit-background-clip:text;
+    background-clip:text;
+
+    -webkit-text-fill-color:transparent;
+    color:transparent;
 }
 
 .sidebar-close{
@@ -427,7 +433,7 @@ text-decoration:underline;
 
     background:rgba(255,255,255,.15);
 
-    color:white;
+    color:#f8ca57;
 
     cursor:pointer;
 
@@ -471,6 +477,31 @@ text-decoration:underline;
  text-align:center;
 }
 
+.footer-title {
+  font-size: 11px;
+  font-weight:500;
+  color:var(--muted);
+  margin-bottom: 6px;
+}
+
+.footer-socials {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin-bottom: 4px;
+}
+
+.footer-socials a {
+  font-size: 22px;
+  color:var(--link-color);
+  transition: all 0.2s ease;
+}
+
+.footer-socials a:hover {
+ color:var(--link-hover-color);
+  transform: translateY(-2px);
+}
+
 .footer-links{
  display:flex;
  justify-content:center;
@@ -479,7 +510,7 @@ text-decoration:underline;
 }
 
 .footer-links a{
- color:var(--link-color);
+ color:var(--muted);
  text-decoration:none;
  font-size:11px;
  font-weight:500;
@@ -488,7 +519,7 @@ text-decoration:underline;
 }
 
 .footer-links a:hover{
- color:var(--link-color);
+ color:var(--link-hover-color);
  text-decoration:underline;
 }
 
@@ -496,6 +527,14 @@ text-decoration:underline;
  margin-top:6px;
  color:var(--muted);
  font-size:11px;
+}
+
+.footer-links{
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ flex-wrap:wrap;
+ gap:12px;
 }
 
 .footer-separator{
