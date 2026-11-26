@@ -44,6 +44,7 @@ const playerMap = {
     "Brian FariĂ±as Perez": "Brian Farinas",
     "Pau CubarsĂ­": "Pau Cubarsi",
     "Dominik LivakoviÄ‡": "Dominik Livakovic",
+    "Alex Campos Camí": "Alex Campos",
     "Ã€lex Campos CamÃ­": "Alex Campos",
     "Alex Campos CamÃ­": "Alex Campos"
 
