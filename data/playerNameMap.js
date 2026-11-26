@@ -21,6 +21,8 @@ const playerMap = {
     "Gavi": "Gavi",
     "Marc Bernal": "Marc Bernal",
     "Fermín López": "Fermin Lopez",
+    "Fermin López": "Fermin Lopez",
+    "Fermin LĂłpez": "Fermin Lopez",
     "Frenkie de Jong": "Frenkie de Jong",
     "Dani Olmo": "Dani Olmo",
     "Brian Fariñas Perez": "Brian Farinas",
