@@ -1550,8 +1550,8 @@
     ]
   },
   "Joan Garcia": {
-    "overall": 6.54,
-    "form": 6.39,
+    "overall": 6.56,
+    "form": 6.43,
     "matches": 17,
     "minutes": 1485,
     "goals": 0,
@@ -1559,10 +1559,10 @@
     "yellowCards": 0,
     "redCards": 0,
     "cleanSheets": 5,
-    "savePct": 65.1,
+    "savePct": 65.2,
     "seasons": {
       "2026/27": {
-        "rating": 6.54,
+        "rating": 6.56,
         "matches": 17,
         "minutes": 1485,
         "goals": 0,
@@ -1663,7 +1663,7 @@
       {
         "matchId": 4474,
         "season": "2026/27",
-        "rating": 6.05
+        "rating": 6.23
       }
     ]
   },
