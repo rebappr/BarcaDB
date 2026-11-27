@@ -19779,12 +19779,12 @@
     "season": "2026/27",
     "position": "7",
     "club": "Racing Santander",
-    "matches": "13",
+    "matches": "14",
     "wins": "5",
     "draws": "2",
-    "losses": "6",
-    "goals": "20:32",
-    "difference": "-12",
+    "losses": "7",
+    "goals": "20:33",
+    "difference": "-13",
     "points": "17"
   },
   {
@@ -19850,6 +19850,18 @@
   {
     "season": "2026/27",
     "position": "13",
+    "club": "Levante",
+    "matches": "14",
+    "wins": "3",
+    "draws": "6",
+    "losses": "5",
+    "goals": "18:22",
+    "difference": "-4",
+    "points": "15"
+  },
+  {
+    "season": "2026/27",
+    "position": "14",
     "club": "Osasuna",
     "matches": "13",
     "wins": "4",
@@ -19861,7 +19873,7 @@
   },
   {
     "season": "2026/27",
-    "position": "14",
+    "position": "15",
     "club": "Celta Vigo",
     "matches": "13",
     "wins": "2",
@@ -19870,18 +19882,6 @@
     "goals": "11:12",
     "difference": "-1",
     "points": "13"
-  },
-  {
-    "season": "2026/27",
-    "position": "15",
-    "club": "Levante",
-    "matches": "13",
-    "wins": "2",
-    "draws": "6",
-    "losses": "5",
-    "goals": "17:22",
-    "difference": "-5",
-    "points": "12"
   },
   {
     "season": "2026/27",
